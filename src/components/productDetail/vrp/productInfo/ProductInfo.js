@@ -4,12 +4,10 @@ import { Carousel } from "../../../carousel/Carousel";
 import classes from "./productInfo.module.css";
 
 export const ProductInfo = ({ productData }) => {
-  
   const product = productData[0];
   console.log(product);
   if (!product) {
-    // Handle the case where product is undefined
-    return null; // or render a loading indicator or an error message
+    return null;
   }
   return (
     <div>
@@ -86,7 +84,6 @@ export const ProductInfo = ({ productData }) => {
           </span>
         </div>
         <div className={classes.box__price}>
-          
           <h3 className={classes.box__price__discount}>
             Rs.{formatNumber(product?.rate_card)}
           </h3>
