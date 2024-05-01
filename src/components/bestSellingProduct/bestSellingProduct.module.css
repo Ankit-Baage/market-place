@@ -1,0 +1,47 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 8px;
+  border-radius: 8px;
+  border: 1px solid #E3E3E3;
+}
+
+.box__img {
+  display:block;
+  width: 72px;
+  height: 64px;
+}
+.box__info {
+  display: flex;
+  justify-content: center;
+  column-gap: 2px;
+  align-items: center;
+}
+
+.box__info__name {
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #2F3567;
+
+}
+
+.box__info__title {
+  font-size: 10px;
+  line-height: 10px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #989898;
+}
+.box__info__price {
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #E45301;
+
+}

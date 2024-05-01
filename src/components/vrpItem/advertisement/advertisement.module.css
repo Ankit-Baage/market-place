@@ -1,0 +1,12 @@
+.box {
+  min-width: 308px;
+  min-height: 176px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.box__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

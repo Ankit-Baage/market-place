@@ -1,0 +1,90 @@
+.box {
+  position:relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.box__table {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  border: 1px solid #EFEFEF;
+  overflow: hidden;
+
+}
+
+.box__modelTable {
+  width: 100%;
+  border-collapse: collapse;
+
+}
+
+
+
+.box__modelTable__head {
+  font-family: "Poppins", sans;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 10px;
+  background-color: #FF6F3F;
+  color: #FFFFFF;
+
+}
+
+.box__modelTable__head__row__cell {
+  padding: 8px 0;
+}
+.box__modelTable__body__row {
+  border-bottom: 1px solid #EFEFEF;
+
+}
+
+.box__modelTable__body__row__data {
+  font-family: "Poppins", sans;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 10px;
+  background-color: #FFFFFF;
+  color: #2F3567;
+  padding: 8px 0;
+  text-align: center;
+
+}
+
+.box__modelTable__body__row:last-child .box__modelTable__body__row__data {
+  color: #EFEFEF
+}
+
+.box__table__btn {
+  position: absolute;
+  display: flex;
+  column-gap: 4px;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 8px;
+  cursor: pointer;
+  bottom:0;
+  right: 28%
+}
+
+.box__table__btn__img {
+  display: block;
+  width: 13px;
+  height: 11px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(../../../assets/expand_btn.svg);
+
+}
+
+.box__table__btn__text {
+  font-family: "Poppins", sans;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+  
+  color: #2F3567;
+
+}

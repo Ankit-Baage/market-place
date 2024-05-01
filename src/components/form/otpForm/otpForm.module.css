@@ -1,0 +1,126 @@
+.otp {
+  display: flex;
+  flex-direction: column;
+  row-gap: 44px;
+  justify-content: center;
+
+}
+
+.otp__head {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  justify-content: center;
+
+}
+
+.otp__head__title {
+  font-family: "Poppins", sans;
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: 600;
+  color: #2F3567;
+
+}
+
+
+.otp__head__subtitle__head {
+  display: inline-block;
+  padding-right: 2px;
+  font-family: "Poppins", sans;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 500;
+  color: #989898;
+}
+
+.otp__head__subtitle__number {
+  display: inline-block;
+  font-family: "Poppins", sans;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 500;
+  color: #4A4C5F;
+
+}
+
+
+.otp__form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 88px;
+  justify-content: center;
+}
+
+.otp__form__group {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  column-gap: 20px;
+  /* padding-right: 12%; */
+
+}
+
+.otp__form__label {
+  width: 48px;
+  height: 48px;
+  display: block;
+  border: 1px solid #FF6F3F;
+  border-radius: 8px;
+  padding: 12px 18px;
+  cursor: text;
+
+}
+
+.otp__form__field {
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+
+  color: #2F3567;
+
+}
+
+.otp__form__btn {
+  display: flex;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  background-color: #9C9C9C;
+  padding: 18px 132px;
+  border-radius: 4px;
+  /* cursor: pointer; */
+
+}
+
+.otp__form__btn__enabled {
+  display: flex;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  background-color: #FF6F3F;
+  padding: 18px 132px;
+  border-radius: 4px;
+  cursor: pointer;
+
+}
+
+.otp__form__btn__resend {
+  color: #2F3567;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  background-color: transparent;
+  cursor: pointer;
+
+}

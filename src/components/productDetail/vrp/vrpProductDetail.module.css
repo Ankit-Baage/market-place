@@ -1,0 +1,97 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  /* padding-bottom: 120px; */
+
+}
+
+/* .box {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  justify-content: center;
+  padding-bottom: 24px;
+}
+.box__divider {
+  height: 1.5px;
+  background-color: #EFEFEF;
+} */
+
+
+.box__vrpList {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  justify-content: center;
+}
+
+
+.box__details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box__details__title {
+  font-family: "Poppins", sans;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 14px;
+  color: #2F3567;
+}
+
+.box__details__download {
+  width: 102px;
+  height: 24px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(../../../assets/download__btn.svg);
+  cursor: pointer;
+}
+
+
+
+.btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box__tables {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 20px;
+}
+
+.btn__addToCart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #FF6F3F;
+  border-radius: 4px;
+  padding:8px 20px;
+  font-family: "Poppins", sans;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  color: #FF6F3F;
+  background-color: #FFFFFF;
+}
+
+.btn__buy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #FF6F3F;
+  border-radius: 4px;
+  padding:8px 36px;
+  font-family: "Poppins", sans;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  background-color: #FF6F3F;
+  color: #FFFFFF
+}

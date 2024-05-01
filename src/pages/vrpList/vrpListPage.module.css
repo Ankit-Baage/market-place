@@ -1,0 +1,33 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  justify-content: center;
+
+}
+
+
+.box__space {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  justify-content: center;
+}
+
+
+.box__ads {
+  height: 176px;
+  background-image: url(../../assets//advertisement.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 8px;
+
+}
+
+.box__item {
+  display: flex;
+  flex-direction: column;
+  row-gap: 18px;
+  justify-content: center;
+}

@@ -1,0 +1,48 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: center;
+}
+
+.slider {
+  position: relative;
+  height: 160px;
+  width:328px;
+  overflow: hidden;
+  border-radius: 4px;
+
+}
+
+.slide {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  will-change: transform, opacity;
+  /* aspect-ratio: auto; */
+}
+
+
+.indicators {
+  display: flex;
+  column-gap: 6px;
+  justify-content: center;
+}
+
+.indicator {
+  width: 6px;
+  height: 1px;
+  background: #000000;
+  opacity: 0.2;
+
+}
+
+
+.active {
+  background: #E45301;
+  opacity: 1;
+
+}

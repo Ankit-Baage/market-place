@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 12px 12px 0 0;
+  box-shadow: -4px 0px 16px 0px #0000001A;
+  padding: 12px 11px 18px; 
+  background-color:  #FFFFFF;
+  
+}
+
+.container__box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 10px;
+  padding: 4px 14px ;
+
+  cursor: pointer;
+}
+
+.container__box__img {
+  display: block;
+  width: 16px;
+  height: 16px;
+
+}
+
+.container__box__text {
+  font-size: 12px;
+  line-height: 15.6px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #989898;
+}

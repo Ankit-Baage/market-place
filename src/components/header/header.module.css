@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.container__box__logo{
+  width:142px;
+  height: 36px;
+  cursor: pointer;
+}
+
+.container__box__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+}
+
+.container__box__notification {
+  width:24px;
+  height: 24px;
+  cursor: pointer;
+
+}
+

@@ -1,0 +1,137 @@
+
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  /* margin-top: 10px; */
+}
+
+
+.form__field {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #d2d2d2;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 1px;
+  color: #2F3567;
+  font-family: "Poppins", sans;
+  /* padding: 7px 0; */
+  padding: 14px 24px;
+  background: transparent;
+  /* transition: border-color 0.2s; */
+}
+
+
+.form__field::placeholder {
+  color: transparent;
+}
+
+
+.form__label {
+  font-family: "Poppins", sans;
+  left: 12px;
+  padding: 0 12px;
+}
+
+.form__field:placeholder-shown~.form__label {
+  font-size: 16px;
+  cursor: text;
+  top: 26px;
+}
+
+
+.form__label,
+.form__field:focus~.form__label {
+  position: absolute;
+  top: 2px;
+  display: block;
+  transition: 0.2s;
+  font-size: 16px;
+  color: #9b9b9b;
+  background-color: #ffff;
+}
+
+.form__field:focus~.form__label {
+  color: #2F3567;
+}
+
+/* .form__field:focus {
+  padding-bottom: 6px;
+  
+
+} */
+
+.form__divider__line {
+
+  height: 1.5px;
+  background-color: #DDDDDD;
+}
+
+.form__divider {
+  padding: 16px 0 12px;
+
+}
+
+.form__divider__container {
+  position: relative;
+
+}
+
+
+
+.form__divider__textBox {
+  position: absolute;
+  top: -16px;
+  left: 44%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border-radius: 50%;
+  background-color: #E6E6E6;
+  align-items: center;
+
+}
+
+.form__divider__textBox__text {
+
+  display: inline-block;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #4A4C5F
+}
+
+
+
+.form__btn {
+  display: flex;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  background-color: #9C9C9C;
+  padding: 18px 120px;
+  border-radius: 4px;
+
+}
+
+.form__btn__enabled {
+  display: flex;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  background-color: #FF6F3F;
+  padding: 18px 120px;
+  border-radius: 4px;
+  cursor: pointer;
+
+}

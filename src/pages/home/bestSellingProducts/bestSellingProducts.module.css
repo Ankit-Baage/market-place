@@ -1,0 +1,38 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  justify-content: center;
+}
+
+.box__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.box__head__title {
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 600;
+  font-family: "Poppins", sans;
+  color: #2F3567;
+
+}
+
+.box__btn {
+  width: 88px;
+  height: 18px;
+  background-image: url(../../../assets//viewMore.svg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+
+.box__productList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+  gap: 12px;
+}

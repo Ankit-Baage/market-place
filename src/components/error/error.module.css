@@ -1,0 +1,89 @@
+.error{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 60vh;
+
+}
+
+.error__container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 88px;
+  padding: 0 16px;
+
+}
+
+.error__message {
+  font-family: "Poppins", sans;
+  color: #2F3567;
+  font-size: 28px;
+  line-height: 37.7px;
+
+}
+
+.error__btn {
+  display: flex;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  background-color: #FF6F3F;
+  padding: 18px 128px;
+  border-radius: 4px;
+  cursor: pointer;
+
+}
+
+.auth__heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 12px;
+  padding: 64px 44px 0px;
+  
+}
+
+.auth__heading__box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.auth__heading__logo {
+  display: block;
+  width: 44px;
+  height: 63px
+}
+
+.auth__heading__title {
+  font-family: "Poppins", sans;
+  color: #2F3567;
+  font-size: 28px;
+  line-height: 37.7px;
+}
+
+.auth__heading__subtitle {
+  font-family: "Poppins", sans;
+  color: #4A4C5F;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20.8px;
+}
+
+.auth__heading__subtitle__highlight {
+  color: #FF6F3F;
+  padding-right: 2px;
+  font-weight: 600;
+}
+
+.auth__outlet {
+  
+}

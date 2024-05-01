@@ -1,0 +1,6 @@
+.userProfile {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 88px;
+}

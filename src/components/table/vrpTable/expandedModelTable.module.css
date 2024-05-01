@@ -1,0 +1,129 @@
+.backDrop {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 150px 0;
+  z-index: 10;
+}
+
+.box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+.box__table {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  align-items: center;
+}
+
+.box__table__container {
+  min-width: 320px;
+  max-height: 450px;
+  border-radius: 4px;
+  overflow: auto;
+
+}
+
+.box__modelTable {
+  position: relative;
+  width: 100%;
+  border-collapse: collapse;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: left;
+ 
+
+}
+
+.box__modelTable__head__row {
+  
+
+}
+
+.box__modelTable__head {
+  font-family: "Poppins", sans;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 10px;
+  background-color: #FF6F3F;
+  color: #FFFFFF;
+  text-align: center;
+
+}
+
+
+.box__modelTable__head__row__cell {
+  position: relative;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.box__modelTable__head__row__cell__sort {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  display: block;
+  bottom: 20%;
+  cursor: pointer;
+}
+
+.box__modelTable__head__row__cell:nth-child(1) .box__modelTable__head__row__cell__sort {
+  left: 64%;
+}
+
+.box__modelTable__head__row__cell:nth-child(2) .box__modelTable__head__row__cell__sort {
+  left: 72%;
+}
+
+.box__modelTable__head__row__cell:nth-child(3) .box__modelTable__head__row__cell__sort {
+  left: 76%;
+}
+
+
+
+
+.box__modelTable__body__row {
+  border-bottom: 1px solid #EFEFEF;
+
+}
+
+.box__modelTable__body__row__data {
+  font-family: "Poppins", sans;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 10px;
+  background-color: #FFFFFF;
+  color: #2F3567;
+  padding: 8px;
+  text-align: center;
+
+}
+
+
+.box__table__btn {
+  width: 24px;
+  height: 24px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(../../../assets/x-circle.svg);
+  cursor: pointer;
+  align-self: center;
+}
+
+.box__modelTable__body__row:last-child .box__modelTable__body__row__data {
+  color: #FF6F3F;
+  font-family: "Poppins", sans;
+  color: #FF6F3F;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+}

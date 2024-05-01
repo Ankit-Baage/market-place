@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 20px;
+}
+.container__box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 2;
+
+}
+
+.container__search {
+  position: sticky;
+  top: 0;
+  padding: 12px 0;
+  background-color: #ffff;
+}
+
+
+.container__routes {
+  display:flex;
+  justify-content: space-between;
+}
+
+.container__routes__btns {
+  width:100px;
+  height: 48px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border-radius: 8px;
+  border: 1px solid #E8E8E8;
+}
+
+/* .container__carousel {
+  position: relative;
+  z-index: 0; 
+} */
+
+.container__box__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 20px;
+
+}

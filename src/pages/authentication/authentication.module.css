@@ -1,0 +1,15 @@
+.auth {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  /* row-gap: 88px; */
+  padding: 0 16px 20px;
+  height: 100vh; 
+
+}
+
+
+.auth__outlet {
+  margin-top: auto;
+}
+
