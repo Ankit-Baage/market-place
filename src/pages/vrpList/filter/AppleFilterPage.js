@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { AppleFilter } from "../../../components/filters/AppleFilter";
+import { AppleFilter } from "../../../components/vrpFilters/AppleFilter";
 
 export const AppleFilterPage = ({ appleData, onClose, onApply }) => {
   const minDataValue = Math.min(...appleData.map((item) => item.value));

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-import { AspFilter } from "../../../components/filters/AspFilter";
+import { AspFilter } from "../../../components/vrpFilters/AspFilter";
 
 export const AspFilterPage = ({ aspData, onClose, onApply }) => {
   const minDataValue = Math.min(...aspData.map((item) => item.value));

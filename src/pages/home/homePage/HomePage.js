@@ -1,5 +1,10 @@
 import React from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import classes from "./homePage.module.css";
 import Cookies from "js-cookie";
 import { getAuthToken } from "../../../utils/helpers/getAuth";
@@ -13,7 +18,7 @@ import { BestSellingProducts } from "../bestSellingProducts/BestSellingProducts"
 import { Carousel } from "../../../components/carousel/Carousel";
 
 const buttonRoutes = [
-  { id: "prexo", image: prexo },
+  { id: "spares", image: prexo },
   { id: "vrp", image: vrp },
   { id: "openBox", image: openBox },
 ];
@@ -48,13 +53,15 @@ export const HomePage = () => {
         </div>
         <div className={classes.container__routes}>
           {buttonRoutes.map((button) => (
-            <button
-              type="submit"
+            <Link
               key={button.id}
               className={classes.container__routes__btns}
-              style={{ backgroundImage: `url(${button.image})`, cursor:"pointer" }}
-              onClick={navigateToPath}
-            ></button>
+              style={{
+                backgroundImage: `url(${button.image})`,
+                cursor: "pointer",
+              }}
+              to={button.id}
+            ></Link>
           ))}
         </div>
       </div>

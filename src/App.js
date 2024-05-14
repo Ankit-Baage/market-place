@@ -14,11 +14,12 @@ import { ProtectedOtpRoute } from "./route-guard/auth/ProtectedOtpRoute";
 import { UserProfile } from "./pages/home/profile/UserProfile";
 import "./App.css";
 
-
-import { Vrp } from "./pages/vrp/Vrp";
+import { VrpPage } from "./pages/vrp/VrpPage";
 import { VrpDetailPage } from "./pages/vrp/VrpDetailPage";
 import { LoginPage } from "./pages/authentication/login/LoginPage";
 import { VrpListPage } from "./pages/vrpList/VrpListPage";
+import { SparesPage } from "./pages/spares/SparesPage";
+import { SpareListPage } from "./pages/spares/SpareListPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -44,9 +45,16 @@ const router = createBrowserRouter([
           { index: true, element: <HomePage /> },
           {
             path: "vrp",
-            element: <Vrp />,
-            children: [{ index: true, element: <VrpListPage /> },
-            { path: ":requestId", element: <VrpDetailPage /> }],
+            element: <VrpPage />,
+            children: [
+              { index: true, element: <VrpListPage /> },
+              { path: ":requestId", element: <VrpDetailPage /> },
+            ],
+          },
+          {
+            path: "spares",
+            element: <SparesPage />,
+            children: [{ index: true, element: <SpareListPage /> }],
           },
 
           { path: "profile", element: <UserProfile /> },

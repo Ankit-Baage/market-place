@@ -12,12 +12,10 @@
   cursor: pointer;
 }
 
-
-
 .container__btn {
   width: 24px;
   height: 24px;
-  background-image: url('../../assets/arrow-left.svg');
+  background-image: url('../assets/arrow-left.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -28,3 +26,4 @@
 .container__search {
   flex-grow: 1;
 }
+

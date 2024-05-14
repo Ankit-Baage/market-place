@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-import { PFilter } from "../../../components/filters/PFilter";
+import { PFilter } from "../../../components/vrpFilters/PFilter";
 
 export const P4filterPage = ({ percentData, onClose, onApply }) => {
   const minDataValue = Math.min(...percentData.map((item) => item.value));

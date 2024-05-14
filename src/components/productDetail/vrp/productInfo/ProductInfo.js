@@ -2,6 +2,7 @@ import React from "react";
 import { formatNumber } from "../../../../utils/helpers/formatNumber";
 import { Carousel } from "../../../carousel/Carousel";
 import classes from "./productInfo.module.css";
+import { Advertisement } from "../../../vrpItem/advertisement/Advertisement";
 
 export const ProductInfo = ({ productData }) => {
   const product = productData[0];
@@ -20,7 +21,8 @@ export const ProductInfo = ({ productData }) => {
           </div>
           <span className={classes.box__info__fav} />
         </div>
-        <Carousel />
+        {/* <Carousel /> */}
+        <Advertisement />
       </div>
       <div className={classes.box__specs}>
         <div className={classes.box__specs__info}>

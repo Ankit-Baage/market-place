@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { SortFilter } from "../../../components/filters/SortFilter";
+import { SortFilter } from "../../../components/vrpFilters/SortFilter";
 
 export const SortFilterPage = ({ sortData, onClose, onApply }) => {
   const [selectedItemId, setSelectedItemId] = useState(null);

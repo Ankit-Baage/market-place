@@ -26,6 +26,8 @@ export const VrpListPage = () => {
 
   const navigate = useNavigate();
 
+  console.log("vrpListpage")
+
 
   useEffect(() => {
     if (isSuccess) {

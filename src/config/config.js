@@ -8,6 +8,9 @@ const resendOtpEndPoint = "resend_otp";
 const profileDataEndPoint = "get_profile";
 const updateProfileDataEndPoint = "update_profile";
 const uploadImageEndPoint = "upload?file_name=hmmm.zip";
+
+/**VRP**/
+
 const vrpListEndPoint = "vrp/";
 const vrpProductDetailEndPoint = (requestId) =>
   `details?request_id=${requestId}`;
@@ -23,11 +26,15 @@ const vrpProductModelTableExpandedEndPoint = "&mode=all";
 const vrpProductLotTableEndPoint = (requestId) =>
   `vrp_wise_details?request_id=${requestId}`;
 
-  const vrpProductDetailDownloadEndPoint = "download_file?request_id=";
+const vrpProductDetailDownloadEndPoint = "download_file?request_id=";
 
-const vrpSortingListEndPoint = "sorting_list"
+const vrpSortingListEndPoint = "sorting_list";
 
-//****************************************// */
+//***********************************************************//
+
+//**Spares***//
+
+const spareListEndPoint = "spares/";
 
 export const requestOtpUrl = `${baseUrl}${version}${mode}${role}${sendOtpEndPoint}`;
 
@@ -71,4 +78,6 @@ export const vrpProductModelTableExpandedUrl = (requestId) =>
 export const vrpProductDetailDownloadUrl = (requestId) =>
   `${baseUrl}${version}${mode}${vrpListEndPoint}${vrpProductDetailDownloadEndPoint}${requestId}`;
 
-  export const vrpSortingListUrl = `${baseUrl}${version}${mode}${vrpListEndPoint}${vrpSortingListEndPoint}`
+export const vrpSortingListUrl = `${baseUrl}${version}${mode}${vrpListEndPoint}${vrpSortingListEndPoint}`;
+
+export const spareListUrl = `${baseUrl}${version}${mode}${spareListEndPoint}`;
