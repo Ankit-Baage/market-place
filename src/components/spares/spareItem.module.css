@@ -6,9 +6,15 @@
 
 }
 
-.box {
+.container__float {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
   align-items: center;
   column-gap: 20px;
   cursor: pointer;
@@ -65,17 +71,17 @@
 
 .box__discount {
   display: flex;
-  justify-content: space-between;
+  column-gap: 4px;
   align-items: center;
 
 }
 
-.box__discount__container {
+/* .box__discount__container {
   display: flex;
   column-gap: 4px;
   justify-content: center;
   align-items: center;
-}
+} */
 
 .box__discount__container__discountedPrice {
   font-family: "Poppins", sans;
@@ -100,8 +106,8 @@
   content: "";
   position: absolute;
   bottom: 50%;
-  left: 56%;
-  width: 48%;
+  left:8%;
+  width: 100%;
   height: 1px;
   background-color: #4A4C5F;
 }
@@ -128,7 +134,8 @@
 .box__info__btns {
   display: flex;
   column-gap: 12px;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  align-items: center;
 
 }
 
@@ -141,7 +148,7 @@
   border-radius: 8px;
   border: 1px solid #FF6F3F;
   color: #FF6F3F;
-  padding: 4px 11px;
+  padding: 8px 11px 8px 10px;
   background-color: #FFFFFF;
 
 }
@@ -154,7 +161,7 @@
   border-radius: 8px;
   border: 1px solid #FF6F3F;
   color: #FFFFFF;
-  padding: 4px 20px;
+  padding: 8px 20px 8px 19px;
   background-color: #FF6F3F;
 
 }
