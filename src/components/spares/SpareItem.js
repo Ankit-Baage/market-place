@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import fav from "../../assets/heart.svg";
 import classes from "./spareItem.module.css";
 
-export const SpareItem = ({ item }) => {
-  const handleVrpDetail = (id) => {
-    // onClick(requestId);
+export const SpareItem = ({ item, onClick }) => {
+  const handleSpareDetail = (id) => {
+    onClick(id);
   };
   return (
     <div className={classes.container}>
       <div className={classes.container__float}>
-        <div className={classes.box} onClick={() => handleVrpDetail(item.id)}>
+        <div className={classes.box} onClick={() => handleSpareDetail(item.id)}>
           <div className={classes.box__img}>
             <img
               src={item.image}

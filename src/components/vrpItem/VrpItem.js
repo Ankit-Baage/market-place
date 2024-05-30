@@ -1,11 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import vrp from "../../assets/vrp.svg";
 import classes from "./vrpItem.module.css";
 
 export const VrpItem = ({ item, index, totalItems, onClick }) => {
-  const navigate = useNavigate();
-  const id = "vrpDetail";
 
   const handleVrpDetail = (requestId) => {
     onClick(requestId);

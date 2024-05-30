@@ -1,38 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import classes from "./spareFilter.module.css";
+import classes from "./spareFilterModal.module.css";
 
-export const SpareFilter = ({ spareData, onItemSelected, selectedItemIds: parentSelectedItemIds, onApply, onClear, onClose }) => {
-  const [selectedItemIds, setSelectedItemIds] = useState(parentSelectedItemIds || []);
-
-  useEffect(() => {
-    setSelectedItemIds(parentSelectedItemIds);
-  }, [parentSelectedItemIds]);
+export const SpareFilterModal = ({
+  optionsData,
+  onApply,
+  filterType,
+  filterData
+  
+}) => {
+  const [filters, setFilters] = useState(filterData);
+  console.log(filters)
 
   const handleCheckboxChange = (event) => {
-    const { value, checked } = event.target;
-    const updatedSelectedItemIds = checked
-      ? [...selectedItemIds, value]
-      : selectedItemIds.filter((id) => id !== value);
-
-    setSelectedItemIds(updatedSelectedItemIds);
-    onItemSelected(updatedSelectedItemIds);
+    const optionId = event.currentTarget.id;
+    const isChecked = event.target.checked;
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      options: isChecked
+        ? [...prevFilters.options, optionId]
+        : prevFilters.options.filter((id) => id !== optionId),
+    }));
   };
 
   const clearHandler = () => {
-    setSelectedItemIds([]);
-    onItemSelected([]);
-    onClear();
+    // setSelectedOptions([]);
   };
 
   const handleApply = () => {
-    onApply();
+    onApply(filters)
+    // console.log(filters)
   };
 
-  const filterClose = () => {
-    onClose();
-  };
-
+  const filterClose = () => {};
   return (
     <div className={classes.backdrop} onClick={filterClose}>
       <motion.div
@@ -44,7 +44,9 @@ export const SpareFilter = ({ spareData, onItemSelected, selectedItemIds: parent
       >
         <div className={classes.box__content}>
           <div className={classes.box__content__head}>
-            <h1 className={classes.box__content__head__title}>Spare</h1>
+            <h1 className={classes.box__content__head__title}>
+              {filters.type}
+            </h1>
             <button
               className={classes.backdrop__btn}
               onClick={filterClose}
@@ -52,7 +54,7 @@ export const SpareFilter = ({ spareData, onItemSelected, selectedItemIds: parent
           </div>
           <hr className={classes.box__content__divider} />
           <div className={classes.box__content__filter}>
-            {spareData.map((item) => (
+            {optionsData.map((item) => (
               <label
                 htmlFor={item.id}
                 key={item.id}
@@ -63,17 +65,11 @@ export const SpareFilter = ({ spareData, onItemSelected, selectedItemIds: parent
                   type="checkbox"
                   className={classes.box__content__filter__option__input}
                   value={item.id}
-                  checked={selectedItemIds.includes(item.id)}
+                  checked={filters.options.includes(item.id)}
                   onChange={handleCheckboxChange}
                 />
-                <span
-                  className={`${classes.box__content__filter__labelText} ${
-                    selectedItemIds.includes(item.id)
-                      ? classes.box__content__filter__labelText__checked
-                      : ""
-                  }`}
-                >
-                  {item.spare}
+                <span className={`${classes.box__content__filter__labelText} `}>
+                  {item.label}
                 </span>
                 <span
                   className={classes.box__content__filter__option__label}

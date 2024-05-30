@@ -9,6 +9,7 @@ function useGetSpareList(filters) {
     retry: 2, // Maximum number of retries
     retryDelay: 1000,
   });
+  console.log(filters)
   return { data, isError, isLoading, isSuccess, refetch };
 }
 

@@ -35,6 +35,14 @@ const vrpSortingListEndPoint = "sorting_list";
 //**Spares***//
 
 const spareListEndPoint = "spares/";
+const filterSortEndPoint = "filter?mode=spare";
+const filterBrandEndPoint = "filter?mode=brand";
+const filterModelEndPoint = "filter?mode=model";
+const filterPriceEndPoint = "filter?mode=price";
+const spareColorEndPoint = (sellerId, brand, model, part) =>
+  `color_details?seller_id=${sellerId}&brand=${brand}e&model=${model}%20iphone%2015&part_name=${part}`;
+
+const spareDetailEndPoint = (requestId) => `details?request_id=${requestId}`;
 
 export const requestOtpUrl = `${baseUrl}${version}${mode}${role}${sendOtpEndPoint}`;
 
@@ -80,4 +88,29 @@ export const vrpProductDetailDownloadUrl = (requestId) =>
 
 export const vrpSortingListUrl = `${baseUrl}${version}${mode}${vrpListEndPoint}${vrpSortingListEndPoint}`;
 
+//***********************************************************//
+
+//**Spares***//
+
 export const spareListUrl = `${baseUrl}${version}${mode}${spareListEndPoint}`;
+
+export const spareDetailUrl = (requestId) =>
+  `${baseUrl}${version}${mode}${spareListEndPoint}${spareDetailEndPoint(
+    requestId
+  )}`;
+
+export const spareColorUrl = (sellerId, brand, model, partName) =>
+  `${baseUrl}${version}${mode}${spareListEndPoint}${spareColorEndPoint(
+    sellerId,
+    brand,
+    model,
+    partName
+  )}`;
+
+export const filterSpareUrl = `${baseUrl}${version}${mode}${spareListEndPoint}${filterSortEndPoint}`;
+export const filterBrandUrl = `${baseUrl}${version}${mode}${spareListEndPoint}${filterBrandEndPoint}`;
+export const filterModelUrl = `${baseUrl}${version}${mode}${spareListEndPoint}${filterModelEndPoint}`;
+export const filterPriceUrl = `${baseUrl}${version}${mode}${spareListEndPoint}${filterPriceEndPoint}`;
+const spareFilterEndPoint = (filterType) => `filter?mode=${filterType}`;
+export const spareFilterUrl = (filterType) =>
+  `${baseUrl}${version}${mode}${spareListEndPoint}${spareFilterEndPoint(filterType)}`;

@@ -20,6 +20,7 @@ import { LoginPage } from "./pages/authentication/login/LoginPage";
 import { VrpListPage } from "./pages/vrpList/VrpListPage";
 import { SparesPage } from "./pages/spares/SparesPage";
 import { SpareListPage } from "./pages/spares/SpareListPage";
+import { SpareDetailPage } from "./pages/spares/SpareDetailPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -54,7 +55,10 @@ const router = createBrowserRouter([
           {
             path: "spares",
             element: <SparesPage />,
-            children: [{ index: true, element: <SpareListPage /> }],
+            children: [
+              { index: true, element: <SpareListPage /> },
+              { path: ":requestId", element: <SpareDetailPage /> },
+            ],
           },
 
           { path: "profile", element: <UserProfile /> },

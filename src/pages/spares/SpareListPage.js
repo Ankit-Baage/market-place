@@ -1,30 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiltersPage } from "./filters/FiltersPage";
 import classes from "./spareListPage.module.css";
 import { Advertisement } from "../../components/vrpItem/advertisement/Advertisement";
 import useGetSpareList from "../../tanstack-query/spares/useGetSpareList";
 import { SpareItem } from "../../components/spares/SpareItem";
+import { useLocation, useNavigate } from "react-router-dom";
+import { SparesFilterPage } from "./filters/sparesFilter/SparesFilterPage";
 
 export const SpareListPage = () => {
+  const [spareListdata, setSpareListData] = useState([]);
+  const [inFilterMode, setInFilterMode] = useState(false);
   const [filters, setFilters] = useState({
     spare: null,
     brand: null,
     model: null,
     price: null,
   });
-  // const { data, isLoading, isError, isSuccess } = useGetVrpList();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { data, isSuccess, isLoading, refetch } = useGetSpareList(filters);
 
+  const navigateToSpareDetail = (requestId) => {
+    navigate(`${requestId}`);
+  };
 
-  console.log(data)
+  const handleApplied = (selectedFilters) => {
+    const { type, options } = selectedFilters;
+    if (
+      type === "spare" ||
+      type === "brand" ||
+      type === "model" ||
+      type === "price"
+    ) {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        [type]: options.join(","),
+      }));
+    }
+  };
+
   return (
     <div className={classes.box}>
-      <FiltersPage
-      // onFilterSort={handleApplied}
-      // onFilterRange ={handleRangeFilterApplied}
-      // setFilterMode={setInFilterMode}
-      // filters={filters}
-      />
+      <SparesFilterPage onApply={handleApplied} />
       <Advertisement />
 
       <div className={classes.box__space}>
@@ -33,9 +50,7 @@ export const SpareListPage = () => {
             <SpareItem
               key={spareItem.id}
               item={spareItem}
-              // index={index}
-              // totalItems={vrpListData.length}
-              // onClick={navigateToVrpDetail}
+              onClick={navigateToSpareDetail}
             />
           ))}
         </div>
