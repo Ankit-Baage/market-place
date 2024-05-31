@@ -5,12 +5,12 @@ import classes from "./spareFilterModal.module.css";
 export const SpareFilterModal = ({
   optionsData,
   onApply,
-  filterType,
-  filterData
-  
+  filterData,
+  onClose,
+  onClear
 }) => {
-  const [filters, setFilters] = useState(filterData);
-  console.log(filters)
+  const [filters, setFilters] = useState({ ...filterData, options: filterData.options || [] });
+
 
   const handleCheckboxChange = (event) => {
     const optionId = event.currentTarget.id;
@@ -24,15 +24,19 @@ export const SpareFilterModal = ({
   };
 
   const clearHandler = () => {
-    // setSelectedOptions([]);
+    onClear()
+    setFilters({ ...filterData, options:  [] })
   };
+  const isApplyDisabled = filters.options.length === 0;
 
   const handleApply = () => {
-    onApply(filters)
-    // console.log(filters)
+    onApply(filters);
+    
   };
 
-  const filterClose = () => {};
+  const filterClose = () => {
+    onClose();
+  };
   return (
     <div className={classes.backdrop} onClick={filterClose}>
       <motion.div
@@ -45,7 +49,7 @@ export const SpareFilterModal = ({
         <div className={classes.box__content}>
           <div className={classes.box__content__head}>
             <h1 className={classes.box__content__head__title}>
-              {filters.type}
+              {(filters.type).charAt(0).toUpperCase() + (filters.type).slice(1)}
             </h1>
             <button
               className={classes.backdrop__btn}
@@ -83,7 +87,7 @@ export const SpareFilterModal = ({
           <button className={classes.box__btn__clear} onClick={clearHandler}>
             Clear All
           </button>
-          <button className={classes.box__btn__apply} onClick={handleApply}>
+          <button className={classes.box__btn__apply} disabled={isApplyDisabled} onClick={handleApply}>
             Apply
           </button>
         </div>

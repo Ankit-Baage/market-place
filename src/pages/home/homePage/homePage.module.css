@@ -47,3 +47,18 @@
   row-gap: 20px;
 
 }
+
+
+.box__colors__carousel {
+  display:flex;
+  overflow: hidden;
+
+}
+
+
+.box__colors__carousel__inner {
+  display:flex;
+  align-items: center;
+  column-gap: 20px;
+
+}

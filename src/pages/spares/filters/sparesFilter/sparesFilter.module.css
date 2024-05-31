@@ -29,3 +29,8 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.active {
+  background-color: #FFE5DC;
+  border: 1px solid #FF6F3F
+}

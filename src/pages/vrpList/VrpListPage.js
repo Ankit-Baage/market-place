@@ -94,7 +94,7 @@ export const VrpListPage = () => {
         <Spinner />
       ) : (
         <div className={classes.box__space}>
-          <Advertisement />
+          <Advertisement image="https://mgstorageaccount.blob.core.windows.net/mgbucket/vrp_add190424_2.png"/>
           <div className={classes.box__item}>
             {vrpListData?.map((vrpItem, index) => (
               <VrpItem

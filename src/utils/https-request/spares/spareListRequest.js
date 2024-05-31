@@ -1,19 +1,20 @@
 import { spareListUrl } from "../../../config/config";
 import axiosInstance from "../../axios-middleware/axiosMiddleware";
 
-export const spareListRequest = async () => {
+export const spareListRequest = async (filters) => {
   try {
     const response = await axiosInstance.get(
       spareListUrl,
 
       {
+        params: filters,
         headers: {
           "Content-Type": "application/json",
         },
       }
     );
 
-    console.log(response.data.data)
+    console.log(response.data.data);
 
     return response.data.data;
   } catch (error) {

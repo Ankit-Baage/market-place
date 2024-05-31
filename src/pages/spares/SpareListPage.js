@@ -1,48 +1,59 @@
 import React, { useEffect, useState } from "react";
-import { FiltersPage } from "./filters/FiltersPage";
+
+import spare_Advertisement from "../../assets/spare_Advertisement.png"
+
 import classes from "./spareListPage.module.css";
 import { Advertisement } from "../../components/vrpItem/advertisement/Advertisement";
 import useGetSpareList from "../../tanstack-query/spares/useGetSpareList";
 import { SpareItem } from "../../components/spares/SpareItem";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { SparesFilterPage } from "./filters/sparesFilter/SparesFilterPage";
 
+
 export const SpareListPage = () => {
-  const [spareListdata, setSpareListData] = useState([]);
-  const [inFilterMode, setInFilterMode] = useState(false);
   const [filters, setFilters] = useState({
-    spare: null,
     brand: null,
+    spare: null,
     model: null,
     price: null,
   });
   const navigate = useNavigate();
-  const location = useLocation();
+
+  const [searchParams, setSearchParams] = useSearchParams();
   const { data, isSuccess, isLoading, refetch } = useGetSpareList(filters);
+  useEffect(() => {
+    const newFilters = {
+      brand: searchParams.get("brand") || null,
+      spare: searchParams.get("spare") || null,
+      model: searchParams.get("model") || null,
+      price: searchParams.get("price") || null,
+    };
+    setFilters(newFilters);
+  }, [searchParams]);
 
   const navigateToSpareDetail = (requestId) => {
     navigate(`${requestId}`);
   };
+  console.log(filters);
 
   const handleApplied = (selectedFilters) => {
     const { type, options } = selectedFilters;
-    if (
-      type === "spare" ||
-      type === "brand" ||
-      type === "model" ||
-      type === "price"
-    ) {
-      setFilters((prevFilters) => ({
-        ...prevFilters,
-        [type]: options.join(","),
-      }));
-    }
+    const newFilters = { ...filters, [type]: options.join(",") };
+
+    setFilters(newFilters);
   };
 
+  // const handleClear = (selectedFilterType) => {
+  //   setSearchParams((params) => {
+  //     params.delete(selectedFilterType);
+  //     return params;
+  //   });
+  //   setFilters({ ...filters, [selectedFilterType]: null });
+  // };
   return (
     <div className={classes.box}>
       <SparesFilterPage onApply={handleApplied} />
-      <Advertisement />
+      <Advertisement image={spare_Advertisement}/>
 
       <div className={classes.box__space}>
         <div className={classes.box__itemList}>
