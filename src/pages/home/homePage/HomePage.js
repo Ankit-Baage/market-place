@@ -20,10 +20,10 @@ import { BestSellingProducts } from "../bestSellingProducts/BestSellingProducts"
 import { Carousel } from "../../../components/carousel/Carousel";
 
 const buttonRoutes = [
-  { id: "spares", image: prexo },
+  { id: "prexo", image: prexo },
   { id: "vrp", image: vrp },
   { id: "openBox", image: openBox },
-  { id: "spare", image: spare },
+  { id: "spares", image: spare },
 ];
 
 export const HomePage = () => {

@@ -15,6 +15,7 @@ function useGetSpareDetail({ requestId }) { // Destructure as an object
     refetchOnWindowFocus: false,
     retry: 2,
     retryDelay: 1000,
+    enabled: !!requestId
   });
   return { data, isError, isLoading, isSuccess };
 }

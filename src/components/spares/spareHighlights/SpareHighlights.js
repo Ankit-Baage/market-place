@@ -13,10 +13,10 @@ export const SpareHighlights = ({ highlights }) => {
       <div className={classes.container__info}>
         <h1 className={classes.container__info__title}>Highlights</h1>
         <div className={classes.box}>
-          {descriptions.map((description) => (
-            <div key={description.id} className={classes.box__desc}>
+          {highlights.map((highlight) => (
+            <div key={highlight.id} className={classes.box__desc}>
               <div className={classes.box__desc__bullet} />
-              <h2 className={classes.box__desc__text}>{description.desc}</h2>
+              <h2 className={classes.box__desc__text}>{highlight.desc}</h2>
             </div>
           ))}
         </div>

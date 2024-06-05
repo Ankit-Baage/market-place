@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { ProductCarousel } from "../../ui/productCarousel/ProductCarousel";
 import classes from "./spareDetail.module.css";
 import { SpareColors } from "../spareColor/SpareColors";
 import { SparePrice } from "../sparePrice/SparePrice";
-import { SpareHighlights } from "../spareHilights/SpareHighlights";
-import { SpareOffers } from "../spareoffers/SpareOffers";
+import { SpareHighlights } from "../spareHighlights/SpareHighlights";
+import { SpareOffers } from "../spareOffers/SpareOffers";
 
 export const SpareDetail = ({
   images,
@@ -13,9 +13,16 @@ export const SpareDetail = ({
   descriptions,
   color,
   spareData,
-  partName
+  partName,
+  onColorSelect
 }) => {
-  // let colors = ["Black", "Gray", "Dark Gray"]
+  const [selectedColor, setSelectedColor] = useState(null);
+
+  const handleColorSelect = (color) => {
+    setSelectedColor(color);
+    console.log('Selected color:', color);
+
+  };
   return (
     <div className={classes.box}>
       <div className={classes.box__spareIntro}>
@@ -26,7 +33,7 @@ export const SpareDetail = ({
           <hr className={classes.box__item__divider} />
         </div>
       </div>
-      <SpareColors colors={colors} color={color} />
+      <SpareColors colors={colors} color={color} onColorSelect={onColorSelect}/>
       <SparePrice prices={prices} />
       <SpareHighlights highlights={descriptions} />
       <SpareOffers />

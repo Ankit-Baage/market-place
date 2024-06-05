@@ -2,16 +2,18 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import classes from "./spareColors.module.css";
 
-export const SpareColors = ({ colors, color: initialColor }) => {
+export const SpareColors = ({ colors, color: initialColor, onColorSelect }) => {
   const [selectedColor, setSelectedColor] = useState(initialColor);
   const [width, setWidth] = useState(0);
 
   const carousel = useRef();
   console.log(colors);
+  const handleColorSelect = (color) => {
+    setSelectedColor(color.color);
+    onColorSelect(color);
+  };
 
   useEffect(() => {
-    console.log("scrollWidth:", carousel.current.scrollWidth);
-    console.log("offsetWidth:", carousel.current.offsetWidth);
     setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
   }, []);
   return (
@@ -32,7 +34,7 @@ export const SpareColors = ({ colors, color: initialColor }) => {
                     ? classes.box__colors__btn__selected
                     : ""
                 }`}
-                onClick={() => setSelectedColor(color.color)}
+                onClick={() => handleColorSelect(color)}
               >
                 {color.color}
               </motion.button>

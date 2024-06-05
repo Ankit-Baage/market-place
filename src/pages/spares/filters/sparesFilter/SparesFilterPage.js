@@ -79,6 +79,7 @@ export const SparesFilterPage = ({ onApply }) => {
   const { data, isSuccess, isLoading, refetch } = useGetFilterSpareOption(
     currentFilterType
   );
+  console.log(data)
 
   return (
     <div className={classes.box}>

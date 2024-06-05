@@ -40,7 +40,7 @@ const filterBrandEndPoint = "filter?mode=brand";
 const filterModelEndPoint = "filter?mode=model";
 const filterPriceEndPoint = "filter?mode=price";
 const spareColorEndPoint = (sellerId, brand, model, part) =>
-  `color_details?seller_id=${sellerId}&brand=${brand}e&model=${model}%20iphone%2015&part_name=${part}`;
+  `color_details?seller_id=${sellerId}&brand=${brand}&model=${model}&part_name=${part}`;
 
 const spareDetailEndPoint = (requestId) => `details?request_id=${requestId}`;
 

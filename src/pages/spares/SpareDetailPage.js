@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useGetSpareDetail from "../../tanstack-query/spares/useGetSpareDetail";
 import { Spinner } from "../../components/ui/spinner/Spinner";
 import { SpareDetail } from "../../components/spares/spareDetail/SpareDetail";
@@ -33,25 +33,35 @@ function reducer(state, action) {
 }
 
 export const SpareDetailPage = () => {
+  const [selectedColor, setSelectedColor] = useState(null);
   const params = useParams();
 
   const requestId = params.requestId;
   const [state, dispatch] = useReducer(reducer, initialState);
-
+  
+  
+const navigate = useNavigate();
   const { data, isError, isPending, isSuccess, refetch } = useGetSpareDetail({
     requestId,
   });
+
+  const handleColorSelect = (color) => {
+    setSelectedColor(color);
+    console.log('Selected color:', color.record_id);
+    navigate(`/home/spares/${color.record_id}`)
+  };
 
   useEffect(() => {
     
     if (isSuccess && data) {
       const spareCarouselData = data.data.data.images;
       const spareDescription = [
-        { id: 1, description: data.data.data.description_1 },
-        { id: 2, description: data.data.data.description_2 },
-        { id: 3, description: data.data.data.description_3 },
-        { id: 4, description: data.data.data.description_4 },
+        { id: 1, desc: data.data.data.description_1 },
+        { id: 2, desc: data.data.data.description_2 },
+        { id: 3, desc: data.data.data.description_3 },
+        { id: 4, desc: data.data.data.description_4 },
       ];
+      
       const colorQuery = {
         sellerId: data.data.data.seller_id,
         brand: data.data.data.brand,
@@ -79,60 +89,17 @@ export const SpareDetailPage = () => {
         },
       });
     }
+    
   }, [isSuccess, data]);
 
-  // if (isSuccess && data) {
-  //   const spareCarouselData = data?.data.data.images;
-  //   const spareDescription = [
-  //     { id: 1, description: data?.data.data.description_1 },
-  //     { id: 2, description: data?.data.data.description_2 },
-  //     { id: 3, description: data?.data.data.description_3 },
-  //     { id: 4, description: data?.data.data.description_4 },
-  //   ];
-  //   const colorQuery = {
-  //     sellerId: data.data.data.seller_id,
-  //     brand: data.data.data.brand,
-  //     model: data.data.data.model,
-  //     part: data.data.data.part,
-  //   };
-
-  //   const prices = {
-  //     originalPrice: data?.data.data.original_price,
-  //     discountedPrice: data?.data.data.discounted_price,
-  //     discountPercentage: data?.data.data.discount_percentage,
-  //   };
-
-  //   const spareColor = data?.data.data.color;
-  // }
-
-  // const colorQuery = {
-  //   sellerId: data?.data.data.seller_id,
-  //   brand: data?.data.data.brand,
-  //   model: data?.data.data.model,
-  //   part: data?.data.data.part,
-  // };
-
-  // const colorQuery = isSuccess
-  //   ? {
-  //       sellerId: data.data.data.seller_id,
-  //       brand: data.data.data.brand,
-  //       model: data.data.data.model,
-  //       part: data.data.data.part,
-  //     }
-  //   : null;
-
-  // const prices = {
-  //   originalPrice: data?.data.data.original_price,
-  //   discountedPrice: data?.data.data.discounted_price,
-  //   discountPercentage: data?.data.data.discount_percentage,
-  // };
-
-  // const spareColor = data?.data.data.color;
+ 
   const { spareCarouselData, colorQuery, prices, spareDescription, color, partName } = state;
 
-  const { data: spareColors, isSuccess: isSpareColorSuccess } =
-    useGetSpareColors(colorQuery);
+  console.log("color :",colorQuery)
 
+ 
+  const { data: spareColors, isSuccess: isSpareColorSuccess } =
+  useGetSpareColors(colorQuery);
   // console.log(colors?.data.data);
   console.log(spareColors?.data.data);
 
@@ -146,6 +113,8 @@ export const SpareDetailPage = () => {
       colors={spareColors?.data.data}
       color={color}
       partName={data?.data.data.part_name}
+      onColorSelect={handleColorSelect}
+      descriptions={spareDescription}
     />
   );
 };
