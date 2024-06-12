@@ -6,6 +6,7 @@ import { SpareFilterModal } from "../../../../components/spares/spareFilters/spa
 import { parseQuery } from "../../../../utils/queryParamsUrl/pareseQuery";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { SparePriceModal } from "../../../../components/spares/spareFilters/spareFilterModal/SparePriceModal";
+import { SparesPriceFilterPage } from "./SparesPriceFilterPage";
 
 const filterButtons = [
   { id: "spare", label: "Spare" },
@@ -14,34 +15,43 @@ const filterButtons = [
   { id: "price", label: "Price" },
 ];
 
-export const SparesFilterPage = ({ onApply }) => {
-  const location = useLocation();
+export const SparesFilterPage = ({ onApply, onPriceApply, onClear }) => {
   const [filters, setFilters] = useState({
     spare: [],
     brand: [],
     model: [],
-    price: [],
+    start: [],
+    end: [],
   });
   const [currentFilterType, setCurrentFilterType] = useState(null);
   const [inFilterMode, setInFilterMode] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeFilters, setActiveFilters] = useState([]);
 
+  const { data, isSuccess, isLoading, refetch } =
+    useGetFilterSpareOption(currentFilterType);
+
   useEffect(() => {
     const newFilters = {
       brand: searchParams.get("brand")?.split(",") || null,
       spare: searchParams.get("spare")?.split(",") || null,
       model: searchParams.get("model")?.split(",") || null,
-      price: searchParams.get("price")?.split(",") || null,
+
+      start: searchParams.get("start") || null,
+      end: searchParams.get("end") || null,
     };
+    // console.log(filters.price.start);
     setFilters(newFilters);
     const urlParams = Array.from(searchParams.entries());
-    const activeFilters = urlParams.map(([key]) => key);
+    let activeFilters = urlParams.map(([key]) => key);
+    if(activeFilters.includes("start"&&"end")) {
+      activeFilters = [...activeFilters, "price"]
+    }
     setActiveFilters(activeFilters);
   }, [searchParams]);
-  
 
-  console.log(filters)
+  console.log(filters);
+  console.log(activeFilters)
   const isActive = (buttonId) => activeFilters.includes(buttonId);
 
   const handleFilter = (event) => {
@@ -50,16 +60,19 @@ export const SparesFilterPage = ({ onApply }) => {
     setInFilterMode(true);
   };
 
+  const handlePriceChange = (start, end) => {
+    onPriceApply(start, end);
+    handleClose();
+  };
   const handleApply = (appliedFilters) => {
     const { type, options } = appliedFilters;
     setSearchParams((params) => {
       params.set(type, options.join(","));
       return params;
     });
-    
-    // console.log(filters);
+
     onApply(appliedFilters);
-    setInFilterMode(false);
+    handleClose();
   };
 
   const handleClose = () => {
@@ -76,16 +89,13 @@ export const SparesFilterPage = ({ onApply }) => {
     setInFilterMode(false);
   };
 
-  const { data, isSuccess, isLoading, refetch } = useGetFilterSpareOption(
-    currentFilterType
-  );
-  console.log(data)
-
   return (
     <div className={classes.box}>
       {filterButtons.map((button) => (
         <button
-        className={`${classes.box__filter} ${isActive(button.id) && classes.active}`}
+          className={`${classes.box__filter} ${
+            isActive(button.id) && classes.active
+          }`}
           key={button.id}
           id={button.id}
           onClick={handleFilter}
@@ -94,27 +104,28 @@ export const SparesFilterPage = ({ onApply }) => {
         </button>
       ))}
       <AnimatePresence>
-      {isSuccess && inFilterMode && (
-          currentFilterType === "price" ? (
-            <SparePriceModal
-              // optionsData={data?.data.data}
-              // onApply={handleApply}
-              // filterType={filters.type}
-              // filterData={{ type: currentFilterType, options: filters[currentFilterType] }}
-              // onClose={handleClose}
-              // onClear={handleClear}
+        {isSuccess &&
+          inFilterMode &&
+          (currentFilterType === "price" ? (
+            <SparesPriceFilterPage
+              optionsData={data?.data.data}
+              onApply={handlePriceChange}
+              onClear={onClear}
+              onClose={handleClose}
             />
           ) : (
             <SpareFilterModal
               optionsData={data?.data.data}
               onApply={handleApply}
               filterType={filters.type}
-              filterData={{ type: currentFilterType, options: filters[currentFilterType] }}
+              filterData={{
+                type: currentFilterType,
+                options: filters[currentFilterType],
+              }}
               onClose={handleClose}
               onClear={handleClear}
             />
-          )
-        )}
+          ))}
       </AnimatePresence>
     </div>
   );

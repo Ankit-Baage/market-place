@@ -1,23 +1,40 @@
 import React, { useState, useEffect } from "react";
 import MultiRangeSlider from "multi-range-slider-react";
 import { motion } from "framer-motion";
-import classes from "./spareFilterModal.module.css";
+import classes from "./sparePriceModal.module.css";
 import { useSearchParams } from "react-router-dom";
 
 export const SparePriceModal = ({
+  radioButtons,
+  onClose,
+  onApply,
+  onClear,
+
+  filterType,
+  optionsData,
+  filterData,
+  itemId,
   minDataValue,
   maxDataValue,
-  onClose,
-  onSelection,
-  onApply,
   minValueFromUrl,
   maxValueFromUrl,
-  onClear,
+  onSelection,
 }) => {
+  // const sliderData = optionsData.find(
+  //   (data) => data.component_type === "range"
+  // );
   const [minValue, setMinValue] = useState(minValueFromUrl);
   const [maxValue, setMaxValue] = useState(maxValueFromUrl);
   const [minValue2, setMinValue2] = useState(minValueFromUrl);
   const [maxValue2, setMaxValue2] = useState(maxValueFromUrl);
+
+  const [selectedItemId, setSelectedItemId] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  // const radioButtons = optionsData.filter(
+  //   (data) => data.component_type !== "range"
+  // );
+
+
 
   const handleChange = (e) => {
     setMinValue(e.minValue);
@@ -37,8 +54,12 @@ export const SparePriceModal = ({
 
   const handleApply = () => {
     onSelection(minValue, maxValue);
+  };
 
-    onClose();
+  const handleCheckboxChange = (itemId) => {
+    setSelectedItemId(itemId);
+    // onItemSelected(itemId.toString());
+    console.log(selectedItemId);
   };
 
   return (
@@ -48,20 +69,46 @@ export const SparePriceModal = ({
         className={classes.box}
         initial={{ y: "100%" }}
         animate={{ y: 0, transition: { duration: 0.5, ease: "easeInOut" } }}
-        exit={{
-          y: "100%",
-          transition: { duration: 0.5, ease: "easeInOut" },
-        }}
+        exit={{ y: "100%", transition: { duration: 0.5, ease: "easeInOut" } }}
       >
         <div className={classes.box__content}>
           <div className={classes.box__content__head}>
-            <h1 className={classes.box__content__head__title}>ASP</h1>
+            <h1 className={classes.box__content__head__title}>Sort</h1>
             <button
               className={classes.backdrop__btn}
               onClick={filterClose}
             ></button>
           </div>
           <hr className={classes.box__content__divider} />
+          <div className={classes.box__content__filter}>
+            {radioButtons.map((item) => (
+              <label
+                htmlFor={item.id}
+                key={item.id}
+                className={classes.box__content__filter__option}
+              >
+                <input
+                  id={item.id}
+                  type="radio"
+                  className={classes.box__content__filter__option__input}
+                  checked={selectedItemId === item.id}
+                  onChange={() => handleCheckboxChange(item.id)}
+                />
+                <span
+                  className={`${classes.box__content__filter__labelText} ${
+                    selectedItemId === item.id
+                      ? classes.box__content__filter__labelText__checked
+                      : ""
+                  }`}
+                >
+                  {item.label}
+                </span>{" "}
+                <span
+                  className={classes.box__content__filter__option__label}
+                ></span>
+              </label>
+            ))}
+          </div>
 
           <div className={classes.box__content__filter}>
             <MultiRangeSlider

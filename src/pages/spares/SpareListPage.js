@@ -15,7 +15,8 @@ export const SpareListPage = () => {
     brand: null,
     spare: null,
     model: null,
-    price: null,
+    start: null,
+    end:null
   });
   const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ export const SpareListPage = () => {
       brand: searchParams.get("brand") || null,
       spare: searchParams.get("spare") || null,
       model: searchParams.get("model") || null,
-      price: searchParams.get("price") || null,
+       price: { start: null, end: null },
     };
     setFilters(newFilters);
   }, [searchParams]);
@@ -43,16 +44,21 @@ export const SpareListPage = () => {
     setFilters(newFilters);
   };
 
-  // const handleClear = (selectedFilterType) => {
-  //   setSearchParams((params) => {
-  //     params.delete(selectedFilterType);
-  //     return params;
-  //   });
-  //   setFilters({ ...filters, [selectedFilterType]: null });
-  // };
+  const handlePriceApplied=(start, end)=>{
+    setSearchParams((params) => {
+      params.set("start", start);
+      params.set("end", end);
+      return params.toString();
+    });
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      start:start,
+      end:end
+    }));
+  }
   return (
     <div className={classes.box}>
-      <SparesFilterPage onApply={handleApplied} />
+      <SparesFilterPage onApply={handleApplied} onPriceApply={handlePriceApplied} />
       <Advertisement image={spare_Advertisement}/>
 
       <div className={classes.box__space}>

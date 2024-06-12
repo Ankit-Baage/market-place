@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { ProductCarousel } from "../../ui/productCarousel/ProductCarousel";
 import classes from "./spareDetail.module.css";
 import { SpareColors } from "../spareColor/SpareColors";
 import { SparePrice } from "../sparePrice/SparePrice";
 import { SpareHighlights } from "../spareHighlights/SpareHighlights";
 import { SpareOffers } from "../spareOffers/SpareOffers";
+import { validateImages } from "../../../utils/helpers/imageValidator";
+import dummy from "../../../assets/spare_Advertisement.png";
+
+const dummyArray = [dummy];
 
 export const SpareDetail = ({
   images,
@@ -14,26 +18,64 @@ export const SpareDetail = ({
   color,
   spareData,
   partName,
-  onColorSelect
+  onColorSelect,
 }) => {
   const [selectedColor, setSelectedColor] = useState(null);
+  const [validationResults, setValidationResults] = useState({});
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);
-    console.log('Selected color:', color);
-
+    console.log("Selected color:", color);
   };
+
+  // Function to check if an image URL is valid
+  const checkImageUrl = (url) => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(true); // Image loaded successfully
+      img.onerror = () => resolve(false); // Error loading image
+      img.src = url;
+    });
+  };
+
+  // Function to validate all image URLs
+  const validateImages = useCallback(async (images) => {
+    const results = {};
+    for (const url of images) {
+      console.log("url:", url.image_url);
+      results[url.image_url] = await checkImageUrl(url.image_url);
+    }
+    setValidationResults(results);
+  }, []);
+
+  useEffect(() => {
+    validateImages(images);
+  }, [images, validateImages]);
+
+  console.log(validationResults);
+
+  const imageArray = Object.keys(validationResults).filter(
+    (key) => validationResults[key] === true
+  );
+  console.log(imageArray);
+
   return (
     <div className={classes.box}>
       <div className={classes.box__spareIntro}>
-        <ProductCarousel imageData={images} />
+        <ProductCarousel
+          imageData={imageArray.length < 1 ? dummyArray : imageArray}
+        />
         <div className={classes.box__spareName}>
           <h1 className={classes.box__spareName__title}>{partName}</h1>
           <h2 className={classes.box__spareName__subtitle}>New</h2>
           <hr className={classes.box__item__divider} />
         </div>
       </div>
-      <SpareColors colors={colors} color={color} onColorSelect={onColorSelect}/>
+      <SpareColors
+        colors={colors}
+        color={color}
+        onColorSelect={onColorSelect}
+      />
       <SparePrice prices={prices} />
       <SpareHighlights highlights={descriptions} />
       <SpareOffers />
@@ -57,10 +99,14 @@ export const SpareDetail = ({
       <div className={classes.box__btns}>
         <button
           className={`${classes.box__btns__btn} ${classes.box__btns__add}`}
-        >Add to Cart</button>
+        >
+          Add to Cart
+        </button>
         <button
           className={`${classes.box__btns__btn} ${classes.box__btns__buy}`}
-        >Buy Now</button>
+        >
+          Buy Now
+        </button>
       </div>
     </div>
   );

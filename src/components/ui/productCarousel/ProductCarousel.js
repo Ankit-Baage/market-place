@@ -62,7 +62,7 @@ export const ProductCarousel = ({ imageData }) => {
           <motion.div
             key={imageCount}
             style={{
-              backgroundImage: `url(${imageData[activeImageIndex].image})`,
+              backgroundImage: `url(${imageData[activeImageIndex]})`,
             }}
             custom={direction}
             variants={sliderVariants}

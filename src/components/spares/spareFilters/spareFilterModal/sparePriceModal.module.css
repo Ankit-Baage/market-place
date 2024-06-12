@@ -51,7 +51,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url(../../assets/close_icon.svg);
+  background-image: url(../../../../assets/close_icon.svg);
   cursor: pointer;
 
 }
@@ -81,8 +81,7 @@
 }
 
 .box__content__filter__option__input {
-  visibility: hidden;
-
+  display: none
 }
 
 .box__content__filter__option__label {
@@ -90,40 +89,38 @@
   left: 0;
   width: 14px;
   height: 14px;
-  border-radius: 2px;
+  border-radius: 50%;
   outline: 1px solid #2F3567;
 }
 
-.box__content__filter__option input:active~.box__content__filter__option__label {
-  background-color: white;
-}
-
 .box__content__filter__option input:checked~.box__content__filter__option__label {
-  background-color: #FFE5DC;
+  background-color: #FFFFFF;
   outline: 1px solid #FF6F3F;
 }
+
+.box__content__filter__option input:checked+.box__content__filter__labelText {
+  color: #FF6F3F;
+
+}
+
+
 
 .box__content__filter__option__label:after {
   content: "";
   position: absolute;
+  transform: translate(36%, 36%);
   display: none;
 }
 
-.box__content__filter__option input:checked~.box__content__filter__option__label:after {
+.box__content__filter__option input:checked~.box__content__filter__option__label::after {
   display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #FF6F3F;
 }
 
-.box__content__filter__option .box__content__filter__option__label:after {
-  left: 4px;
-  bottom: 4px;
-  width: 4px;
-  height: 8px;
-  border: 1.2px solid #FF6F3F;
-  border-width: 0 2px 2px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
+
 
 .box__content__filter__labelText__checked {
   color: #FF6F3F;
@@ -177,12 +174,4 @@
   line-height: 16px;
   color: #4A4C5F;
   border: 1px solid #C6C6C6;
-}
-.box__content__filter__control__to {
-  font-family: "Poppins", sans;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 16px;
-  color: #4A4C5F;
-
 }
