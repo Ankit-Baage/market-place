@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { AnimatePresence } from "framer-motion";
 import { VrpExpandedModelTablePage } from "../vrp/VrpExpandedModelTablePage";
 import { Spinner } from "../../components/ui/spinner/Spinner";
+import { formatNumber } from "../../utils/helpers/formatNumber";
 
 export const VrpModelTablePage = ({ requestId }) => {
   const [open, setOpen] = useState(false);
@@ -32,7 +33,7 @@ export const VrpModelTablePage = ({ requestId }) => {
     transformedModelTable = modelTable?.map((entry) => ({
       Model: entry.model || 0,
       Grade: entry.grade || 0,
-      RateCard: entry.rate_card || 0,
+      RateCard: `Rs. ${formatNumber(entry.rate_card)}` || 0,
     }));
 
     tableHeaders = Object.keys(transformedModelTable[0]);

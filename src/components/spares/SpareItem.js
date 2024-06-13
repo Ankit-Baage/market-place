@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import fav from "../../assets/heart.svg";
 import classes from "./spareItem.module.css";
+import { formatNumber } from "../../utils/helpers/formatNumber";
 
 export const SpareItem = ({ item, onClick }) => {
   const handleSpareDetail = (id) => {
@@ -32,11 +33,11 @@ export const SpareItem = ({ item, onClick }) => {
 
             <div className={classes.box__discount}>
               <h3 className={classes.box__discount__container__discountedPrice}>
-                Rs.{item.discounted_price}
+                Rs.{formatNumber(item.discounted_price)}
               </h3>
 
               <h3 className={classes.box__discount__container__price}>
-                {item.original_price}
+                Rs.{formatNumber(item.original_price)}
               </h3>
               {/* </div> */}
               <span className={classes.box__discount__img}>

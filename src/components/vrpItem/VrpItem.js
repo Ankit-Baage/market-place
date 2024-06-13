@@ -1,6 +1,7 @@
 import React from "react";
 import vrp from "../../assets/vrp.svg";
 import classes from "./vrpItem.module.css";
+import { formatNumber } from "../../utils/helpers/formatNumber";
 
 export const VrpItem = ({ item, index, totalItems, onClick }) => {
 
@@ -37,7 +38,7 @@ export const VrpItem = ({ item, index, totalItems, onClick }) => {
               <div className={classes.box__info__quant}>
                 <h1 className={classes.box__info__id__title}>ASP:</h1>
                 <h2 className={classes.box__info__id__number}>
-                  Rs.{item.ASP}
+                 Rs {formatNumber(item.ASP)}
                 </h2>
               </div>
               <div className={classes.box__info__quant}>
@@ -66,10 +67,10 @@ export const VrpItem = ({ item, index, totalItems, onClick }) => {
               <div className={classes.box__discount__container}>
                 
                 <h3 className={classes.box__discount__container__price__disc}>
-                  Rs.{item.rate_card}
+                  Rs {formatNumber(item.rate_card)}
                 </h3>
                 <h3 className={classes.box__discount__container__price}>
-                  Rs.{item.original_price}
+                  Rs {formatNumber(item.original_price)}
                 </h3>
               </div>
               <span className={classes.box__discount__img}>

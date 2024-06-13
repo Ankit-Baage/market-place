@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import useGetVrpProductModelTableExpanded from "../../tanstack-query/vrp/useGetProductModelTableExpanded";
 import { ExpandedModelTable } from "../../components/table/vrpTable/ExpandedModelTable";
+import { formatNumber } from "../../utils/helpers/formatNumber";
 
 export const VrpExpandedModelTablePage = ({ requestId, onClose }) => {
   const dispatch = useDispatch();
@@ -32,13 +33,25 @@ export const VrpExpandedModelTablePage = ({ requestId, onClose }) => {
         });
         return sums;
       }, {});
+      
       const sumRow = {
         Model: "",
         Grade: "",
         ...columnSums,
       };
 
-      setTransformedExpandedModelTable([...transformedData, sumRow]);
+      const formattedData = transformedData.map((row) => ({
+        ...row,
+        RateCard: `Rs ${formatNumber(row.RateCard)}`,
+      }));
+      
+      const formattedSumRow = {
+        ...sumRow,
+        RateCard: `Rs ${formatNumber(sumRow.RateCard)}`,
+      };
+      
+      // Set the final data to state
+      setTransformedExpandedModelTable([...formattedData, formattedSumRow]);
       setTableHeaders(Object.keys(transformedData[0]));
     }
   }, [isSuccess, data]);

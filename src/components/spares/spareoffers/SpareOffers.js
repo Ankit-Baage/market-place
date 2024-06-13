@@ -22,7 +22,7 @@ export const SpareOffers = ({ offers }) => {
   return (
     <div className={classes.container}>
       <div className={classes.container__info}>
-        <h1 className={classes.container__info__title}>Highlights</h1>
+        <h1 className={classes.container__info__title}>Discount Offers</h1>
         <div className={classes.box}>
           {discountOffers.map((offer) => (
             <div key={offer.id} className={classes.box__desc}>

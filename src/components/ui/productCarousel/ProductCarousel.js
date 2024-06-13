@@ -56,8 +56,8 @@ export const ProductCarousel = ({ imageData }) => {
   };
 
   return (
-    <div className="box">
-      <div className="slider">
+    <div className={classes.box}>
+      <div className={classes.slider}>
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={imageCount}
@@ -74,7 +74,7 @@ export const ProductCarousel = ({ imageData }) => {
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={1}
             onDragEnd={(_, dragInfo) => dragEndHandler(dragInfo)}
-            className="slide"
+            className={classes.slide}
           />
         </AnimatePresence>
       </div>
