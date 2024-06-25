@@ -6,6 +6,7 @@ export const SparesPriceFilterPage = ({
   optionsData,
   onApply,
   onClose,
+  onRadioApplied,
 }) => {
   const radioButtons = optionsData.filter(
     (data) => data.component_type !== "range"
@@ -17,33 +18,42 @@ export const SparesPriceFilterPage = ({
   const maxDataValue = sliderData.end;
   const [startValue, setStartValue] = useState(minDataValue);
   const [endValue, setEndValue] = useState(maxDataValue);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     const start = searchParams.get("start");
     const end = searchParams.get("end");
+    const sort = searchParams.get("sort");
 
     if (start !== null && end !== null) {
       setStartValue(+start);
       setEndValue(+end);
+    }
+    if(sort !== null) {
+      setSelectedItem(+sort)
     }
   }, [searchParams]);
 
   const handleSelection = (startValue, endValue) => {
     onApply(startValue, endValue);
   };
+  const handleSelect = (itemId) => {
+    onRadioApplied(itemId);
+    console.log(itemId)
+  };
 
-  const handleClear=() =>{
+  const handleClear = () => {
     setSearchParams((params) => {
       params.delete("start");
       params.delete("end");
+      params.delete("sort");
       return params;
     });
     onClose();
-    
-
-  }
+  };
+  console.log(selectedItem)
   return (
     <SparePriceModal
       radioButtons={radioButtons}
@@ -57,6 +67,8 @@ export const SparesPriceFilterPage = ({
       }
       onClose={onClose}
       onClear={handleClear}
+      onItemSelected={(itemId)=>handleSelect(itemId)}
+      item = {selectedItem}
     />
   );
 };

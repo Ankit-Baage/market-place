@@ -7,34 +7,26 @@ import { useSearchParams } from "react-router-dom";
 export const SparePriceModal = ({
   radioButtons,
   onClose,
-  onApply,
   onClear,
 
-  filterType,
-  optionsData,
-  filterData,
-  itemId,
   minDataValue,
   maxDataValue,
   minValueFromUrl,
   maxValueFromUrl,
   onSelection,
+  onItemSelected,
+  item
 }) => {
-  // const sliderData = optionsData.find(
-  //   (data) => data.component_type === "range"
-  // );
+  
   const [minValue, setMinValue] = useState(minValueFromUrl);
   const [maxValue, setMaxValue] = useState(maxValueFromUrl);
   const [minValue2, setMinValue2] = useState(minValueFromUrl);
   const [maxValue2, setMaxValue2] = useState(maxValueFromUrl);
 
-  const [selectedItemId, setSelectedItemId] = useState(null);
+  const [selectedItemId, setSelectedItemId] = useState();
   const [searchParams, setSearchParams] = useSearchParams();
-  // const radioButtons = optionsData.filter(
-  //   (data) => data.component_type !== "range"
-  // );
 
-
+  console.log(selectedItemId)
 
   const handleChange = (e) => {
     setMinValue(e.minValue);
@@ -58,9 +50,14 @@ export const SparePriceModal = ({
 
   const handleCheckboxChange = (itemId) => {
     setSelectedItemId(itemId);
-    // onItemSelected(itemId.toString());
-    console.log(selectedItemId);
+    onItemSelected(itemId);
+   
   };
+  useEffect(() => {
+    if (item !== undefined) {
+      setSelectedItemId(item);
+    }
+  }, [item]);
 
   return (
     <div className={classes.backdrop} onClick={filterClose}>

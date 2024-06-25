@@ -14,7 +14,7 @@ import { SearchInput } from "../../../components/searchInput/SearchInput";
 import prexo from "../../../assets/prexo_button.svg";
 import vrp from "../../../assets/vrp_button.svg";
 import openBox from "../../../assets/openBox_button.svg";
-import spare from "../../../assets/spare.svg";
+import spares from "../../../assets/spares.svg";
 
 import { BestSellingProducts } from "../bestSellingProducts/BestSellingProducts";
 import { Carousel } from "../../../components/carousel/Carousel";
@@ -23,7 +23,7 @@ const buttonRoutes = [
   { id: "prexo", image: prexo },
   { id: "vrp", image: vrp },
   { id: "openBox", image: openBox },
-  { id: "spares", image: spare },
+  { id: "spares", image: spares },
 ];
 
 export const HomePage = () => {

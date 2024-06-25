@@ -9,19 +9,20 @@ import { SparePriceModal } from "../../../../components/spares/spareFilters/spar
 import { SparesPriceFilterPage } from "./SparesPriceFilterPage";
 
 const filterButtons = [
-  { id: "spare", label: "Spare" },
+  { id: "spare", label: "Spares" },
   { id: "brand", label: "Brand" },
   { id: "model", label: "Model" },
   { id: "price", label: "Price" },
 ];
 
-export const SparesFilterPage = ({ onApply, onPriceApply, onClear }) => {
+export const SparesFilterPage = ({ onApply, onPriceApply, onClear, onSelection }) => {
   const [filters, setFilters] = useState({
     spare: [],
     brand: [],
     model: [],
     start: [],
     end: [],
+    sort: null,
   });
   const [currentFilterType, setCurrentFilterType] = useState(null);
   const [inFilterMode, setInFilterMode] = useState(false);
@@ -39,12 +40,13 @@ export const SparesFilterPage = ({ onApply, onPriceApply, onClear }) => {
 
       start: searchParams.get("start") || null,
       end: searchParams.get("end") || null,
+      sort: searchParams.get("sort")||null,
     };
     // console.log(filters.price.start);
     setFilters(newFilters);
     const urlParams = Array.from(searchParams.entries());
     let activeFilters = urlParams.map(([key]) => key);
-    if(activeFilters.includes("start"&&"end")) {
+    if(activeFilters.includes(("start"&&"end")  || "sort")) {
       activeFilters = [...activeFilters, "price"]
     }
     setActiveFilters(activeFilters);
@@ -74,6 +76,11 @@ export const SparesFilterPage = ({ onApply, onPriceApply, onClear }) => {
     onApply(appliedFilters);
     handleClose();
   };
+
+  const handleRadio =(itemId)=>{
+    console.log(itemId);
+    onSelection(itemId)
+  }
 
   const handleClose = () => {
     setInFilterMode(false);
@@ -112,6 +119,7 @@ export const SparesFilterPage = ({ onApply, onPriceApply, onClear }) => {
               onApply={handlePriceChange}
               onClear={onClear}
               onClose={handleClose}
+              onRadioApplied ={(itemId)=>handleRadio(itemId)}
             />
           ) : (
             <SpareFilterModal
