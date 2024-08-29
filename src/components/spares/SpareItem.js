@@ -3,10 +3,14 @@ import { Link } from "react-router-dom";
 import fav from "../../assets/heart.svg";
 import classes from "./spareItem.module.css";
 import { formatNumber } from "../../utils/helpers/formatNumber";
+import dummyImage from "../../assets/spare_preview_not_available.svg"
 
 export const SpareItem = ({ item, onClick }) => {
   const handleSpareDetail = (id) => {
     onClick(id);
+  };
+  const handleImageError = (e) => {
+    e.target.src = dummyImage;
   };
   return (
     <div className={classes.container}>
@@ -17,6 +21,7 @@ export const SpareItem = ({ item, onClick }) => {
               src={item.image}
               alt={item.part_name}
               className={classes.box_img_pic}
+              onError={handleImageError} 
             />
           </div>
           <div className={classes.box__info}>

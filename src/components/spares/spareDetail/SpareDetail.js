@@ -20,13 +20,8 @@ export const SpareDetail = ({
   partName,
   onColorSelect,
 }) => {
-  const [selectedColor, setSelectedColor] = useState(null);
+  
   const [validationResults, setValidationResults] = useState({});
-
-  const handleColorSelect = (color) => {
-    setSelectedColor(color);
-    console.log("Selected color:", color);
-  };
 
   // Function to check if an image URL is valid
   const checkImageUrl = (url) => {

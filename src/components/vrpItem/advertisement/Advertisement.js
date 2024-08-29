@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./advertisement.module.css";
 
 export const Advertisement = ({ image }) => {
+  console.log(image)
   return (
     <div className={classes.box}>
       <img

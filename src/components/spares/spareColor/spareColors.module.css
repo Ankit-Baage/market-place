@@ -2,8 +2,6 @@
   display: flex;
   flex-direction: column;
   row-gap: 16px;
-  
-
 }
 .box__colors {
   display: flex;

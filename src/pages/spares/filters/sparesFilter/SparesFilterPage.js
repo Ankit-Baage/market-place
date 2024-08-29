@@ -3,9 +3,9 @@ import useGetFilterSpareOption from "../../../../tanstack-query/spares/useGetFil
 import classes from "./sparesFilter.module.css";
 import { AnimatePresence } from "framer-motion";
 import { SpareFilterModal } from "../../../../components/spares/spareFilters/spareFilterModal/SpareFilterModal";
-import { parseQuery } from "../../../../utils/queryParamsUrl/pareseQuery";
-import { useLocation, useSearchParams } from "react-router-dom";
-import { SparePriceModal } from "../../../../components/spares/spareFilters/spareFilterModal/SparePriceModal";
+
+import { useSearchParams } from "react-router-dom";
+
 import { SparesPriceFilterPage } from "./SparesPriceFilterPage";
 
 const filterButtons = [

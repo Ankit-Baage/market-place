@@ -113,4 +113,87 @@ export const filterModelUrl = `${baseUrl}${version}${mode}${spareListEndPoint}${
 export const filterPriceUrl = `${baseUrl}${version}${mode}${spareListEndPoint}${filterPriceEndPoint}`;
 const spareFilterEndPoint = (filterType) => `filter?mode=${filterType}`;
 export const spareFilterUrl = (filterType) =>
-  `${baseUrl}${version}${mode}${spareListEndPoint}${spareFilterEndPoint(filterType)}`;
+  `${baseUrl}${version}${mode}${spareListEndPoint}${spareFilterEndPoint(
+    filterType
+  )}`;
+
+/////////////********newPhone*********************///////
+const newPhoneDetailEndPoint = (requestId) => `details?request_id=${requestId}`;
+const newPhoneListEndPoint = "new_phones/";
+export const newPhoneListUrl = `${baseUrl}${version}${mode}${newPhoneListEndPoint}`;
+
+const newPhoneFilterEndPoint = (filterType) => `filter?mode=${filterType}`;
+export const newPhoneFilterUrl = (filterType) =>
+  `${baseUrl}${version}${mode}${newPhoneListEndPoint}${newPhoneFilterEndPoint(
+    filterType
+  )}`;
+
+export const newPhoneDetailUrl = (requestId) =>
+  `${baseUrl}${version}${mode}${newPhoneListEndPoint}${newPhoneDetailEndPoint(
+    requestId
+  )}`;
+
+const newPhoneColorEndPoint = (sellerId, brand, model, ram, rom) =>
+  `color_details?seller_id=${sellerId}&brand=${brand}&model=${model}&ram=${ram}&rom=${rom}`;
+
+export const newPhoneColorUrl = (sellerId, brand, model, ram, rom) =>
+  `${baseUrl}${version}${mode}${newPhoneListEndPoint}${newPhoneColorEndPoint(
+    sellerId,
+    brand,
+    model,
+    ram,
+    rom
+  )}`;
+
+  const newPhoneVariantEndPoint = (sellerId, brand, model, color) =>
+    `variant_details?seller_id=${sellerId}&brand=${brand}&model=${model}&color=${color}`;
+  
+  export const newPhoneVariantUrl = (sellerId, brand, model,color) =>
+    `${baseUrl}${version}${mode}${newPhoneListEndPoint}${newPhoneVariantEndPoint(
+      sellerId,
+      brand,
+      model,
+     color
+    )}`;
+
+
+//////////////*******open_box**********///////////////
+
+
+const openBoxDetailEndPoint = (requestId) => `details?request_id=${requestId}`;
+const openBoxListEndPoint = "open_box/";
+export const openBoxListUrl = `${baseUrl}${version}${mode}${openBoxListEndPoint}`;
+
+const openBoxFilterEndPoint = (filterType) => `filter?mode=${filterType}`;
+export const openBoxFilterUrl = (filterType) =>
+  `${baseUrl}${version}${mode}${openBoxListEndPoint}${openBoxFilterEndPoint(
+    filterType
+  )}`;
+
+export const openBoxDetailUrl = (requestId) =>
+  `${baseUrl}${version}${mode}${openBoxListEndPoint}${openBoxDetailEndPoint(
+    requestId
+  )}`;
+
+const openBoxColorEndPoint = (sellerId, brand, model, ram, rom) =>
+  `color_details?seller_id=${sellerId}&brand=${brand}&model=${model}&ram=${ram}&rom=${rom}`;
+
+export const openBoxColorUrl = (sellerId, brand, model, ram, rom) =>
+  `${baseUrl}${version}${mode}${openBoxListEndPoint}${openBoxColorEndPoint(
+    sellerId,
+    brand,
+    model,
+    ram,
+    rom
+  )}`;
+
+  const openBoxVariantEndPoint = (sellerId, brand, model, color) =>
+    `variant_details?seller_id=${sellerId}&brand=${brand}&model=${model}&color=${color}`;
+  
+  export const openBoxVariantUrl = (sellerId, brand, model,color) =>
+    `${baseUrl}${version}${mode}${openBoxListEndPoint}${openBoxVariantEndPoint(
+      sellerId,
+      brand,
+      model,
+     color
+    )}`;

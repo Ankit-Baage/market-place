@@ -11,19 +11,28 @@ import Cookies from "js-cookie";
 import { getAuthToken } from "../../../utils/helpers/getAuth";
 import { Header } from "../../../components/header/Header";
 import { SearchInput } from "../../../components/searchInput/SearchInput";
-import prexo from "../../../assets/prexo_button.svg";
-import vrp from "../../../assets/vrp_button.svg";
-import openBox from "../../../assets/openBox_button.svg";
-import spares from "../../../assets/spares.svg";
+import prexo from "../../../assets/prexo.svg";
+import vrp from "../../../assets/vrp.svg";
+import openBox from "../../../assets/openBox.svg";
+import spares from "../../../assets/spare.svg";
+import newPhone from "../../../assets/new_phone.svg";
 
 import { BestSellingProducts } from "../bestSellingProducts/BestSellingProducts";
 import { Carousel } from "../../../components/carousel/Carousel";
+import carousel_image from "../../../assets/carouselImage_1.svg";
+
+const images = [
+  { id: 1, url: "https://mgstorageaccount.blob.core.windows.net/mgbucket/vrp_add190424_1.png" },
+  { id: 2, url: "https://mgstorageaccount.blob.core.windows.net/mgbucket/vrp_add190424_2.png" },
+  { id: 3, url: carousel_image },
+];
 
 const buttonRoutes = [
-  { id: "prexo", image: prexo },
-  { id: "vrp", image: vrp },
-  { id: "openBox", image: openBox },
-  { id: "spares", image: spares },
+  { id: "prexo", image: prexo, label:"Prexo" },
+  { id: "vrp", image: vrp, label: "VRP" },
+  { id: "openBox", image: openBox, label:"Open Box" },
+  { id: "spares", image: spares, label:"Spares" },
+  { id: "newPhone", image: newPhone, label:"New Phone" },
 ];
 
 export const HomePage = () => {
@@ -74,12 +83,12 @@ export const HomePage = () => {
                 <Link
                   key={button.id}
                   className={classes.container__routes__btns}
-                  style={{
-                    backgroundImage: `url(${button.image})`,
-                    cursor: "pointer",
-                  }}
                   to={button.id}
-                ></Link>
+                >
+                  <img src={button.image} alt={button.id}
+                  />
+                  <h3 className={classes.container__routes__btns__text}>{button.label}</h3>
+                </Link>
               ))}
             </motion.div>
           </motion.div>
@@ -88,7 +97,7 @@ export const HomePage = () => {
 
       <div className={classes.container__box__content}>
         <div className={classes.container__carousel}>
-          <Carousel />
+          <Carousel images={images}/>
         </div>
         <div className={classes.container__bestSelling}>
           <BestSellingProducts />

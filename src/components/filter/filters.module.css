@@ -1,0 +1,36 @@
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.box__filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 8px;
+  padding: 9px 4px 9px 8px;
+  border-radius: 32px;
+  background-color: #F5F5F5;
+  font-family: "Poppins", sans;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  color: #4A4C5F;
+  cursor: pointer;
+}
+
+.box__filter__chevron {
+  width: 14px;
+  height: 14px;
+  background-image: url(../../assets//chevron-down.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.active {
+  background-color: #FFE5DC;
+  border: 1px solid #FF6F3F
+}

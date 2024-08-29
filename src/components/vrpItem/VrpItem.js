@@ -2,6 +2,7 @@ import React from "react";
 import vrp from "../../assets/vrp.svg";
 import classes from "./vrpItem.module.css";
 import { formatNumber } from "../../utils/helpers/formatNumber";
+import dummyImage from "../../assets/spare_preview_not_available.svg"
 
 export const VrpItem = ({ item, index, totalItems, onClick }) => {
 
@@ -15,7 +16,7 @@ export const VrpItem = ({ item, index, totalItems, onClick }) => {
         onClick={() => handleVrpDetail(item.request_id)}
       >
         <div className={classes.box__img}>
-          <img src={vrp} alt="VRP" />
+          <img src={vrp || dummyImage} alt="VRP" />
         </div>
         <div className={classes.box__info}>
           <div className={classes.box__info__content}>

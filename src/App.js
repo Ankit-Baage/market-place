@@ -21,6 +21,12 @@ import { VrpListPage } from "./pages/vrpList/VrpListPage";
 import { SparesPage } from "./pages/spares/SparesPage";
 import { SpareListPage } from "./pages/spares/SpareListPage";
 import { SpareDetailPage } from "./pages/spares/SpareDetailPage";
+import { NewPhonePage } from "./pages/newPhones/NewPhonePage";
+import { NewPhoneListPage } from "./pages/newPhones/NewPhoneListPage";
+import { NewPhoneDetailPage } from "./pages/newPhones/newPhoneFilters/NewPhoneDetailPage";
+import { OpenBoxPage } from "./pages/openBox/OpenBoxPage";
+import { OpenBoxListPage } from "./pages/openBox/OpenBoxListPage";
+import { OpenBoxDetailPage } from "./pages/openBox/openBoxFilters/OpenBoxDetailPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -58,6 +64,22 @@ const router = createBrowserRouter([
             children: [
               { index: true, element: <SpareListPage /> },
               { path: ":requestId", element: <SpareDetailPage /> },
+            ],
+          },
+          {
+            path: "newPhone",
+            element: <NewPhonePage />,
+            children: [
+              { index: true, element: <NewPhoneListPage /> },
+              { path: ":requestId", element: <NewPhoneDetailPage /> },
+            ],
+          },
+          {
+            path: "openBox",
+            element: <OpenBoxPage />,
+            children: [
+              { index: true, element: <OpenBoxListPage /> },
+              { path: ":requestId", element: <OpenBoxDetailPage /> },
             ],
           },
 

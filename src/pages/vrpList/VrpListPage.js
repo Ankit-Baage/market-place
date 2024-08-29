@@ -7,6 +7,19 @@ import { Spinner } from "../../components/ui/spinner/Spinner";
 import { Advertisement } from "../../components/vrpItem/advertisement/Advertisement";
 import { FilterPage } from "./filter/FilterPage";
 import useGetVrpSortedList from "../../tanstack-query/vrp/useGetVrpSortedList";
+import axiosInstance from "../../utils/axios-middleware/axiosMiddleware";
+import { useQuery } from "@tanstack/react-query";
+import { Carousel } from "../../components/carousel/Carousel";
+
+const fetchAdvertisements = async () => {
+  const response = await axiosInstance.get(
+    "https://dev.backend.mobigarage.com/v1/mp/admin/advertisement",
+    {
+      params: { category: "vrp", page: "listing" },
+    }
+  );
+  return response.data;
+};
 
 export const VrpListPage = () => {
   const [vrpListData, setVrpListData] = useState([]);
@@ -22,12 +35,20 @@ export const VrpListPage = () => {
     p4_percent_end: null,
   });
   // const { data, isLoading, isError, isSuccess } = useGetVrpList();
+  const {
+    data: add,
+    error,
+    isLoading: addisLoading,
+  } = useQuery({
+    queryKey: ["advertisements", "vrp", "listing"],
+    queryFn: fetchAdvertisements,
+  });
+
   const { data, isSuccess, isLoading, refetch } = useGetVrpSortedList(filters);
 
   const navigate = useNavigate();
 
-  console.log("vrpListpage")
-
+  console.log(add);
 
   useEffect(() => {
     if (isSuccess) {
@@ -94,7 +115,12 @@ export const VrpListPage = () => {
         <Spinner />
       ) : (
         <div className={classes.box__space}>
-          <Advertisement image="https://mgstorageaccount.blob.core.windows.net/mgbucket/vrp_add190424_2.png"/>
+          {add?.data?.length > 1 ? (
+            <Carousel images={add?.data} />
+          ) : (
+            <Advertisement image={add?.data[0].url} />
+          )}
+
           <div className={classes.box__item}>
             {vrpListData?.map((vrpItem, index) => (
               <VrpItem
