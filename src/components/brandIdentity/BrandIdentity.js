@@ -29,8 +29,8 @@ export const BrandIdentity = () => {
           key={currentDeal} // Ensure animation on key change
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          onClick={() => cycleDeal()}
+          // transition={{ duration: 0.5 }}
+          // onClick={() => cycleDeal()}
         >
           {currentDeal}
         </motion.h2>

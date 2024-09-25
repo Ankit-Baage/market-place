@@ -38,8 +38,7 @@ export const SpareDetailPage = () => {
 
   const requestId = params.requestId;
   const [state, dispatch] = useReducer(reducer, initialState);
-  
-  
+
 const navigate = useNavigate();
   const { data, isError, isPending, isSuccess, refetch } = useGetSpareDetail({
     requestId,

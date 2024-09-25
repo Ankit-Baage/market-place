@@ -113,4 +113,45 @@ export const filterModelUrl = `${baseUrl}${version}${mode}${spareListEndPoint}${
 export const filterPriceUrl = `${baseUrl}${version}${mode}${spareListEndPoint}${filterPriceEndPoint}`;
 const spareFilterEndPoint = (filterType) => `filter?mode=${filterType}`;
 export const spareFilterUrl = (filterType) =>
-  `${baseUrl}${version}${mode}${spareListEndPoint}${spareFilterEndPoint(filterType)}`;
+  `${baseUrl}${version}${mode}${spareListEndPoint}${spareFilterEndPoint(
+    filterType
+  )}`;
+
+/////////////********newPhone*********************///////
+const newPhoneDetailEndPoint = (requestId) => `details?request_id=${requestId}`;
+const newPhoneListEndPoint = "new_phones/";
+export const newPhoneListUrl = `${baseUrl}${version}${mode}${newPhoneListEndPoint}`;
+
+const newPhoneFilterEndPoint = (filterType) => `filter?mode=${filterType}`;
+export const newPhoneFilterUrl = (filterType) =>
+  `${baseUrl}${version}${mode}${newPhoneListEndPoint}${newPhoneFilterEndPoint(
+    filterType
+  )}`;
+
+export const newPhoneDetailUrl = (requestId) =>
+  `${baseUrl}${version}${mode}${newPhoneListEndPoint}${newPhoneDetailEndPoint(
+    requestId
+  )}`;
+
+const newPhoneColorEndPoint = (sellerId, brand, model, ram, rom) =>
+  `color_details?seller_id=${sellerId}&brand=${brand}&model=${model}&ram=${ram}&rom=${rom}`;
+
+export const newPhoneColorUrl = (sellerId, brand, model, ram, rom) =>
+  `${baseUrl}${version}${mode}${newPhoneListEndPoint}${newPhoneColorEndPoint(
+    sellerId,
+    brand,
+    model,
+    ram,
+    rom
+  )}`;
+
+  const newPhoneVariantEndPoint = (sellerId, brand, model, color) =>
+    `variant_details?seller_id=${sellerId}&brand=${brand}&model=${model}&color=${color}`;
+  
+  export const newPhoneVariantUrl = (sellerId, brand, model,color) =>
+    `${baseUrl}${version}${mode}${newPhoneListEndPoint}${newPhoneVariantEndPoint(
+      sellerId,
+      brand,
+      model,
+     color
+    )}`;
