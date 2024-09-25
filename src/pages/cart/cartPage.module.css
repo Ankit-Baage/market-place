@@ -1,0 +1,27 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 80px;
+ 
+}
+.box__search {
+  position: fixed;
+  top: 0px;
+  left:16px;
+  right: 16px;
+  background-color: #FFFFFF;
+  padding: 12px 0; 
+  z-index: 10000;
+ 
+
+}
+
+.box__cart {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  justify-content: center;
+  padding-top: 88px;
+
+}

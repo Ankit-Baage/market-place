@@ -19,6 +19,7 @@ import useGetFilterNewPhoneOption from "../../tanstack-query/newPhones/useGetFil
 import { NewPhoneFiltersPage } from "./newPhoneFilters/NewPhoneFiltersPage";
 import useGetNewPhoneList from "../../tanstack-query/newPhones/useGetNewPhoneList";
 import { NewPhoneItem } from "../../components/newPhone/NewPhoneItem";
+import useCartListMutation from "../../tanstack-query/cart/useCartListMutation";
 
 export const NewPhoneListPage = () => {
   const [filters, setFilters] = useState({
@@ -34,6 +35,11 @@ export const NewPhoneListPage = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const { data, isSuccess, isLoading, refetch } = useGetNewPhoneList(filters);
+  const {
+    mutateAsync,
+    isLoading: isAdding,
+    isSuccess: addSuccess,
+  } = useCartListMutation();
   useEffect(() => {
     const newFilters = {
       brand: searchParams.get("brand") || null,
@@ -94,6 +100,22 @@ export const NewPhoneListPage = () => {
     },
   ];
 
+  const handleAddToCart = async (event, data) => {
+    event.stopPropagation();
+    const cartData = {
+      category_id: data.category_id,
+      master_product_id: data.master_product_id,
+      item_id: data.item_id,
+    };
+    try {
+      await mutateAsync(cartData);
+      console.log(cartData)
+      console.log("Item added to cart successfully.");
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+    }
+  };
+
   return (
     <div className={classes.box}>
       {/* <SparesFilterPage
@@ -107,11 +129,18 @@ export const NewPhoneListPage = () => {
 
       <div className={classes.box__space}>
         <div className={classes.box__itemList}>
-          {data?.map((spareItem, index) => (
+          {data?.map((newPhoneItem, index) => (
             <NewPhoneItem
-              key={spareItem.id}
-              item={spareItem}
+              key={newPhoneItem.id}
+              item={newPhoneItem}
               onClick={navigateToNewPhoneDetail}
+              onAddToCart={(event) =>
+                handleAddToCart(event, {
+                  category_id: newPhoneItem.category_id,
+                  master_product_id: newPhoneItem.master_product_id,
+                  item_id: newPhoneItem.id,
+                })
+              }
             />
           ))}
         </div>

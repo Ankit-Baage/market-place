@@ -145,13 +145,17 @@ export const newPhoneColorUrl = (sellerId, brand, model, ram, rom) =>
     rom
   )}`;
 
-  const newPhoneVariantEndPoint = (sellerId, brand, model, color) =>
-    `variant_details?seller_id=${sellerId}&brand=${brand}&model=${model}&color=${color}`;
-  
-  export const newPhoneVariantUrl = (sellerId, brand, model,color) =>
-    `${baseUrl}${version}${mode}${newPhoneListEndPoint}${newPhoneVariantEndPoint(
-      sellerId,
-      brand,
-      model,
-     color
-    )}`;
+const newPhoneVariantEndPoint = (sellerId, brand, model, color) =>
+  `variant_details?seller_id=${sellerId}&brand=${brand}&model=${model}&color=${color}`;
+
+export const newPhoneVariantUrl = (sellerId, brand, model, color) =>
+  `${baseUrl}${version}${mode}${newPhoneListEndPoint}${newPhoneVariantEndPoint(
+    sellerId,
+    brand,
+    model,
+    color
+  )}`;
+
+//////////********Cart*********///////////
+const cart = "cart";
+export const cartListUrl = `${baseUrl}${version}${mode}${cart}`;

@@ -2,9 +2,9 @@ import React from "react";
 import vrp from "../../assets/vrp.svg";
 import classes from "./vrpItem.module.css";
 import { formatNumber } from "../../utils/helpers/formatNumber";
+import { ItemActionButton } from "../itemActionButton/ItemActionButton";
 
-export const VrpItem = ({ item, index, totalItems, onClick }) => {
-
+export const VrpItem = ({ item, index, totalItems, onClick, onAddToCart }) => {
   const handleVrpDetail = (requestId) => {
     onClick(requestId);
   };
@@ -38,7 +38,7 @@ export const VrpItem = ({ item, index, totalItems, onClick }) => {
               <div className={classes.box__info__quant}>
                 <h1 className={classes.box__info__id__title}>ASP:</h1>
                 <h2 className={classes.box__info__id__number}>
-                 Rs {formatNumber(item.ASP)}
+                  Rs {formatNumber(item.ASP)}
                 </h2>
               </div>
               <div className={classes.box__info__quant}>
@@ -65,7 +65,6 @@ export const VrpItem = ({ item, index, totalItems, onClick }) => {
 
             <div className={classes.box__discount}>
               <div className={classes.box__discount__container}>
-                
                 <h3 className={classes.box__discount__container__price__disc}>
                   Rs {formatNumber(item.rate_card)}
                 </h3>
@@ -79,12 +78,7 @@ export const VrpItem = ({ item, index, totalItems, onClick }) => {
             </div>
           </div>
 
-          <div className={classes.box__info__btns}>
-            <button className={classes.box__info__btns__cart}>
-              Add to Cart
-            </button>
-            <button className={classes.box__info__btns__buy}>Buy Now</button>
-          </div>
+          <ItemActionButton onAdd={onAddToCart}/>
         </div>
       </div>
 

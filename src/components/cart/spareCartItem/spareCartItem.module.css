@@ -1,0 +1,121 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  justify-content: center;
+
+}
+
+.box__info {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 18px;
+}
+
+.box__info__cred {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  justify-content: center;
+  align-items: flex-start;
+
+}
+.box__info__cred__title__head {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #2F3567;
+}
+.box__info__cred__price {
+  display: flex;
+  column-gap: 4px;
+  justify-content: center;
+  align-items: center;
+
+}
+.box__info__cred__price__value {
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #FF6F3F;
+
+}
+.box__info__cred__price__subValue {
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #4A4C5F;
+  position: relative;
+
+}
+
+.box__info__cred__price__subValue::before {
+  content: "";
+  position: absolute;
+  bottom: 50%;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background-color: #989898;
+
+}
+.box__info__cred__price__discount {
+  background-image: url(../../../assets/discount_btn.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-size: 8px;
+  line-height: 8px;
+  font-weight: 600;
+  font-family: "Poppins", sans;
+  color: #FFFFFF;
+  padding: 4px 2px 3px 8px;
+
+}
+
+.box__btns {
+  width:80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.box__btns__decrement {
+  width:24px;
+  height: 24px;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #C6C6C6;
+  border: 1px solid #EFEFEF;
+  border-radius: 4px;
+  background-color: transparent;
+
+}
+.box__btns__increment {
+  width:24px;
+  height: 24px;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #FFFFFF;
+  background-color: #FF6F3F;
+  border-radius: 4px;
+
+}
+
+.box__btns__value{
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #2F3567;
+
+}
+

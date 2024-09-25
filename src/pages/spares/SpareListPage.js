@@ -6,8 +6,9 @@ import classes from "./spareListPage.module.css";
 import { Advertisement } from "../../components/vrpItem/advertisement/Advertisement";
 import useGetSpareList from "../../tanstack-query/spares/useGetSpareList";
 import { SpareItem } from "../../components/spares/SpareItem";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { SparesFilterPage } from "./filters/sparesFilter/SparesFilterPage";
+import useCartListMutation from "../../tanstack-query/cart/useCartListMutation";
 
 export const SpareListPage = () => {
   const [filters, setFilters] = useState({
@@ -21,6 +22,11 @@ export const SpareListPage = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const { data, isSuccess, isLoading, refetch } = useGetSpareList(filters);
+  const {
+    mutateAsync,
+    isLoading: isAdding,
+    isSuccess: addSuccess,
+  } = useCartListMutation();
   useEffect(() => {
     const newFilters = {
       brand: searchParams.get("brand") || null,
@@ -75,6 +81,22 @@ export const SpareListPage = () => {
     console.log(itemId);
   };
 
+  const handleAddToCart = async (event, data) => {
+    event.stopPropagation();
+    const cartData = {
+      category_id: data.category_id,
+      master_product_id: data.master_product_id,
+      item_id: data.item_id,
+    };
+    try {
+      await mutateAsync(cartData);
+      console.log(cartData)
+      console.log("Item added to cart successfully.");
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+    }
+  };
+
   return (
     <div className={classes.box}>
       <SparesFilterPage
@@ -91,6 +113,13 @@ export const SpareListPage = () => {
               key={spareItem.id}
               item={spareItem}
               onClick={navigateToSpareDetail}
+              onAddToCart={(event) =>
+                handleAddToCart(event, {
+                  category_id: spareItem.category_id,
+                  master_product_id: spareItem.master_product_id,
+                  item_id: spareItem.id,
+                })
+              }
             />
           ))}
         </div>

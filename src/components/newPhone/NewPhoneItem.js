@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import fav from "../../assets/heart.svg";
 import classes from "./newPhoneItem.module.css";
 import { formatNumber } from "../../utils/helpers/formatNumber";
+import { ItemActionButton } from "../itemActionButton/ItemActionButton";
 
-export const NewPhoneItem = ({ item, onClick }) => {
+export const NewPhoneItem = ({ item, onClick, onAddToCart }) => {
   const handleNewPhoneDetail = (id) => {
     onClick(id);
   };
@@ -42,12 +43,7 @@ export const NewPhoneItem = ({ item, onClick }) => {
               </span>
             </div>
 
-            <div className={classes.box__info__btns}>
-              <button className={classes.box__info__btns__cart}>
-                Add to Cart
-              </button>
-              <button className={classes.box__info__btns__buy}>Buy Now</button>
-            </div>
+            <ItemActionButton onAdd={onAddToCart}/>
           </div>
         </div>
         <Link className={classes.box__info__fav}>

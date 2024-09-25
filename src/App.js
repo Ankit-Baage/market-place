@@ -5,7 +5,6 @@ import { RootLayout } from "./pages/RootLayout";
 import { Authentication } from "./pages/authentication/Authentication";
 
 import { OtpVerification } from "./pages/authentication/otpVerification/OtpVerification";
-import { DevTool } from "@hookform/devtools";
 import { HomePage } from "./pages/home/homePage/HomePage";
 
 import { Home } from "./pages/home/Home";
@@ -24,6 +23,7 @@ import { SpareDetailPage } from "./pages/spares/SpareDetailPage";
 import { NewPhonePage } from "./pages/newPhones/NewPhonePage";
 import { NewPhoneListPage } from "./pages/newPhones/NewPhoneListPage";
 import { NewPhoneDetailPage } from "./pages/newPhones/newPhoneFilters/NewPhoneDetailPage";
+import { CartPage } from "./pages/cart/CartPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -73,6 +73,7 @@ const router = createBrowserRouter([
           },
 
           { path: "profile", element: <UserProfile /> },
+          { path: "cart", element: <CartPage /> },
         ],
       },
     ],

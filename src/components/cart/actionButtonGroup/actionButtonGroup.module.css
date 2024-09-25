@@ -1,0 +1,44 @@
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1.5px solid #EFEFEF;
+  border-bottom: 1.5px solid #EFEFEF;
+  padding: 6px 16px;
+
+}
+
+.box__sep {
+  height: 22px;
+  border: 1px solid #C6C6C6;
+}
+
+.box__remove {
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #FD6363;
+
+}
+
+.box__later {
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #4A4C5F;
+
+}
+
+.box__buy {
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #FF6F3F;
+
+}
+
+
+

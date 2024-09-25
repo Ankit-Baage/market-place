@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import fav from "../../assets/heart.svg";
 import classes from "./spareItem.module.css";
 import { formatNumber } from "../../utils/helpers/formatNumber";
+import { ItemActionButton } from "../itemActionButton/ItemActionButton";
 
-export const SpareItem = ({ item, onClick }) => {
+export const SpareItem = ({ item, onClick, onAddToCart }) => {
   const handleSpareDetail = (id) => {
     onClick(id);
   };
@@ -22,13 +23,6 @@ export const SpareItem = ({ item, onClick }) => {
           <div className={classes.box__info}>
             <div className={classes.box__info__container}>
               <h1 className={classes.box__info__title}>{item.part_name}</h1>
-              {/* <Link className={classes.box__info__fav}>
-                <img
-                  src={fav}
-                  alt="fav"
-                  className={classes.box__info__fav__img}
-                />
-              </Link> */}
             </div>
 
             <div className={classes.box__discount}>
@@ -45,12 +39,7 @@ export const SpareItem = ({ item, onClick }) => {
               </span>
             </div>
 
-            <div className={classes.box__info__btns}>
-              <button className={classes.box__info__btns__cart}>
-                Add to Cart
-              </button>
-              <button className={classes.box__info__btns__buy}>Buy Now</button>
-            </div>
+            <ItemActionButton onAdd={onAddToCart}/>
           </div>
         </div>
         <Link className={classes.box__info__fav}>

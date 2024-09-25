@@ -7,6 +7,7 @@ import { Spinner } from "../../components/ui/spinner/Spinner";
 import { Advertisement } from "../../components/vrpItem/advertisement/Advertisement";
 import { FilterPage } from "./filter/FilterPage";
 import useGetVrpSortedList from "../../tanstack-query/vrp/useGetVrpSortedList";
+import useCartListMutation from "../../tanstack-query/cart/useCartListMutation";
 
 export const VrpListPage = () => {
   const [vrpListData, setVrpListData] = useState([]);
@@ -24,10 +25,10 @@ export const VrpListPage = () => {
   // const { data, isLoading, isError, isSuccess } = useGetVrpList();
   const { data, isSuccess, isLoading, refetch } = useGetVrpSortedList(filters);
 
+  const { mutateAsync, isLoading:isAdding, isSuccess: addSuccess} =
+  useCartListMutation();
+
   const navigate = useNavigate();
-
-  console.log("vrpListpage")
-
 
   useEffect(() => {
     if (isSuccess) {
@@ -82,6 +83,20 @@ export const VrpListPage = () => {
     navigate(`${requestId}`);
   };
 
+  const handleAddToCart = async (event,data) => {
+    event.stopPropagation();
+    const cartData = {
+      category_id: data.category_id,
+      request_id: data.request_id,
+    };
+    try {
+      await mutateAsync(cartData);
+      console.log("Item added to cart successfully.");
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+    }
+  };
+
   return (
     <div className={classes.box}>
       <FilterPage
@@ -94,7 +109,7 @@ export const VrpListPage = () => {
         <Spinner />
       ) : (
         <div className={classes.box__space}>
-          <Advertisement image="https://mgstorageaccount.blob.core.windows.net/mgbucket/vrp_add190424_2.png"/>
+          <Advertisement image="https://mgstorageaccount.blob.core.windows.net/mgbucket/vrp_add190424_2.png" />
           <div className={classes.box__item}>
             {vrpListData?.map((vrpItem, index) => (
               <VrpItem
@@ -103,6 +118,12 @@ export const VrpListPage = () => {
                 index={index}
                 totalItems={vrpListData.length}
                 onClick={navigateToVrpDetail}
+                onAddToCart={(event) => 
+                  handleAddToCart(event, {
+                    category_id: vrpItem.category_id,
+                    request_id: vrpItem.request_id,
+                  })
+                }
               />
             ))}
           </div>

@@ -339,39 +339,6 @@
 
 }
 
-.box__info__btns {
-  display: flex;
-  column-gap: 16px;
-  align-items: center;
-
-}
-
-
-.box__info__btns__cart {
-  font-family: "Poppins", sans;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 12px;
-  border-radius: 8px;
-  border: 1px solid #FF6F3F;
-  color: #FF6F3F;
-  padding: 4px 11px;
-  background-color: #FFFFFF;
-
-}
-
-.box__info__btns__buy {
-  font-family: "Poppins", sans;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 12px;
-  border-radius: 8px;
-  border: 1px solid #FF6F3F;
-  color: #FFFFFF;
-  padding: 4px 20px;
-  background-color: #FF6F3F;
-
-}
 
 .box__item__divider {
   background-color: #EFEFEF;

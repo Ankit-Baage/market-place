@@ -1,0 +1,104 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  justify-content: center;
+
+}
+
+.box__info {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 18px;
+}
+
+.box__info__product {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.box__vrp {
+  display: flex;
+  column-gap: 4px;
+  justify-content: center;
+  align-items: center;
+}
+
+.box__vrp__title {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #989898;
+}
+
+.box__vrp__title__value {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #2F3567;
+
+}
+
+.box__vrp__asp {
+  display: flex;
+  column-gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
+
+}
+
+.box__vrp__price {
+  display: flex;
+  column-gap: 4px;
+  justify-content: center;
+  align-items: center;
+}
+
+.box__vrp__price__original {
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #FF6F3F;
+
+}
+
+
+
+.box__vrp__price__discount {
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #4A4C5F;
+  position: relative;
+
+}
+.box__vrp__price__discount::before {
+  content: "";
+  position: absolute;
+  bottom: 50%;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background-color: #989898;
+
+}
+
+.box__vrp__price__discount__img {
+  background-image: url(../../../assets/discount_btn.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-size: 8px;
+  line-height: 8px;
+  font-weight: 600;
+  font-family: "Poppins", sans;
+  color: #FFFFFF;
+  padding: 4px 2px 3px 8px;
+}
