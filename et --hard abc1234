@@ -1,0 +1,16 @@
+[33m62a431f[m[33m ([m[1;36mHEAD -> [m[1;32mnewPhones[m[33m)[m HEAD@{0}: reset: moving to HEAD
+[33m62a431f[m[33m ([m[1;36mHEAD -> [m[1;32mnewPhones[m[33m)[m HEAD@{1}: commit: order
+[33m4b8ccf9[m[33m ([m[1;31morigin/spares-Section[m[33m, [m[1;32mspares-Section[m[33m)[m HEAD@{2}: checkout: moving from spares-Section to newPhones
+[33m4b8ccf9[m[33m ([m[1;31morigin/spares-Section[m[33m, [m[1;32mspares-Section[m[33m)[m HEAD@{3}: commit: spares
+[33m766f51e[m HEAD@{4}: commit: formated data
+[33m1cb285b[m HEAD@{5}: commit: spares-complete
+[33mf32581b[m HEAD@{6}: commit: mp-demo
+[33m623cba1[m HEAD@{7}: commit: functionalities-state retained
+[33ma763b88[m HEAD@{8}: commit: filter done
+[33m6e5d9e5[m HEAD@{9}: commit: advertsisement banner fixed-layout rewired
+[33mc316eda[m HEAD@{10}: commit: spare-Section_static-listApi
+[33meaa1d30[m[33m ([m[1;31morigin/price-postion[m[33m, [m[1;32mprice-postion[m[33m)[m HEAD@{11}: checkout: moving from price-postion to spares-Section
+[33meaa1d30[m[33m ([m[1;31morigin/price-postion[m[33m, [m[1;32mprice-postion[m[33m)[m HEAD@{12}: commit: position changed
+[33m2a2d0ad[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{13}: checkout: moving from main to price-postion
+[33m2a2d0ad[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{14}: commit: marketplace
+[33mae59962[m HEAD@{15}: clone: from https://github.com/Ankit-Baage/market-place.git
