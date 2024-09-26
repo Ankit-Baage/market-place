@@ -2,13 +2,35 @@ import React from "react";
 import vrp from "../../assets/vrp.svg";
 import classes from "./vrpItem.module.css";
 import { formatNumber } from "../../utils/helpers/formatNumber";
-import dummyImage from "../../assets/spare_preview_not_available.svg"
+import dummyImage from "../../assets/spare_preview_not_available.svg";
+import { CategoryActionButtonGroup } from "../categoryActionButtonGroup/CategoryActionButtonGroup";
+import useCartListSparesMutation from "../../tanstack-query/cartList/useCartListSparesMutation";
 
 export const VrpItem = ({ item, index, totalItems, onClick }) => {
 
+  const { mutateAsync, isLoading, isSuccess, isPending } =
+  useCartListSparesMutation();
+
+  const handleAddToCart = async (event) => {
+    event.stopPropagation()
+    const data = {
+      category_id: item.category_id,
+      master_product_id: item.master_product_id,
+      item_id: item.id,
+      ...(item.category_id === 5 && { request_id: item.request_id }), // Add request_id only if category_id is 5
+    };
+
+    try {
+      await mutateAsync(data);
+      console.log("Item added to cart successfully.");
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+    }
+  };
   const handleVrpDetail = (requestId) => {
     onClick(requestId);
   };
+  const handleAdd = () => {};
   return (
     <div className={classes.container}>
       <div
@@ -39,7 +61,7 @@ export const VrpItem = ({ item, index, totalItems, onClick }) => {
               <div className={classes.box__info__quant}>
                 <h1 className={classes.box__info__id__title}>ASP:</h1>
                 <h2 className={classes.box__info__id__number}>
-                 Rs {formatNumber(item.ASP)}
+                  Rs {formatNumber(item.ASP)}
                 </h2>
               </div>
               <div className={classes.box__info__quant}>
@@ -66,7 +88,6 @@ export const VrpItem = ({ item, index, totalItems, onClick }) => {
 
             <div className={classes.box__discount}>
               <div className={classes.box__discount__container}>
-                
                 <h3 className={classes.box__discount__container__price__disc}>
                   Rs {formatNumber(item.rate_card)}
                 </h3>
@@ -79,13 +100,14 @@ export const VrpItem = ({ item, index, totalItems, onClick }) => {
               </span>
             </div>
           </div>
+          <CategoryActionButtonGroup onAdd={handleAddToCart}/>
 
-          <div className={classes.box__info__btns}>
+          {/* <div className={classes.box__info__btns}>
             <button className={classes.box__info__btns__cart}>
               Add to Cart
             </button>
             <button className={classes.box__info__btns__buy}>Buy Now</button>
-          </div>
+          </div> */}
         </div>
       </div>
 

@@ -1,0 +1,57 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.box__sep {
+  width: 100%;
+ border:  1.5px solid #EFEFEF;
+}
+
+
+.box__btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.box__btns__sep {
+  border: 1px solid #C6C6C6;
+  height: 22px;
+
+}
+.btns__sep {
+  padding:12px;
+}
+
+.box__btns__remove {
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #FD6363;
+
+}
+
+
+.box__btns__later {
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #989898;
+
+}
+
+
+.box__btns__buy {
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #FF6F3F;
+
+}

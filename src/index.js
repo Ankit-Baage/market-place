@@ -5,6 +5,8 @@ import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from "react-redux";
 import { store } from "./store";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 
 import "./index.css";
 import { Backdrop } from "./components/ui/backDrop/Backdrop";
@@ -21,6 +23,17 @@ root.render(
       {/* <Spinner />
       <Loader /> */}
       <App />
+      <ToastContainer
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover={false}
+        theme="light"
+      />
     </Provider>
   </QueryClientProvider>
 );

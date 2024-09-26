@@ -38,7 +38,7 @@ export const NewPhoneColors = ({
                     ? classes.box__colors__btn__selected
                     : ""
                 } ${
-                  color.is_active === 0 ? classes.box__colors__btn__inActive : ""
+                  color.is_active === 0 ? classes.inActive : ""
                 }`}
                 onClick={() => handleColorSelect(color)}
                 disabled={color.is_active === 0}

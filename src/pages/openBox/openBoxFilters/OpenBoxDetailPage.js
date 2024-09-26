@@ -59,7 +59,7 @@ export const OpenBoxDetailPage = () => {
     // setSelectedVariant(requestId);
     console.log("variant :", requestId);
 
-    navigate(`/home/newPhone/${requestId}`);
+    navigate(`/home/openBox/${requestId}`);
   };
 
   useEffect(() => {

@@ -107,7 +107,6 @@ export const VrpListPage = () => {
     <div className={classes.box}>
       <FilterPage
         onFilterSort={handleApplied}
-        // onFilterRange ={handleRangeFilterApplied}
         setFilterMode={setInFilterMode}
         filters={filters}
       />

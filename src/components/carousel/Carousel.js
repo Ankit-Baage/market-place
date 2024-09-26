@@ -87,7 +87,7 @@ export const Carousel = ({images}) => {
             key={index}
             onClick={() => skipToImage(index)}
             className={`indicator ${
-              index === activeImageIndex ? "active" : null
+              index === activeImageIndex ? "isActive" : null
             }`}
           />
         ))}

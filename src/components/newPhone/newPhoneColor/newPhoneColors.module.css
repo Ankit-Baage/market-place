@@ -62,13 +62,11 @@
   border-radius: 30px;
 
 }
-.box__colors__btn__inActive {
+.inActive {
   color: #EFEFEF;
   font-family: "Poppins", sans;
-  font-weight: 500;
-  /* padding: 6px 12px; */
-  /* background-color: #FFD4C5; */
-  background-color: #FFFFFF;
+  font-weight: 400;
+  color:#bdbcbc;
   border-radius: 30px;
 
 }

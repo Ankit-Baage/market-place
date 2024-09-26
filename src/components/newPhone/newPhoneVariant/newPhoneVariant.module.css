@@ -50,7 +50,7 @@
   position: relative;
   padding-left: 24px;
   font-family: "Poppins", sans;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 14px;
   color: #2F3567;
   cursor: pointer;
@@ -74,9 +74,8 @@
 .inActive {
 
   font-family: "Poppins", sans;
-  font-weight: 500;
-  color:#EFEFEF;
-  cursor: none;
+  font-weight: 400;
+  color:#bdbcbc;
 
 }
 

@@ -7,9 +7,10 @@ import useResendOtpMutation from "../../../tanstack-query/auth/useResendOtp";
 import { closeLoader, openLoader } from "../../../store/loaderSlice";
 import { OtpForm } from "../../../components/form/otpForm/OtpForm";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const OtpVerification = () => {
-  const { mutateAsync, isLoading, isSucces } = useOtpVerificationMutation();
+  const { mutateAsync, isLoading, isSuccess } = useOtpVerificationMutation();
 
   const {
     mutateAsync: resendOtp,
@@ -43,11 +44,11 @@ export const OtpVerification = () => {
   };
 
   const onSubmit = async (data) => {
+    const loadingToastId = toast.loading("Verifying OTP...");
     try {
       const otp = Object.values(data).join("");
       const mobile_no = phoneNumber;
       const response = await mutateAsync({ mobile_no, otp });
-      dispatch(closeLoader());
 
       const status = response.status;
       console.log(response.status);
@@ -55,14 +56,13 @@ export const OtpVerification = () => {
       urlFragment.set("authenticated", status);
       navigate(`/home?${urlFragment.toString()}`);
       localStorage.removeItem("mobile_no");
+      toast.dismiss(loadingToastId);
+      toast.success(response.message.displayMessage);
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        navigate("/error", { state: { error } });
-        console.error("Axios error in onSubmit:", error.message);
-      } else {
-        console.error("Non-Axios error in onSubmit:", error.message);
-        navigate("/error", { state: { error } });
-      }
+      toast.dismiss(loadingToastId);
+      toast.error(error.data.message.displayMessage);
+
+      navigate("/error", { state: { error } });
     }
   };
 

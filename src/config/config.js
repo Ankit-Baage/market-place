@@ -145,20 +145,18 @@ export const newPhoneColorUrl = (sellerId, brand, model, ram, rom) =>
     rom
   )}`;
 
-  const newPhoneVariantEndPoint = (sellerId, brand, model, color) =>
-    `variant_details?seller_id=${sellerId}&brand=${brand}&model=${model}&color=${color}`;
-  
-  export const newPhoneVariantUrl = (sellerId, brand, model,color) =>
-    `${baseUrl}${version}${mode}${newPhoneListEndPoint}${newPhoneVariantEndPoint(
-      sellerId,
-      brand,
-      model,
-     color
-    )}`;
+const newPhoneVariantEndPoint = (sellerId, brand, model, color) =>
+  `variant_details?seller_id=${sellerId}&brand=${brand}&model=${model}&color=${color}`;
 
+export const newPhoneVariantUrl = (sellerId, brand, model, color) =>
+  `${baseUrl}${version}${mode}${newPhoneListEndPoint}${newPhoneVariantEndPoint(
+    sellerId,
+    brand,
+    model,
+    color
+  )}`;
 
 //////////////*******open_box**********///////////////
-
 
 const openBoxDetailEndPoint = (requestId) => `details?request_id=${requestId}`;
 const openBoxListEndPoint = "open_box/";
@@ -187,13 +185,18 @@ export const openBoxColorUrl = (sellerId, brand, model, ram, rom) =>
     rom
   )}`;
 
-  const openBoxVariantEndPoint = (sellerId, brand, model, color) =>
-    `variant_details?seller_id=${sellerId}&brand=${brand}&model=${model}&color=${color}`;
-  
-  export const openBoxVariantUrl = (sellerId, brand, model,color) =>
-    `${baseUrl}${version}${mode}${openBoxListEndPoint}${openBoxVariantEndPoint(
-      sellerId,
-      brand,
-      model,
-     color
-    )}`;
+const openBoxVariantEndPoint = (sellerId, brand, model, color) =>
+  `variant_details?seller_id=${sellerId}&brand=${brand}&model=${model}&color=${color}`;
+
+export const openBoxVariantUrl = (sellerId, brand, model, color) =>
+  `${baseUrl}${version}${mode}${openBoxListEndPoint}${openBoxVariantEndPoint(
+    sellerId,
+    brand,
+    model,
+    color
+  )}`;
+
+////////CART/////////////////
+const cart = "cart";
+
+export const cartListUrl = `${baseUrl}${version}${mode}${cart}`;

@@ -3,9 +3,30 @@ import { Link } from "react-router-dom";
 import fav from "../../assets/heart.svg";
 import classes from "./newPhoneItem.module.css";
 import { formatNumber } from "../../utils/helpers/formatNumber";
-import dummyImage from "../../assets/spare_preview_not_available.svg"
+import dummyImage from "../../assets/spare_preview_not_available.svg";
+import { CategoryActionButtonGroup } from "../categoryActionButtonGroup/CategoryActionButtonGroup";
+import useCartListSparesMutation from "../../tanstack-query/cartList/useCartListSparesMutation";
 
 export const NewPhoneItem = ({ item, onClick }) => {
+  const { mutateAsync, isLoading, isSuccess, isPending } =
+  useCartListSparesMutation();
+
+  const handleAddToCart = async (event) => {
+    event.stopPropagation()
+    const data = {
+      category_id: item.category_id,
+      master_product_id: item.master_product_id,
+      item_id: item.id,
+      ...(item.category_id === 5 && { request_id: item.request_id }), // Add request_id only if category_id is 5
+    };
+
+    try {
+      await mutateAsync(data);
+      console.log("Item added to cart successfully.");
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+    }
+  };
   const handleNewPhoneDetail = (id) => {
     onClick(id);
   };
@@ -25,13 +46,15 @@ export const NewPhoneItem = ({ item, onClick }) => {
               src={item.image}
               alt={item.part_name}
               className={classes.box_img_pic}
-              onError={handleImageError} 
+              onError={handleImageError}
             />
           </div>
           <div className={classes.box__info}>
             <div className={classes.box__info__container}>
               {/* <h1 className={classes.box__info__title}>{item.brand}</h1> */}
-              <h1 className={classes.box__info__title}>{`${item.model} ${item.ram}/${item.rom} (${item.color})`}</h1>
+              <h1
+                className={classes.box__info__title}
+              >{`${item.model} ${item.ram}/${item.rom} (${item.color})`}</h1>
             </div>
 
             <div className={classes.box__discount}>
@@ -48,12 +71,7 @@ export const NewPhoneItem = ({ item, onClick }) => {
               </span>
             </div>
 
-            <div className={classes.box__info__btns}>
-              <button className={classes.box__info__btns__cart}>
-                Add to Cart
-              </button>
-              <button className={classes.box__info__btns__buy}>Buy Now</button>
-            </div>
+            <CategoryActionButtonGroup onAdd={handleAddToCart}/>
           </div>
         </div>
         <Link className={classes.box__info__fav}>

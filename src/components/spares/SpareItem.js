@@ -4,8 +4,31 @@ import fav from "../../assets/heart.svg";
 import classes from "./spareItem.module.css";
 import { formatNumber } from "../../utils/helpers/formatNumber";
 import dummyImage from "../../assets/spare_preview_not_available.svg"
+import { CategoryActionButtonGroup } from "../categoryActionButtonGroup/CategoryActionButtonGroup";
+import useCartListSparesMutation from "../../tanstack-query/cartList/useCartListSparesMutation";
 
 export const SpareItem = ({ item, onClick }) => {
+  const { mutateAsync, isLoading, isSuccess, isPending } =
+    useCartListSparesMutation();
+
+    const handleAddToCart = async (event) => {
+      event.stopPropagation()
+      const data = {
+        category_id: item.category_id,
+        master_product_id: item.master_product_id,
+        item_id: item.id,
+        ...(item.category_id === 5 && { request_id: item.request_id }), // Add request_id only if category_id is 5
+      };
+  
+      try {
+        await mutateAsync(data);
+        console.log("Item added to cart successfully.");
+      } catch (error) {
+        console.error("Error adding item to cart:", error);
+      }
+    };
+
+  
   const handleSpareDetail = (id) => {
     onClick(id);
   };
@@ -50,12 +73,7 @@ export const SpareItem = ({ item, onClick }) => {
               </span>
             </div>
 
-            <div className={classes.box__info__btns}>
-              <button className={classes.box__info__btns__cart}>
-                Add to Cart
-              </button>
-              <button className={classes.box__info__btns__buy}>Buy Now</button>
-            </div>
+            <CategoryActionButtonGroup onAdd={handleAddToCart}/>
           </div>
         </div>
         <Link className={classes.box__info__fav}>

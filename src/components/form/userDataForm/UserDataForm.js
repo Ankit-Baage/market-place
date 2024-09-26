@@ -13,7 +13,7 @@ import { Button } from "../../ui/button/Button";
 
 export const UserDataForm = ({ userData, onSubmit, status }) => {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
-  const { register, handleSubmit, formState, control, setValue } = useForm({
+  const { register, handleSubmit, formState,  setValue } = useForm({
     defaultValues: userData,
     validateCriteriaMode: "all",
   });
@@ -145,7 +145,7 @@ export const UserDataForm = ({ userData, onSubmit, status }) => {
           disabled={!isValid || !(isDirty || isTouched)}
         />
       </form>
-      <DevTool control={control} />
+      {/* <DevTool control={control} /> */}
     </div>
   );
 };

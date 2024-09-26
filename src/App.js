@@ -27,6 +27,7 @@ import { NewPhoneDetailPage } from "./pages/newPhones/newPhoneFilters/NewPhoneDe
 import { OpenBoxPage } from "./pages/openBox/OpenBoxPage";
 import { OpenBoxListPage } from "./pages/openBox/OpenBoxListPage";
 import { OpenBoxDetailPage } from "./pages/openBox/openBoxFilters/OpenBoxDetailPage";
+import { CartPage } from "./pages/cart/CartPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -84,6 +85,7 @@ const router = createBrowserRouter([
           },
 
           { path: "profile", element: <UserProfile /> },
+          { path: "cart", element: <CartPage /> },
         ],
       },
     ],

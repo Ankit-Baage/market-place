@@ -15,9 +15,10 @@
   align-items: center;
   row-gap: 10px;
   padding: 4px 14px ;
-
   cursor: pointer;
 }
+
+
 
 .container__box__img {
   display: block;
@@ -32,4 +33,13 @@
   font-weight: 400;
   font-family: "Poppins", sans;
   color: #989898;
+}
+
+.categoryActive {
+  font-size: 12px;
+  line-height: 15.6px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #FF6F3F;
+
 }

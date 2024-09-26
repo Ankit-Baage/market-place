@@ -106,7 +106,7 @@ export const NewPhoneListPage = () => {
         {add?.data?.length > 1 ? (
           <Carousel images={add?.data} />
         ) : (
-          <Advertisement image={add?.data[0].url} />
+          <Advertisement image={add?.data.url} />
         )}
         <div className={classes.box__itemList}>
           {data?.map((spareItem, index) => (
