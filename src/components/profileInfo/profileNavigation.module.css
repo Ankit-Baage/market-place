@@ -1,9 +1,10 @@
 .box {
   display: flex;
   flex-direction: column;
-  row-gap: 180px;
+  row-gap: 160px;
   justify-content: center;
 }
+
 
 .box__linkGroup {
   display: flex;
@@ -16,8 +17,8 @@
 .box__link {
   display: flex;
   column-gap: 12px;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   border-radius: 8px;
   padding: 12px 108px;
 }
@@ -35,5 +36,32 @@
   line-height: 16px;
   color: #FFFFFF;
 
+}
+
+
+.box__navigators__btn {
+  display: flex;
+  column-gap: 12px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 12px 108px;
+  background-color: #AF3030;
+  font-family: "Poppins", sans;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 16px;
+  color: #FFFFFF;
+
+}
+
+.box__navigators__btn__img {
+  width: 24px;
+  height: 24px;
+  background-image: url('../../assets/logOutNavigator.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
 }
 

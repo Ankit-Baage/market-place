@@ -34,10 +34,9 @@ const navigators = [
     id: 4,
     name: "Wishlist",
     image: wishListNavigator,
-    path: "/wishlist",
+    path: "wishlist",
     backGround: "#27BEFC",
   },
-  // { id: 5, name: "Logout", image: logOutNavigator, path: "" },
 ];
 
 export const ProfileNavigation = () => {
@@ -46,24 +45,30 @@ export const ProfileNavigation = () => {
     <div className={classes.box}>
       <SearchBar placeholder={placeholder} />
       <div className={classes.box__linkGroup}>
-        {navigators.map((navigator) => (
-          <Link
-            key={navigator.id}
-            to={navigator.path}
-            className={classes.box__link}
-            style={
-              navigator.backGround ? { background: navigator.backGround } : {}
-            }
-          >
-            <img
-              src={navigator.image}
-              alt={navigator.name}
-              className={classes.box__link__image}
-            />
+        <div className={classes.box__linkGroup}>
+          {navigators.map((navigator) => (
+            <Link
+              key={navigator.id}
+              to={navigator.path}
+              className={classes.box__link}
+              style={{
+                background: navigator.backGround,
+              }}
+            >
+              <img
+                src={navigator.image}
+                alt={navigator.name}
+                className={classes.box__link__image}
+              />
 
-            <h3 className={classes.box__link__title}>{navigator.name}</h3>
-          </Link>
-        ))}
+              <h3 className={classes.box__link__title}>{navigator.name}</h3>
+            </Link>
+          ))}
+        </div>
+        <button className={classes.box__navigators__btn}>
+          <span className={classes.box__navigators__btn__img} />
+          Logout
+        </button>
       </div>
     </div>
   );
