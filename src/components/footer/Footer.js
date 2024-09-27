@@ -41,7 +41,7 @@ const footerData = [
     image: profile,
     activeImage: profileActive,
     text: "Profile",
-    path: "profile",
+    path: "profileInfo",
   },
 ];
 

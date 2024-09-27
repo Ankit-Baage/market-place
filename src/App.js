@@ -28,6 +28,9 @@ import { OpenBoxPage } from "./pages/openBox/OpenBoxPage";
 import { OpenBoxListPage } from "./pages/openBox/OpenBoxListPage";
 import { OpenBoxDetailPage } from "./pages/openBox/openBoxFilters/OpenBoxDetailPage";
 import { CartPage } from "./pages/cart/CartPage";
+import { ProfileInfoPage } from "./pages/profileInfo/ProfileInfoPage";
+import { ProfileNavigation } from "./components/profileInfo/ProfileNavigation";
+import { AddressPage } from "./pages/address/AddressPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -84,7 +87,15 @@ const router = createBrowserRouter([
             ],
           },
 
-          { path: "profile", element: <UserProfile /> },
+          {
+            path: "profileInfo",
+            element: <ProfileInfoPage />,
+            children: [
+              { index: true, element: <ProfileNavigation /> },
+              { path: "profile", element: <UserProfile /> },
+              { path: "address", element: <AddressPage /> },
+            ],
+          },
           { path: "cart", element: <CartPage /> },
         ],
       },
