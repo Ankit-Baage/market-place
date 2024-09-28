@@ -3,10 +3,10 @@ import { CartActionButtonGroup } from "./CartActionButtonGroup/CartActionButtonG
 import classes from "./cart.module.css";
 
 
-export const Cart = () => {
-  return (
-    <div>
-      <CartActionButtonGroup />
-    </div>
-  );
-};
+// export const Cart = () => {
+//   return (
+//     <div>
+//       <CartActionButtonGroup />
+//     </div>
+//   );
+// };

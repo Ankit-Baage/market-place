@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import profileNavigator from "../../assets/profileNavigator.svg";
 import cartNavigator from "../../assets/cartNavigator.svg";
 import wishListNavigator from "../../assets/wishListNavigator.svg";
-import logOutNavigator from "../../assets/logOutNavigator.svg";
+import addressNavigator from "../../assets/addressNavigator.svg";
 
 import { SearchBar } from "../ui/searchBarWithBackBtn/SearchBar";
 import classes from "./profileNavigation.module.css";
@@ -11,31 +11,32 @@ import classes from "./profileNavigation.module.css";
 const navigators = [
   {
     id: 1,
-    name: "Profile",
+    name: "My Profile",
     image: profileNavigator,
     path: "profile",
     backGround: "#FF6F3F",
   },
+
   {
     id: 2,
-    name: "Address",
-    image: profileNavigator,
-    path: "address",
-    backGround: "#FF6F3F",
-  },
-  {
-    id: 3,
-    name: "Orders",
+    name: "My Orders",
     image: cartNavigator,
     path: "orders",
     backGround: "#2F3567",
   },
   {
-    id: 4,
-    name: "Wishlist",
+    id: 3,
+    name: "My Wishlist",
     image: wishListNavigator,
     path: "wishlist",
     backGround: "#27BEFC",
+  },
+  {
+    id: 4,
+    name: "My Address",
+    image: addressNavigator,
+    path: "address",
+    backGround: "#F1BC19",
   },
 ];
 
