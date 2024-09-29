@@ -12,13 +12,12 @@
   border: 1px solid #d2d2d2;
   font-size: 16px;
   line-height: 16px;
+  font-weight: 400;
   letter-spacing: 1px;
   color: #2F3567;
   font-family: "Poppins", sans;
-  /* padding: 7px 0; */
   padding: 14px 24px;
   background: transparent;
-  /* transition: border-color 0.2s; */
 }
 
 

@@ -20,19 +20,38 @@ import newPhone from "../../../assets/new_phone.svg";
 import { BestSellingProducts } from "../bestSellingProducts/BestSellingProducts";
 import { Carousel } from "../../../components/carousel/Carousel";
 import carousel_image from "../../../assets/carouselImage_1.svg";
+import axiosInstance from "../../../utils/axios-middleware/axiosMiddleware";
+import { useQuery } from "@tanstack/react-query";
+import { Advertisement } from "../../../components/vrpItem/advertisement/Advertisement";
 
 const images = [
-  { id: 1, url: "https://mgstorageaccount.blob.core.windows.net/mgbucket/vrp_add190424_1.png" },
-  { id: 2, url: "https://mgstorageaccount.blob.core.windows.net/mgbucket/vrp_add190424_2.png" },
+  {
+    id: 1,
+    url: "https://mgstorageaccount.blob.core.windows.net/mgbucket/vrp_add190424_1.png",
+  },
+  {
+    id: 2,
+    url: "https://mgstorageaccount.blob.core.windows.net/mgbucket/vrp_add190424_2.png",
+  },
   { id: 3, url: carousel_image },
 ];
 
+const fetchAdvertisements = async () => {
+  const response = await axiosInstance.get(
+    "https://dev.backend.mobigarage.com/v1/mp/admin/advertisement",
+    {
+      params: { category: "home", page: "landing" },
+    }
+  );
+  return response.data;
+};
+
 const buttonRoutes = [
-  { id: "prexo", image: prexo, label:"Prexo" },
+  { id: "prexo", image: prexo, label: "Prexo" },
   { id: "vrp", image: vrp, label: "VRP" },
-  { id: "openBox", image: openBox, label:"Open Box" },
-  { id: "spares", image: spares, label:"Spares" },
-  { id: "newPhone", image: newPhone, label:"New Phone" },
+  { id: "openBox", image: openBox, label: "Open Box" },
+  { id: "spares", image: spares, label: "Spares" },
+  { id: "newPhone", image: newPhone, label: "New Phone" },
 ];
 
 export const HomePage = () => {
@@ -44,6 +63,14 @@ export const HomePage = () => {
   const placeholder = "Search for mobile, accessories & more";
 
   const carousel = useRef();
+  const {
+    data: add,
+    error,
+    isLoading: addisLoading,
+  } = useQuery({
+    queryKey: ["advertisements", "vrp", "listing"],
+    queryFn: fetchAdvertisements,
+  });
 
   useEffect(() => {
     console.log("scrollWidth:", carousel.current.scrollWidth);
@@ -85,9 +112,10 @@ export const HomePage = () => {
                   className={classes.container__routes__btns}
                   to={button.id}
                 >
-                  <img src={button.image} alt={button.id}
-                  />
-                  <h3 className={classes.container__routes__btns__text}>{button.label}</h3>
+                  <img src={button.image} alt={button.id} />
+                  <h3 className={classes.container__routes__btns__text}>
+                    {button.label}
+                  </h3>
                 </Link>
               ))}
             </motion.div>
@@ -97,7 +125,12 @@ export const HomePage = () => {
 
       <div className={classes.container__box__content}>
         <div className={classes.container__carousel}>
-          <Carousel images={images}/>
+          {/* <Carousel images={images}/> */}
+          {add?.data?.length > 1 ? (
+            <Carousel images={add?.data} />
+          ) : (
+            <Advertisement image={add?.data[0]} />
+          )}
         </div>
         <div className={classes.container__bestSelling}>
           <BestSellingProducts />

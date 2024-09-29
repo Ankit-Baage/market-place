@@ -1,0 +1,52 @@
+.box {
+  position: relative;
+  padding: 15px 0 0;
+}
+
+.box__chevronDown {
+  position: absolute;
+  top: 40%;
+  right: 4%;
+  z-index: -1;
+  
+  width: 24px;
+  height: 24px;
+  background-image: url('../../assets/chevron-down.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.box__select {
+  width: 100%;
+  font-family: "Poppins", sans;
+  color: #9b9b9b;
+  font-size: 16px;
+  line-height: 1.563;
+  font-weight: 400;
+  border: 1px solid #D3D3D3;
+  border-radius: 4px;
+  padding: 14px 24px;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.box select {
+  /* for Firefox */
+  -moz-appearance: none;
+  /* for Safari, Chrome, Opera */
+  -webkit-appearance: none;
+}
+
+.box select::-ms-expand {
+  display: none;
+}
+
+.box__option {
+  font-family: "Poppins", sans;
+  color: #9b9b9b;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 400;
+}

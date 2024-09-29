@@ -31,6 +31,8 @@ import { CartPage } from "./pages/cart/CartPage";
 import { ProfileInfoPage } from "./pages/profileInfo/ProfileInfoPage";
 import { ProfileNavigation } from "./components/profileInfo/ProfileNavigation";
 import { AddressPage } from "./pages/address/AddressPage";
+import { AddressOutlet } from "./pages/address/AddressOutlet";
+import { AddressDetailPage } from "./pages/address/AddressDetailPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -93,7 +95,15 @@ const router = createBrowserRouter([
             children: [
               { index: true, element: <ProfileNavigation /> },
               { path: "profile", element: <UserProfile /> },
-              { path: "address", element: <AddressPage /> },
+              {
+                path: "address",
+                element: <AddressOutlet />,
+                children: [
+                  { index: true, element: <AddressPage /> },
+                  { path: ":addressId", element: <AddressDetailPage /> },
+                  { path: "add", element: <AddressDetailPage /> },
+                ],
+              },
             ],
           },
           { path: "cart", element: <CartPage /> },

@@ -200,3 +200,10 @@ export const openBoxVariantUrl = (sellerId, brand, model, color) =>
 const cart = "cart";
 
 export const cartListUrl = `${baseUrl}${version}${mode}${cart}`;
+
+/////////addresses//////////////////
+const addresses = "addresses";
+export const addressUrl = `${baseUrl}${version}${mode}${addresses}`;
+
+export const selectAddressUrl = (id) => `${addressUrl}?id=${id}`;
+export const selectedAddressDetailUrl = (id) => `${addressUrl}?id=${id}`;
