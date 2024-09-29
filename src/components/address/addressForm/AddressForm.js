@@ -27,8 +27,8 @@ export const AddressForm = ({ addressData, onSubmit, onNavigate }) => {
       ...data,
       is_default: data.is_default ? 1 : 0, // Convert true/false to 1/0
     };
-    console.log(payload);
-    // You can pass `payload` to onSubmit if needed
+
+    onSubmit(payload);
   };
 
   const handleSelectionChange = (label, selectedId) => {
@@ -41,7 +41,7 @@ export const AddressForm = ({ addressData, onSubmit, onNavigate }) => {
     { id: "2", label: "Option 2" },
     { id: "3", label: "Option 3" },
   ];
-  console.log(addressData)
+  console.log(addressData);
 
   return (
     <div className={classes.profile}>
@@ -92,7 +92,6 @@ export const AddressForm = ({ addressData, onSubmit, onNavigate }) => {
             id="address_line1"
             placeholder="Flat, House no, Building, Company,"
             register={register}
-           
             message="Please provide the correct GST No"
           />
           <CustomInput
@@ -100,7 +99,6 @@ export const AddressForm = ({ addressData, onSubmit, onNavigate }) => {
             id="address_line2"
             placeholder="Area, Street, Sector, Village"
             register={register}
-            
             message="Please provide the correct GST No"
           />
           <CustomInput
@@ -108,7 +106,6 @@ export const AddressForm = ({ addressData, onSubmit, onNavigate }) => {
             id="landmark"
             placeholder="Landmark"
             register={register}
-            
             message="Please provide the correct landmark"
           />
           <div className={classes.form__city}>
@@ -124,23 +121,37 @@ export const AddressForm = ({ addressData, onSubmit, onNavigate }) => {
             </div>
 
             <div className={classes.form__select}>
-              <CustomSelect
+              {/* <CustomSelect
                 optionData={options}
                 // selectedId="2"
                 label="Town/City"
                 register={register} // Registering with react-hook-form
                 name="city" // Name for react-hook-form
                 onSelection={handleSelectionChange} // Handle selection change
+              /> */}
+              <CustomInput
+                type="text"
+                id="city"
+                placeholder="Town/City"
+                register={register}
+                message="Please provide the correct state"
               />
             </div>
           </div>
-          <CustomSelect
+          {/* <CustomSelect
             optionData={options}
             // selectedId="2"
             label="Select State"
             register={register} // Registering with react-hook-form
             name="state" // Name for react-hook-form
             onSelection={handleSelectionChange} // Handle selection change
+          /> */}
+          <CustomInput
+            type="text"
+            id="state"
+            placeholder="state"
+            register={register}
+            message="Please provide the correct Pincode"
           />
 
           <div>

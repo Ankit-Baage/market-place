@@ -5,6 +5,8 @@ import classes from "./addressPage.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { CartLoader } from "../../components/cart/cartLoader/CartLoader";
 import useSelectAddressMutation from "../../tanstack-query/address/useSelectAddressMutation";
+import { toast } from "react-toastify";
+import useDeleteAddressMutation from "../../tanstack-query/address/useDeleteAddressMutation";
 
 export const AddressPage = () => {
   const { data, isLoading, isSuccess } = useGetAddressList();
@@ -14,6 +16,12 @@ export const AddressPage = () => {
     isError,
     isSuccess: selectionSuccess,
   } = useSelectAddressMutation();
+  const {
+    mutateAsync: deleteMutation,
+    isLoading: isDeleting,
+    isSuccess: isDeleteSuccess,
+  } = useDeleteAddressMutation();
+
   const [selectedAddressId, setSelectedAddressId] = useState(null);
 
   const navigate = useNavigate();
@@ -27,13 +35,28 @@ export const AddressPage = () => {
       console.error("Failed to select address:", error);
     }
   };
-  const handleNavigateToDetailPage =(id)=>{
-    navigate(`${id}`)
-    console.log(id)
-  }
-  const handleEdit =()=>{
-    navigate("add")
-  }
+  const handleNavigateToDetailPage = (id) => {
+    navigate(`${id}`);
+    console.log(id);
+  };
+  const handleEdit = () => {
+    navigate("add");
+  };
+
+  const handleDelete = async (addressId) => {
+    const loadingToastId = toast.loading("Deleting Address...");
+
+    try {
+      // Trigger the delete mutation
+      await deleteMutation(addressId);
+
+      toast.dismiss(loadingToastId);
+      toast.success("Address deleted successfully");
+    } catch (error) {
+      toast.dismiss(loadingToastId);
+      toast.error("Failed to delete address");
+    }
+  };
 
   const handleNavigateBack = () => {
     navigate(-1);
@@ -60,7 +83,8 @@ export const AddressPage = () => {
             address={address}
             selectedAddressId={selectedAddressId}
             onAddressChange={handleSelectAddress}
-            onEdit ={()=>handleNavigateToDetailPage(address.id)}
+            onEdit={() => handleNavigateToDetailPage(address.id)}
+            onDelete={() => handleDelete(address.id)}
           />
         ))}
 
@@ -68,10 +92,7 @@ export const AddressPage = () => {
           <button className={classes.box__card__new__btn} onClick={handleEdit}>
             Add a New Address <span className={classes.box__card__new__right} />
           </button>
-          <button className={classes.box__card__new__btn} onClick={handleEdit}>
-            Add a New Address <span className={classes.box__card__new__right} />
-          </button>
-          
+
           <button className={classes.box__card__new__btn}>
             Find a pickup location near you
             <span className={classes.box__card__new__right} />
