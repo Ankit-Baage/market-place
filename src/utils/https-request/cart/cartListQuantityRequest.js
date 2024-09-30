@@ -22,7 +22,6 @@ export const cartListQuantityRequest = async ({
       }
     );
 
-    console.log("Response data:", response.data.data);
     return response.data;
   } catch (error) {
     throw error;

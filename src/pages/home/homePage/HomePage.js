@@ -68,7 +68,7 @@ export const HomePage = () => {
     error,
     isLoading: addisLoading,
   } = useQuery({
-    queryKey: ["advertisements", "vrp", "listing"],
+    queryKey: ["advertisements", "home", "landing"],
     queryFn: fetchAdvertisements,
   });
 
@@ -77,6 +77,8 @@ export const HomePage = () => {
     console.log("offsetWidth:", carousel.current.offsetWidth);
     setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
   }, []);
+
+  console.log(add)
 
   const handleProfile = () => {
     navigate("profile");
@@ -126,10 +128,10 @@ export const HomePage = () => {
       <div className={classes.container__box__content}>
         <div className={classes.container__carousel}>
           {/* <Carousel images={images}/> */}
-          {add?.data?.length > 1 ? (
+          {add?.data.length > 1 ? (
             <Carousel images={add?.data} />
           ) : (
-            <Advertisement image={add?.data[0]} />
+            <Advertisement image={add?.data[0].url} />
           )}
         </div>
         <div className={classes.container__bestSelling}>
