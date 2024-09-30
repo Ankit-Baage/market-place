@@ -15,8 +15,8 @@ export const VrpItem = ({ item, index, totalItems, onClick }) => {
     event.stopPropagation()
     const data = {
       category_id: item.category_id,
-      master_product_id: item.master_product_id,
-      item_id: item.id,
+      // master_product_id: item.master_product_id,
+      // item_id: item.id,
       ...(item.category_id === 5 && { request_id: item.request_id }), // Add request_id only if category_id is 5
     };
 

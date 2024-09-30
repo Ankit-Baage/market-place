@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import classes from "./vrpProductDetail.module.css";
 import { VrpLotTablePage } from "../../../pages/vrp/VrpLotTablePage";
 import { VrpModelTablePage } from "../../../pages/vrp/vrpModelTablePage";
@@ -6,18 +6,45 @@ import { VrpBrandTablePage } from "../../../pages/vrp/VrpBrandTablePage";
 import { ProductInfoPage } from "../../../pages/vrp/ProductInfoPage";
 import { BasicTable } from "../../table/BasicTable";
 import { basicTableData } from "../../table/bsaicTableData";
+import useCartListSparesMutation from "../../../tanstack-query/cartList/useCartListSparesMutation";
 
 export const VrpProductDetail = ({ requestId, onDownLoad }) => {
-  console.log(requestId);
+  const [productInfo, setProductInfo] = useState({ category_id: null, request_id: requestId });
+  const { mutateAsync, isLoading, isSuccess, isPending } =
+  useCartListSparesMutation();
 
   const handleDownLoad = () => {
     onDownLoad();
     // console.log(requestId)
   };
 
+  const handleProductData = useCallback((categoryId, requestId) => {
+    // Update state only if values change
+    if (productInfo.category_id !== categoryId || productInfo.request_id !== requestId) {
+      setProductInfo({ category_id: categoryId, request_id: requestId });
+      console.log("Product data received from child:", { categoryId, requestId });
+    }
+  }, [productInfo]);
+ 
+
+  const handleAddToCart = async (event) => {
+    event.stopPropagation()
+    const data = {
+      category_id: productInfo.category_id,
+      request_id: productInfo.request_id 
+    };
+
+    try {
+      await mutateAsync(data);
+      console.log("Item added to cart successfully.");
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+    }
+  };
+
   return (
     <div className={classes.container}>
-      <ProductInfoPage requestId={requestId} />
+      <ProductInfoPage requestId={requestId} onProductData={handleProductData}/>
 
       <div className={classes.box__vrpList}>
         <div className={classes.box__details}>
@@ -34,7 +61,7 @@ export const VrpProductDetail = ({ requestId, onDownLoad }) => {
         </div>
       </div>
       <div className={classes.btn}>
-        <button className={classes.btn__addToCart}>Add to Cart(1)</button>
+        <button className={classes.btn__addToCart} onClick={handleAddToCart}>Add to Cart</button>
         <button className={classes.btn__buy}>Buy Now</button>
       </div>
     </div>

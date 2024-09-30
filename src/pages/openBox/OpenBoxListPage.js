@@ -13,6 +13,7 @@ import { NewPhoneItem } from "../../components/newPhone/NewPhoneItem";
 import axiosInstance from "../../utils/axios-middleware/axiosMiddleware";
 import { useQuery } from "@tanstack/react-query";
 import { Carousel } from "../../components/carousel/Carousel";
+import { OpenBoxItem } from "../../components/openBox/OpenBoxItem";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -113,7 +114,7 @@ export const OpenBoxListPage = () => {
         )}
         <div className={classes.box__itemList}>
           {data?.map((spareItem, index) => (
-            <NewPhoneItem
+            <OpenBoxItem
               key={spareItem.id}
               item={spareItem}
               onClick={navigateToNewPhoneDetail}

@@ -5,6 +5,7 @@ import classes from "./vrpCartItem.module.css";
 import { formatNumber } from "../../../utils/helpers/formatNumber";
 import { CartActionButtonGroup } from "../CartActionButtonGroup/CartActionButtonGroup";
 import useCartListDeleteItemMutation from "../../../tanstack-query/cartList/useCartListDeleteItemMutation";
+import { Link } from "react-router-dom";
 
 export const VrpCartItem = ({ item }) => {
   const { mutateAsync: deleteItem, isLoading } =
@@ -15,12 +16,14 @@ export const VrpCartItem = ({ item }) => {
     // Create the payload based on category_id
     const data = {
       category_id,
-      ...(category_id === 5 ? { request_id: request_id } : { master_product_id }),
+      ...(category_id === 5
+        ? { request_id: request_id }
+        : { master_product_id }),
     };
 
     try {
       await deleteItem(data);
-      console.log(data)
+      console.log(data);
       console.log("Item deleted successfully");
     } catch (error) {
       console.error("Error deleting the item:", error);
@@ -30,14 +33,17 @@ export const VrpCartItem = ({ item }) => {
   return (
     <div className={classes.box}>
       <div className={classes.box__info}>
-        <img src={vrp} alt="item" className={classes.box__img} />
+        <Link to={`/home/vrp/${item.request_id}`} >
+          <img src={vrp} alt="item" className={classes.box__img} />
+        </Link>
+
         <div className={classes.box__info__cred}>
-          <div className={classes.box__info__cred__title}>
+          <Link to={`/home/vrp/${item.request_id}`} className={classes.box__info__cred__title}>
             <h1 className={classes.box__info__cred__title__key}>VRP : </h1>
             <h2 className={classes.box__info__cred__title__value}>
               #{item.lot_id}
             </h2>
-          </div>
+          </Link>
           <div className={classes.box__info__cred__title}>
             <h1 className={classes.box__info__cred__title__key}>
               Total Phones :

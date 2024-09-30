@@ -100,7 +100,6 @@
   padding: 15px;
   background-color: #FF6F3F;
 }
-
 .box__card__navigate {
   display: flex;
   align-items: center;
@@ -110,6 +109,20 @@
   font-size: 14px;
   line-height: 14px;
   color: #4A4C5F;
+  border-radius: 8px;
+  border: 1px solid #DCDCDC;
+  padding: 15px;
+}
+
+.box__card__delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 14px;
+  color: #FE0000;
   border-radius: 8px;
   border: 1px solid #DCDCDC;
   padding: 15px;

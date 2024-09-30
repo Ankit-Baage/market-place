@@ -10,7 +10,6 @@ import dummy from "../../../assets/spare_preview_not_available.svg";
 import { NewPhoneColors } from "../newPhoneColor/NewPhoneColors";
 import { NewPhoneVariant } from "../newPhoneVariant/NewPhoneVariant";
 
-
 const dummyArray = [dummy];
 
 export const NewPhoneDetail = ({
@@ -25,12 +24,9 @@ export const NewPhoneDetail = ({
   variants,
   variantId,
   onVariantSelect,
+  onAddToCart,
 }) => {
-
-
   const [validationResults, setValidationResults] = useState({});
-
-
 
   // Function to check if an image URL is valid
   const checkImageUrl = (url) => {
@@ -55,8 +51,6 @@ export const NewPhoneDetail = ({
     validateImages(images);
   }, [images, validateImages]);
 
-  
-
   const imageArray = Object.keys(validationResults).filter(
     (key) => validationResults[key] === true
   );
@@ -68,12 +62,19 @@ export const NewPhoneDetail = ({
           imageData={imageArray.length < 1 ? dummyArray : imageArray}
         />
         <div className={classes.box__spareName}>
-          <h1 className={classes.box__spareName__title}>{`${infoSpecs.model} ${infoSpecs.ram}/${infoSpecs.rom} (${color})`}</h1>
+          <h1
+            className={classes.box__spareName__title}
+          >{`${infoSpecs.model} ${infoSpecs.ram}/${infoSpecs.rom} (${color})`}</h1>
           <h2 className={classes.box__spareName__subtitle}>New</h2>
           <hr className={classes.box__item__divider} />
         </div>
       </div>
-      <NewPhoneVariant variants={variants} variant={variant} variantId={variantId} onVariantSelect={(itemId)=>onVariantSelect(itemId)}/>
+      <NewPhoneVariant
+        variants={variants}
+        variant={variant}
+        variantId={variantId}
+        onVariantSelect={(itemId) => onVariantSelect(itemId)}
+      />
       <NewPhoneColors
         colors={colors}
         color={color}
@@ -102,6 +103,7 @@ export const NewPhoneDetail = ({
       <div className={classes.box__btns}>
         <button
           className={`${classes.box__btns__btn} ${classes.box__btns__add}`}
+          onClick={onAddToCart}
         >
           Add to Cart
         </button>

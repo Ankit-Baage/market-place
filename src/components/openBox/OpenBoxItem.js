@@ -1,61 +1,60 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import fav from "../../assets/heart.svg";
-import classes from "./spareItem.module.css";
+import classes from "./openBoxItem.module.css";
 import { formatNumber } from "../../utils/helpers/formatNumber";
-import dummyImage from "../../assets/spare_preview_not_available.svg"
+import dummyImage from "../../assets/spare_preview_not_available.svg";
 import { CategoryActionButtonGroup } from "../categoryActionButtonGroup/CategoryActionButtonGroup";
 import useCartListSparesMutation from "../../tanstack-query/cartList/useCartListSparesMutation";
 
-export const SpareItem = ({ item, onClick }) => {
+export const OpenBoxItem = ({ item, onClick }) => {
   const { mutateAsync, isLoading, isSuccess, isPending } =
-    useCartListSparesMutation();
+  useCartListSparesMutation();
 
-    const handleAddToCart = async (event) => {
-      event.stopPropagation()
-      const data = {
-        category_id: item.category_id,
-        master_product_id: item.master_product_id,
-        item_id: item.id,
-      };
-  
-      try {
-        await mutateAsync(data);
-        console.log("Item added to cart successfully.");
-      } catch (error) {
-        console.error("Error adding item to cart:", error);
-      }
+  const handleAddToCart = async (event) => {
+    event.stopPropagation()
+    const data = {
+      category_id: item.category_id,
+      master_product_id: item.master_product_id,
+      item_id: item.id,
+      ...(item.category_id === 5 && { request_id: item.request_id }), // Add request_id only if category_id is 5
     };
 
-  
-  const handleSpareDetail = (id) => {
+    try {
+      await mutateAsync(data);
+      console.log("Item added to cart successfully.");
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+    }
+  };
+  const handleNewPhoneDetail = (id) => {
     onClick(id);
   };
+
   const handleImageError = (e) => {
     e.target.src = dummyImage;
   };
   return (
     <div className={classes.container}>
       <div className={classes.container__float}>
-        <div className={classes.box} onClick={() => handleSpareDetail(item.id)}>
+        <div
+          className={classes.box}
+          onClick={() => handleNewPhoneDetail(item.id)}
+        >
           <div className={classes.box__img}>
             <img
               src={item.image}
               alt={item.part_name}
               className={classes.box_img_pic}
-              onError={handleImageError} 
+              onError={handleImageError}
             />
           </div>
           <div className={classes.box__info}>
             <div className={classes.box__info__container}>
-              <h1 className={classes.box__info__title}>{item.part_name}</h1>
-              {/* <Link className={classes.box__info__fav}>
-                <img
-                  src={fav}
-                  alt="fav"
-                  className={classes.box__info__fav__img}
-                />
-              </Link> */}
+              {/* <h1 className={classes.box__info__title}>{item.brand}</h1> */}
+              <h1
+                className={classes.box__info__title}
+              >{`${item.model} ${item.ram}/${item.rom} (${item.color})`}</h1>
             </div>
 
             <div className={classes.box__discount}>

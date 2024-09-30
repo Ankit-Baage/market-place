@@ -7,6 +7,7 @@ import { NewPhoneDetail } from "../../../components/newPhone/newPhoneDetail/NewP
 import useGetNewPhoneDetail from "../../../tanstack-query/newPhones/useGetNewPhoneDetail";
 import useGetNewPhoneColors from "../../../tanstack-query/newPhones/useGetNewPhoneColors";
 import useGetNewPhoneVariant from "../../../tanstack-query/newPhones/useGetNewPhonevariant";
+import useCartListSparesMutation from "../../../tanstack-query/cartList/useCartListSparesMutation";
 
 const initialState = {
   newPhoneCarouselData: null,
@@ -59,7 +60,7 @@ export const NewPhoneDetailPage = () => {
 
   const handleVariantSelect = (requestId) => {
     // setSelectedVariant(requestId);
-    console.log("variant :",requestId)
+    console.log("variant :", requestId);
 
     navigate(`/home/newPhone/${requestId}`);
   };
@@ -125,6 +126,30 @@ export const NewPhoneDetailPage = () => {
 
   const { data: newPhoneVariant, isSuccess: isNewPhoneVariantSuccess } =
     useGetNewPhoneVariant(variantQuery);
+
+    const { mutateAsync, isLoading } =
+    useCartListSparesMutation();
+    
+    const handleAddToCart = async (event) => {
+      event.stopPropagation();
+      const payload = {
+        category_id: data?.data?.data.category_id,
+        master_product_id: data?.data?.data.master_product_id,
+        item_id: data?.data?.data.id,
+      };
+  
+      try {
+        await mutateAsync(payload);
+        // console.log(data)
+        console.log("Item added to cart successfully.");
+      } catch (error) {
+        console.error("Error adding item to cart:", error);
+      }
+    };
+
+
+
+
   return !isNewPhoneSuccess ? (
     <Spinner />
   ) : (
@@ -140,7 +165,8 @@ export const NewPhoneDetailPage = () => {
       variant={variant}
       variantId={data?.data.data.id}
       infoSpecs={colorQuery}
-      onVariantSelect={(itemId)=>handleVariantSelect(itemId)}
+      onVariantSelect={(itemId) => handleVariantSelect(itemId)}
+      onAddToCart = {handleAddToCart}
     />
   );
 };

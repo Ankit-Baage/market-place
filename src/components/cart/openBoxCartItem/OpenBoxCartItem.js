@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { formatNumber } from "../../../utils/helpers/formatNumber";
-import dummyImage from "../../../assets/spare_preview_not_available.svg";
-import classes from "./sparesCartItem.module.css";
-import { CartActionButtonGroup } from "../CartActionButtonGroup/CartActionButtonGroup";
-import useCartListDeleteItemMutation from "../../../tanstack-query/cartList/useCartListDeleteItemMutation";
-import useCartListQuantityMutation from "../../../tanstack-query/cartList/useCartListQuantityMutation";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { formatNumber } from "../../../utils/helpers/formatNumber";
+import useCartListDeleteItemMutation from "../../../tanstack-query/cartList/useCartListDeleteItemMutation";
+import useCartListQuantityMutation from "../../../tanstack-query/cartList/useCartListQuantityMutation";
+import { CartActionButtonGroup } from "../CartActionButtonGroup/CartActionButtonGroup";
+import dummyImage from "../../../assets/spare_preview_not_available.svg";
+import classes from "./openBoxCartItem.module.css";
 
-export const SparesCartItem = ({ item }) => {
+export const OpenBoxCartItem = ({ item }) => {
   const [quantity, setQuantity] = useState(item.quantity);
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -73,12 +73,20 @@ export const SparesCartItem = ({ item }) => {
     e.target.src = dummyImage;
   };
 
+  const categoryMapping = {
+    6: "spares",
+    7: "newPhone",
+    8: "openBox",
+    // Add more category mappings if needed
+  };
 
+  // Get the category name based on item.category_id
+  const categoryName = categoryMapping[item.category_id] || "vrp";
 
   return (
     <div className={classes.box}>
       <div className={classes.box__info}>
-        <Link to={`/home/spares/${item.id}`}>
+        <Link to={`/home/openBox/${item.id}`}>
           <img
             src={item.image}
             alt="item"
@@ -89,13 +97,14 @@ export const SparesCartItem = ({ item }) => {
 
         <div className={classes.box__info__cred}>
           <Link
-            to={`/home/spares/${item.id}`}
+            to={`/home/openBox/${item.id}`}
             className={classes.box__info__cred__title}
           >
             <h1 className={classes.box__info__cred__title__head}>
-              {item.part_name}
+              {item.model}
+
             </h1>
-            <h2 className={classes.box__info__cred__title__color}>{`(${item.color})`}</h2>
+            <h2 className={classes.box__info__cred__title__color}>{`(${item.ram}/${item.rom}, ${item.color})`}</h2>
           </Link>
 
           <div className={classes.box__info__cred__price}>

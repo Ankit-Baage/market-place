@@ -5,6 +5,7 @@ import { Spinner } from "../../components/ui/spinner/Spinner";
 import { SpareDetail } from "../../components/spares/spareDetail/SpareDetail";
 import useGetSpareColors from "../../tanstack-query/spares/useGetSpareColors";
 import { formatNumber } from "../../utils/helpers/formatNumber";
+import useCartListSparesMutation from "../../tanstack-query/cartList/useCartListSparesMutation";
 
 const initialState = {
   spareCarouselData: null,
@@ -102,6 +103,26 @@ const navigate = useNavigate();
   // console.log(colors?.data.data);
   console.log(spareColors?.data.data);
 
+  const { mutateAsync, isLoading } =
+  useCartListSparesMutation();
+  
+  const handleAddToCart = async (event) => {
+    event.stopPropagation();
+    const payload = {
+      category_id: data?.data?.data.category_id,
+      master_product_id: data?.data?.data.master_product_id,
+      item_id: data?.data?.data.id,
+    };
+
+    try {
+      await mutateAsync(payload);
+      // console.log(data)
+      console.log("Item added to cart successfully.");
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+    }
+  };
+
   return !isSpareColorSuccess ? (
     <Spinner />
   ) : (
@@ -114,6 +135,7 @@ const navigate = useNavigate();
       partName={data?.data.data.part_name}
       onColorSelect={handleColorSelect}
       descriptions={spareDescription}
+      onAddToCart = {handleAddToCart}
     />
   );
 };

@@ -7,6 +7,8 @@ import { VrpCartItem } from "../../components/cart/vrpCartItem/VrpCartItem";
 import useGetCartList from "../../tanstack-query/cartList/useGetCartList";
 import { SparesCartItem } from "../../components/cart/sparesCartItem/SparesCartItem";
 import { CartLoader } from "../../components/cart/cartLoader/CartLoader";
+import { OpenBoxCartItem } from "../../components/cart/openBoxCartItem/OpenBoxCartItem";
+import { NewPhoneCartItem } from "../../components/cart/newPhoneCartItem/NewPhoneCartItem";
 
 export const CartPage = () => {
   const { data, isSuccess, isLoading, refetch } = useGetCartList();
@@ -16,14 +18,21 @@ export const CartPage = () => {
     if (isLoading) {
       return <CartLoader />;
     }
-    if (isSuccess && data?.data?.data.length > 1) {
-      return data.data.data.map((item) =>
-        item.category_id === 5 ? (
-          <VrpCartItem key={item.request_id} item={item} />
-        ) : (
-          <SparesCartItem key={item.id} item={item} />
-        )
-      );
+    if (isSuccess && data?.data?.data.length > 0) {
+      return data.data.data.map((item) => {
+        switch (item.category_id) {
+          case 5:
+            return <VrpCartItem key={item.request_id} item={item} />;
+          case 6:
+            return <SparesCartItem key={item.id} item={item} />;
+          case 7:
+            return <NewPhoneCartItem key={item.id} item={item} />;
+          case 8:
+            return <OpenBoxCartItem key={item.id} item={item} />;
+          default:
+            return null;
+        }
+      });
     }
     return <EmptyCart />;
   }, [isLoading, isSuccess, data]);
@@ -33,14 +42,6 @@ export const CartPage = () => {
     <div className={classes.box}>
       <SearchBar placeholder={placeholder} />
       <div className={classes.box__cart}>
-        {/* {data?.data?.data.map((item) =>
-          item.category_id === 5 ? (
-            <VrpCartItem key={item.request_id} item={item} />
-          ) : (
-            <SparesCartItem key={item.id} item={item} />
-          )
-        )}
-        {isSuccess && data?.data?.data.length < 1 && <EmptyCart />} */}
         {content}
       </div>
     </div>

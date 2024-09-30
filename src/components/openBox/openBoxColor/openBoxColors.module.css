@@ -1,0 +1,77 @@
+.box{
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  
+
+}
+.box__colors {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+}
+
+.box__colors__text {
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: 1px;
+  color: #2F3567;
+  font-family: "Poppins", sans;
+  font-weight: 600;
+
+}
+.box__item__divider {
+  background-color: #EFEFEF;
+  height: 1.5px;
+}
+
+
+
+.box__colors__carousel {
+  display:flex;
+  overflow: hidden;
+
+}
+
+
+.box__colors__carousel__inner {
+  display:flex;
+  align-items: center;
+  column-gap: 20px;
+
+}
+
+
+.box__colors__btn {
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: 1px;
+  color: #595959;
+  font-family: "Poppins", sans;
+  font-weight: 500;
+  padding: 6px 10px;
+  /* min-width: 70px; */
+}
+
+.box__colors__btn__selected {
+  color: #FFFFFF;
+  font-family: "Poppins", sans;
+  font-weight: 500;
+  /* padding: 6px 12px; */
+  background-color: #FF6F3F;
+  border-radius: 30px;
+
+}
+.inActive {
+  color: #EFEFEF;
+  font-family: "Poppins", sans;
+  font-weight: 400;
+  color:#bdbcbc;
+  border-radius: 30px;
+
+}
+
+.box__item__divider {
+  background-color: #EFEFEF;
+  height: 1.5px;
+}

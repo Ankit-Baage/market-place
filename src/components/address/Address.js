@@ -44,7 +44,7 @@ export const Address = ({
         <button className={classes.box__card__navigate} onClick={onEdit}>
           Edit Address
         </button>
-        <button className={classes.box__card__navigate} onClick={onDelete}>
+        <button className={classes.box__card__delete} onClick={onDelete}>
           Delete Address
         </button>
       </div>

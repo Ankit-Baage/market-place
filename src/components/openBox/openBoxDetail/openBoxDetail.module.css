@@ -1,0 +1,135 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  justify-content: center;
+  
+}
+
+.box__spareIntro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 16px;
+}
+
+.box__spareName {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  text-align: center;
+  row-gap: 8px;
+}
+.box__spareName__title {
+  font-size: 16px;
+  line-height: 22px;
+  color: #2F3567;
+  font-family: "Poppins", sans;
+  font-weight: 600;
+
+}
+.box__spareName__subtitle {
+  font-size: 14px;
+  line-height: 18.2px;
+  color: #46CD80;
+  font-family: "Poppins", sans;
+  font-weight: 500;
+
+}
+
+
+.box__otherSellers {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 16px;
+}
+
+.box__otherSellers__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.box__otherSellers__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 12px;
+
+}
+
+.box__otherSellers__info__title {
+  font-size: 16px;
+  line-height: 20.8px;
+  color: #2F3567;
+  font-family: "Poppins", sans;
+  font-weight: 500;
+}
+.box__otherSellers__info__subtitle {
+  font-size: 14px;
+  line-height: 18.2px;
+  color: #2F3567;
+  font-family: "Poppins", sans;
+  font-weight: 400;
+
+}
+
+.box__otherSellers__info__price {
+  font-size: 14px;
+  line-height: 14px;
+  color: #FF6F3F;
+  font-family: "Poppins", sans;
+  font-weight: 500;
+
+}
+
+.box__otherSellers__arrow {
+  display: block;
+  width: 5px;
+  height: 10px;
+  background-image: url(../../../assets/arrow_right.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+
+
+.box__item__divider {
+  background-color: #EFEFEF;
+  height: 1.5px;
+}
+
+.box__btns {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.box__btns__btn {
+  font-size: 12px;
+  line-height: 12px;
+  font-family: "Poppins", sans;
+  font-weight: 400;
+  padding: 8px 44px;
+  cursor: pointer;
+
+}
+
+.box__btns__add {
+  border: 1px solid #FF6F3F;
+  border-radius: 4px;
+  color: #FF6F3F;
+  background-color: #FFFFFF;
+
+}
+.box__btns__buy {
+  border-radius: 4px;
+  color: #FFFFFF;
+  background-color: #FF6F3F;
+
+}

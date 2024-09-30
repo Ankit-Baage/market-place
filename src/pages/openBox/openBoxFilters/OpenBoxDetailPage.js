@@ -3,10 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "../../../components/ui/spinner/Spinner";
 
 import { formatNumber } from "../../../utils/helpers/formatNumber";
-import { NewPhoneDetail } from "../../../components/newPhone/newPhoneDetail/NewPhoneDetail";
+
 import useGetOpenBoxDetail from "../../../tanstack-query/openBox/useGetOpenBoxDetail";
 import useGetOpenBoxColors from "../../../tanstack-query/openBox/useGetOpenBoxColors";
 import useGetOpenBoxVariant from "../../../tanstack-query/openBox/useGetOpenBoxVariant";
+import useCartListSparesMutation from "../../../tanstack-query/cartList/useCartListSparesMutation";
+import { OpenBoxDetail } from "../../../components/openBox/openBoxDetail/OpenBoxDetail";
 
 const initialState = {
   newPhoneCarouselData: null,
@@ -123,10 +125,34 @@ export const OpenBoxDetailPage = () => {
 
   const { data: newPhoneVariant, isSuccess: isOpenBoxVariantSuccess } =
     useGetOpenBoxVariant(variantQuery);
+
+    const { mutateAsync, isLoading } =
+    useCartListSparesMutation();
+    
+    const handleAddToCart = async (event) => {
+      event.stopPropagation();
+      const payload = {
+        category_id: data?.data?.data.category_id,
+        master_product_id: data?.data?.data.master_product_id,
+        item_id: data?.data?.data.id,
+      };
+  
+      try {
+        await mutateAsync(payload);
+        // console.log(data)
+        console.log("Item added to cart successfully.");
+      } catch (error) {
+        console.error("Error adding item to cart:", error);
+      }
+    };
+
+
+
+
   return !isNewPhoneSuccess ? (
     <Spinner />
   ) : (
-    <NewPhoneDetail
+    <OpenBoxDetail
       images={newPhoneCarouselData}
       prices={prices}
       colors={newPhoneColors?.data.data}
@@ -139,6 +165,7 @@ export const OpenBoxDetailPage = () => {
       variantId={data?.data.data.id}
       infoSpecs={colorQuery}
       onVariantSelect={(itemId) => handleVariantSelect(itemId)}
+      onAddToCart = {handleAddToCart}
     />
   );
 };
