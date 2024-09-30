@@ -13,7 +13,6 @@ export const AddressPage = () => {
   const {
     mutateAsync,
     isLoading: selecting,
-    isError,
     isSuccess: selectionSuccess,
   } = useSelectAddressMutation();
   const {
@@ -30,9 +29,9 @@ export const AddressPage = () => {
     try {
       const response = await mutateAsync(id);
       setSelectedAddressId(id);
-      console.log("Address selected successfully:", response);
+      toast.success(response.message.displayMessage);
     } catch (error) {
-      console.error("Failed to select address:", error);
+      toast.error(error.response.data.message.displayMessage);
     }
   };
   const handleNavigateToDetailPage = (id) => {
@@ -44,17 +43,14 @@ export const AddressPage = () => {
   };
 
   const handleDelete = async (addressId) => {
-    const loadingToastId = toast.loading("Deleting Address...");
 
     try {
       // Trigger the delete mutation
-      await deleteMutation(addressId);
+      const response = await deleteMutation(addressId);
 
-      toast.dismiss(loadingToastId);
-      toast.success("Address deleted successfully");
+      toast.success(response.message.displayMessage);
     } catch (error) {
-      toast.dismiss(loadingToastId);
-      toast.error("Failed to delete address");
+      toast.error(error.response.data.message.displayMessage);
     }
   };
 

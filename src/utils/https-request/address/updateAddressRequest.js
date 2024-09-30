@@ -15,9 +15,9 @@ export const updateAddressRequest = async (payload) => {
       }
     );
 
-    console.log(response.data.data)
+    
 
-    return response;
+    return response.data;
   } catch (error) {
     if (axiosInstance.isAxiosError(error)) {
       // Axios error (e.g., network error, 404 Not Found)

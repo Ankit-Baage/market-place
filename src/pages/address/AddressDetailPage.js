@@ -5,7 +5,6 @@ import { AddressForm } from "../../components/address/addressForm/AddressForm";
 import useUpdateAddressMutation from "../../tanstack-query/address/useUpdateAddressMutation";
 import { toast } from "react-toastify";
 import useAddAddressMutation from "../../tanstack-query/address/useAddAddress";
-import useDeleteAddressMutation from "../../tanstack-query/address/useDeleteAddressMutation";
 
 const newAddressData = {
   name: "",
@@ -41,7 +40,6 @@ export const AddressDetailPage = () => {
     isLoading: isAdding,
     isSuccess: isAddSuccess,
   } = useAddAddressMutation();
-  
 
   const handleSubmit = async (payload) => {
     const loadingToastId = toast.loading(
@@ -53,23 +51,17 @@ export const AddressDetailPage = () => {
       let response;
 
       if (addressId) {
-        // If addressId exists, update the address
         data.id = addressId;
         response = await mutateAsync(data);
       } else {
-        // If no addressId, add a new address
-        response = await addMutation({...data, country:"India"});
+        response = await addMutation({ ...data, country: "India" });
       }
 
       navigate(-1);
       toast.dismiss(loadingToastId);
-      toast.success(response.data.message.displayMessage);
+      toast.success(response.message.displayMessage);
     } catch (error) {
-      console.log("Failed to process address:", error);
-      toast.dismiss(loadingToastId);
-      toast.error(
-        error.response?.data?.message?.displayMessage || "An error occurred"
-      );
+      toast.error(error.response.data.message.displayMessage);
     }
   };
   console.log(addressId);
