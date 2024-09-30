@@ -6,6 +6,7 @@ import { SpareDetail } from "../../components/spares/spareDetail/SpareDetail";
 import useGetSpareColors from "../../tanstack-query/spares/useGetSpareColors";
 import { formatNumber } from "../../utils/helpers/formatNumber";
 import useCartListSparesMutation from "../../tanstack-query/cartList/useCartListSparesMutation";
+import { toast } from "react-toastify";
 
 const initialState = {
   spareCarouselData: null,
@@ -115,11 +116,11 @@ const navigate = useNavigate();
     };
 
     try {
-      await mutateAsync(payload);
+      const response = await mutateAsync(payload);
       // console.log(data)
-      console.log("Item added to cart successfully.");
+      toast.success(response.message.displayMessage);
     } catch (error) {
-      console.error("Error adding item to cart:", error);
+      toast.error(error.response.data.message.displayMessage);
     }
   };
 

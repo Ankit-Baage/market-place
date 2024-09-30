@@ -21,8 +21,7 @@ export const cartListDeleteRequest = async (data) => {
       data: payload,
     });
 
-    console.log("Response data:", response.data.data);
-    return response.data.data; // Return the relevant part of the response
+    return response.data; // Return the relevant part of the response
   } catch (error) {
     if (axiosInstance.isAxiosError(error)) {
       console.error("Axios error:", error.message);

@@ -6,6 +6,7 @@ import { formatNumber } from "../../utils/helpers/formatNumber";
 import dummyImage from "../../assets/spare_preview_not_available.svg";
 import { CategoryActionButtonGroup } from "../categoryActionButtonGroup/CategoryActionButtonGroup";
 import useCartListSparesMutation from "../../tanstack-query/cartList/useCartListSparesMutation";
+import { toast } from "react-toastify";
 
 export const OpenBoxItem = ({ item, onClick }) => {
   const { mutateAsync, isLoading, isSuccess, isPending } =
@@ -17,14 +18,13 @@ export const OpenBoxItem = ({ item, onClick }) => {
       category_id: item.category_id,
       master_product_id: item.master_product_id,
       item_id: item.id,
-      ...(item.category_id === 5 && { request_id: item.request_id }), // Add request_id only if category_id is 5
     };
 
     try {
-      await mutateAsync(data);
-      console.log("Item added to cart successfully.");
+      const response = await mutateAsync(data);
+      toast.success(response.message.displayMessage);
     } catch (error) {
-      console.error("Error adding item to cart:", error);
+      toast.error(error.response.data.message.displayMessage);
     }
   };
   const handleNewPhoneDetail = (id) => {

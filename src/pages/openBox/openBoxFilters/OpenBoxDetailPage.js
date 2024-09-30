@@ -9,6 +9,7 @@ import useGetOpenBoxColors from "../../../tanstack-query/openBox/useGetOpenBoxCo
 import useGetOpenBoxVariant from "../../../tanstack-query/openBox/useGetOpenBoxVariant";
 import useCartListSparesMutation from "../../../tanstack-query/cartList/useCartListSparesMutation";
 import { OpenBoxDetail } from "../../../components/openBox/openBoxDetail/OpenBoxDetail";
+import { toast } from "react-toastify";
 
 const initialState = {
   newPhoneCarouselData: null,
@@ -39,8 +40,7 @@ function reducer(state, action) {
 }
 
 export const OpenBoxDetailPage = () => {
-  // const [selectedColor, setSelectedColor] = useState(null);
-  const [selectedVariant, setSelectedVariant] = useState(null);
+ 
   const params = useParams();
 
   const requestId = params.requestId;
@@ -126,28 +126,24 @@ export const OpenBoxDetailPage = () => {
   const { data: newPhoneVariant, isSuccess: isOpenBoxVariantSuccess } =
     useGetOpenBoxVariant(variantQuery);
 
-    const { mutateAsync, isLoading } =
-    useCartListSparesMutation();
-    
-    const handleAddToCart = async (event) => {
-      event.stopPropagation();
-      const payload = {
-        category_id: data?.data?.data.category_id,
-        master_product_id: data?.data?.data.master_product_id,
-        item_id: data?.data?.data.id,
-      };
-  
-      try {
-        await mutateAsync(payload);
-        // console.log(data)
-        console.log("Item added to cart successfully.");
-      } catch (error) {
-        console.error("Error adding item to cart:", error);
-      }
+  const { mutateAsync, isLoading } = useCartListSparesMutation();
+
+  const handleAddToCart = async (event) => {
+    event.stopPropagation();
+    const payload = {
+      category_id: data?.data?.data.category_id,
+      master_product_id: data?.data?.data.master_product_id,
+      item_id: data?.data?.data.id,
     };
 
-
-
+    try {
+      const response = await mutateAsync(payload);
+      // console.log(data)
+      toast.success(response.message.displayMessage);
+    } catch (error) {
+      toast.error(error.response.data.message.displayMessage);
+    }
+  };
 
   return !isNewPhoneSuccess ? (
     <Spinner />
@@ -165,7 +161,7 @@ export const OpenBoxDetailPage = () => {
       variantId={data?.data.data.id}
       infoSpecs={colorQuery}
       onVariantSelect={(itemId) => handleVariantSelect(itemId)}
-      onAddToCart = {handleAddToCart}
+      onAddToCart={handleAddToCart}
     />
   );
 };

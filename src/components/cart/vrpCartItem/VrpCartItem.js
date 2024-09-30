@@ -11,9 +11,7 @@ export const VrpCartItem = ({ item }) => {
   const { mutateAsync: deleteItem, isLoading } =
     useCartListDeleteItemMutation();
   const handleRemove = async () => {
-    const { category_id, master_product_id, request_id } = item; // Destructure for clarity
-
-    // Create the payload based on category_id
+    const { category_id, master_product_id, request_id } = item;
     const data = {
       category_id,
       ...(category_id === 5
@@ -33,12 +31,15 @@ export const VrpCartItem = ({ item }) => {
   return (
     <div className={classes.box}>
       <div className={classes.box__info}>
-        <Link to={`/home/vrp/${item.request_id}`} >
+        <Link to={`/home/vrp/${item.request_id}`}>
           <img src={vrp} alt="item" className={classes.box__img} />
         </Link>
 
         <div className={classes.box__info__cred}>
-          <Link to={`/home/vrp/${item.request_id}`} className={classes.box__info__cred__title}>
+          <Link
+            to={`/home/vrp/${item.request_id}`}
+            className={classes.box__info__cred__title}
+          >
             <h1 className={classes.box__info__cred__title__key}>VRP : </h1>
             <h2 className={classes.box__info__cred__title__value}>
               #{item.lot_id}

@@ -8,6 +8,7 @@ import useGetNewPhoneDetail from "../../../tanstack-query/newPhones/useGetNewPho
 import useGetNewPhoneColors from "../../../tanstack-query/newPhones/useGetNewPhoneColors";
 import useGetNewPhoneVariant from "../../../tanstack-query/newPhones/useGetNewPhonevariant";
 import useCartListSparesMutation from "../../../tanstack-query/cartList/useCartListSparesMutation";
+import { toast } from "react-toastify";
 
 const initialState = {
   newPhoneCarouselData: null,
@@ -139,11 +140,11 @@ export const NewPhoneDetailPage = () => {
       };
   
       try {
-        await mutateAsync(payload);
+        const response = await mutateAsync(payload);
         // console.log(data)
-        console.log("Item added to cart successfully.");
+        toast.success(response.message.displayMessage);
       } catch (error) {
-        console.error("Error adding item to cart:", error);
+        toast.error(error.response.data.message.displayMessage);
       }
     };
 

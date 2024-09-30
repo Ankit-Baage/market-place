@@ -6,6 +6,7 @@ import { formatNumber } from "../../utils/helpers/formatNumber";
 import dummyImage from "../../assets/spare_preview_not_available.svg"
 import { CategoryActionButtonGroup } from "../categoryActionButtonGroup/CategoryActionButtonGroup";
 import useCartListSparesMutation from "../../tanstack-query/cartList/useCartListSparesMutation";
+import { toast } from "react-toastify";
 
 export const SpareItem = ({ item, onClick }) => {
   const { mutateAsync, isLoading, isSuccess, isPending } =
@@ -20,10 +21,10 @@ export const SpareItem = ({ item, onClick }) => {
       };
   
       try {
-        await mutateAsync(data);
-        console.log("Item added to cart successfully.");
+        const response = await mutateAsync(data);
+        toast.success(response.message.displayMessage);
       } catch (error) {
-        console.error("Error adding item to cart:", error);
+        toast.error(error.response.data.message.displayMessage);
       }
     };
 
