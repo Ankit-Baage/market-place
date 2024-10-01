@@ -1,5 +1,5 @@
 import React from "react";
-import vrp from "../../assets/vrp.svg";
+import vrp from "../../assets/vrpCartItem.png";
 import classes from "./vrpItem.module.css";
 import { formatNumber } from "../../utils/helpers/formatNumber";
 import dummyImage from "../../assets/spare_preview_not_available.svg";

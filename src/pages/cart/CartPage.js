@@ -29,12 +29,12 @@ export const CartPage = () => {
         ...(category_id === 5 ? { request_id } : { master_product_id }),
       };
 
-      // Set isUpdating to true before API call
       setIsUpdating(true);
 
       try {
         const response = await deleteItem(data);
         toast.success(response.message.displayMessage);
+        console.log(response.message.displayMessage)
       } catch (error) {
         toast.error(error.response.data.message.displayMessage);
       } finally {

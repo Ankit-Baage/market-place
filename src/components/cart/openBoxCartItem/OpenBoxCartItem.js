@@ -36,7 +36,7 @@ export const OpenBoxCartItem = ({
             className={classes.box__info__cred__title}
           >
             <h1 className={classes.box__info__cred__title__head}>
-              {item.part_name}
+              {item.model}
             </h1>
             <h2
               className={classes.box__info__cred__title__color}

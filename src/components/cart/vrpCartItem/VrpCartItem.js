@@ -7,27 +7,7 @@ import { CartActionButtonGroup } from "../CartActionButtonGroup/CartActionButton
 import useCartListDeleteItemMutation from "../../../tanstack-query/cartList/useCartListDeleteItemMutation";
 import { Link } from "react-router-dom";
 
-export const VrpCartItem = ({ item }) => {
-  const { mutateAsync: deleteItem, isLoading } =
-    useCartListDeleteItemMutation();
-  const handleRemove = async () => {
-    const { category_id, master_product_id, request_id } = item;
-    const data = {
-      category_id,
-      ...(category_id === 5
-        ? { request_id: request_id }
-        : { master_product_id }),
-    };
-
-    try {
-      await deleteItem(data);
-      console.log(data);
-      console.log("Item deleted successfully");
-    } catch (error) {
-      console.error("Error deleting the item:", error);
-    }
-  };
-
+export const VrpCartItem = ({ item, onRemove }) => {
   return (
     <div className={classes.box}>
       <div className={classes.box__info}>
@@ -81,7 +61,7 @@ export const VrpCartItem = ({ item }) => {
           </div>
         </div>
       </div>
-      <CartActionButtonGroup onRemove={handleRemove} />
+      <CartActionButtonGroup onRemove={onRemove} />
     </div>
   );
 };
