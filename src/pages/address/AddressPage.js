@@ -2,28 +2,27 @@ import React, { useEffect, useState } from "react";
 import { Address } from "../../components/address/Address";
 import useGetAddressList from "../../tanstack-query/address/useGetAddressList";
 import classes from "./addressPage.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CartLoader } from "../../components/cart/cartLoader/CartLoader";
 import useSelectAddressMutation from "../../tanstack-query/address/useSelectAddressMutation";
 import { toast } from "react-toastify";
-import useDeleteAddressMutation from "../../tanstack-query/address/useDeleteAddressMutation";
+import { useDispatch } from "react-redux";
+import { onOpen } from "../../store/confirmationModal/confirmationModalSlice";
 
 export const AddressPage = () => {
   const { data, isLoading, isSuccess } = useGetAddressList();
   const {
     mutateAsync,
     isLoading: selecting,
+
     isSuccess: selectionSuccess,
   } = useSelectAddressMutation();
-  const {
-    mutateAsync: deleteMutation,
-    isLoading: isDeleting,
-    isSuccess: isDeleteSuccess,
-  } = useDeleteAddressMutation();
+  
 
   const [selectedAddressId, setSelectedAddressId] = useState(null);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSelectAddress = async (id) => {
     try {
@@ -42,15 +41,22 @@ export const AddressPage = () => {
     navigate("add");
   };
 
-  const handleDelete = async (addressId) => {
 
-    try {
-      // Trigger the delete mutation
-      const response = await deleteMutation(addressId);
-
-      toast.success(response.message.displayMessage);
-    } catch (error) {
-      toast.error(error.response.data.message.displayMessage);
+  const handleDeleteModal = (address) => {
+    console.log(address);
+    if (address) {
+      dispatch(
+        onOpen({
+          id: address.id,
+          mobile_no: address.mobile_no,
+          address_line1: address.address_line1,
+          address_line2: address.address_line2,
+          city: address.city,
+          state: address.state,
+          postal_code:address.postal_code,
+          country: address.country,
+        })
+      );
     }
   };
 
@@ -80,7 +86,7 @@ export const AddressPage = () => {
             selectedAddressId={selectedAddressId}
             onAddressChange={handleSelectAddress}
             onEdit={() => handleNavigateToDetailPage(address.id)}
-            onDelete={() => handleDelete(address.id)}
+            onOpenDeleteModal={() => handleDeleteModal(address)}
           />
         ))}
 

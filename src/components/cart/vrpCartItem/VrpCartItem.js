@@ -4,7 +4,7 @@ import vrp from "../../../assets/vrpCartItem.png";
 import classes from "./vrpCartItem.module.css";
 import { formatNumber } from "../../../utils/helpers/formatNumber";
 import { CartActionButtonGroup } from "../CartActionButtonGroup/CartActionButtonGroup";
-import useCartListDeleteItemMutation from "../../../tanstack-query/cartList/useCartListDeleteItemMutation";
+
 import { Link } from "react-router-dom";
 
 export const VrpCartItem = ({ item, onRemove }) => {

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+
 import classes from "./address.module.css";
 
 export const Address = ({
@@ -7,7 +7,7 @@ export const Address = ({
   selectedAddressId,
   onAddressChange,
   onEdit,
-  onDelete,
+  onOpenDeleteModal,
 }) => {
   return (
     <div className={classes.box__card}>
@@ -38,13 +38,13 @@ export const Address = ({
         </p>
       </div>
       <div className={classes.box__card__confirm}>
-        {/* <button className={classes.box__card__confirm__btn}>
-          Delivery to this address
-        </button> */}
         <button className={classes.box__card__navigate} onClick={onEdit}>
           Edit Address
         </button>
-        <button className={classes.box__card__delete} onClick={onDelete}>
+        <button
+          className={classes.box__card__delete}
+          onClick={onOpenDeleteModal}
+        >
           Delete Address
         </button>
       </div>

@@ -12,7 +12,8 @@ import "./index.css";
 import { Backdrop } from "./components/ui/backDrop/Backdrop";
 import { Loader } from "./components/ui/loader/Loader";
 import { Spinner } from "./components/ui/spinner/Spinner";
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import { ConfirmationModal } from "./components/modal/confirmationModal/ConfirmationModal";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ root.render(
     <Provider store={store}>
       {/* <Spinner />
       <Loader /> */}
+      <ConfirmationModal />
       <App />
       <ToastContainer
         autoClose={2000}
@@ -37,7 +39,6 @@ root.render(
     </Provider>
   </QueryClientProvider>
 );
-
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
