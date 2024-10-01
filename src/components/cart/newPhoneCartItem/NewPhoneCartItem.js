@@ -22,7 +22,7 @@ export const NewPhoneCartItem = ({
   return (
     <div className={classes.box}>
       <div className={classes.box__info}>
-        <Link to={`/home/newPhones/${item.id}`}>
+        <Link to={`/home/newPhone/${item.id}`}>
           <img
             src={item.image}
             alt="item"
@@ -33,7 +33,7 @@ export const NewPhoneCartItem = ({
 
         <div className={classes.box__info__cred}>
           <Link
-            to={`/home/newPhones/${item.id}`}
+            to={`/home/newPhone/${item.id}`}
             className={classes.box__info__cred__title}
           >
             <h1 className={classes.box__info__cred__title__head}>

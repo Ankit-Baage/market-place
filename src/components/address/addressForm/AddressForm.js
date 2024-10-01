@@ -115,7 +115,7 @@ export const AddressForm = ({ addressData, onSubmit, onNavigate }) => {
                 id="postal_code"
                 placeholder="Pincode"
                 register={register}
-                pattern={/^[0-9A-Z]{6}$/}
+                pattern={/^\d{6}$/}
                 message="Please provide the correct Pincode"
               />
             </div>
