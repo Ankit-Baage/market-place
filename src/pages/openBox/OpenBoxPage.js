@@ -1,7 +1,7 @@
 import React from "react";
-import classes from "./openBox.module.css";
-import { SearchBar } from "../../components/ui/searchBarWithBackBtn/SearchBar";
 import { Outlet } from "react-router-dom";
+import { SearchBar } from "../../components/ui/searchBarWithBackBtn/SearchBar";
+import classes from "./openBox.module.css";
 
 export const OpenBoxPage = () => {
   const placeholder = "Search for open Box ...";

@@ -33,6 +33,8 @@ import { ProfileNavigation } from "./components/profileInfo/ProfileNavigation";
 import { AddressPage } from "./pages/address/AddressPage";
 import { AddressOutlet } from "./pages/address/AddressOutlet";
 import { AddressDetailPage } from "./pages/address/AddressDetailPage";
+import { HelpPage } from "./pages/help/HelpPage";
+import { CategoryPage } from "./pages/category/CategoryPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -105,6 +107,14 @@ const router = createBrowserRouter([
                 ],
               },
             ],
+          },
+          {
+            path: "category",
+            element: <CategoryPage />,
+          },
+          {
+            path: "help",
+            element: <HelpPage />,
           },
           { path: "cart", element: <CartPage /> },
         ],

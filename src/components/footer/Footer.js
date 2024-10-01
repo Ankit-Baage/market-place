@@ -10,7 +10,7 @@ import help from "../../assets/alert-circle.svg";
 import cart from "../../assets/shopping-cart.svg";
 import profile from "../../assets/user.svg";
 import classes from "./footer.module.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 const footerData = [
   {
@@ -18,34 +18,41 @@ const footerData = [
     activeImage: homeActive,
     text: "Home",
     path: "/home",
+    exact: true,
   },
   {
     image: category,
     activeImage: categoryActive,
     text: "Category",
-    path: "/category",
+    path: "category",
+    exact: false,
   },
   {
     image: help,
     activeImage: helpActive,
     text: "Help",
-    path: "/help",
+    path: "help",
+    exact: false,
   },
   {
     image: cart,
     activeImage: cartActive,
     text: "Cart",
     path: "cart",
+    exact: false,
   },
   {
     image: profile,
     activeImage: profileActive,
     text: "Profile",
     path: "profileInfo",
+    exact: false,
   },
 ];
 
 export const Footer = () => {
+  const location = useLocation(); // Access the current location
+
   return (
     <div className={classes.container}>
       {footerData.map((data) => (
@@ -53,24 +60,30 @@ export const Footer = () => {
           key={data.text}
           to={data.path}
           className={classes.container__box}
-          end
+          end={data.exact}
         >
-          {({ isActive }) => (
-            <>
-              <img
-                src={isActive ? data.activeImage : data.image}
-                alt={data.text}
-                className={classes.container__box__img}
-              />
-              <h1
-                className={`${classes.container__box__text} ${
-                  isActive ? classes.categoryActive : ""
-                }`}
-              >
-                {data.text}
-              </h1>
-            </>
-          )}
+          {({ isActive }) => {
+            const isRouteActive = data.exact
+              ? isActive
+              : isActive || location.pathname.includes(data.path);
+
+            return (
+              <>
+                <img
+                  src={isRouteActive ? data.activeImage : data.image}
+                  alt={data.text}
+                  className={classes.container__box__img}
+                />
+                <h1
+                  className={`${classes.container__box__text} ${
+                    isRouteActive ? classes.categoryActive : ""
+                  }`}
+                >
+                  {data.text}
+                </h1>
+              </>
+            );
+          }}
         </NavLink>
       ))}
     </div>
