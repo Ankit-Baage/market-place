@@ -1,0 +1,185 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  justify-content: center;
+}
+
+.box__info {
+  display: flex;
+  column-gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box__img {
+  display: block;
+  width: 80px;
+  height: 105px;
+}
+
+.box__info__cred {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  justify-content: center;
+
+}
+
+.box__info__cred__img {
+  width: fit-content;
+  font-size: 7.68px;
+  line-height: 7.68px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #FFFFFF;
+  text-align: left;
+  background-image: url(../../../assets//laterItemLabel.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 4px 22px;
+}
+
+.box__info__cred__title {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  justify-content: center;
+}
+.box__info__cred__title__head {
+  font-size: 14px;
+  line-height: 18.2px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #2F3567;
+
+}
+.box__info__cred__title__color {
+  font-size: 14px;
+  line-height: 18.2px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #2F3567;
+
+}
+
+.box__info__cred__title__key {
+  font-size: 14px;
+  line-height: 18.2px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #989898;
+  text-align: left;
+
+}
+
+.box__info__cred__title__value {
+  font-size: 14px;
+  line-height: 18.2px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #2F3567;
+
+}
+
+.box__info__cred__asp {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.box__info__cred__price {
+  display: flex;
+  column-gap: 4px;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.box__info__cred__price__value {
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #FF6F3F;
+
+}
+
+.box__info__cred__price__subValue {
+  position: relative;
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #4A4C5F;
+}
+
+.box__info__cred__price__subValue::before {
+  position: absolute;
+  content: "";
+  bottom: 50%;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background-color: #989898;
+}
+
+.box__info__cred__price__discount {
+  width: 72px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../../../assets//discount_btn.svg");
+  font-family: "Poppins", sans;
+  font-weight: 600;
+  font-size: 8px;
+  color: #FFFFFF;
+}
+
+.box__btns {
+  width:88px;
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.box__btns__decrement{
+  width: 24px;
+  height: 24px;
+  background-image: url("../../../assets/decrement.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Poppins", sans;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 14px;
+  color: #C6C6C6;
+}
+.box__btns__value {
+  font-family: "Poppins", sans;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 14px;
+  color: #2F3567;
+
+}
+
+.box__btns__increment{
+  width: 24px;
+  height: 24px;
+  background-image: url("../../../assets/increment.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Poppins", sans;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 14px;
+  color: #FFFFFF;
+}

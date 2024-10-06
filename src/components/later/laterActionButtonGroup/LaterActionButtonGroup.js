@@ -1,7 +1,7 @@
 import React from "react";
-import classes from "./cartActionButtonGroup.module.css";
+import classes from "./laterActionButtonGroup.module.css";
 
-export const CartActionButtonGroup = ({ onRemove, isUpdating, onLater }) => {
+export const LaterActionButtonGroup = ({ onRemove, isUpdating, onMove }) => {
   return (
     <div className={classes.box}>
       <hr className={classes.box__sep} />
@@ -14,8 +14,8 @@ export const CartActionButtonGroup = ({ onRemove, isUpdating, onLater }) => {
           Remove
         </button>
         <span className={classes.box__btns__sep} />
-        <button className={`${classes.box__btns__later} ${classes.btns__sep}`} onClick={onLater}>
-          Save for later
+        <button className={`${classes.box__btns__later} ${classes.btns__sep}`} onClick={onMove}>
+         Move To Cart
         </button>
         <span className={classes.box__btns__sep} />
         <button className={`${classes.box__btns__buy} ${classes.btns__sep}`}>

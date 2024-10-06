@@ -11,7 +11,8 @@ export const SparesCartItem = ({
   onUpdateQuantity,
   spareQuantity,
   isUpdating,
-  onRemove
+  onRemove,
+  onLater
 }) => {
  
   const handleImageError = (e) => {
@@ -75,7 +76,7 @@ export const SparesCartItem = ({
         </div>
       </div>
 
-      <CartActionButtonGroup onRemove={onRemove} isUpdating={isUpdating}/>
+      <CartActionButtonGroup onRemove={onRemove} isUpdating={isUpdating} onLater={onLater}/>
     </div>
   );
 };

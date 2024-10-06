@@ -1,13 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import vrp from "../../../assets/vrpCartItem.png";
 
-import classes from "./vrpCartItem.module.css";
 import { formatNumber } from "../../../utils/helpers/formatNumber";
-import { CartActionButtonGroup } from "../CartActionButtonGroup/CartActionButtonGroup";
 
-import { Link } from "react-router-dom";
+import classes from "./vrpLaterItem.module.css";
+import { LaterActionButtonGroup } from "../laterActionButtonGroup/LaterActionButtonGroup";
 
-export const VrpCartItem = ({ item, onRemove, onLater }) => {
+export const VrpLaterItem = ({ item, onRemove, onMove }) => {
   return (
     <div className={classes.box}>
       <div className={classes.box__info}>
@@ -16,6 +16,7 @@ export const VrpCartItem = ({ item, onRemove, onLater }) => {
         </Link>
 
         <div className={classes.box__info__cred}>
+          <span className={classes.box__info__cred__img}>VRP</span>
           <Link
             to={`/home/vrp/${item.request_id}`}
             className={classes.box__info__cred__title}
@@ -61,7 +62,7 @@ export const VrpCartItem = ({ item, onRemove, onLater }) => {
           </div>
         </div>
       </div>
-      <CartActionButtonGroup onRemove={onRemove} onLater={onLater}/>
+      <LaterActionButtonGroup onRemove={onRemove} onMove={onMove}/>
     </div>
   );
 };

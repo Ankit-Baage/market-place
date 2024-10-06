@@ -25,10 +25,11 @@ export const VrpItem = ({ item, index, totalItems, onClick }) => {
       toast.error(error.response.data.message.displayMessage);
     }
   };
+  
   const handleVrpDetail = (requestId) => {
     onClick(requestId);
   };
-  const handleAdd = () => {};
+ 
   return (
     <div className={classes.container}>
       <div

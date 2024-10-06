@@ -11,6 +11,7 @@ import { NewPhoneCartItem } from "../../components/cart/newPhoneCartItem/NewPhon
 import { toast } from "react-toastify";
 import useCartListDeleteItemMutation from "../../tanstack-query/cartList/useCartListDeleteItemMutation";
 import useCartListQuantityMutation from "../../tanstack-query/cartList/useCartListQuantityMutation";
+import useMoveToLaterMutation from "../../tanstack-query/cartList/useMoveToLaterMutation";
 
 export const CartPage = () => {
   const { data, isSuccess, isLoading, refetch } = useGetCartList();
@@ -19,6 +20,12 @@ export const CartPage = () => {
 
   const { mutateAsync: deleteItem } = useCartListDeleteItemMutation();
   const { mutate: updateQuantity } = useCartListQuantityMutation();
+  const {
+    mutateAsync,
+    isLoading: isMoving,
+    isSuccess: IsMoved,
+    isPending,
+  } = useMoveToLaterMutation();
 
   const handleRemove = useCallback(
     async (item) => {
@@ -34,7 +41,7 @@ export const CartPage = () => {
       try {
         const response = await deleteItem(data);
         toast.success(response.message.displayMessage);
-        console.log(response.message.displayMessage)
+        console.log(response.message.displayMessage);
       } catch (error) {
         toast.error(error.response.data.message.displayMessage);
       } finally {
@@ -89,6 +96,28 @@ export const CartPage = () => {
     [localQuantities, updateQuantity]
   );
 
+  const handleSaveForLater = useCallback(
+    async (item) => {
+      const payload = {
+        category_id: item.category_id,
+        ...(item.category_id !== 5 && {
+          master_product_id: item.master_product_id,
+        }),
+        ...(item.category_id !== 5 && { item_id: item.id }),
+        ...(item.category_id === 5 && { request_id: item.request_id }),
+      };
+
+      try {
+        const response = await mutateAsync(payload);
+        toast.success(response.message.displayMessage);
+        console.log(item)
+      } catch (error) {
+        toast.error(error.response.data.message.displayMessage);
+      }
+    },
+    [mutateAsync]
+  );
+
   const placeholder = "Search...";
 
   const content = useMemo(() => {
@@ -107,6 +136,7 @@ export const CartPage = () => {
                 onRemove={() => {
                   handleRemove(item);
                 }}
+                onLater={()=>handleSaveForLater(item)}
               />
             );
           case 6:
@@ -120,6 +150,7 @@ export const CartPage = () => {
                 onRemove={() => {
                   handleRemove(item);
                 }}
+                onLater={() => handleSaveForLater(item)}
                 spareQuantity={localQuantities[item.id] || item.quantity}
                 isUpdating={isUpdating}
               />
@@ -135,6 +166,7 @@ export const CartPage = () => {
                 onRemove={() => {
                   handleRemove(item);
                 }}
+                onLater={() => handleSaveForLater(item)}
                 newPhoneQuantity={localQuantities[item.id] || item.quantity}
                 isUpdating={isUpdating}
               />
@@ -150,6 +182,7 @@ export const CartPage = () => {
                 onRemove={() => {
                   handleRemove(item);
                 }}
+                onLater={() => handleSaveForLater(item)}
                 openBoxQuantity={localQuantities[item.id] || item.quantity}
                 isUpdating={isUpdating}
               />
@@ -160,15 +193,7 @@ export const CartPage = () => {
       });
     }
     return <EmptyCart />;
-  }, [
-    isLoading,
-    isSuccess,
-    data?.data?.data,
-    isUpdating,
-    localQuantities,
-    handleRemove,
-    handleQuantityUpdate,
-  ]);
+  }, [isLoading, isSuccess, data?.data?.data, isUpdating, localQuantities, handleSaveForLater, handleRemove, handleQuantityUpdate]);
 
   console.log(data?.data?.data);
   return (

@@ -1,18 +1,19 @@
 import React from "react";
 import { formatNumber } from "../../../utils/helpers/formatNumber";
 import dummyImage from "../../../assets/spare_preview_not_available.svg";
-import classes from "./newPhoneCartItem.module.css";
-import { CartActionButtonGroup } from "../CartActionButtonGroup/CartActionButtonGroup";
+
 
 import { Link } from "react-router-dom";
+import classes from "./newPhoneLaterItem.module.css";
+import { LaterActionButtonGroup } from "../laterActionButtonGroup/LaterActionButtonGroup";
 
-export const NewPhoneCartItem = ({
+export const NewPhoneLaterItem = ({
   item,
   onUpdateQuantity,
   newPhoneQuantity,
   isUpdating,
   onRemove,
-  onLater
+  onMove
 }) => {
  
 
@@ -33,6 +34,7 @@ export const NewPhoneCartItem = ({
         </Link>
 
         <div className={classes.box__info__cred}>
+        <span className={classes.box__info__cred__img}>New Phone</span>
           <Link
             to={`/home/newPhone/${item.id}`}
             className={classes.box__info__cred__title}
@@ -77,7 +79,7 @@ export const NewPhoneCartItem = ({
         </div>
       </div>
 
-      <CartActionButtonGroup onRemove={onRemove} isUpdating={isUpdating} onLater={onLater}/>
+      <LaterActionButtonGroup onRemove={onRemove} isUpdating={isUpdating}onMove={onMove}/>
     </div>
   );
 };

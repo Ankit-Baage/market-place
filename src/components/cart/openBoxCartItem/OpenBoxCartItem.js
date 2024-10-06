@@ -13,6 +13,7 @@ export const OpenBoxCartItem = ({
   isUpdating,
   onRemove,
   openBoxQuantity,
+  onLater
 }) => {
   const handleImageError = (e) => {
     e.target.src = dummyImage;
@@ -75,7 +76,7 @@ export const OpenBoxCartItem = ({
         </div>
       </div>
 
-      <CartActionButtonGroup onRemove={onRemove} isUpdating={isUpdating} />
+      <CartActionButtonGroup onRemove={onRemove} isUpdating={isUpdating} onLater={onLater}/>
     </div>
   );
 };

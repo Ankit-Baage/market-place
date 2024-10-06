@@ -35,6 +35,7 @@ import { AddressOutlet } from "./pages/address/AddressOutlet";
 import { AddressDetailPage } from "./pages/address/AddressDetailPage";
 import { HelpPage } from "./pages/help/HelpPage";
 import { CategoryPage } from "./pages/category/CategoryPage";
+import { LaterPage } from "./pages/later/LaterPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -117,6 +118,7 @@ const router = createBrowserRouter([
             element: <HelpPage />,
           },
           { path: "cart", element: <CartPage /> },
+          { path: "later", element: <LaterPage /> },
         ],
       },
     ],

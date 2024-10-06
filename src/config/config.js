@@ -207,3 +207,9 @@ export const addressUrl = `${baseUrl}${version}${mode}${addresses}`;
 
 export const selectAddressUrl = (id) => `${addressUrl}?id=${id}`;
 export const selectedAddressDetailUrl = (id) => `${addressUrl}?id=${id}`;
+
+////////save for later/////////////////
+
+const later = "/save_for_later";
+export const laterListUrl = `${baseUrl}${version}${mode}${cart}${later}`;
+

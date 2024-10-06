@@ -1,21 +1,21 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { formatNumber } from "../../../utils/helpers/formatNumber";
 import dummyImage from "../../../assets/spare_preview_not_available.svg";
-import classes from "./newPhoneCartItem.module.css";
-import { CartActionButtonGroup } from "../CartActionButtonGroup/CartActionButtonGroup";
 
-import { Link } from "react-router-dom";
 
-export const NewPhoneCartItem = ({
+import classes from "./sparesLaterItem.module.css";
+import { LaterActionButtonGroup } from "../laterActionButtonGroup/LaterActionButtonGroup";
+
+export const SparesLaterItem = ({
   item,
   onUpdateQuantity,
-  newPhoneQuantity,
+  spareQuantity,
   isUpdating,
   onRemove,
-  onLater
+  onMove
 }) => {
  
-
   const handleImageError = (e) => {
     e.target.src = dummyImage;
   };
@@ -23,7 +23,7 @@ export const NewPhoneCartItem = ({
   return (
     <div className={classes.box}>
       <div className={classes.box__info}>
-        <Link to={`/home/newPhone/${item.id}`}>
+        <Link to={`/home/spares/${item.id}`}>
           <img
             src={item.image}
             alt="item"
@@ -33,16 +33,17 @@ export const NewPhoneCartItem = ({
         </Link>
 
         <div className={classes.box__info__cred}>
+        <span className={classes.box__info__cred__img}>Spares</span>
           <Link
-            to={`/home/newPhone/${item.id}`}
+            to={`/home/spares/${item.id}`}
             className={classes.box__info__cred__title}
           >
             <h1 className={classes.box__info__cred__title__head}>
-              {item.model}
+              {item.part_name}
             </h1>
             <h2
               className={classes.box__info__cred__title__color}
-            >{`(${item.ram}/${item.rom}, ${item.color})`}</h2>
+            >{`(${item.color})`}</h2>
           </Link>
 
           <div className={classes.box__info__cred__price}>
@@ -65,7 +66,7 @@ export const NewPhoneCartItem = ({
             >
               -
             </button>
-            <h3 className={classes.box__btns__value}>{newPhoneQuantity}</h3>
+            <h3 className={classes.box__btns__value}>{spareQuantity}</h3>
             <button
               className={classes.box__btns__increment}
               onClick={() => onUpdateQuantity("increase")}
@@ -77,7 +78,7 @@ export const NewPhoneCartItem = ({
         </div>
       </div>
 
-      <CartActionButtonGroup onRemove={onRemove} isUpdating={isUpdating} onLater={onLater}/>
+      <LaterActionButtonGroup onRemove={onRemove} isUpdating={isUpdating} onMove={onMove}/>
     </div>
   );
 };
