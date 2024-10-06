@@ -56,23 +56,6 @@ export const OpenBoxLaterItem = ({
             </span>
           </div>
 
-          <div className={classes.box__btns}>
-            <button
-              className={classes.box__btns__decrement}
-              onClick={() => onUpdateQuantity("decrease")}
-              disabled={isUpdating}
-            >
-              -
-            </button>
-            <h3 className={classes.box__btns__value}>{openBoxQuantity}</h3>
-            <button
-              className={classes.box__btns__increment}
-              onClick={() => onUpdateQuantity("increase")}
-              disabled={isUpdating}
-            >
-              +
-            </button>
-          </div>
         </div>
       </div>
 

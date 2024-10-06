@@ -58,23 +58,6 @@ export const SparesLaterItem = ({
             </span>
           </div>
 
-          <div className={classes.box__btns}>
-            <button
-              className={classes.box__btns__decrement}
-              onClick={() => onUpdateQuantity("decrease")}
-              disabled={isUpdating}
-            >
-              -
-            </button>
-            <h3 className={classes.box__btns__value}>{spareQuantity}</h3>
-            <button
-              className={classes.box__btns__increment}
-              onClick={() => onUpdateQuantity("increase")}
-              disabled={isUpdating}
-            >
-              +
-            </button>
-          </div>
         </div>
       </div>
 
