@@ -5,6 +5,7 @@ export const laterToCartPostRequest = async (item) => {
   
   const payload = {
     category_id: item.category_id,
+    mode:"save_for_later",
     ...(item.category_id !== 5 && {
       master_product_id: item.master_product_id,
       item_id: item.item_id,

@@ -3,7 +3,6 @@ import {
   Link,
   useLocation,
   useNavigate,
-  useSearchParams,
 } from "react-router-dom";
 import { motion } from "framer-motion";
 import classes from "./homePage.module.css";

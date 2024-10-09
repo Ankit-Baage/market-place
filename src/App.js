@@ -98,6 +98,7 @@ const router = createBrowserRouter([
             children: [
               { index: true, element: <ProfileNavigation /> },
               { path: "profile", element: <UserProfile /> },
+              { path: "later", element: <LaterPage /> },
               {
                 path: "address",
                 element: <AddressOutlet />,
@@ -118,7 +119,7 @@ const router = createBrowserRouter([
             element: <HelpPage />,
           },
           { path: "cart", element: <CartPage /> },
-          { path: "later", element: <LaterPage /> },
+          
         ],
       },
     ],
