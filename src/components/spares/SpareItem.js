@@ -73,7 +73,7 @@ export const SpareItem = ({ item, onClick }) => {
               </span>
             </div>
 
-            <CategoryActionButtonGroup onAdd={handleAddToCart}/>
+            <CategoryActionButtonGroup onAdd={handleAddToCart} isAddedToCart={item.cart_status}/>
           </div>
         </div>
         <Link className={classes.box__info__fav}>

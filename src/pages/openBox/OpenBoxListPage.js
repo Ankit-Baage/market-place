@@ -9,11 +9,12 @@ import classes from "./openBoxListPage.module.css";
 
 
 import useGetOpenBoxList from "../../tanstack-query/openBox/useGetOpenBoxList";
-import { NewPhoneItem } from "../../components/newPhone/NewPhoneItem";
+
 import axiosInstance from "../../utils/axios-middleware/axiosMiddleware";
 import { useQuery } from "@tanstack/react-query";
 import { Carousel } from "../../components/carousel/Carousel";
 import { OpenBoxItem } from "../../components/openBox/OpenBoxItem";
+import Cookies from 'js-cookie';
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -38,7 +39,8 @@ export const OpenBoxListPage = () => {
   const navigate = useNavigate();
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const { data, isSuccess, isLoading, refetch } = useGetOpenBoxList(filters);
+  const user_id = Cookies.get('user_id');
+  const { data, isSuccess, isLoading, refetch } = useGetOpenBoxList(filters,user_id);
 
   const {
     data: add,
@@ -113,7 +115,7 @@ export const OpenBoxListPage = () => {
           <Advertisement image={add?.data[0].url} />
         )}
         <div className={classes.box__itemList}>
-          {data?.map((spareItem, index) => (
+          {data?.map((spareItem) => (
             <OpenBoxItem
               key={spareItem.id}
               item={spareItem}

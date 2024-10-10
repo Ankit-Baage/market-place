@@ -12,6 +12,7 @@ import { NewPhoneItem } from "../../components/newPhone/NewPhoneItem";
 import axiosInstance from "../../utils/axios-middleware/axiosMiddleware";
 import { useQuery } from "@tanstack/react-query";
 import { Carousel } from "../../components/carousel/Carousel";
+import Cookies from 'js-cookie';
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -32,9 +33,10 @@ export const NewPhoneListPage = () => {
     end: null,
   });
   const navigate = useNavigate();
+  const user_id = Cookies.get('user_id');
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const { data, isSuccess, isLoading, refetch } = useGetNewPhoneList(filters);
+  const { data, isSuccess, isLoading, refetch } = useGetNewPhoneList(filters,user_id);
 
   const {
     data: add,

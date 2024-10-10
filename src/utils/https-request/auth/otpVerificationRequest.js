@@ -17,12 +17,15 @@ export const otpVerificationRequest = async (data) => {
     );
 
     const authToken = response.data.data.auth_token;
-    console.log(authToken);
+    const user_id = response.data.data.profile_data.id;
+    console.log("user_id :",user_id);
     Cookies.set("authToken", authToken);
+    Cookies.set("user_id", user_id);
 
     console.log("Cookie set:", {
       authToken: Cookies.get("authToken"),
     });
+    console.log(response.data)
 
     return response.data;
   } catch (error) {

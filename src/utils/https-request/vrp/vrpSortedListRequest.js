@@ -1,10 +1,11 @@
 import { vrpListUrl } from "../../../config/config";
 import axiosInstance from "../../axios-middleware/axiosMiddleware";
 
-export const vrpSortedListRequest = async (filters) => {
+export const vrpSortedListRequest = async (filters,user_id) => {
+  console.log(user_id)
   try {
-    const response = await axiosInstance.get(vrpListUrl, {
-      params: filters, // Pass filters as params object
+    const response = await axiosInstance.get(vrpListUrl(user_id), {
+      params: filters,
       headers: {
         "Content-Type": "application/json",
       },

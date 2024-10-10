@@ -56,7 +56,7 @@ export const updateProfileDataUrl = `${baseUrl}${version}${mode}${role}${updateP
 
 export const uploadImageUrl = `${baseUrl}${version}${mode}${role}${uploadImageEndPoint}`;
 
-export const vrpListUrl = `${baseUrl}${version}${mode}${vrpListEndPoint}`;
+export const vrpListUrl =(user_id)=> `${baseUrl}${version}${mode}${vrpListEndPoint}?user_id=${user_id}`;
 
 export const vrpProductDetailUrl = (requestId) =>
   `${baseUrl}${version}${mode}${vrpListEndPoint}${vrpProductDetailEndPoint(
@@ -92,7 +92,7 @@ export const vrpSortingListUrl = `${baseUrl}${version}${mode}${vrpListEndPoint}$
 
 //**Spares***//
 
-export const spareListUrl = `${baseUrl}${version}${mode}${spareListEndPoint}`;
+export const spareListUrl =(user_id)=> `${baseUrl}${version}${mode}${spareListEndPoint}?user_id=${user_id}`;
 
 export const spareDetailUrl = (requestId) =>
   `${baseUrl}${version}${mode}${spareListEndPoint}${spareDetailEndPoint(
@@ -120,7 +120,7 @@ export const spareFilterUrl = (filterType) =>
 /////////////********newPhone*********************///////
 const newPhoneDetailEndPoint = (requestId) => `details?request_id=${requestId}`;
 const newPhoneListEndPoint = "new_phones/";
-export const newPhoneListUrl = `${baseUrl}${version}${mode}${newPhoneListEndPoint}`;
+export const newPhoneListUrl =(user_id)=> `${baseUrl}${version}${mode}${newPhoneListEndPoint}?user_id=${user_id}`;
 
 const newPhoneFilterEndPoint = (filterType) => `filter?mode=${filterType}`;
 export const newPhoneFilterUrl = (filterType) =>
@@ -160,7 +160,7 @@ export const newPhoneVariantUrl = (sellerId, brand, model, color) =>
 
 const openBoxDetailEndPoint = (requestId) => `details?request_id=${requestId}`;
 const openBoxListEndPoint = "open_box/";
-export const openBoxListUrl = `${baseUrl}${version}${mode}${openBoxListEndPoint}`;
+export const openBoxListUrl =(user_id)=> `${baseUrl}${version}${mode}${openBoxListEndPoint}?user_id=${user_id}`;
 
 const openBoxFilterEndPoint = (filterType) => `filter?mode=${filterType}`;
 export const openBoxFilterUrl = (filterType) =>

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { vrpSortedListRequest } from "../../utils/https-request/vrp/vrpSortedListRequest";
 
-function useGetVrpSortedList(filters) {
+function useGetVrpSortedList(filters, user_id) {
   const {
     data,
     isError,
@@ -9,8 +9,8 @@ function useGetVrpSortedList(filters) {
     isSuccess,
     refetch,
   } = useQuery({
-    queryKey: ["vrpFilteredData", filters],
-    queryFn: ()=>vrpSortedListRequest(filters),
+    queryKey: ["vrpFilteredData", filters, user_id],
+    queryFn: ()=>vrpSortedListRequest(filters, user_id),
     refetchOnWindowFocus: false,
     retry: 2, // Maximum number of retries
     retryDelay: 1000,

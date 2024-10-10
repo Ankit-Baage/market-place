@@ -11,6 +11,7 @@ import { SparesFilterPage } from "./filters/sparesFilter/SparesFilterPage";
 import axiosInstance from "../../utils/axios-middleware/axiosMiddleware";
 import { useQuery } from "@tanstack/react-query";
 import { Carousel } from "../../components/carousel/Carousel";
+import Cookies from 'js-cookie';
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -31,9 +32,10 @@ export const SpareListPage = () => {
     end: null,
   });
   const navigate = useNavigate();
+  const user_id = Cookies.get('user_id');
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const { data, isSuccess, isLoading, refetch } = useGetSpareList(filters);
+  const { data, isSuccess, isLoading, refetch } = useGetSpareList(filters, user_id);
   const {
     data: add,
     error,

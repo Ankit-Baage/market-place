@@ -99,7 +99,7 @@ export const VrpItem = ({ item, index, totalItems, onClick }) => {
               </span>
             </div>
           </div>
-          <CategoryActionButtonGroup onAdd={handleAddToCart} />
+          <CategoryActionButtonGroup onAdd={handleAddToCart} isAddedToCart={item.cart_status} />
 
           {/* <div className={classes.box__info__btns}>
             <button className={classes.box__info__btns__cart}>

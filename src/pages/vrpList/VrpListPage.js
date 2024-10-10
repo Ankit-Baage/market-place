@@ -10,6 +10,7 @@ import useGetVrpSortedList from "../../tanstack-query/vrp/useGetVrpSortedList";
 import axiosInstance from "../../utils/axios-middleware/axiosMiddleware";
 import { useQuery } from "@tanstack/react-query";
 import { Carousel } from "../../components/carousel/Carousel";
+import Cookies from 'js-cookie';
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -35,18 +36,20 @@ export const VrpListPage = () => {
     p4_percent_end: null,
   });
   // const { data, isLoading, isError, isSuccess } = useGetVrpList();
+  const user_id = Cookies.get('user_id');
   const {
     data: add,
     error,
-    isLoading: addisLoading,
+    isLoading: addIsLoading,
   } = useQuery({
     queryKey: ["advertisements", "vrp", "listing"],
     queryFn: fetchAdvertisements,
   });
 
-  const { data, isSuccess, isLoading, refetch } = useGetVrpSortedList(filters);
+  const { data, isSuccess, isLoading, refetch } = useGetVrpSortedList(filters, user_id);
 
   const navigate = useNavigate();
+  console.log("user_id :", user_id)
 
   console.log(add);
 
