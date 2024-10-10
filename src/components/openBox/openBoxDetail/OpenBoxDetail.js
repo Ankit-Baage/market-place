@@ -26,6 +26,8 @@ export const OpenBoxDetail = ({
   variantId,
   onVariantSelect,
   onAddToCart,
+  cart_status,
+  wishlist_status
 }) => {
   const [validationResults, setValidationResults] = useState({});
 
@@ -106,7 +108,7 @@ export const OpenBoxDetail = ({
           className={`${classes.box__btns__btn} ${classes.box__btns__add}`}
           onClick={onAddToCart}
         >
-          Add to Cart
+          {cart_status?"Added To cart" : "Add To cart"}
         </button>
         <button
           className={`${classes.box__btns__btn} ${classes.box__btns__buy}`}

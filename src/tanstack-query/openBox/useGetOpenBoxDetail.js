@@ -4,15 +4,15 @@ import { openBoxDetailRequest } from "../../utils/https-request/openBox/openBoxD
 
 
 
-function useGetOpenBoxDetail({ requestId }) { // Destructure as an object
+function useGetOpenBoxDetail({ requestId, user_id }) { // Destructure as an object
   const {
     data,
     isError,
     isLoading,
     isSuccess,
   } = useQuery({
-    queryKey: ["openBoxDetail", requestId],
-    queryFn: () => openBoxDetailRequest({ requestId }), 
+    queryKey: ["openBoxDetail",user_id, requestId],
+    queryFn: () => openBoxDetailRequest({ requestId, user_id }), 
     refetchOnWindowFocus: false,
     retry: 2,
     retryDelay: 1000,

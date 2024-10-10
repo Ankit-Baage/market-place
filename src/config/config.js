@@ -56,12 +56,13 @@ export const updateProfileDataUrl = `${baseUrl}${version}${mode}${role}${updateP
 
 export const uploadImageUrl = `${baseUrl}${version}${mode}${role}${uploadImageEndPoint}`;
 
-export const vrpListUrl =(user_id)=> `${baseUrl}${version}${mode}${vrpListEndPoint}?user_id=${user_id}`;
+export const vrpListUrl = (user_id) =>
+  `${baseUrl}${version}${mode}${vrpListEndPoint}?user_id=${user_id}`;
 
-export const vrpProductDetailUrl = (requestId) =>
+export const vrpProductDetailUrl = (requestId, user_id) =>
   `${baseUrl}${version}${mode}${vrpListEndPoint}${vrpProductDetailEndPoint(
     requestId
-  )}`;
+  )}&user_id=${user_id}`;
 
 export const vrpProductModelTableUrl = (requestId) =>
   `${baseUrl}${version}${mode}${vrpListEndPoint}${vrpProductModelTableEndPoint(
@@ -92,12 +93,13 @@ export const vrpSortingListUrl = `${baseUrl}${version}${mode}${vrpListEndPoint}$
 
 //**Spares***//
 
-export const spareListUrl =(user_id)=> `${baseUrl}${version}${mode}${spareListEndPoint}?user_id=${user_id}`;
+export const spareListUrl = (user_id) =>
+  `${baseUrl}${version}${mode}${spareListEndPoint}?user_id=${user_id}`;
 
-export const spareDetailUrl = (requestId) =>
+export const spareDetailUrl = (requestId, user_id) =>
   `${baseUrl}${version}${mode}${spareListEndPoint}${spareDetailEndPoint(
     requestId
-  )}`;
+  )}&user_id=${user_id}`;
 
 export const spareColorUrl = (sellerId, brand, model, partName) =>
   `${baseUrl}${version}${mode}${spareListEndPoint}${spareColorEndPoint(
@@ -120,7 +122,8 @@ export const spareFilterUrl = (filterType) =>
 /////////////********newPhone*********************///////
 const newPhoneDetailEndPoint = (requestId) => `details?request_id=${requestId}`;
 const newPhoneListEndPoint = "new_phones/";
-export const newPhoneListUrl =(user_id)=> `${baseUrl}${version}${mode}${newPhoneListEndPoint}?user_id=${user_id}`;
+export const newPhoneListUrl = (user_id) =>
+  `${baseUrl}${version}${mode}${newPhoneListEndPoint}?user_id=${user_id}`;
 
 const newPhoneFilterEndPoint = (filterType) => `filter?mode=${filterType}`;
 export const newPhoneFilterUrl = (filterType) =>
@@ -128,10 +131,10 @@ export const newPhoneFilterUrl = (filterType) =>
     filterType
   )}`;
 
-export const newPhoneDetailUrl = (requestId) =>
+export const newPhoneDetailUrl = (requestId,user_id) =>
   `${baseUrl}${version}${mode}${newPhoneListEndPoint}${newPhoneDetailEndPoint(
     requestId
-  )}`;
+  )}&user_id=${user_id}`;
 
 const newPhoneColorEndPoint = (sellerId, brand, model, ram, rom) =>
   `color_details?seller_id=${sellerId}&brand=${brand}&model=${model}&ram=${ram}&rom=${rom}`;
@@ -160,7 +163,8 @@ export const newPhoneVariantUrl = (sellerId, brand, model, color) =>
 
 const openBoxDetailEndPoint = (requestId) => `details?request_id=${requestId}`;
 const openBoxListEndPoint = "open_box/";
-export const openBoxListUrl =(user_id)=> `${baseUrl}${version}${mode}${openBoxListEndPoint}?user_id=${user_id}`;
+export const openBoxListUrl = (user_id) =>
+  `${baseUrl}${version}${mode}${openBoxListEndPoint}?user_id=${user_id}`;
 
 const openBoxFilterEndPoint = (filterType) => `filter?mode=${filterType}`;
 export const openBoxFilterUrl = (filterType) =>
@@ -168,10 +172,10 @@ export const openBoxFilterUrl = (filterType) =>
     filterType
   )}`;
 
-export const openBoxDetailUrl = (requestId) =>
+export const openBoxDetailUrl = (requestId, user_id) =>
   `${baseUrl}${version}${mode}${openBoxListEndPoint}${openBoxDetailEndPoint(
     requestId
-  )}`;
+  )}&user_id=${user_id}`;
 
 const openBoxColorEndPoint = (sellerId, brand, model, ram, rom) =>
   `color_details?seller_id=${sellerId}&brand=${brand}&model=${model}&ram=${ram}&rom=${rom}`;
@@ -212,4 +216,3 @@ export const selectedAddressDetailUrl = (id) => `${addressUrl}?id=${id}`;
 
 const later = "/save_for_later";
 export const laterListUrl = `${baseUrl}${version}${mode}${cart}${later}`;
-

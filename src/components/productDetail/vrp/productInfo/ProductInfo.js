@@ -6,11 +6,6 @@ import { Advertisement } from "../../../vrpItem/advertisement/Advertisement";
 import vrpAdd from "../../../../assets/vrpAdd.png";
 
 export const ProductInfo = ({ productData }) => {
-  // const product = productData[0];
-  // console.log(product);
-  // if (!product) {
-  //   return null;
-  // }
   return (
     <div>
       {" "}

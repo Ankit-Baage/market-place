@@ -7,6 +7,7 @@ import useGetSpareColors from "../../tanstack-query/spares/useGetSpareColors";
 import { formatNumber } from "../../utils/helpers/formatNumber";
 import useCartListSparesMutation from "../../tanstack-query/cartList/useCartListSparesMutation";
 import { toast } from "react-toastify";
+import Cookies from 'js-cookie';
 
 const initialState = {
   spareCarouselData: null,
@@ -37,6 +38,7 @@ function reducer(state, action) {
 export const SpareDetailPage = () => {
   const [selectedColor, setSelectedColor] = useState(null);
   const params = useParams();
+  const user_id = Cookies.get('user_id')
 
   const requestId = params.requestId;
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -44,6 +46,7 @@ export const SpareDetailPage = () => {
 const navigate = useNavigate();
   const { data, isError, isPending, isSuccess, refetch } = useGetSpareDetail({
     requestId,
+    user_id
   });
 
   const handleColorSelect = (color) => {
@@ -96,7 +99,8 @@ const navigate = useNavigate();
  
   const { spareCarouselData, colorQuery, prices, spareDescription, color, partName } = state;
 
-  console.log("color :",colorQuery)
+  console.log("user_id :",user_id)
+  console.log(data?.data.data.cart_status)
 
  
   const { data: spareColors, isSuccess: isSpareColorSuccess } =
@@ -137,6 +141,8 @@ const navigate = useNavigate();
       onColorSelect={handleColorSelect}
       descriptions={spareDescription}
       onAddToCart = {handleAddToCart}
+      cart_status={data?.data?.data.cart_status}
+      wishlist_status={data?.data?.data.wishlist_status}
     />
   );
 };

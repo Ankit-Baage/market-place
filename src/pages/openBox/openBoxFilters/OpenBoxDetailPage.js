@@ -10,6 +10,7 @@ import useGetOpenBoxVariant from "../../../tanstack-query/openBox/useGetOpenBoxV
 import useCartListSparesMutation from "../../../tanstack-query/cartList/useCartListSparesMutation";
 import { OpenBoxDetail } from "../../../components/openBox/openBoxDetail/OpenBoxDetail";
 import { toast } from "react-toastify";
+import Cookies from 'js-cookie';
 
 const initialState = {
   newPhoneCarouselData: null,
@@ -46,9 +47,12 @@ export const OpenBoxDetailPage = () => {
   const requestId = params.requestId;
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const user_id = Cookies.get('user_id')
+
   const navigate = useNavigate();
   const { data, isError, isPending, isSuccess, refetch } = useGetOpenBoxDetail({
     requestId,
+    user_id
   });
 
   const handleColorSelect = (color) => {
@@ -162,6 +166,8 @@ export const OpenBoxDetailPage = () => {
       infoSpecs={colorQuery}
       onVariantSelect={(itemId) => handleVariantSelect(itemId)}
       onAddToCart={handleAddToCart}
+      cart_status={data?.data?.data.cart_status}
+      wishlist_status={data?.data?.data.wishlist_status}
     />
   );
 };

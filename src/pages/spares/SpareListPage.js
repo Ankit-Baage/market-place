@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import spare_Advertisement from "../../assets/spare_Advertisement.png";
-
 import classes from "./spareListPage.module.css";
 import { Advertisement } from "../../components/vrpItem/advertisement/Advertisement";
 import useGetSpareList from "../../tanstack-query/spares/useGetSpareList";
 import { SpareItem } from "../../components/spares/SpareItem";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { SparesFilterPage } from "./filters/sparesFilter/SparesFilterPage";
 import axiosInstance from "../../utils/axios-middleware/axiosMiddleware";
 import { useQuery } from "@tanstack/react-query";

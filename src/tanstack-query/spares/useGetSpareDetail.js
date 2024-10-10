@@ -3,15 +3,15 @@ import { spareDetailRequest } from "../../utils/https-request/spares/spareDetail
 
 
 
-function useGetSpareDetail({ requestId }) { // Destructure as an object
+function useGetSpareDetail({ requestId, user_id }) { // Destructure as an object
   const {
     data,
     isError,
     isLoading,
     isSuccess,
   } = useQuery({
-    queryKey: ["vrpProductDetail", requestId],
-    queryFn: () => spareDetailRequest({ requestId }), // Wrapped in a function
+    queryKey: ["vrpProductDetail",user_id, requestId],
+    queryFn: () => spareDetailRequest({ requestId,user_id }), // Wrapped in a function
     refetchOnWindowFocus: false,
     retry: 2,
     retryDelay: 1000,

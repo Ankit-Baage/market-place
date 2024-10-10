@@ -4,8 +4,7 @@ import { VrpLotTablePage } from "../../../pages/vrp/VrpLotTablePage";
 import { VrpModelTablePage } from "../../../pages/vrp/vrpModelTablePage";
 import { VrpBrandTablePage } from "../../../pages/vrp/VrpBrandTablePage";
 import { ProductInfoPage } from "../../../pages/vrp/ProductInfoPage";
-import { BasicTable } from "../../table/BasicTable";
-import { basicTableData } from "../../table/bsaicTableData";
+
 import useCartListSparesMutation from "../../../tanstack-query/cartList/useCartListSparesMutation";
 import { toast } from "react-toastify";
 
@@ -13,6 +12,8 @@ export const VrpProductDetail = ({ requestId, onDownLoad }) => {
   const [productInfo, setProductInfo] = useState({
     category_id: null,
     request_id: requestId,
+    cart_status: null,
+    wishlist_status: null,
   });
   const { mutateAsync, isLoading, isSuccess, isPending } =
     useCartListSparesMutation();
@@ -23,13 +24,18 @@ export const VrpProductDetail = ({ requestId, onDownLoad }) => {
   };
 
   const handleProductData = useCallback(
-    (categoryId, requestId) => {
+    (categoryId, requestId, cart_status, wishlist_status) => {
       // Update state only if values change
       if (
         productInfo.category_id !== categoryId ||
         productInfo.request_id !== requestId
       ) {
-        setProductInfo({ category_id: categoryId, request_id: requestId });
+        setProductInfo({
+          category_id: categoryId,
+          request_id: requestId,
+          cart_status,
+          wishlist_status,
+        });
         console.log("Product data received from child:", {
           categoryId,
           requestId,
@@ -77,7 +83,7 @@ export const VrpProductDetail = ({ requestId, onDownLoad }) => {
       </div>
       <div className={classes.btn}>
         <button className={classes.btn__addToCart} onClick={handleAddToCart}>
-          Add to Cart
+          {productInfo.cart_status ? "Added To Cart" : "Add To Cart"}
         </button>
         <button className={classes.btn__buy}>Buy Now</button>
       </div>

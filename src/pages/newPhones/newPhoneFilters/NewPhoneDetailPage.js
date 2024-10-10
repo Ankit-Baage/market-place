@@ -9,6 +9,7 @@ import useGetNewPhoneColors from "../../../tanstack-query/newPhones/useGetNewPho
 import useGetNewPhoneVariant from "../../../tanstack-query/newPhones/useGetNewPhonevariant";
 import useCartListSparesMutation from "../../../tanstack-query/cartList/useCartListSparesMutation";
 import { toast } from "react-toastify";
+import Cookies from 'js-cookie';
 
 const initialState = {
   newPhoneCarouselData: null,
@@ -42,6 +43,7 @@ export const NewPhoneDetailPage = () => {
   // const [selectedColor, setSelectedColor] = useState(null);
   const [selectedVariant, setSelectedVariant] = useState(null);
   const params = useParams();
+  const user_id = Cookies.get('user_id')
 
   const requestId = params.requestId;
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -50,6 +52,7 @@ export const NewPhoneDetailPage = () => {
   const { data, isError, isPending, isSuccess, refetch } = useGetNewPhoneDetail(
     {
       requestId,
+      user_id
     }
   );
 
@@ -168,6 +171,8 @@ export const NewPhoneDetailPage = () => {
       infoSpecs={colorQuery}
       onVariantSelect={(itemId) => handleVariantSelect(itemId)}
       onAddToCart = {handleAddToCart}
+      cart_status={data?.data?.data.cart_status}
+      wishlist_status={data?.data?.data.wishlist_status}
     />
   );
 };

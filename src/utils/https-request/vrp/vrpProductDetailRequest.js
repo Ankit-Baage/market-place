@@ -1,10 +1,10 @@
 import { vrpProductDetailUrl } from "../../../config/config";
 import axiosInstance from "../../axios-middleware/axiosMiddleware";
 
-export const vrpProductDetailRequest = async ({ requestId }) => {
+export const vrpProductDetailRequest = async ({ requestId, user_id }) => {
   try {
     const response = await axiosInstance.get(
-      vrpProductDetailUrl(requestId),
+      vrpProductDetailUrl(requestId, user_id),
 
       {
         headers: {
