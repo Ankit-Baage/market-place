@@ -1,6 +1,7 @@
 .box {
   display: flex;
   align-items: center;
+  column-gap: 8px;
   justify-content: space-between;
   padding-top: 4px;
 }

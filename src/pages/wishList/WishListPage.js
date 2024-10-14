@@ -7,22 +7,20 @@ import { EmptyCart } from "../../components/cart/EmptyCart";
 import { CartLoader } from "../../components/cart/cartLoader/CartLoader";
 
 import classes from "./wishListPage.module.css";
-
-import useLaterListDeleteItemMutation from "../../tanstack-query/laterList/useLaterListDeleteMutation";
-import useMoveToCartMutation from "../../tanstack-query/laterList/useLaterToCartMutation";
 import useLaterToCartMutation from "../../tanstack-query/laterList/useLaterToCartMutation";
 import { VrpWishListItem } from "../../components/wishList/vrpWishListItem/VrpWishListItem";
 import { SparesWishListItem } from "../../components/wishList/sparesWishListItem/SparesWishListItem";
 import { NewPhoneWishListItem } from "../../components/wishList/newPhoneWishListItem/NewPhoneWishListItem";
 import { OpenBoxWishListItem } from "../../components/wishList/openBoxWishListItem/OpenBoxWishListItem";
 import useGetWishList from "../../tanstack-query/wishList/useGetWishList";
+import useWishListDeleteItemMutation from "../../tanstack-query/wishList/useWishListDeleteItemMutation";
 
 export const WishListPage = () => {
-  const { data, isSuccess, isLoading, refetch } = useGetWishList();
+  const { data, isSuccess, isLoading } = useGetWishList();
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const { mutateAsync: deleteItem } = useLaterListDeleteItemMutation();
-  const { mutate: updateQuantity } = useCartListQuantityMutation();
+  const { mutateAsync: deleteItem } = useWishListDeleteItemMutation();
+
   const {
     mutateAsync,
     isLoading: isMoving,
@@ -34,6 +32,7 @@ export const WishListPage = () => {
     async (item) => {
       const data = {
         category_id: item.category_id,
+        mode:"wishlist",
         ...(item.category_id !== 5 && {
           master_product_id: item.master_product_id,
           item_id: item.id,
@@ -71,6 +70,7 @@ export const WishListPage = () => {
         const response = await deleteItem(payload);
 
         toast.success(response.message.displayMessage);
+        console.log(payload);
       } catch (error) {
         toast.error(error.response.data.message.displayMessage);
         console.log(error);
@@ -109,9 +109,6 @@ export const WishListPage = () => {
               <SparesWishListItem
                 key={item.id}
                 item={item}
-                // onUpdateQuantity={(operator) =>
-                //   handleQuantityUpdate(operator, item)
-                // }
                 onRemove={() => {
                   handleRemove(item);
                 }}
@@ -126,9 +123,6 @@ export const WishListPage = () => {
               <NewPhoneWishListItem
                 key={item.id}
                 item={item}
-                // onUpdateQuantity={(operator) =>
-                //   handleQuantityUpdate(operator, item)
-                // }
                 onMove={() => {
                   handleMoveToCart(item);
                 }}

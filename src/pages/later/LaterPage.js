@@ -2,7 +2,6 @@ import React, { useCallback, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import useGetLaterList from "../../tanstack-query/laterList/useGetLaterList";
 
-import useCartListQuantityMutation from "../../tanstack-query/cartList/useCartListQuantityMutation";
 import { SearchBar } from "../../components/ui/searchBarWithBackBtn/SearchBar";
 import { EmptyCart } from "../../components/cart/EmptyCart";
 import { CartLoader } from "../../components/cart/cartLoader/CartLoader";
@@ -14,7 +13,7 @@ import { OpenBoxLaterItem } from "../../components/later/openBoxLaterItem/OpenBo
 import classes from "./laterPage.module.css";
 
 import useLaterListDeleteItemMutation from "../../tanstack-query/laterList/useLaterListDeleteMutation";
-import useMoveToCartMutation from "../../tanstack-query/laterList/useLaterToCartMutation";
+
 import useLaterToCartMutation from "../../tanstack-query/laterList/useLaterToCartMutation";
 
 export const LaterPage = () => {
@@ -23,7 +22,6 @@ export const LaterPage = () => {
   const [isUpdating, setIsUpdating] = useState(false);
 
   const { mutateAsync: deleteItem } = useLaterListDeleteItemMutation();
-  const { mutate: updateQuantity } = useCartListQuantityMutation();
   const {
     mutateAsync,
     isLoading: isMoving,
@@ -35,6 +33,7 @@ export const LaterPage = () => {
     async (item) => {
       const data = {
         category_id: item.category_id,
+        mode:"save_for_later",
         ...(item.category_id !== 5 && {
           master_product_id: item.master_product_id,
           item_id: item.id,
@@ -56,7 +55,6 @@ export const LaterPage = () => {
 
   const handleRemove = useCallback(
     async (item) => {
-      // const { category_id, master_product_id, request_id } = item;
 
       const payload = {
         category_id: item.category_id,

@@ -88,7 +88,6 @@
 .box__info__cred__price {
   display: flex;
   column-gap: 4px;
-  justify-content: center;
   align-items: center;
 }
 
