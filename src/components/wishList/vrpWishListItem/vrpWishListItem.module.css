@@ -1,0 +1,143 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  justify-content: center;
+}
+
+.box__info {
+  display: flex;
+  column-gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box__img {
+  display: block;
+  width: 94px;
+  height: 75px;
+}
+
+.box__info__cred {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  justify-content: center;
+
+}
+
+.box__info__cred__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box__info__cred__content__title {
+  font-size: 12px;
+  line-height: 15.6px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #FF6F3F;
+  padding: 8px;
+  background-color: #F5F5F5;
+  border-radius: 20px;
+
+
+}
+
+.box__info__cred__img {
+ width: 16px;
+ height: 16px;
+  background-image: url(../../../assets/heart__filled.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.box__info__cred__title {
+  display: flex;
+  column-gap: 4px;
+  align-items: center;
+}
+
+.box__info__cred__title__key {
+  font-size: 14px;
+  line-height: 18.2px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #989898;
+  text-align: left;
+
+}
+
+.box__info__cred__title__value {
+  font-size: 14px;
+  line-height: 18.2px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #2F3567;
+
+}
+
+.box__info__cred__asp {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.box__info__cred__price {
+  display: flex;
+  column-gap: 4px;
+  justify-content: center;
+  align-items: center;
+}
+
+.box__info__cred__price__value {
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #FF6F3F;
+
+}
+
+.box__info__cred__price__subValue {
+  position: relative;
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #4A4C5F;
+}
+
+.box__info__cred__price__subValue::before {
+  position: absolute;
+  content: "";
+  bottom: 50%;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background-color: #989898;
+}
+
+
+.box__info__cred__price__discount {
+  width: 72px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../../../assets//discount_btn.svg");
+  font-family: "Poppins", sans;
+  font-weight: 600;
+  font-size: 8px;
+  color: #FFFFFF;
+}
+
+.box__sep {
+  width: 100%;
+ border:  1.5px solid #EFEFEF;
+}

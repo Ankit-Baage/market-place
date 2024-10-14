@@ -1,34 +1,31 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import fav from "../../assets/heart.svg";
 import classes from "./spareItem.module.css";
 import { formatNumber } from "../../utils/helpers/formatNumber";
-import dummyImage from "../../assets/spare_preview_not_available.svg"
+import dummyImage from "../../assets/spare_preview_not_available.svg";
 import { CategoryActionButtonGroup } from "../categoryActionButtonGroup/CategoryActionButtonGroup";
 import useCartListSparesMutation from "../../tanstack-query/cartList/useCartListSparesMutation";
 import { toast } from "react-toastify";
 
-export const SpareItem = ({ item, onClick }) => {
+export const SpareItem = ({ item, onClick, onWishList }) => {
   const { mutateAsync, isLoading, isSuccess, isPending } =
     useCartListSparesMutation();
 
-    const handleAddToCart = async (event) => {
-      event.stopPropagation()
-      const data = {
-        category_id: item.category_id,
-        master_product_id: item.master_product_id,
-        item_id: item.id,
-      };
-  
-      try {
-        const response = await mutateAsync(data);
-        toast.success(response.message.displayMessage);
-      } catch (error) {
-        toast.error(error.response.data.message.displayMessage);
-      }
+  const handleAddToCart = async (event) => {
+    event.stopPropagation();
+    const data = {
+      category_id: item.category_id,
+      master_product_id: item.master_product_id,
+      item_id: item.id,
     };
 
-  
+    try {
+      const response = await mutateAsync(data);
+      toast.success(response.message.displayMessage);
+    } catch (error) {
+      toast.error(error.response.data.message.displayMessage);
+    }
+  };
+
   const handleSpareDetail = (id) => {
     onClick(id);
   };
@@ -44,7 +41,7 @@ export const SpareItem = ({ item, onClick }) => {
               src={item.image}
               alt={item.part_name}
               className={classes.box_img_pic}
-              onError={handleImageError} 
+              onError={handleImageError}
             />
           </div>
           <div className={classes.box__info}>
@@ -73,12 +70,20 @@ export const SpareItem = ({ item, onClick }) => {
               </span>
             </div>
 
-            <CategoryActionButtonGroup onAdd={handleAddToCart} isAddedToCart={item.cart_status}/>
+            <CategoryActionButtonGroup
+              onAdd={handleAddToCart}
+              isAddedToCart={item.cart_status}
+            />
           </div>
         </div>
-        <Link className={classes.box__info__fav}>
-          <img src={fav} alt="fav" className={classes.box__info__fav__img} />
-        </Link>
+        <span
+          className={
+            item.wishlist_status === 1
+              ? classes.box__info__fav__active
+              : classes.box__info__fav
+          }
+          onClick={onWishList}
+        />
       </div>
 
       <hr className={classes.box__item__divider} />

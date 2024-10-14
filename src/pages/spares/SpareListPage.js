@@ -9,7 +9,9 @@ import { SparesFilterPage } from "./filters/sparesFilter/SparesFilterPage";
 import axiosInstance from "../../utils/axios-middleware/axiosMiddleware";
 import { useQuery } from "@tanstack/react-query";
 import { Carousel } from "../../components/carousel/Carousel";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
+import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWishListMutation";
+import { toast } from "react-toastify";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -30,10 +32,13 @@ export const SpareListPage = () => {
     end: null,
   });
   const navigate = useNavigate();
-  const user_id = Cookies.get('user_id');
+  const user_id = Cookies.get("user_id");
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const { data, isSuccess, isLoading, refetch } = useGetSpareList(filters, user_id);
+  const { data, isSuccess, isLoading, refetch } = useGetSpareList(
+    filters,
+    user_id
+  );
   const {
     data: add,
     error,
@@ -42,6 +47,13 @@ export const SpareListPage = () => {
     queryKey: ["advertisements", "spares", "listing"],
     queryFn: fetchAdvertisements,
   });
+
+  const {
+    mutateAsync,
+    isLoading: isAdding,
+    isSuccess: isAdded,
+    isPending,
+  } = useAddToWishListMutation();
   useEffect(() => {
     const newFilters = {
       brand: searchParams.get("brand") || null,
@@ -89,11 +101,23 @@ export const SpareListPage = () => {
       params.set("sort", itemId);
       return params.toString();
     });
-    // setFilters((prevFilters) => ({
-    //   ...prevFilters,
-    //   sort: itemId,
-    // }));
-    console.log(itemId);
+  };
+  const handleAddToWishList = async (event, item) => {
+    event.stopPropagation();
+
+    const data = {
+      category_id: item.category_id,
+      item_id: item.id,
+      master_product_id:item.master_product_id,
+    };
+
+    try {
+      const response = await mutateAsync(data);
+      toast.success(response.message.displayMessage);
+      console.log(item);
+    } catch (error) {
+      // toast.error(error.response.message.displayMessage);
+    }
   };
 
   return (
@@ -117,6 +141,7 @@ export const SpareListPage = () => {
               key={spareItem.id}
               item={spareItem}
               onClick={navigateToSpareDetail}
+              onWishList={(event) => handleAddToWishList(event, spareItem)}
             />
           ))}
         </div>

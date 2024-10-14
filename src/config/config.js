@@ -216,3 +216,7 @@ export const selectedAddressDetailUrl = (id) => `${addressUrl}?id=${id}`;
 
 const later = "/save_for_later";
 export const laterListUrl = `${baseUrl}${version}${mode}${cart}${later}`;
+
+////////wishList/////////////////
+const wishList = "/wishlist";
+export const wishListListUrl = `${baseUrl}${version}${mode}${cart}${wishList}`;

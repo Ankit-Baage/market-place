@@ -8,7 +8,7 @@ import { CategoryActionButtonGroup } from "../categoryActionButtonGroup/Category
 import useCartListSparesMutation from "../../tanstack-query/cartList/useCartListSparesMutation";
 import { toast } from "react-toastify";
 
-export const NewPhoneItem = ({ item, onClick }) => {
+export const NewPhoneItem = ({ item, onClick, onWishList }) => {
   const { mutateAsync, isLoading, isSuccess, isPending } =
   useCartListSparesMutation();
 
@@ -74,9 +74,14 @@ export const NewPhoneItem = ({ item, onClick }) => {
             <CategoryActionButtonGroup onAdd={handleAddToCart} isAddedToCart={item.cart_status}/>
           </div>
         </div>
-        <Link className={classes.box__info__fav}>
-          <img src={fav} alt="fav" className={classes.box__info__fav__img} />
-        </Link>
+        <span
+          className={
+            item.wishlist_status === 1
+              ? classes.box__info__fav__active
+              : classes.box__info__fav
+          }
+          onClick={onWishList}
+        />
       </div>
 
       <hr className={classes.box__item__divider} />

@@ -10,7 +10,9 @@ import useGetVrpSortedList from "../../tanstack-query/vrp/useGetVrpSortedList";
 import axiosInstance from "../../utils/axios-middleware/axiosMiddleware";
 import { useQuery } from "@tanstack/react-query";
 import { Carousel } from "../../components/carousel/Carousel";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
+import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWishListMutation";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -36,7 +38,7 @@ export const VrpListPage = () => {
     p4_percent_end: null,
   });
   // const { data, isLoading, isError, isSuccess } = useGetVrpList();
-  const user_id = Cookies.get('user_id');
+  const user_id = Cookies.get("user_id");
   const {
     data: add,
     error,
@@ -46,12 +48,19 @@ export const VrpListPage = () => {
     queryFn: fetchAdvertisements,
   });
 
-  const { data, isSuccess, isLoading, refetch } = useGetVrpSortedList(filters, user_id);
+  const { data, isSuccess, isLoading, refetch } = useGetVrpSortedList(
+    filters,
+    user_id
+  );
+
+  const {
+    mutateAsync,
+    isLoading: isAdding,
+    isSuccess: isAdded,
+    isPending,
+  } = useAddToWishListMutation();
 
   const navigate = useNavigate();
-  console.log("user_id :", user_id)
-
-  console.log(add);
 
   useEffect(() => {
     if (isSuccess) {
@@ -90,15 +99,20 @@ export const VrpListPage = () => {
       console.error("Error applying filters:", err);
     }
   };
+  const handleAddToWishList = async (event, item) => {
+    event.stopPropagation();
 
-  const handleRangeFilterApplied = async () => {
+    const data = {
+      category_id: item.category_id,
+      request_id: item.request_id,
+    };
+
     try {
-      setFilters({ ...filters });
-
-      await refetch();
-      setVrpListData(data.data.data);
-    } catch (err) {
-      console.error("Error applying filters:", err);
+      const response = await mutateAsync(data);
+      toast.success(response.message.displayMessage);
+      console.log(item);
+    } catch (error) {
+      // toast.error(error.response.message.displayMessage);
     }
   };
 
@@ -131,6 +145,7 @@ export const VrpListPage = () => {
                 index={index}
                 totalItems={vrpListData.length}
                 onClick={navigateToVrpDetail}
+                onWishList={(event) => handleAddToWishList(event, vrpItem)}
               />
             ))}
           </div>

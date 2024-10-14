@@ -1,0 +1,40 @@
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4px;
+}
+
+
+
+.box__btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box__btns__cart {
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #FF6F3F;
+  border-radius: 4px;
+  border: 1px solid #FF6F3F;
+  padding: 8px 10px;
+
+}
+
+
+.box__btns__buy {
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #FFFFFF;
+  background-color: #FF6F3F;
+  padding: 8px 20px;
+  border-radius: 4px;
+
+}
+

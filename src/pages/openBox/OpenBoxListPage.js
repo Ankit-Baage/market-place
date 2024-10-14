@@ -3,10 +3,9 @@ import React, { useEffect, useState } from "react";
 import { Advertisement } from "../../components/vrpItem/advertisement/Advertisement";
 
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { OpenBoxFilterPage} from "./openBoxFilters/OpenBoxFiltersPage"
+import { OpenBoxFilterPage } from "./openBoxFilters/OpenBoxFiltersPage";
 
 import classes from "./openBoxListPage.module.css";
-
 
 import useGetOpenBoxList from "../../tanstack-query/openBox/useGetOpenBoxList";
 
@@ -14,7 +13,9 @@ import axiosInstance from "../../utils/axios-middleware/axiosMiddleware";
 import { useQuery } from "@tanstack/react-query";
 import { Carousel } from "../../components/carousel/Carousel";
 import { OpenBoxItem } from "../../components/openBox/OpenBoxItem";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
+import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWishListMutation";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -25,8 +26,6 @@ const fetchAdvertisements = async () => {
   );
   return response.data;
 };
-
-
 
 export const OpenBoxListPage = () => {
   const [filters, setFilters] = useState({
@@ -39,8 +38,11 @@ export const OpenBoxListPage = () => {
   const navigate = useNavigate();
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const user_id = Cookies.get('user_id');
-  const { data, isSuccess, isLoading, refetch } = useGetOpenBoxList(filters,user_id);
+  const user_id = Cookies.get("user_id");
+  const { data, isSuccess, isLoading, refetch } = useGetOpenBoxList(
+    filters,
+    user_id
+  );
 
   const {
     data: add,
@@ -50,6 +52,13 @@ export const OpenBoxListPage = () => {
     queryKey: ["advertisements", "new_phones", "listing"],
     queryFn: fetchAdvertisements,
   });
+
+  const {
+    mutateAsync,
+    isLoading: isAdding,
+    isSuccess: isAdded,
+    isPending,
+  } = useAddToWishListMutation();
   useEffect(() => {
     const newFilters = {
       brand: searchParams.get("brand") || null,
@@ -100,6 +109,24 @@ export const OpenBoxListPage = () => {
     console.log(itemId);
   };
 
+  const handleAddToWishList = async (event, item) => {
+    event.stopPropagation();
+
+    const data = {
+      category_id: item.category_id,
+      item_id: item.id,
+      master_product_id: item.master_product_id,
+    };
+
+    try {
+      const response = await mutateAsync(data);
+      toast.success(response.message.displayMessage);
+      console.log(item);
+    } catch (error) {
+      // toast.error(error.response.message.displayMessage);
+    }
+  };
+
   return (
     <div className={classes.box}>
       <OpenBoxFilterPage
@@ -115,11 +142,12 @@ export const OpenBoxListPage = () => {
           <Advertisement image={add?.data[0].url} />
         )}
         <div className={classes.box__itemList}>
-          {data?.map((spareItem) => (
+          {data?.map((openBoxItem) => (
             <OpenBoxItem
-              key={spareItem.id}
-              item={spareItem}
+              key={openBoxItem.id}
+              item={openBoxItem}
               onClick={navigateToNewPhoneDetail}
+              onWishList={(event) => handleAddToWishList(event, openBoxItem)}
             />
           ))}
         </div>

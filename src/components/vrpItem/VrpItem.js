@@ -7,7 +7,7 @@ import { CategoryActionButtonGroup } from "../categoryActionButtonGroup/Category
 import useCartListSparesMutation from "../../tanstack-query/cartList/useCartListSparesMutation";
 import { toast } from "react-toastify";
 
-export const VrpItem = ({ item, index, totalItems, onClick }) => {
+export const VrpItem = ({ item, index, totalItems, onClick, onWishList }) => {
   const { mutateAsync, isLoading, isSuccess, isPending } =
     useCartListSparesMutation();
 
@@ -25,11 +25,11 @@ export const VrpItem = ({ item, index, totalItems, onClick }) => {
       toast.error(error.response.data.message.displayMessage);
     }
   };
-  
+
   const handleVrpDetail = (requestId) => {
     onClick(requestId);
   };
- 
+
   return (
     <div className={classes.container}>
       <div
@@ -48,7 +48,14 @@ export const VrpItem = ({ item, index, totalItems, onClick }) => {
                   #{item.lot_id}
                 </h2>
               </div>
-              <span className={classes.box__info__fav} />
+              <span
+                className={
+                  item.wishlist_status === 1
+                    ? classes.box__info__fav__active
+                    : classes.box__info__fav
+                }
+                onClick={onWishList}
+              />
             </div>
             <div className={classes.box__info__quant}>
               <h1 className={classes.box__info__id__title}>Total Phones:</h1>
@@ -99,7 +106,10 @@ export const VrpItem = ({ item, index, totalItems, onClick }) => {
               </span>
             </div>
           </div>
-          <CategoryActionButtonGroup onAdd={handleAddToCart} isAddedToCart={item.cart_status} />
+          <CategoryActionButtonGroup
+            onAdd={handleAddToCart}
+            isAddedToCart={item.cart_status}
+          />
 
           {/* <div className={classes.box__info__btns}>
             <button className={classes.box__info__btns__cart}>

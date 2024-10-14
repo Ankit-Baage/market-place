@@ -36,6 +36,7 @@ import { AddressDetailPage } from "./pages/address/AddressDetailPage";
 import { HelpPage } from "./pages/help/HelpPage";
 import { CategoryPage } from "./pages/category/CategoryPage";
 import { LaterPage } from "./pages/later/LaterPage";
+import { WishListPage } from "./pages/wishList/WishListPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -99,6 +100,7 @@ const router = createBrowserRouter([
               { index: true, element: <ProfileNavigation /> },
               { path: "profile", element: <UserProfile /> },
               { path: "later", element: <LaterPage /> },
+              { path: "wishList", element: <WishListPage /> },
               {
                 path: "address",
                 element: <AddressOutlet />,
