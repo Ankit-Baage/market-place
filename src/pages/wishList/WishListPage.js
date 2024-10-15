@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 import useCartListQuantityMutation from "../../tanstack-query/cartList/useCartListQuantityMutation";
 import { SearchBar } from "../../components/ui/searchBarWithBackBtn/SearchBar";
-import { EmptyCart } from "../../components/cart/EmptyCart";
+import { EmptyCart } from "../../components/wishList/EmptyCart";
 import { CartLoader } from "../../components/cart/cartLoader/CartLoader";
 
 import classes from "./wishListPage.module.css";

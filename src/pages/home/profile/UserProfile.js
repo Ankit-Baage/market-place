@@ -26,16 +26,14 @@ export const UserProfile = () => {
   }
 
   if (isError) {
-    console.log(isError)
-   navigate("/error")
-   return null;
-    
+    console.log(isError);
+    navigate("/error");
+    return null;
   }
 
   // if (isError || !data) {
   //   return <div>Error loading profile data</div>; // Display an error message
   // }
-  
 
   const handleSubmit = async (formData) => {
     try {
@@ -66,20 +64,25 @@ export const UserProfile = () => {
     }
   };
 
+  const handleNavigate = () => {
+    navigate(-1);
+  };
+
   return (
     <div className={classes.userProfile}>
-      <BrandIdentity />
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : isError ? (
-        <p>Error...</p>
-      ) : (
-        <UserDataForm
-          userData={data.data.data}
-          onSubmit={handleSubmit}
-          status={data.data.data.profile_status}
+      <div className={classes.box__brand__wrapper}>
+        <button
+          className={classes.box__profile__back}
+          onClick={handleNavigate}
         />
-      )}
+        <BrandIdentity />
+      </div>
+
+      <UserDataForm
+        userData={data?.data?.data}
+        onSubmit={handleSubmit}
+        status={data?.data?.data.profile_status}
+      />
     </div>
   );
 };

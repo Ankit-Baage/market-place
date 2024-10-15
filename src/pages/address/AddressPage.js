@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { onOpen } from "../../store/confirmationModal/confirmationModalSlice";
 
 export const AddressPage = () => {
+  const [heading, setHeading] = useState("Edit")
   const { data, isLoading, isSuccess } = useGetAddressList();
   const {
     mutateAsync,
@@ -39,6 +40,7 @@ export const AddressPage = () => {
   };
   const handleEdit = () => {
     navigate("add");
+    setHeading("Add")
   };
 
 
@@ -77,7 +79,7 @@ export const AddressPage = () => {
       <button className={classes.box__btn} onClick={handleNavigateBack} />
       <div className={classes.box__wrapper}>
         <h1 className={classes.box__wrapper__title}>
-          Select a delivery address
+          My Addresses
         </h1>
         {data?.data?.data.map((address) => (
           <Address

@@ -13,12 +13,6 @@
   justify-content: center;
 }
 
-.box__profile {
-  /* position: relative; */
-
-
-}
-
 .box__profile__info {
   position: absolute;
   top: 0;

@@ -66,7 +66,7 @@ export const SpareItem = ({ item, onClick, onWishList }) => {
               </h3>
               {/* </div> */}
               <span className={classes.box__discount__img}>
-                {item.discount_percentage}% DISCOUNT
+                {item.discount_percentage}% OFF
               </span>
             </div>
 

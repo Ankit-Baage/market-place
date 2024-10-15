@@ -4,3 +4,20 @@
   flex-direction: column;
   row-gap: 88px;
 }
+.box__profile__back {
+  width: 24px;
+  height: 24px;
+  background-image: url(../../../assets/arrow-left.svg);
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+
+}
+
+.box__brand__wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 20px;
+
+}

@@ -12,7 +12,7 @@ export const EmptyCart = () => {
           alt="empty cart"
           className={classes.box__info__img}
         />
-        <h3 className={classes.box__info__title}>Empty Cart</h3>
+        <h3 className={classes.box__info__title}>Empty WishList</h3>
         <h3 className={classes.box__info__subtitle}>
           Looks like you haven't made your choose yet
         </h3>

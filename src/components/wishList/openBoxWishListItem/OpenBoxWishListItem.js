@@ -55,7 +55,7 @@ export const OpenBoxWishListItem = ({
               Rs.{formatNumber(item.original_price)}
             </h2>
             <span className={classes.box__info__cred__price__discount}>
-              {item.discount_percentage}% Discount
+              {item.discount_percentage}% OFF
             </span>
           </div>
           <WishListActionButtonGroup

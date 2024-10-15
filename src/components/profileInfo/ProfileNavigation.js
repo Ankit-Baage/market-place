@@ -13,6 +13,7 @@ import grievanceNavigator from "../../assets/grievanceNavigator.png";
 import { LinkItem } from "../linkItem/LinkItem";
 
 import classes from "./profileNavigation.module.css";
+import { useNavigate } from "react-router-dom";
 
 const navigators = [
   {
@@ -95,12 +96,17 @@ const extendedNavigators = [
 ];
 
 export const ProfileNavigation = () => {
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate(-1);
+  };
   return (
     <div className={classes.box__wrapper}>
       <div className={classes.box}>
         <div className={classes.box__profile}>
           <div className={classes.box__profile__info}>
-            <button className={classes.box__profile__back} />
+            <button className={classes.box__profile__back} onClick={handleNavigate}/>
             <div className={classes.box__profile__user}>
               <span className={classes.box__profile__info__avatar}></span>
               <h2 className={classes.box__profile__info__name}>

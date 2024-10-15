@@ -41,7 +41,6 @@
 
 .box__info__container {
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   column-gap: 8px;
 }
@@ -75,13 +74,6 @@
 
 }
 
-/* .box__discount__container {
-  display: flex;
-  column-gap: 4px;
-  justify-content: center;
-  align-items: center;
-} */
-
 .box__discount__container__discountedPrice {
   font-family: "Poppins", sans;
   font-weight: 500;
@@ -111,12 +103,10 @@
   background-color: #4A4C5F;
 }
 
-
-
-
-
-
 .box__discount__img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -126,7 +116,7 @@
   font-size: 8px;
   line-height: 8px;
   color: #FFFFFF;
-  padding: 4px 2px 3px 8px;
+  padding:2px 12px
 
 }
 

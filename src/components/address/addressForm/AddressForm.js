@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { CustomInput } from "../../form/customInput/CustomInput";
 import { Button } from "../../ui/button/Button";
 import { CustomSelect } from "../../customSelect/CustomSelect";
+import { useParams } from "react-router-dom";
 
 export const AddressForm = ({ addressData, onSubmit, onNavigate }) => {
   const { register, handleSubmit, setValue, watch, formState } = useForm({
@@ -21,6 +22,10 @@ export const AddressForm = ({ addressData, onSubmit, onNavigate }) => {
   });
 
   const { isValid, isDirty, isTouched } = formState;
+
+  const params = useParams();
+
+  console.log("addressForm: ", params);
   const submitHandler = async (data) => {
     // Send `is_default` as 1 if true, otherwise send 0
     const payload = {
@@ -31,25 +36,11 @@ export const AddressForm = ({ addressData, onSubmit, onNavigate }) => {
     onSubmit(payload);
   };
 
-  const handleSelectionChange = (label, selectedId) => {
-    console.log(`${label} selected:`, selectedId);
-  };
-
-  // Example options for the select dropdown
-  const options = [
-    { id: "1", label: "Option 1" },
-    { id: "2", label: "Option 2" },
-    { id: "3", label: "Option 3" },
-  ];
-  console.log(addressData);
-
   return (
     <div className={classes.profile}>
       <div className={classes.profile__head}>
         <button className={classes.profile__backBtn} onClick={onNavigate} />
-        <h2 className={classes.profile__head__title}>
-          Enter your delivery address
-        </h2>
+        <h2 className={classes.profile__head__title}>Add Address</h2>
       </div>
       <form
         className={classes.form}
@@ -69,14 +60,6 @@ export const AddressForm = ({ addressData, onSubmit, onNavigate }) => {
             placeholder="Phone Number*"
             register={register}
           />
-          {/* <CustomInput
-            type="email"
-            id="email"
-            placeholder="Email ID"
-            register={register}
-            pattern={/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i}
-            message="Enter a valid email address"
-          /> */}
 
           <div className={classes.form__location}>
             <h4 className={classes.form__location__text}>
@@ -121,14 +104,6 @@ export const AddressForm = ({ addressData, onSubmit, onNavigate }) => {
             </div>
 
             <div className={classes.form__select}>
-              {/* <CustomSelect
-                optionData={options}
-                // selectedId="2"
-                label="Town/City"
-                register={register} // Registering with react-hook-form
-                name="city" // Name for react-hook-form
-                onSelection={handleSelectionChange} // Handle selection change
-              /> */}
               <CustomInput
                 type="text"
                 id="city"
@@ -138,14 +113,7 @@ export const AddressForm = ({ addressData, onSubmit, onNavigate }) => {
               />
             </div>
           </div>
-          {/* <CustomSelect
-            optionData={options}
-            // selectedId="2"
-            label="Select State"
-            register={register} // Registering with react-hook-form
-            name="state" // Name for react-hook-form
-            onSelection={handleSelectionChange} // Handle selection change
-          /> */}
+
           <CustomInput
             type="text"
             id="state"

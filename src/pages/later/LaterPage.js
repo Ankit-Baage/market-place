@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import useGetLaterList from "../../tanstack-query/laterList/useGetLaterList";
 
 import { SearchBar } from "../../components/ui/searchBarWithBackBtn/SearchBar";
-import { EmptyCart } from "../../components/cart/EmptyCart";
+
 import { CartLoader } from "../../components/cart/cartLoader/CartLoader";
 
 import { VrpLaterItem } from "../../components/later/vrpLaterItem/VrpLaterItem";
@@ -15,6 +15,7 @@ import classes from "./laterPage.module.css";
 import useLaterListDeleteItemMutation from "../../tanstack-query/laterList/useLaterListDeleteMutation";
 
 import useLaterToCartMutation from "../../tanstack-query/laterList/useLaterToCartMutation";
+import { EmptyCart } from "../../components/later/EmptyCart";
 
 export const LaterPage = () => {
   const [localQuantities, setLocalQuantities] = useState({});

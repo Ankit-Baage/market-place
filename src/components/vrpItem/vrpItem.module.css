@@ -144,6 +144,9 @@
 
 
 .box__discount__img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -153,7 +156,7 @@
   font-size: 8px;
   line-height: 8px;
   color: #FFFFFF;
-  padding: 4px 2px 3px 8px;
+  padding:2px 12px
 
 }
 

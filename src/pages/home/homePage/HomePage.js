@@ -1,9 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  Link,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import classes from "./homePage.module.css";
 import Cookies from "js-cookie";
@@ -46,11 +42,11 @@ const fetchAdvertisements = async () => {
 };
 
 const buttonRoutes = [
-  { id: "prexo", image: prexo, label: "Prexo" },
   { id: "vrp", image: vrp, label: "VRP" },
   { id: "openBox", image: openBox, label: "Open Box" },
   { id: "spares", image: spares, label: "Spares" },
   { id: "newPhone", image: newPhone, label: "New Phone" },
+  { id: "prexo", image: prexo, label: "Prexo" },
 ];
 
 export const HomePage = () => {
@@ -77,7 +73,7 @@ export const HomePage = () => {
     setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
   }, []);
 
-  console.log(add)
+  console.log(add);
 
   const handleProfile = () => {
     navigate("profile");
