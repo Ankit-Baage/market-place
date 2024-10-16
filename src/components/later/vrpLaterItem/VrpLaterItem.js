@@ -16,7 +16,7 @@ export const VrpLaterItem = ({ item, onRemove, onMove }) => {
         </Link>
 
         <div className={classes.box__info__cred}>
-          <span className={classes.box__info__cred__img}>VRP</span>
+        <h2 className={classes.box__info__cred__badge}>VRP</h2>
           <Link
             to={`/home/vrp/${item.request_id}`}
             className={classes.box__info__cred__title}

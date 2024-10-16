@@ -25,6 +25,18 @@
   justify-content: center;
 
 }
+.box__info__cred__badge{
+  width: fit-content;
+  font-size: 12px;
+  line-height: 15.6px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #FF6F3F;
+  padding:8px;
+  border-radius: 20px;
+  background-color: #F5F5F5;
+
+}
 
 .box__info__cred__title {
   display: flex;

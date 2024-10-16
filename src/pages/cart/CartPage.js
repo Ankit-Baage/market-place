@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from "react";
 import classes from "./cartPage.module.css";
 import { SearchBar } from "../../components/ui/searchBarWithBackBtn/SearchBar";
-import { EmptyCart } from "../../components/cart/EmptyCart";
+
 import { VrpCartItem } from "../../components/cart/vrpCartItem/VrpCartItem";
 import useGetCartList from "../../tanstack-query/cartList/useGetCartList";
 import { SparesCartItem } from "../../components/cart/sparesCartItem/SparesCartItem";
@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import useCartListDeleteItemMutation from "../../tanstack-query/cartList/useCartListDeleteItemMutation";
 import useCartListQuantityMutation from "../../tanstack-query/cartList/useCartListQuantityMutation";
 import useMoveToLaterMutation from "../../tanstack-query/cartList/useMoveToLaterMutation";
+import { EmptyCart } from "../../components/cart/EmptyCart";
 
 export const CartPage = () => {
   const { data, isSuccess, isLoading, refetch } = useGetCartList();

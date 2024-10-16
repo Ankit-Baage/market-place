@@ -26,21 +26,17 @@
 
 }
 
-.box__info__cred__img {
+.box__info__cred__badge{
   width: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 8px;
+  font-size: 12px;
+  line-height: 15.6px;
   font-weight: 500;
   font-family: "Poppins", sans;
-  color: #FFFFFF;
-  text-align: left;
-  background-image: url(../../../assets//laterItemLabel.svg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  padding: 4px 22px;
+  color: #FF6F3F;
+  padding:8px;
+  border-radius: 20px;
+  background-color: #F5F5F5;
+
 }
 
 .box__info__cred__title {

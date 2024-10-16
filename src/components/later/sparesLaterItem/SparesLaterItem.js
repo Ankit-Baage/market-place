@@ -33,7 +33,7 @@ export const SparesLaterItem = ({
         </Link>
 
         <div className={classes.box__info__cred}>
-        <span className={classes.box__info__cred__img}>Spares</span>
+        <h2 className={classes.box__info__cred__badge}>Spares</h2>
           <Link
             to={`/home/spares/${item.id}`}
             className={classes.box__info__cred__title}

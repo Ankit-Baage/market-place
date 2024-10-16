@@ -26,6 +26,19 @@
 
 }
 
+.box__info__cred__badge{
+  width: fit-content;
+  font-size: 12px;
+  line-height: 15.6px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #FF6F3F;
+  padding:8px;
+  border-radius: 20px;
+  background-color: #F5F5F5;
+
+}
+
 .box__info__cred__title {
   display: flex;
   flex-direction: column;
@@ -41,11 +54,11 @@
 
 }
 .box__info__cred__title__color {
-  font-size: 14px;
-  line-height: 18.2px;
+  font-size: 12px;
+  line-height: 12px;
   font-weight: 400;
   font-family: "Poppins", sans;
-  color: #2F3567;
+  color: #595959;
 
 }
 

@@ -32,6 +32,7 @@ export const OpenBoxCartItem = ({
         </Link>
 
         <div className={classes.box__info__cred}>
+        <h2 className={classes.box__info__cred__badge}>Open Box</h2>
           <Link
             to={`/home/openBox/${item.id}`}
             className={classes.box__info__cred__title}

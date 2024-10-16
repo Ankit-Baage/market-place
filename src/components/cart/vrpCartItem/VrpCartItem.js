@@ -16,6 +16,7 @@ export const VrpCartItem = ({ item, onRemove, onLater }) => {
         </Link>
 
         <div className={classes.box__info__cred}>
+          <h2 className={classes.box__info__cred__badge}>VRP</h2>
           <Link
             to={`/home/vrp/${item.request_id}`}
             className={classes.box__info__cred__title}

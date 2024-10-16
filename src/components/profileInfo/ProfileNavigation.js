@@ -1,14 +1,14 @@
 import React from "react";
-import profileNavigator from "../../assets/profileNavigator.png";
-import laterNavigator from "../../assets/laterNavigator.png";
-import cartNavigator from "../../assets/cartNavigator.png";
-import wishListNavigator from "../../assets/wishListNavigator.png";
-import aboutNavigator from "../../assets/aboutNavigator.png";
-import faqNavigator from "../../assets/faqNavigator.png";
-import termNavigator from "../../assets/termNavigator.png";
-import policyNavigator from "../../assets/policyNavigator.png";
-import addressNavigator from "../../assets/addressNavigator.png";
-import grievanceNavigator from "../../assets/grievanceNavigator.png";
+import profileNavigator from "../../assets/profileNavigator.svg";
+import laterNavigator from "../../assets/laterNavigator.svg";
+import cartNavigator from "../../assets/cartNavigator.svg";
+import wishListNavigator from "../../assets/wishListNavigator.svg";
+import aboutNavigator from "../../assets/aboutNavigator.svg";
+import faqNavigator from "../../assets/faqNavigator.svg";
+import termNavigator from "../../assets/termNavigator.svg";
+import policyNavigator from "../../assets/policyNavigator.svg";
+import addressNavigator from "../../assets/addressNavigator.svg";
+import grievanceNavigator from "../../assets/grievanceNavigator.svg";
 
 import { LinkItem } from "../linkItem/LinkItem";
 

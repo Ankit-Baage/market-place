@@ -1,5 +1,5 @@
 import React from "react";
-import emptyCart from "../../assets/emptyCart.svg";
+import emptyWishList from "../../assets/empty__wishList.svg";
 import classes from "./emptyCart.module.css";
 import { Link } from "react-router-dom";
 
@@ -8,13 +8,12 @@ export const EmptyCart = () => {
     <div className={classes.box}>
       <div className={classes.box__info}>
         <img
-          src={emptyCart}
+          src={emptyWishList}
           alt="empty cart"
           className={classes.box__info__img}
         />
-        <h3 className={classes.box__info__title}>Empty WishList</h3>
         <h3 className={classes.box__info__subtitle}>
-          Looks like you haven't made your choose yet
+        Your wishlist is empty.
         </h3>
       </div>
       <Link to="/home" className={classes.box__link}>Back to product</Link>

@@ -13,7 +13,7 @@ import { Button } from "../../ui/button/Button";
 
 export const UserDataForm = ({ userData, onSubmit, status }) => {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
-  const { register, handleSubmit, formState,  setValue } = useForm({
+  const { register, handleSubmit, formState, setValue } = useForm({
     defaultValues: userData,
     validateCriteriaMode: "all",
   });
@@ -67,7 +67,7 @@ export const UserDataForm = ({ userData, onSubmit, status }) => {
           <CustomInput
             type="text"
             id="name"
-            placeholder="Name"
+            placeholder="Name*"
             register={register}
           />
           <CustomInput
@@ -137,13 +137,12 @@ export const UserDataForm = ({ userData, onSubmit, status }) => {
             register={register}
             onChange={(e) => handleFileChange(e, "aadhar_image_url")}
           />
+          <Button
+            type="submit"
+            text="Save"
+            disabled={!isValid || !(isDirty || isTouched)}
+          />
         </div>
-
-        <Button
-          type="submit"
-          text="Save"
-          disabled={!isValid || !(isDirty || isTouched)}
-        />
       </form>
       {/* <DevTool control={control} /> */}
     </div>

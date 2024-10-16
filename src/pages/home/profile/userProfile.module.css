@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  row-gap: 88px;
+  row-gap: 32px;
 }
 .box__profile__back {
   width: 24px;
@@ -18,6 +18,6 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  row-gap: 20px;
+  row-gap: 22px;
 
 }

@@ -3,11 +3,16 @@ import classes from "./addressForm.module.css";
 import { useForm } from "react-hook-form";
 import { CustomInput } from "../../form/customInput/CustomInput";
 import { Button } from "../../ui/button/Button";
-import { CustomSelect } from "../../customSelect/CustomSelect";
+
 import { useParams } from "react-router-dom";
 
-export const AddressForm = ({ addressData, onSubmit, onNavigate }) => {
-  const { register, handleSubmit, setValue, watch, formState } = useForm({
+export const AddressForm = ({
+  addressData,
+  onSubmit,
+  onNavigate,
+  addressId,
+}) => {
+  const { register, handleSubmit, formState } = useForm({
     defaultValues: {
       name: addressData.name || "",
       mobile_no: addressData.mobile_no || "",
@@ -27,10 +32,9 @@ export const AddressForm = ({ addressData, onSubmit, onNavigate }) => {
 
   console.log("addressForm: ", params);
   const submitHandler = async (data) => {
-    // Send `is_default` as 1 if true, otherwise send 0
     const payload = {
       ...data,
-      is_default: data.is_default ? 1 : 0, // Convert true/false to 1/0
+      is_default: data.is_default ? 1 : 0,
     };
 
     onSubmit(payload);
@@ -40,7 +44,9 @@ export const AddressForm = ({ addressData, onSubmit, onNavigate }) => {
     <div className={classes.profile}>
       <div className={classes.profile__head}>
         <button className={classes.profile__backBtn} onClick={onNavigate} />
-        <h2 className={classes.profile__head__title}>Add Address</h2>
+        <h2 className={classes.profile__head__title}>
+          {addressId ? "Edit Address" : "Add Address"}
+        </h2>
       </div>
       <form
         className={classes.form}

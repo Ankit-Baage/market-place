@@ -77,6 +77,7 @@ export const AddressDetailPage = () => {
       onNavigate={handleNavigateBack}
       addressData={addressData}
       onSubmit={handleSubmit}
+      addressId ={addressId}
     />
   );
 };

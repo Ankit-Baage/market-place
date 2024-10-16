@@ -12,9 +12,8 @@ export const EmptyCart = () => {
           alt="empty cart"
           className={classes.box__info__img}
         />
-        <h3 className={classes.box__info__title}>Empty Save For Later</h3>
         <h3 className={classes.box__info__subtitle}>
-          Looks like you haven't made your choose yet
+        Nothing saved for later yet.
         </h3>
       </div>
       <Link to="/home" className={classes.box__link}>Back to product</Link>

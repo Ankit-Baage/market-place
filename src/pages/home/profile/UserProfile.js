@@ -4,7 +4,6 @@ import { UserDataForm } from "../../../components/form/userDataForm/UserDataForm
 import { BrandIdentity } from "../../../components/brandIdentity/BrandIdentity";
 import classes from "./userProfile.module.css";
 import useUpdateProfileMutation from "../../../tanstack-query/profile/useUpdateProfile";
-import { uploadImageRequest } from "../../../utils/https-request/profile/uploadImage";
 import axiosInstance from "../../../utils/axios-middleware/axiosMiddleware";
 import { useDispatch } from "react-redux";
 import { openLoader } from "../../../store/loaderSlice";

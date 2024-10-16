@@ -49,7 +49,7 @@
 .box__profile__info__avatar {
   width: 28px;
   height: 28px;
-  background-image: url(../../assets/avatar.png);
+  background-image: url(../../assets/avatar.svg);
   background-position: center;
   background-repeat: repeat;
   background-size: cover;
