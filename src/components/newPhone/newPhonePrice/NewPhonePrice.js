@@ -17,7 +17,7 @@ export const NewPhonePrice = ({ prices }) => {
               {prices.originalPrice}
             </h3>
             <span className={classes.box__price__discount__img}>
-              {prices.discountPercentage}% DISCOUNT
+              {prices.discountPercentage}% OFF
             </span>
           </div>
           <div className={classes.box__quantity}>

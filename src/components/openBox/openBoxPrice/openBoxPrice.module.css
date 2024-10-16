@@ -27,8 +27,6 @@
   justify-content: space-between;
   align-items: center;
 
-
-
 }
 
 .box__container {
@@ -76,10 +74,6 @@
 }
 
 
-
-
-
-
 .box__price__discount__img {
   background-position: center;
   background-repeat: no-repeat;
@@ -90,7 +84,7 @@
   font-size: 8px;
   line-height: 8px;
   color: #FFFFFF;
-  padding: 4px 2px 3px 8px;
+  padding: 2px 12px;
 
 }
 

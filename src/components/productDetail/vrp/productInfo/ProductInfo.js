@@ -1,6 +1,6 @@
 import React from "react";
 import { formatNumber } from "../../../../utils/helpers/formatNumber";
-import { Carousel } from "../../../carousel/Carousel";
+
 import classes from "./productInfo.module.css";
 import { Advertisement } from "../../../vrpItem/advertisement/Advertisement";
 import vrpAdd from "../../../../assets/vrpAdd.png";
@@ -98,16 +98,14 @@ export const ProductInfo = ({ productData, onWishList }) => {
               ? `Rs. ${formatNumber(productData?.rate_card)}`
               : productData?.rate_card}
           </h3>
-          {/* <h2 className={classes.box__price__actual}>
-            Rate Card
-          </h2> */}
+          
           <h2 className={classes.box__price__actual}>
             {productData?.original_price
               ? `Rs. ${formatNumber(productData?.original_price)}`
               : productData?.original_price}
           </h2>
           <span className={classes.box__price_discount__img}>
-            {productData?.discount_percentage}% DISCOUNT
+            {productData?.discount_percentage}% OFF
           </span>
         </div>
         <hr className={classes.box__divider} />

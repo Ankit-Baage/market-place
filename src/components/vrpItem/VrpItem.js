@@ -111,12 +111,7 @@ export const VrpItem = ({ item, index, totalItems, onClick, onWishList }) => {
             isAddedToCart={item.cart_status}
           />
 
-          {/* <div className={classes.box__info__btns}>
-            <button className={classes.box__info__btns__cart}>
-              Add to Cart
-            </button>
-            <button className={classes.box__info__btns__buy}>Buy Now</button>
-          </div> */}
+         
         </div>
       </div>
 
