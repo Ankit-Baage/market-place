@@ -3,13 +3,32 @@ import Cookies from 'js-cookie';
 import { useDispatch } from "react-redux";
 import useGetVrpProductDetail from "../../tanstack-query/vrp/useGetVrpProductDetail";
 import { ProductInfo } from "../../components/productDetail/vrp/productInfo/ProductInfo";
+import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWishListMutation";
+import { toast } from "react-toastify";
 
 export const ProductInfoPage = ({ requestId, onProductData }) => {
   const dispatch = useDispatch();
   const user_id = Cookies.get('user_id')
   const { data, isLoading, isSuccess } = useGetVrpProductDetail({ requestId, user_id });
+  const {
+    mutateAsync,
+    isLoading: isAdding,
+    isSuccess: isAdded,
+  } = useAddToWishListMutation();
 
-  
+  const handleAddToWishList = async () => {
+    const payLoad = {
+      category_id: data?.data?.data?.category_id,
+      request_id: data?.data?.data?.request_id,
+    };
+
+    try {
+      const response = await mutateAsync(payLoad);
+      toast.success(response.message.displayMessage);
+    } catch (error) {
+      toast.error(error.message.displayMessage);
+    }
+  };
 
   useEffect(() => {
     if (isSuccess) {
@@ -25,5 +44,5 @@ export const ProductInfoPage = ({ requestId, onProductData }) => {
     }
   }, [data, isSuccess, onProductData]);
 
-  return <ProductInfo productData={data?.data.data} />;
+  return <ProductInfo productData={data?.data.data} onWishList={handleAddToWishList}/>;
 };

@@ -26,7 +26,8 @@ export const NewPhoneDetail = ({
   onVariantSelect,
   onAddToCart,
   cart_status,
-  wishlist_status
+  wishlist_status,
+  onWishList,
 }) => {
   const [validationResults, setValidationResults] = useState({});
 
@@ -60,6 +61,14 @@ export const NewPhoneDetail = ({
   return (
     <div className={classes.box}>
       <div className={classes.box__spareIntro}>
+        <span
+          className={
+            wishlist_status === 1
+              ? classes.box__info__fav__active
+              : classes.box__info__fav
+          }
+          onClick={onWishList}
+        />
         <ProductCarousel
           imageData={imageArray.length < 1 ? dummyArray : imageArray}
         />
@@ -107,7 +116,7 @@ export const NewPhoneDetail = ({
           className={`${classes.box__btns__btn} ${classes.box__btns__add}`}
           onClick={onAddToCart}
         >
-          {cart_status?"Added To cart" : "Add To cart"}
+          {cart_status ? "Added To cart" : "Add To cart"}
         </button>
         <button
           className={`${classes.box__btns__btn} ${classes.box__btns__buy}`}

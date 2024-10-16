@@ -8,7 +8,6 @@ import { SpareOffers } from "../spareOffers/SpareOffers";
 import { validateImages } from "../../../utils/helpers/imageValidator";
 import dummy from "../../../assets/spare_preview_not_available.svg";
 
-
 const dummyArray = [dummy];
 
 export const SpareDetail = ({
@@ -22,13 +21,11 @@ export const SpareDetail = ({
   onColorSelect,
   onAddToCart,
   cart_status,
-  wishlist_status
+  wishlist_status,
+  onWishList
 }) => {
   const [validationResults, setValidationResults] = useState({});
- 
 
-
- 
   // Function to check if an image URL is valid
   const checkImageUrl = (url) => {
     return new Promise((resolve) => {
@@ -63,6 +60,14 @@ export const SpareDetail = ({
   return (
     <div className={classes.box}>
       <div className={classes.box__spareIntro}>
+        <span
+          className={
+            wishlist_status === 1
+              ? classes.box__info__fav__active
+              : classes.box__info__fav
+          }
+          onClick={onWishList}
+        />
         <ProductCarousel
           imageData={imageArray.length < 1 ? dummyArray : imageArray}
         />
@@ -102,7 +107,7 @@ export const SpareDetail = ({
           className={`${classes.box__btns__btn} ${classes.box__btns__add}`}
           onClick={onAddToCart}
         >
-          {cart_status?"Added To cart" : "Add To cart"}
+          {cart_status ? "Added To cart" : "Add To cart"}
         </button>
         <button
           className={`${classes.box__btns__btn} ${classes.box__btns__buy}`}

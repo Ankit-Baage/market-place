@@ -7,6 +7,7 @@ import { ProductInfoPage } from "../../../pages/vrp/ProductInfoPage";
 
 import useCartListSparesMutation from "../../../tanstack-query/cartList/useCartListSparesMutation";
 import { toast } from "react-toastify";
+import useAddToWishListMutation from "../../../tanstack-query/wishList/useAddToWishListMutation";
 
 export const VrpProductDetail = ({ requestId, onDownLoad }) => {
   const [productInfo, setProductInfo] = useState({
@@ -17,6 +18,10 @@ export const VrpProductDetail = ({ requestId, onDownLoad }) => {
   });
   const { mutateAsync, isLoading, isSuccess, isPending } =
     useCartListSparesMutation();
+
+ 
+
+  
 
   const handleDownLoad = () => {
     onDownLoad();

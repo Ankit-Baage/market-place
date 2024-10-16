@@ -9,7 +9,8 @@ import useGetNewPhoneColors from "../../../tanstack-query/newPhones/useGetNewPho
 import useGetNewPhoneVariant from "../../../tanstack-query/newPhones/useGetNewPhonevariant";
 import useCartListSparesMutation from "../../../tanstack-query/cartList/useCartListSparesMutation";
 import { toast } from "react-toastify";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
+import useAddToWishListMutation from "../../../tanstack-query/wishList/useAddToWishListMutation";
 
 const initialState = {
   newPhoneCarouselData: null,
@@ -43,7 +44,7 @@ export const NewPhoneDetailPage = () => {
   // const [selectedColor, setSelectedColor] = useState(null);
   const [selectedVariant, setSelectedVariant] = useState(null);
   const params = useParams();
-  const user_id = Cookies.get('user_id')
+  const user_id = Cookies.get("user_id");
 
   const requestId = params.requestId;
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -52,7 +53,7 @@ export const NewPhoneDetailPage = () => {
   const { data, isError, isPending, isSuccess, refetch } = useGetNewPhoneDetail(
     {
       requestId,
-      user_id
+      user_id,
     }
   );
 
@@ -131,28 +132,45 @@ export const NewPhoneDetailPage = () => {
   const { data: newPhoneVariant, isSuccess: isNewPhoneVariantSuccess } =
     useGetNewPhoneVariant(variantQuery);
 
-    const { mutateAsync, isLoading } =
-    useCartListSparesMutation();
-    
-    const handleAddToCart = async (event) => {
-      event.stopPropagation();
-      const payload = {
-        category_id: data?.data?.data.category_id,
-        master_product_id: data?.data?.data.master_product_id,
-        item_id: data?.data?.data.id,
-      };
-  
-      try {
-        const response = await mutateAsync(payload);
-        // console.log(data)
-        toast.success(response.message.displayMessage);
-      } catch (error) {
-        toast.error(error.response.data.message.displayMessage);
-      }
+  const { mutateAsync, isLoading } = useCartListSparesMutation();
+
+  const {
+    mutateAsync: addToWishList,
+    isLoading: isAdding,
+    isSuccess: isAdded,
+  } = useAddToWishListMutation();
+
+  const handleAddToWishList = async () => {
+    const payLoad = {
+      category_id: data?.data?.data?.category_id,
+      item_id: data?.data?.data?.id,
+      master_product_id: data?.data?.data?.master_product_id,
     };
 
+    try {
+      const response = await addToWishList(payLoad);
+      toast.success(response.message.displayMessage);
+    } catch (error) {
+      toast.error(error.message.displayMessage);
+    }
+  };
 
+  const handleAddToCart = async (event) => {
+    event.stopPropagation();
+    const payload = {
+      category_id: data?.data?.data.category_id,
+      master_product_id: data?.data?.data.master_product_id,
+      item_id: data?.data?.data.id,
+    };
 
+    try {
+      const response = await mutateAsync(payload);
+      // console.log(data)
+      toast.success(response.message.displayMessage);
+    } catch (error) {
+      toast.error(error.response.data.message.displayMessage);
+    }
+  };
 
   return !isNewPhoneSuccess ? (
     <Spinner />
@@ -170,9 +188,10 @@ export const NewPhoneDetailPage = () => {
       variantId={data?.data.data.id}
       infoSpecs={colorQuery}
       onVariantSelect={(itemId) => handleVariantSelect(itemId)}
-      onAddToCart = {handleAddToCart}
+      onAddToCart={handleAddToCart}
       cart_status={data?.data?.data.cart_status}
       wishlist_status={data?.data?.data.wishlist_status}
+      onWishList={handleAddToWishList}
     />
   );
 };

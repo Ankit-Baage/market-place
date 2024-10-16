@@ -11,6 +11,7 @@ import useCartListSparesMutation from "../../../tanstack-query/cartList/useCartL
 import { OpenBoxDetail } from "../../../components/openBox/openBoxDetail/OpenBoxDetail";
 import { toast } from "react-toastify";
 import Cookies from 'js-cookie';
+import useAddToWishListMutation from "../../../tanstack-query/wishList/useAddToWishListMutation";
 
 const initialState = {
   newPhoneCarouselData: null,
@@ -131,6 +132,28 @@ export const OpenBoxDetailPage = () => {
     useGetOpenBoxVariant(variantQuery);
 
   const { mutateAsync, isLoading } = useCartListSparesMutation();
+  const {
+    mutateAsync: addToWishList,
+    isLoading: isAdding,
+    isSuccess: isAdded,
+  } = useAddToWishListMutation();
+
+
+  const handleAddToWishList = async () => {
+    const payLoad = {
+      category_id: data?.data?.data?.category_id,
+      item_id: data?.data?.data?.id,
+      master_product_id: data?.data?.data?.master_product_id,
+    };
+
+    try {
+      const response = await addToWishList(payLoad);
+      toast.success(response.message.displayMessage);
+    } catch (error) {
+      toast.error(error.message.displayMessage);
+    }
+  };
+
 
   const handleAddToCart = async (event) => {
     event.stopPropagation();
@@ -168,6 +191,7 @@ export const OpenBoxDetailPage = () => {
       onAddToCart={handleAddToCart}
       cart_status={data?.data?.data.cart_status}
       wishlist_status={data?.data?.data.wishlist_status}
+      onWishList={handleAddToWishList}
     />
   );
 };

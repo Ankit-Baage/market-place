@@ -5,6 +5,7 @@ import { VrpProductDetail } from "../../components/productDetail/vrp/VrpProductD
 import useGetVrpProductDetailDownLoad from "../../tanstack-query/vrp/useGetVrpProductDetailDownload";
 
 import { Spinner } from "../../components/ui/spinner/Spinner";
+import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWishListMutation";
 
 export const VrpDetailPage = () => {
   const params = useParams();

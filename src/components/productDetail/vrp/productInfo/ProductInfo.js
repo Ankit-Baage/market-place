@@ -5,7 +5,8 @@ import classes from "./productInfo.module.css";
 import { Advertisement } from "../../../vrpItem/advertisement/Advertisement";
 import vrpAdd from "../../../../assets/vrpAdd.png";
 
-export const ProductInfo = ({ productData }) => {
+export const ProductInfo = ({ productData, onWishList }) => {
+  console.log(productData?productData:null)
   return (
     <div>
       {" "}
@@ -17,9 +18,15 @@ export const ProductInfo = ({ productData }) => {
               #{productData?.lot_id}
             </h2>
           </div>
-          <span className={classes.box__info__fav} />
+          <span
+            className={
+              productData?.wishlist_status === 1
+                ? classes.box__info__fav__active
+                : classes.box__info__fav
+            }
+            onClick={onWishList}
+          />
         </div>
-        {/* <Carousel /> */}
         <Advertisement image={vrpAdd} />
       </div>
       <div className={classes.box__specs}>

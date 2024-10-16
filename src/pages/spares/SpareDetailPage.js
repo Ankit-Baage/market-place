@@ -7,7 +7,8 @@ import useGetSpareColors from "../../tanstack-query/spares/useGetSpareColors";
 import { formatNumber } from "../../utils/helpers/formatNumber";
 import useCartListSparesMutation from "../../tanstack-query/cartList/useCartListSparesMutation";
 import { toast } from "react-toastify";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
+import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWishListMutation";
 
 const initialState = {
   spareCarouselData: null,
@@ -15,7 +16,7 @@ const initialState = {
   prices: null,
   colorQuery: null,
   color: null,
-  partName:null,
+  partName: null,
 };
 
 function reducer(state, action) {
@@ -38,25 +39,24 @@ function reducer(state, action) {
 export const SpareDetailPage = () => {
   const [selectedColor, setSelectedColor] = useState(null);
   const params = useParams();
-  const user_id = Cookies.get('user_id')
+  const user_id = Cookies.get("user_id");
 
   const requestId = params.requestId;
   const [state, dispatch] = useReducer(reducer, initialState);
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const { data, isError, isPending, isSuccess, refetch } = useGetSpareDetail({
     requestId,
-    user_id
+    user_id,
   });
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);
-    console.log('Selected color:', color.record_id);
-    navigate(`/home/spares/${color.record_id}`)
+    console.log("Selected color:", color.record_id);
+    navigate(`/home/spares/${color.record_id}`);
   };
 
   useEffect(() => {
-    
     if (isSuccess && data) {
       const spareCarouselData = data.data.data.images;
       const spareDescription = [
@@ -65,7 +65,7 @@ const navigate = useNavigate();
         { id: 3, desc: data.data.data.description_3 },
         { id: 4, desc: data.data.data.description_4 },
       ];
-      
+
       const colorQuery = {
         sellerId: data.data.data.seller_id,
         brand: data.data.data.brand,
@@ -79,7 +79,7 @@ const navigate = useNavigate();
       };
       const color = data.data.data.color;
       const partName = data.data.data.part_name;
-      console.log(partName)
+      console.log(partName);
 
       dispatch({
         type: "SET_DATA",
@@ -89,28 +89,48 @@ const navigate = useNavigate();
           prices,
           colorQuery,
           color,
-          partName
+          partName,
         },
       });
     }
-    
   }, [isSuccess, data]);
 
- 
-  const { spareCarouselData, colorQuery, prices, spareDescription, color, partName } = state;
+  const {
+    spareCarouselData,
+    colorQuery,
+    prices,
+    spareDescription,
+    color,
+    partName,
+  } = state;
 
-  console.log("user_id :",user_id)
-  console.log(data?.data.data.cart_status)
-
- 
   const { data: spareColors, isSuccess: isSpareColorSuccess } =
-  useGetSpareColors(colorQuery);
+    useGetSpareColors(colorQuery);
   // console.log(colors?.data.data);
   console.log(spareColors?.data.data);
 
-  const { mutateAsync, isLoading } =
-  useCartListSparesMutation();
-  
+  const { mutateAsync, isLoading } = useCartListSparesMutation();
+  const {
+    mutateAsync: addToWishList,
+    isLoading: isAdding,
+    isSuccess: isAdded,
+  } = useAddToWishListMutation();
+
+  const handleAddToWishList = async () => {
+    const payLoad = {
+      category_id: data?.data?.data?.category_id,
+      item_id: data?.data?.data?.id,
+      master_product_id: data?.data?.data?.master_product_id,
+    };
+
+    try {
+      const response = await addToWishList(payLoad);
+      toast.success(response.message.displayMessage);
+    } catch (error) {
+      toast.error(error.message.displayMessage);
+    }
+  };
+
   const handleAddToCart = async (event) => {
     event.stopPropagation();
     const payload = {
@@ -140,9 +160,10 @@ const navigate = useNavigate();
       partName={data?.data.data.part_name}
       onColorSelect={handleColorSelect}
       descriptions={spareDescription}
-      onAddToCart = {handleAddToCart}
+      onAddToCart={handleAddToCart}
       cart_status={data?.data?.data.cart_status}
       wishlist_status={data?.data?.data.wishlist_status}
+      onWishList={handleAddToWishList}
     />
   );
 };

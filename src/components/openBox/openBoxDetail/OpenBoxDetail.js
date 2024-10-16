@@ -27,7 +27,8 @@ export const OpenBoxDetail = ({
   onVariantSelect,
   onAddToCart,
   cart_status,
-  wishlist_status
+  wishlist_status,
+  onWishList
 }) => {
   const [validationResults, setValidationResults] = useState({});
 
@@ -61,6 +62,14 @@ export const OpenBoxDetail = ({
   return (
     <div className={classes.box}>
       <div className={classes.box__spareIntro}>
+      <span
+          className={
+            wishlist_status === 1
+              ? classes.box__info__fav__active
+              : classes.box__info__fav
+          }
+          onClick={onWishList}
+        />
         <ProductCarousel
           imageData={imageArray.length < 1 ? dummyArray : imageArray}
         />
