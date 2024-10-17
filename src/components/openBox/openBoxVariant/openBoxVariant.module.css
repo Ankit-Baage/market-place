@@ -44,7 +44,7 @@
 }
 
 .box__content__filter__option {
-  
+  width: max-content;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -64,19 +64,19 @@
 
 .box__content__filter__option__label {
   position: absolute;
-  left:2px;
+  left: 2px;
   width: 14px;
   height: 14px;
   border-radius: 50%;
   outline: 1px solid #2F3567;
-  
+
 }
 
 .inActive {
 
   font-family: "Poppins", sans;
   font-weight: 400;
-  color:#bdbcbc;
+  color: #bdbcbc;
 
 }
 
@@ -120,5 +120,3 @@
   background-color: #EFEFEF;
   height: 1.5px;
 }
-
-

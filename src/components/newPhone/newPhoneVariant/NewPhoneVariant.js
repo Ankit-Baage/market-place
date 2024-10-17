@@ -48,7 +48,7 @@ export const NewPhoneVariant = ({
                   className={classes.box__content__filter__option__input}
                   checked={itemId === item.record_id}
                   onChange={() => handleCheckboxChange(item.record_id)}
-                  disabled={item.is_active === 0} // Disable the checkbox if is_active is 0
+                  disabled={item.is_active === 0}
                 />
                 <span
                   className={`${classes.box__content__filter__labelText} ${

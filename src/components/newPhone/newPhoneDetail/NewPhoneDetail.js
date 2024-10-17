@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { ProductCarousel } from "../../ui/productCarousel/ProductCarousel";
 import classes from "./newPhoneDetail.module.css";
 
-import { NewPhonePrice, SparePrice } from "../newPhonePrice/NewPhonePrice";
+import { NewPhonePrice } from "../newPhonePrice/NewPhonePrice";
 import { SpareHighlights } from "../newPhoneHighlights/NewPhoneHighlights";
 import { SpareOffers } from "../newPhoneOffers/NewPhoneOffers";
 import { validateImages } from "../../../utils/helpers/imageValidator";
@@ -116,7 +116,7 @@ export const NewPhoneDetail = ({
           className={`${classes.box__btns__btn} ${classes.box__btns__add}`}
           onClick={onAddToCart}
         >
-          {cart_status ? "Added To cart" : "Add To cart"}
+          {cart_status ? "Added" : "Add To cart"}
         </button>
         <button
           className={`${classes.box__btns__btn} ${classes.box__btns__buy}`}

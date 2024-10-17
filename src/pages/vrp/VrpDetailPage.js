@@ -5,7 +5,6 @@ import { VrpProductDetail } from "../../components/productDetail/vrp/VrpProductD
 import useGetVrpProductDetailDownLoad from "../../tanstack-query/vrp/useGetVrpProductDetailDownload";
 
 import { Spinner } from "../../components/ui/spinner/Spinner";
-import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWishListMutation";
 
 export const VrpDetailPage = () => {
   const params = useParams();
@@ -22,11 +21,9 @@ export const VrpDetailPage = () => {
         const contentType =
           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
         const blob = new Blob([data], { type: contentType });
-
-        // Create a temporary link element
         const link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
-        link.download = `mobiGarage_${requestId}.xlsx`; // Set the download attribute with desired file name
+        link.download = `mobiGarage_${requestId}.xlsx`;
         link.click();
       }
     } catch (error) {

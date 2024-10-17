@@ -110,8 +110,6 @@ export const VrpItem = ({ item, index, totalItems, onClick, onWishList }) => {
             onAdd={handleAddToCart}
             isAddedToCart={item.cart_status}
           />
-
-         
         </div>
       </div>
 

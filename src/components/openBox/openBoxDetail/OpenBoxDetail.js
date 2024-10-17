@@ -77,7 +77,7 @@ export const OpenBoxDetail = ({
           <h1
             className={classes.box__spareName__title}
           >{`${infoSpecs.model} ${infoSpecs.ram}/${infoSpecs.rom} (${color})`}</h1>
-          <h2 className={classes.box__spareName__subtitle}>New</h2>
+          <h2 className={classes.box__spareName__subtitle}>Open Box</h2>
           <hr className={classes.box__item__divider} />
         </div>
       </div>
@@ -117,7 +117,7 @@ export const OpenBoxDetail = ({
           className={`${classes.box__btns__btn} ${classes.box__btns__add}`}
           onClick={onAddToCart}
         >
-          {cart_status?"Added To cart" : "Add To cart"}
+          {cart_status?"Added" : "Add To cart"}
         </button>
         <button
           className={`${classes.box__btns__btn} ${classes.box__btns__buy}`}

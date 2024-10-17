@@ -7,7 +7,6 @@ import { ProductInfoPage } from "../../../pages/vrp/ProductInfoPage";
 
 import useCartListSparesMutation from "../../../tanstack-query/cartList/useCartListSparesMutation";
 import { toast } from "react-toastify";
-import useAddToWishListMutation from "../../../tanstack-query/wishList/useAddToWishListMutation";
 
 export const VrpProductDetail = ({ requestId, onDownLoad }) => {
   const [productInfo, setProductInfo] = useState({
@@ -19,18 +18,12 @@ export const VrpProductDetail = ({ requestId, onDownLoad }) => {
   const { mutateAsync, isLoading, isSuccess, isPending } =
     useCartListSparesMutation();
 
- 
-
-  
-
   const handleDownLoad = () => {
     onDownLoad();
-    // console.log(requestId)
   };
 
   const handleProductData = useCallback(
     (categoryId, requestId, cart_status, wishlist_status) => {
-      // Update state only if values change
       if (
         productInfo.category_id !== categoryId ||
         productInfo.request_id !== requestId
@@ -88,7 +81,7 @@ export const VrpProductDetail = ({ requestId, onDownLoad }) => {
       </div>
       <div className={classes.btn}>
         <button className={classes.btn__addToCart} onClick={handleAddToCart}>
-          {productInfo.cart_status ? "Added To Cart" : "Add To Cart"}
+          {productInfo.cart_status ? "Added" : "Add To Cart"}
         </button>
         <button className={classes.btn__buy}>Buy Now</button>
       </div>

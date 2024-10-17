@@ -107,7 +107,7 @@ export const SpareDetail = ({
           className={`${classes.box__btns__btn} ${classes.box__btns__add}`}
           onClick={onAddToCart}
         >
-          {cart_status ? "Added To cart" : "Add To cart"}
+          {cart_status ? "Added" : "Add To cart"}
         </button>
         <button
           className={`${classes.box__btns__btn} ${classes.box__btns__buy}`}
