@@ -18,6 +18,8 @@ import carousel_image from "../../../assets/carouselImage_1.svg";
 import axiosInstance from "../../../utils/axios-middleware/axiosMiddleware";
 import { useQuery } from "@tanstack/react-query";
 import { Advertisement } from "../../../components/vrpItem/advertisement/Advertisement";
+import { BestSellingVrp } from "../../../components/bestSellingProduct/bestSellingVrp/BestSellingVrp";
+import { BestSellingProductPage } from "../bestSellingProducts/BestSellingProductPage";
 
 const images = [
   {
@@ -129,11 +131,15 @@ export const HomePage = () => {
             <Advertisement image={add?.data[0].url} />
           )}
         </div>
-        <div className={classes.container__bestSelling}>
-          <BestSellingProducts />
-        </div>
+        {/* <div className={classes.container__bestSelling}>
+          <BestSellingVrp />
+          <BestSellingVrp />
+          <BestSellingVrp />
+          <BestSellingVrp />
+        </div> */}
+        <BestSellingProductPage/>
 
-        <div className={classes.container__bestSelling}>
+        {/* <div className={classes.container__bestSelling}>
           <BestSellingProducts />
         </div>
         <div className={classes.container__bestSelling}>
@@ -141,7 +147,7 @@ export const HomePage = () => {
         </div>
         <div className={classes.container__bestSelling}>
           <BestSellingProducts />
-        </div>
+        </div> */}
       </div>
     </div>
   );

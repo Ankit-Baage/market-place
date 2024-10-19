@@ -1,0 +1,50 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 20px;
+}
+
+.box__content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  justify-content: center;
+}
+
+.box__content__category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box__content__category__title {
+  font-family: "Poppins", sans;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+  color: #2F3567;
+}
+
+.box__content__category__link {
+  width: 87px;
+  height: 18px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(../../../assets/viewMore.svg);
+
+}
+
+
+
+.box__content__container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.box__content__sep {
+  background-color: #EFEFEF;
+  height: 1.5px;
+}

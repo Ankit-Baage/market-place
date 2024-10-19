@@ -131,7 +131,7 @@ export const newPhoneFilterUrl = (filterType) =>
     filterType
   )}`;
 
-export const newPhoneDetailUrl = (requestId,user_id) =>
+export const newPhoneDetailUrl = (requestId, user_id) =>
   `${baseUrl}${version}${mode}${newPhoneListEndPoint}${newPhoneDetailEndPoint(
     requestId
   )}&user_id=${user_id}`;
@@ -220,3 +220,14 @@ export const laterListUrl = `${baseUrl}${version}${mode}${cart}${later}`;
 ////////wishList/////////////////
 const wishList = "/wishlist";
 export const wishListListUrl = `${baseUrl}${version}${mode}${cart}${wishList}`;
+
+//////////////////Best Selling Products///////////////////
+
+export const bestVrpProductUrl = 
+  `${baseUrl}${version}${mode}vrp/?limit=4`;
+  export const bestSparesProductUrl = 
+  `${baseUrl}${version}${mode}spares/?limit=4`;
+  export const bestNewPhonesProductUrl = 
+  `${baseUrl}${version}${mode}new_phones/?limit=4`;
+  export const bestOpenBoxProductUrl = 
+  `${baseUrl}${version}${mode}open_box/?limit=4`;

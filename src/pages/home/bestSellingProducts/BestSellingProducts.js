@@ -14,7 +14,6 @@ export const data = [
 ];
 
 export const BestSellingProducts = () => {
-  
   return (
     <div className={classes.box}>
       <div className={classes.box__head}>

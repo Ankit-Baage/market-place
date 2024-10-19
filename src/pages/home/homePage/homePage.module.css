@@ -27,7 +27,7 @@
 }
 
 .container__routes__btns {
-  width:max-content;
+  width: max-content;
   display: flex;
   justify-content: center;
   column-gap: 4px;
@@ -73,4 +73,11 @@
   align-items: center;
   column-gap: 20px;
 
+}
+
+.container__bestSelling {
+  display: flex;
+  flex-wrap: wrap;
+  /* Allows the items to wrap to the next line */
+  gap: 16px;
 }
