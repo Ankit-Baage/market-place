@@ -1,13 +1,122 @@
 .box {
-  height: 100vh;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 24px;
+}
+
+.box__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.box__content__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 12px;
+}
+
+.box__content__info__title {
+  font-family: "Poppins", sans;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 26px;
+  color: #2F3567;
+
+}
+
+.box__content__info__para {
+  font-family: "Poppins", sans;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 15.6px;
+  color: #C6C6C6;
+}
+
+.box__help {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  justify-content: center;
+}
+
+.box__help__title {
+  font-family: "Poppins", sans;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18.2px;
+  color: #2F3567;
+
+}
+
+.box__help__tabs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.box__help__tabs__tab {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
   justify-content: center;
   align-items: center;
-  background-color: #FBE8B3;
-  font-size: 32px;
-  line-height: 15px;
-  font-weight: 400;
+  padding: 12px 0;
+}
+
+
+.box__help__tabs__tab__name {
   font-family: "Poppins", sans;
-  color: #F2B200;
-  
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18.2px;
+  color: #2F3567;
+
+}
+
+.box__faqs {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;;
+  justify-content: center;
+}
+
+.box__faqs__faq {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 16px;
+}
+
+.box__faqs__faq__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box__faqs__faq__content__title {
+  font-family: "Poppins", sans;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  color: #989898;
+
+}
+
+.box__faqs__faq__content__btn {
+  width: 24px;
+  height: 24px;
+  background-image: url('../../assets/arrow-right-lite.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.box__item__divider {
+  background-color: #EFEFEF;
+  height: 1.5px;
 }

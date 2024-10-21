@@ -11,27 +11,11 @@ import vrp from "../../../assets/vrp.svg";
 import openBox from "../../../assets/openBox.svg";
 import spares from "../../../assets/spare.svg";
 import newPhone from "../../../assets/new_phone.svg";
-
-import { BestSellingProducts } from "../bestSellingProducts/BestSellingProducts";
 import { Carousel } from "../../../components/carousel/Carousel";
-import carousel_image from "../../../assets/carouselImage_1.svg";
 import axiosInstance from "../../../utils/axios-middleware/axiosMiddleware";
 import { useQuery } from "@tanstack/react-query";
 import { Advertisement } from "../../../components/vrpItem/advertisement/Advertisement";
-import { BestSellingVrp } from "../../../components/bestSellingProduct/bestSellingVrp/BestSellingVrp";
 import { BestSellingProductPage } from "../bestSellingProducts/BestSellingProductPage";
-
-const images = [
-  {
-    id: 1,
-    url: "https://mgstorageaccount.blob.core.windows.net/mgbucket/vrp_add190424_1.png",
-  },
-  {
-    id: 2,
-    url: "https://mgstorageaccount.blob.core.windows.net/mgbucket/vrp_add190424_2.png",
-  },
-  { id: 3, url: carousel_image },
-];
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -53,8 +37,6 @@ const buttonRoutes = [
 
 export const HomePage = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const autToken = getAuthToken();
   const [width, setWidth] = useState(0);
 
   const placeholder = "Search for mobile, accessories & more";
@@ -74,16 +56,6 @@ export const HomePage = () => {
     console.log("offsetWidth:", carousel.current.offsetWidth);
     setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
   }, []);
-
-  console.log(add);
-
-  const handleProfile = () => {
-    navigate("profile");
-  };
-
-  const navigateToPath = () => {
-    navigate("vrp");
-  };
 
   const handleLogOut = () => {
     Cookies.remove("authToken");
@@ -124,30 +96,14 @@ export const HomePage = () => {
 
       <div className={classes.container__box__content}>
         <div className={classes.container__carousel}>
-          {/* <Carousel images={images}/> */}
           {add?.data.length > 1 ? (
             <Carousel images={add?.data} />
           ) : (
             <Advertisement image={add?.data[0].url} />
           )}
         </div>
-        {/* <div className={classes.container__bestSelling}>
-          <BestSellingVrp />
-          <BestSellingVrp />
-          <BestSellingVrp />
-          <BestSellingVrp />
-        </div> */}
-        <BestSellingProductPage/>
 
-        {/* <div className={classes.container__bestSelling}>
-          <BestSellingProducts />
-        </div>
-        <div className={classes.container__bestSelling}>
-          <BestSellingProducts />
-        </div>
-        <div className={classes.container__bestSelling}>
-          <BestSellingProducts />
-        </div> */}
+        <BestSellingProductPage />
       </div>
     </div>
   );

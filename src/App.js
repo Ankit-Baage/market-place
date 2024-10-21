@@ -121,7 +121,6 @@ const router = createBrowserRouter([
             element: <HelpPage />,
           },
           { path: "cart", element: <CartPage /> },
-          
         ],
       },
     ],

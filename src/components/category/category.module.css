@@ -1,13 +1,130 @@
 .box {
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  justify-content: center;
+}
+
+.box__title {
+  font-family: "Poppins", sans;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+  color: #2F3567;
+}
+
+.box__vrp {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2F3567;
+  border-radius: 8px;
+}
+
+.box__vrp__content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  justify-content: center;
+  padding: 0 4px 10px 16px;
+}
+
+.box__vrp__content__title {
+  font-family: "Poppins", sans;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 20px;
+  color: #FFFFFF;
+
+}
+
+.box__vrp__content__para {
+  font-family: "Poppins", sans;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15.6px;
+  color: #969ABE;
+
+}
+
+.box__others {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 16px;
+}
+
+.box__others__prexo {
   display: flex;
   justify-content: center;
-  align-items: center;
-  background-color: #F0FFF4;
-  font-size: 32px;
-  line-height: 15px;
-  font-weight: 400;
+  background-color: #E4FDEF;
+  border-radius: 8px;
+  padding: 6px 0 0 12px;
+}
+
+.box__others__prexo__title {
   font-family: "Poppins", sans;
-  color: #46CD80;
-  
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 26px;
+  color: #2F3567;
+  padding-top: 6px;
+  ;
+
+}
+
+.box__others__spares {
+  display: flex;
+  justify-content: center;
+  background-color: #FFE8E0;
+  border-radius: 8px;
+
+}
+
+.box__others__spares__title {
+  font-family: "Poppins", sans;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 26px;
+  color: #2F3567;
+  padding: 12px 0 0 12px;
+
+}
+
+
+.box__newPhones {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FF6F3F;
+  border-radius: 8px;
+  padding: 14px 17px 0 16px;
+}
+
+.box__newPhones__content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  justify-content: center;
+
+
+}
+
+.box__newPhones__content__title {
+  font-family: "Poppins", sans;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 20px;
+  color: #FFFFFF;
+
+}
+
+.box__newPhones__content__para {
+  font-family: "Poppins", sans;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15.6px;
+  color: #FFD7CA;
+  padding-right: 4px;
+
 }

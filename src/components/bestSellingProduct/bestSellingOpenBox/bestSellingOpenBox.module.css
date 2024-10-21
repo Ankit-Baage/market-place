@@ -8,7 +8,7 @@
   border: 1px solid #E3E3E3;
   border-radius: 8px;
   padding: 28px 8px;
-  flex: 1 1 calc(50% - 16px); 
+  flex: 1 1 calc(50% - 16px);
   cursor: pointer;
 
 }
@@ -31,7 +31,7 @@
   font-size: 8px;
   line-height: 8px;
   color: #FFFFFF;
-  
+
 }
 
 .box__img {
@@ -75,6 +75,7 @@
   color: #FF6F3F;
 
 }
+
 .box__content__info__price__original {
   font-family: "Poppins", sans;
   font-weight: 400;
@@ -84,6 +85,7 @@
   position: relative;
 
 }
+
 .box__content__info__price__original::before {
   content: "";
   position: absolute;

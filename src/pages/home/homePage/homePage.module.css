@@ -78,6 +78,5 @@
 .container__bestSelling {
   display: flex;
   flex-wrap: wrap;
-  /* Allows the items to wrap to the next line */
   gap: 16px;
 }

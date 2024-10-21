@@ -30,7 +30,7 @@ export const BestSellingNewPhones = ({ newPhones }) => {
       />
       <div className={classes.box__content}>
         <h1 className={classes.box__content__title}>
-          {newPhones.brand} {newPhones.model} {newPhones.ram}/{newPhones.rom} (
+          {newPhones.model} {newPhones.ram}/{newPhones.rom} (
           {newPhones.color})
         </h1>
 

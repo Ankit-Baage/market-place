@@ -31,8 +31,7 @@ export const BestSellingOpenBox = ({ openBox }) => {
       />
       <div className={classes.box__content}>
         <h1 className={classes.box__content__title}>
-          {openBox.brand} {openBox.model} {openBox.ram}/{openBox.rom} (
-          {openBox.color})
+          {openBox.model} {openBox.ram}/{openBox.rom} ({openBox.color})
         </h1>
 
         <div className={classes.box__content__info__price}>
