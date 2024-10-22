@@ -4,12 +4,13 @@ import category_prexo from "../../assets/category_prexo.svg";
 import category_spares from "../../assets/category_spares.svg";
 import category_newPhones from "../../assets/category_newPhones.svg";
 import classes from "./category.module.css";
+import { Link } from "react-router-dom";
 
 export const Category = () => {
   return (
     <div className={classes.box}>
       <h1 className={classes.box__title}>Product Category</h1>
-      <div className={classes.box__vrp}>
+      <Link className={classes.box__vrp} to="/home/vrp">
         <div className={classes.box__vrp__content}>
           <h2 className={classes.box__vrp__content__title}>VRP</h2>
           <p className={classes.box__vrp__content__para}>
@@ -18,26 +19,26 @@ export const Category = () => {
           </p>
         </div>
         <img className={classes.box__vrp__img} src={category_vrp} alt="vrp" />
-      </div>
+      </Link>
       <div className={classes.box__others}>
-        <div className={classes.box__others__prexo}>
+        <Link className={classes.box__others__prexo} to="/home/prexo">
           <h2 className={classes.box__others__prexo__title}>Prexo</h2>
           <img
             className={classes.box__others__prexo__img}
             src={category_prexo}
             alt="prexo"
           />
-        </div>
-        <div className={classes.box__others__spares}>
+        </Link>
+        <Link className={classes.box__others__spares} to="/home/spares">
           <h2 className={classes.box__others__spares__title}>Spares</h2>
           <img
             className={classes.box__others__spares__img}
             src={category_spares}
-            alt="newPhones"
+            alt="spares"
           />
-        </div>
+        </Link>
       </div>
-      <div className={classes.box__newPhones}>
+      <Link className={classes.box__newPhones} to="/home/newPhone">
         <div className={classes.box__newPhones__content}>
           <h2 className={classes.box__newPhones__content__title}>New Phones</h2>
           <p className={classes.box__newPhones__content__para}>
@@ -48,9 +49,9 @@ export const Category = () => {
         <img
           className={classes.box__newPhones__img}
           src={category_newPhones}
-          alt="vrp"
+          alt="newPhones"
         />
-      </div>
+      </Link>
     </div>
   );
 };
