@@ -64,9 +64,12 @@ export const BestSellingVrp = ({ vrp }) => {
           <h1 className={classes.box__content__info__price__discount}>
             Rs {vrp?.rate_card ? formatNumber(vrp.rate_card) : "N/A"}
           </h1>
-          <h2 className={classes.box__content__info__price__original}>
-            Rs {vrp?.original_price ? formatNumber(vrp.original_price) : "N/A"}
-          </h2>
+          <div className={classes.box__content__info__price__original_wrapper}>
+            <h2 className={classes.box__content__info__price__original}>
+              Rs{" "}
+              {vrp?.original_price ? formatNumber(vrp.original_price) : "N/A"}
+            </h2>
+          </div>
         </div>
       </div>
     </div>

@@ -91,7 +91,9 @@
 
 .box__content__info__price {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  row-gap: 8px;
+ justify-content: center;
   column-gap: 4px;
 
 }
@@ -112,6 +114,10 @@
   color: #2F3567;
   position: relative;
 
+}
+
+.box__content__info__price__original_wrapper {
+  width: fit-content;
 }
 .box__content__info__price__original::before {
   content: "";
