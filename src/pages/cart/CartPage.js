@@ -13,6 +13,8 @@ import useCartListDeleteItemMutation from "../../tanstack-query/cartList/useCart
 import useCartListQuantityMutation from "../../tanstack-query/cartList/useCartListQuantityMutation";
 import useMoveToLaterMutation from "../../tanstack-query/cartList/useMoveToLaterMutation";
 import { EmptyCart } from "../../components/cart/EmptyCart";
+import { Link } from "react-router-dom";
+import { OrderSummary } from "../../components/orderSummary/OrderSummary";
 
 export const CartPage = () => {
   const { data, isSuccess, isLoading, refetch } = useGetCartList();
@@ -111,7 +113,7 @@ export const CartPage = () => {
       try {
         const response = await mutateAsync(payload);
         toast.success(response.message.displayMessage);
-        console.log(item)
+        console.log(item);
       } catch (error) {
         toast.error(error.response.data.message.displayMessage);
       }
@@ -137,7 +139,7 @@ export const CartPage = () => {
                 onRemove={() => {
                   handleRemove(item);
                 }}
-                onLater={()=>handleSaveForLater(item)}
+                onLater={() => handleSaveForLater(item)}
               />
             );
           case 6:
@@ -194,13 +196,34 @@ export const CartPage = () => {
       });
     }
     return <EmptyCart />;
-  }, [isLoading, isSuccess, data?.data?.data, isUpdating, localQuantities, handleSaveForLater, handleRemove, handleQuantityUpdate]);
+  }, [
+    isLoading,
+    isSuccess,
+    data?.data?.data,
+    isUpdating,
+    localQuantities,
+    handleSaveForLater,
+    handleRemove,
+    handleQuantityUpdate,
+  ]);
 
   console.log(data?.data?.data);
   return (
     <div className={classes.box}>
       <SearchBar placeholder={placeholder} />
       <div className={classes.box__cart}>{content}</div>
+      <div className={classes.box__cart}>
+        <Link className={classes.box__coupons} to="/home/coupons">
+          <div className={classes.box__coupons__content}>
+            <span className={classes.box__coupons__content__img} />
+            <h3 className={classes.box__coupons__content__title}>Use Coupons</h3>
+          </div>
+
+          <span className={classes.box__coupons__navigate} />
+        </Link>
+        <OrderSummary/>
+        <button className={classes.box__cart__order__btn}>Place Order</button>
+      </div>
     </div>
   );
 };

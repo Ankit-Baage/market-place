@@ -1,0 +1,122 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  justify-content: center;
+}
+
+.box__coupons {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  justify-content: center;
+}
+
+
+.box__coupons__content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  justify-content: center;
+}
+
+.box__coupons__content__head {
+  display: flex;
+  column-gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.box__coupons__content__head__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 12px;
+}
+
+.box__coupons__content__head__info__title {
+  font-family: "Poppins", sans;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 26px;
+  color: #2F3567;
+
+}
+
+.box__coupons__content__head__info__para {
+  font-family: "Poppins", sans;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15.6px;
+  color: #C6C6C6;
+
+}
+
+
+.box__coupons__search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 12px;
+  background-color: #F9F9F9;
+  border: 1px solid #E5E5E5;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 8px;
+
+}
+
+.box__coupons__search__label {
+  width: 100%;
+
+}
+
+
+.box__coupons__search__input {
+  width: 100%;
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #989898;
+  background-color: #F9F9F9;
+
+}
+
+.container__input::placeholder {
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #989898;
+
+}
+
+.box__coupons__search__btn {
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #989898;
+  padding: 8px 12px;
+  border: 1px solid #E5E5E5;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+}
+
+.box__coupons__container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  justify-content: center;
+}
+
+.box__coupons__container__title {
+  font-size: 14px;
+  line-height: 18.2px;
+  font-weight: 600;
+  font-family: "Poppins", sans;
+  color: #2F3567;
+
+}

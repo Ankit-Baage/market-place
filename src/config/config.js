@@ -231,3 +231,10 @@ export const bestVrpProductUrl =
   `${baseUrl}${version}${mode}new_phones/?limit=4`;
   export const bestOpenBoxProductUrl = 
   `${baseUrl}${version}${mode}open_box/?limit=4`;
+
+
+  //////////////////coupons///////////////////
+  const coupons = "coupons"
+
+  export const couponsListUrl = 
+  `${baseUrl}${version}${mode}${role}${coupons}`;

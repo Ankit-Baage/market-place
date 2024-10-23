@@ -12,3 +12,67 @@
   justify-content: center;
 
 }
+
+
+.box__coupons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2F3567;
+  border-radius: 8px;
+  padding: 16px 12px;
+}
+
+.box__coupons__content {
+  display: flex;
+  justify-content: center;
+  column-gap: 8px;
+  align-items: center;
+}
+
+.box__coupons__content__img {
+  width: 24px;
+  height: 24px;
+  background-image: url(../../assets/coupons.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+
+
+
+.box__coupons__content__title {
+  font-family: "Poppins", sans;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20.8px;
+  color: #FAFAFA;
+
+}
+
+
+
+
+
+.box__coupons__navigate {
+  width: 20px;
+  height: 20px;
+  background-image: url(../../assets/arrow__coupon.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.box__cart__order__btn {
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  border-radius: 4px;
+  background-color: #FF6F3F;
+  color: #FFFFFF;
+  padding: 18px;
+
+}
