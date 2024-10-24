@@ -203,7 +203,20 @@ export const openBoxVariantUrl = (sellerId, brand, model, color) =>
 ////////CART/////////////////
 const cart = "cart";
 
-export const cartListUrl = `${baseUrl}${version}${mode}${cart}`;
+// export const cartListUrl = `${baseUrl}${version}${mode}${cart}`;
+
+export const cartListUrl = (coupon_code) => {
+  let url = baseUrl + version + mode + cart; 
+
+  if (coupon_code) {
+    url += `/?coupon_code=${coupon_code}&beta=1`;
+  } else {
+    url += "?beta=1";
+  }
+  console.log(baseUrl)
+
+  return url;
+};
 
 /////////addresses//////////////////
 const addresses = "addresses";
@@ -223,18 +236,12 @@ export const wishListListUrl = `${baseUrl}${version}${mode}${cart}${wishList}`;
 
 //////////////////Best Selling Products///////////////////
 
-export const bestVrpProductUrl = 
-  `${baseUrl}${version}${mode}vrp/?limit=4`;
-  export const bestSparesProductUrl = 
-  `${baseUrl}${version}${mode}spares/?limit=4`;
-  export const bestNewPhonesProductUrl = 
-  `${baseUrl}${version}${mode}new_phones/?limit=4`;
-  export const bestOpenBoxProductUrl = 
-  `${baseUrl}${version}${mode}open_box/?limit=4`;
+export const bestVrpProductUrl = `${baseUrl}${version}${mode}vrp/?limit=4`;
+export const bestSparesProductUrl = `${baseUrl}${version}${mode}spares/?limit=4`;
+export const bestNewPhonesProductUrl = `${baseUrl}${version}${mode}new_phones/?limit=4`;
+export const bestOpenBoxProductUrl = `${baseUrl}${version}${mode}open_box/?limit=4`;
 
+//////////////////coupons///////////////////
+const coupons = "coupons";
 
-  //////////////////coupons///////////////////
-  const coupons = "coupons"
-
-  export const couponsListUrl = 
-  `${baseUrl}${version}${mode}${role}${coupons}`;
+export const couponsListUrl = `${baseUrl}${version}${mode}${role}${coupons}`;

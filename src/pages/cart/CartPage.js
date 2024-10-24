@@ -127,8 +127,8 @@ export const CartPage = () => {
     if (isLoading) {
       return <CartLoader />;
     }
-    if (isSuccess && data?.data?.data.length > 0) {
-      return data.data.data.map((item) => {
+    if (isSuccess && data?.data?.data?.cart_items.length > 0) {
+      return data.data.data.cart_items.map((item) => {
         switch (item.category_id) {
           case 5:
             return (
@@ -216,12 +216,18 @@ export const CartPage = () => {
         <Link className={classes.box__coupons} to="/home/coupons">
           <div className={classes.box__coupons__content}>
             <span className={classes.box__coupons__content__img} />
-            <h3 className={classes.box__coupons__content__title}>Use Coupons</h3>
+            <h3 className={classes.box__coupons__content__title}>
+              Use Coupons
+            </h3>
           </div>
 
           <span className={classes.box__coupons__navigate} />
         </Link>
-        <OrderSummary/>
+        <OrderSummary
+          subTotal={data?.data?.data.total_amount}
+          gst={data?.data?.data?.gst_amount}
+          grandTotal={data?.data?.data?.final_amount}
+        />
         <button className={classes.box__cart__order__btn}>Place Order</button>
       </div>
     </div>
