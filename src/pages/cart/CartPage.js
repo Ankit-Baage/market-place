@@ -223,10 +223,30 @@ export const CartPage = () => {
 
           <span className={classes.box__coupons__navigate} />
         </Link>
+        {data?.data?.data?.applied_coupon_code && (
+          <div className={classes.box__coupons__applied} to="/home/coupons">
+            <div className={classes.box__coupons__content}>
+              <span className={classes.box__coupons__content__img} />
+              <div className={classes.box__coupons__applied__content}>
+                <h3 className={classes.box__coupons__content__applied__title}>
+                  Coupon applied...
+                </h3>
+                <h3 className={classes.box__coupons__content__subTitle}>
+                  DIWALI500
+                </h3>
+              </div>
+            </div>
+
+            <button className={classes.box__coupons__remove}>Remove</button>
+          </div>
+        )}
+
         <OrderSummary
           subTotal={data?.data?.data.total_amount}
           gst={data?.data?.data?.gst_amount}
           grandTotal={data?.data?.data?.final_amount}
+          couponAmount={data?.data?.data?.applied_coupon_amount}
+          couponCode = {data?.data?.data?.applied_coupon_code}
         />
         <button className={classes.box__cart__order__btn}>Place Order</button>
       </div>

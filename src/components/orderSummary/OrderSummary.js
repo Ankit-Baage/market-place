@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./orderSummary.module.css";
 import { formatNumber } from "../../utils/helpers/formatNumber";
 
-export const OrderSummary = ({ subTotal, gst, grandTotal }) => {
+export const OrderSummary = ({ subTotal, gst, grandTotal, couponAmount, couponCode }) => {
   return (
     <div className={classes.box}>
       <h1 className={classes.box__title}>Bill Details</h1>
@@ -10,9 +10,15 @@ export const OrderSummary = ({ subTotal, gst, grandTotal }) => {
       <div className={classes.box__content}>
         <h2 className={classes.box__content__key}>Subtotal</h2>
         <h3 className={classes.box__content__value}>
-          Rs.{formatNumber(subTotal)}
+          Rs.{subTotal ? formatNumber(subTotal): ""}
         </h3>
       </div>
+      {couponCode && <div className={classes.box__content}>
+        <h2 className={classes.box__content__key}>Coupon Saving</h2>
+        <h3 className={classes.box__content__coupon__value}>
+          -Rs.{couponAmount ? formatNumber(couponAmount): ""}
+        </h3>
+      </div>}
       <div className={classes.box__content}>
         <h2 className={classes.box__content__key}>Shipping Fee</h2>
 
@@ -24,13 +30,13 @@ export const OrderSummary = ({ subTotal, gst, grandTotal }) => {
       </div>
       <div className={classes.box__content}>
         <h2 className={classes.box__content__key}>Gst</h2>
-        <h3 className={classes.box__content__value}>Rs.{formatNumber(gst)}</h3>
+        <h3 className={classes.box__content__value}>Rs.{gst ? formatNumber(gst) :""}</h3>
       </div>
       <hr className={classes.box__sep} />
       <div className={classes.box__content}>
         <h2 className={classes.box__content__key__total}>Grand Total</h2>
         <h3 className={classes.box__content__value__total}>
-          Rs.{formatNumber(grandTotal)}
+          Rs.{grandTotal ? formatNumber(grandTotal):""}
         </h3>
       </div>
     </div>

@@ -13,7 +13,6 @@
 
 }
 
-
 .box__coupons {
   display: flex;
   justify-content: space-between;
@@ -21,6 +20,17 @@
   background-color: #2F3567;
   border-radius: 8px;
   padding: 16px 12px;
+}
+
+.box__coupons__applied {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FFFFFF;
+  box-shadow: 0px 4px 16px 0px #00000014;
+  border-radius: 8px;
+  padding: 16px 12px;
+
 }
 
 .box__coupons__content {
@@ -48,6 +58,32 @@
   font-size: 16px;
   line-height: 20.8px;
   color: #FAFAFA;
+
+}
+
+.box__coupons__content__applied__title {
+  font-family: "Poppins", sans;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15.6px;
+  color: #2F3567;
+
+}
+
+.box__coupons__content__subTitle {
+  font-family: "Poppins", sans;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18.2px;
+  color: #2F3567;
+}
+
+.box__coupons__remove {
+  font-size: 12px;
+  line-height: 18.2px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #FE0000;
 
 }
 

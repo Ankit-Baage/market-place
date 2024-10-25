@@ -40,6 +40,14 @@
   color: #2F3567;
 
 }
+.box__content__coupon__value {
+  font-family: "Poppins", sans;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+  color: #FE0000;
+
+}
 
 .box__content__wrapper {
   display: flex;
