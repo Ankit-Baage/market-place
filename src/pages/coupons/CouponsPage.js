@@ -1,17 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SearchBar } from "../../components/ui/searchBarWithBackBtn/SearchBar";
 import { Coupon } from "../../components/coupon/Coupon";
 import coupon_page from "../../assets/couponPage_img.svg";
 import classes from "./couponsPage.module.css";
 import useGetCouponsList from "../../tanstack-query/couponsList/useGetCouponsList";
 import { CartLoader } from "../../components/cart/cartLoader/CartLoader";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { couponAdded } from "../../store/coupon/couponSlice";
 
 export const CouponsPage = () => {
   const placeholder = "Search for mobile, accessories & more";
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const { data, isLoading, isSuccess } = useGetCouponsList();
 
   console.log(data ? data.data.data : null);
+
+  const handleCouponApply = (code) => {
+
+    dispatch(couponAdded({ coupon_code: code }));
+    navigate(-1);
+  };
+
+
   return (
     <div className={classes.box}>
       <SearchBar placeholder={placeholder} />
@@ -56,7 +71,11 @@ export const CouponsPage = () => {
           <div className={classes.box__coupons__list}>
             {isSuccess ? (
               data?.data?.data.map((coupon) => (
-                <Coupon key={coupon.id} coupon={coupon} />
+                <Coupon
+                  key={coupon.id}
+                  coupon={coupon}
+                  onCouponApply={() => handleCouponApply(coupon.id)}
+                />
               ))
             ) : (
               <CartLoader />

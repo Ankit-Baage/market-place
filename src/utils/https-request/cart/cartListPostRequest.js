@@ -19,7 +19,7 @@ export const cartListPostRequest = async (data) => {
       },
     });
 
-    return response.data; // Return the relevant part of the response
+    return response.data;
   } catch (error) {
     throw error;
   }

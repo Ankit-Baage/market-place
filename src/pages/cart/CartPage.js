@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import classes from "./cartPage.module.css";
 import { SearchBar } from "../../components/ui/searchBarWithBackBtn/SearchBar";
 
@@ -13,11 +13,23 @@ import useCartListDeleteItemMutation from "../../tanstack-query/cartList/useCart
 import useCartListQuantityMutation from "../../tanstack-query/cartList/useCartListQuantityMutation";
 import useMoveToLaterMutation from "../../tanstack-query/cartList/useMoveToLaterMutation";
 import { EmptyCart } from "../../components/cart/EmptyCart";
-import { Link } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { OrderSummary } from "../../components/orderSummary/OrderSummary";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  couponAdded,
+  couponRemoved,
+  selectCouponState,
+} from "../../store/coupon/couponSlice";
 
 export const CartPage = () => {
-  const { data, isSuccess, isLoading, refetch } = useGetCartList();
+  const dispatch = useDispatch();
+  const coupon = useSelector(selectCouponState);
+  const { data, isSuccess, isLoading, refetch } = useGetCartList(
+    coupon.coupon_code
+  );
+  const navigate = useNavigate();
+
   const [localQuantities, setLocalQuantities] = useState({});
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -29,6 +41,8 @@ export const CartPage = () => {
     isSuccess: IsMoved,
     isPending,
   } = useMoveToLaterMutation();
+
+  const placeholder = "Search...";
 
   const handleRemove = useCallback(
     async (item) => {
@@ -120,8 +134,16 @@ export const CartPage = () => {
     },
     [mutateAsync]
   );
-
-  const placeholder = "Search...";
+  const handleNavigateToCoupons = () => {
+    navigate("coupons");
+  };
+  const handleRemoveCoupon = () => {
+    dispatch(couponRemoved());
+    setSearchParams((params) => {
+      params.delete("coupon");
+      return params;
+    });
+  };
 
   const content = useMemo(() => {
     if (isLoading) {
@@ -206,25 +228,56 @@ export const CartPage = () => {
     handleRemove,
     handleQuantityUpdate,
   ]);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    const couponCodeFromUrl = searchParams.get("coupon");
+    if (couponCodeFromUrl && !coupon.coupon_code) {
+      dispatch(couponAdded({ coupon_code: couponCodeFromUrl }));
+    }
+  }, [dispatch, coupon.coupon_code, searchParams]);
+
+  useEffect(() => {
+    if (coupon.coupon_code) {
+      setSearchParams((params) => {
+        params.set("coupon", coupon.coupon_code);
+        return params;
+      });
+    } else {
+      setSearchParams((params) => {
+        params.delete("coupon");
+        return params;
+      });
+    }
+  }, [coupon, setSearchParams]);
+
+
 
   console.log(data?.data?.data);
+  console.log(coupon);
   return (
     <div className={classes.box}>
       <SearchBar placeholder={placeholder} />
       <div className={classes.box__cart}>{content}</div>
       <div className={classes.box__cart}>
-        <Link className={classes.box__coupons} to="/home/coupons">
-          <div className={classes.box__coupons__content}>
-            <span className={classes.box__coupons__content__img} />
-            <h3 className={classes.box__coupons__content__title}>
-              Use Coupons
-            </h3>
-          </div>
+        {!data?.data?.data?.applied_coupon_code && (
+          <button
+            className={classes.box__coupons}
+            onClick={handleNavigateToCoupons}
+          >
+            <div className={classes.box__coupons__content}>
+              <span className={classes.box__coupons__content__img} />
+              <h3 className={classes.box__coupons__content__title}>
+                Use Coupons
+              </h3>
+            </div>
 
-          <span className={classes.box__coupons__navigate} />
-        </Link>
+            <span className={classes.box__coupons__navigate} />
+          </button>
+        )}
+
         {data?.data?.data?.applied_coupon_code && (
-          <div className={classes.box__coupons__applied} to="/home/coupons">
+          <div className={classes.box__coupons__applied}>
             <div className={classes.box__coupons__content}>
               <span className={classes.box__coupons__content__img} />
               <div className={classes.box__coupons__applied__content}>
@@ -237,7 +290,12 @@ export const CartPage = () => {
               </div>
             </div>
 
-            <button className={classes.box__coupons__remove}>Remove</button>
+            <button
+              className={classes.box__coupons__remove}
+              onClick={handleRemoveCoupon}
+            >
+              Remove
+            </button>
           </div>
         )}
 
@@ -246,7 +304,7 @@ export const CartPage = () => {
           gst={data?.data?.data?.gst_amount}
           grandTotal={data?.data?.data?.final_amount}
           couponAmount={data?.data?.data?.applied_coupon_amount}
-          couponCode = {data?.data?.data?.applied_coupon_code}
+          couponCode={data?.data?.data?.applied_coupon_code}
         />
         <button className={classes.box__cart__order__btn}>Place Order</button>
       </div>

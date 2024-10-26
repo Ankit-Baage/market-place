@@ -121,8 +121,13 @@ const router = createBrowserRouter([
             path: "help",
             element: <HelpPage />,
           },
-          { path: "cart", element: <CartPage /> },
-          { path: "coupons", element: <CouponsPage /> },
+          {
+            path: "cart",
+            children: [
+              { index: true, element: <CartPage /> },
+              { path: "coupons", element: <CouponsPage /> },
+            ],
+          },
         ],
       },
     ],

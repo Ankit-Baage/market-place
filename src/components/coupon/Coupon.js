@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./coupon.module.css";
 
-export const Coupon = ({ coupon }) => {
+export const Coupon = ({ coupon, onCouponApply }) => {
   return (
     <div className={classes.box}>
       <div className={classes.box__content}>
@@ -14,7 +14,7 @@ export const Coupon = ({ coupon }) => {
             </span>
           </h2>
         </div>
-        <button className={classes.box__content__btn}>Apply</button>
+        <button className={classes.box__content__btn} onClick={onCouponApply}>Apply</button>
       </div>
       <hr className={classes.box__sep} />
       <p className={classes.box__content__info__para}>

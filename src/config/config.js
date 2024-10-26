@@ -203,9 +203,9 @@ export const openBoxVariantUrl = (sellerId, brand, model, color) =>
 ////////CART/////////////////
 const cart = "cart";
 
-// export const cartListUrl = `${baseUrl}${version}${mode}${cart}`;
+export const cartListUrl = `${baseUrl}${version}${mode}${cart}`;
 
-export const cartListUrl = (coupon_code) => {
+export const cartGetListUrl = (coupon_code) => {
   let url = baseUrl + version + mode + cart; 
 
   if (coupon_code) {
@@ -213,7 +213,6 @@ export const cartListUrl = (coupon_code) => {
   } else {
     url += "?beta=1";
   }
-  console.log(baseUrl)
 
   return url;
 };
