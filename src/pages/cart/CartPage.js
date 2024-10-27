@@ -25,7 +25,7 @@ import {
 export const CartPage = () => {
   const dispatch = useDispatch();
   const coupon = useSelector(selectCouponState);
-  const { data, isSuccess, isLoading, refetch } = useGetCartList(coupon.id);
+  const { data, isSuccess, isLoading } = useGetCartList(coupon.id);
   const navigate = useNavigate();
 
   const [localQuantities, setLocalQuantities] = useState({});
@@ -139,8 +139,6 @@ export const CartPage = () => {
     dispatch(couponRemoved());
     setSearchParams((params) => {
       params.delete("coupon");
-      params.delete("code");
-      params.delete("descrption");
       return params;
     });
   };
@@ -232,45 +230,43 @@ export const CartPage = () => {
 
   useEffect(() => {
     const couponIdFromUrl = searchParams.get("coupon");
-    const couponCodeFromUrl = searchParams.get("code");
-    const couponDescrptionFromUrl = searchParams.get("descrption");
-    if (couponIdFromUrl && !coupon.id) {
+
+    if (couponIdFromUrl) {
       dispatch(
         couponAdded({
           id: couponIdFromUrl,
-          code: couponCodeFromUrl,
-          descrption: couponDescrptionFromUrl,
         })
       );
     }
   }, [coupon.id, dispatch, searchParams]);
 
   useEffect(() => {
-    if (coupon.id) {
-      setSearchParams((params) => {
-        params.set("coupon", coupon.id);
-        params.set("code", coupon.code);
-        params.set("descrption", coupon.descrption);
-        return params;
-      });
+    if (isSuccess && data) {
+      const couponCode = data?.data?.data?.applied_coupon_code;
+      if (couponCode) {
+        setSearchParams((params) => {
+          params.set("coupon", coupon.id);
+          return params;
+        });
+      } else {
+        dispatch(couponRemoved());
+      }
     } else {
       setSearchParams((params) => {
         params.delete("coupon");
-        params.delete("code");
-        params.delete("descrption");
         return params;
       });
     }
-  }, [coupon, setSearchParams]);
+  }, [coupon, data, data?.data?.data?.applied_coupon_code, dispatch, isSuccess, setSearchParams]);
 
   console.log(data?.data?.data);
-  console.log(coupon);
+  console.log("coupon :", coupon);
   return isSuccess ? (
     <div className={classes.box}>
       <SearchBar placeholder={placeholder} />
       <div className={classes.box__cart}>{content}</div>
       <div className={classes.box__cart}>
-        {!coupon.id && (
+        {!data?.data?.data?.applied_coupon_code && (
           <button
             className={classes.box__coupons}
             onClick={handleNavigateToCoupons}
@@ -286,16 +282,16 @@ export const CartPage = () => {
           </button>
         )}
 
-        {coupon.id && (
+        {data?.data?.data?.applied_coupon_code && (
           <div className={classes.box__coupons__applied}>
             <div className={classes.box__coupons__content}>
               <span className={classes.box__coupons__content__img} />
               <div className={classes.box__coupons__applied__content}>
                 <h3 className={classes.box__coupons__content__applied__title}>
-                  {coupon?.descrption}
+                  Coupon applied...
                 </h3>
                 <h3 className={classes.box__coupons__content__subTitle}>
-                  {coupon?.code}
+                  {data?.data?.data?.applied_coupon_code}
                 </h3>
               </div>
             </div>

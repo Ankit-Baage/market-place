@@ -19,8 +19,8 @@ export const CouponsPage = () => {
 
   console.log(data ? data.data.data : null);
 
-  const handleCouponApply = (coupon) => {
-    dispatch(couponAdded(coupon));
+  const handleCouponApply = (id) => {
+    dispatch(couponAdded({ id }));
     navigate(-1);
   };
 
@@ -71,7 +71,7 @@ export const CouponsPage = () => {
                 <Coupon
                   key={coupon.id}
                   coupon={coupon}
-                  onCouponApply={() => handleCouponApply(coupon)}
+                  onCouponApply={() => handleCouponApply(coupon.id)}
                 />
               ))
             ) : (
