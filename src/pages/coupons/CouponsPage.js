@@ -12,7 +12,6 @@ import { couponAdded } from "../../store/coupon/couponSlice";
 export const CouponsPage = () => {
   const placeholder = "Search for mobile, accessories & more";
 
-  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -20,12 +19,10 @@ export const CouponsPage = () => {
 
   console.log(data ? data.data.data : null);
 
-  const handleCouponApply = (code) => {
-
-    dispatch(couponAdded({ coupon_code: code }));
+  const handleCouponApply = (coupon) => {
+    dispatch(couponAdded(coupon));
     navigate(-1);
   };
-
 
   return (
     <div className={classes.box}>
@@ -74,7 +71,7 @@ export const CouponsPage = () => {
                 <Coupon
                   key={coupon.id}
                   coupon={coupon}
-                  onCouponApply={() => handleCouponApply(coupon.id)}
+                  onCouponApply={() => handleCouponApply(coupon)}
                 />
               ))
             ) : (

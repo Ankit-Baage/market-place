@@ -25,9 +25,7 @@ import {
 export const CartPage = () => {
   const dispatch = useDispatch();
   const coupon = useSelector(selectCouponState);
-  const { data, isSuccess, isLoading, refetch } = useGetCartList(
-    coupon.coupon_code
-  );
+  const { data, isSuccess, isLoading, refetch } = useGetCartList(coupon.id);
   const navigate = useNavigate();
 
   const [localQuantities, setLocalQuantities] = useState({});
@@ -141,6 +139,8 @@ export const CartPage = () => {
     dispatch(couponRemoved());
     setSearchParams((params) => {
       params.delete("coupon");
+      params.delete("code");
+      params.delete("descrption");
       return params;
     });
   };
@@ -231,36 +231,46 @@ export const CartPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    const couponCodeFromUrl = searchParams.get("coupon");
-    if (couponCodeFromUrl && !coupon.coupon_code) {
-      dispatch(couponAdded({ coupon_code: couponCodeFromUrl }));
+    const couponIdFromUrl = searchParams.get("coupon");
+    const couponCodeFromUrl = searchParams.get("code");
+    const couponDescrptionFromUrl = searchParams.get("descrption");
+    if (couponIdFromUrl && !coupon.id) {
+      dispatch(
+        couponAdded({
+          id: couponIdFromUrl,
+          code: couponCodeFromUrl,
+          descrption: couponDescrptionFromUrl,
+        })
+      );
     }
-  }, [dispatch, coupon.coupon_code, searchParams]);
+  }, [coupon.id, dispatch, searchParams]);
 
   useEffect(() => {
-    if (coupon.coupon_code) {
+    if (coupon.id) {
       setSearchParams((params) => {
-        params.set("coupon", coupon.coupon_code);
+        params.set("coupon", coupon.id);
+        params.set("code", coupon.code);
+        params.set("descrption", coupon.descrption);
         return params;
       });
     } else {
       setSearchParams((params) => {
         params.delete("coupon");
+        params.delete("code");
+        params.delete("descrption");
         return params;
       });
     }
   }, [coupon, setSearchParams]);
 
-
-
   console.log(data?.data?.data);
   console.log(coupon);
-  return (
+  return isSuccess ? (
     <div className={classes.box}>
       <SearchBar placeholder={placeholder} />
       <div className={classes.box__cart}>{content}</div>
       <div className={classes.box__cart}>
-        {!data?.data?.data?.applied_coupon_code && (
+        {!coupon.id && (
           <button
             className={classes.box__coupons}
             onClick={handleNavigateToCoupons}
@@ -276,16 +286,16 @@ export const CartPage = () => {
           </button>
         )}
 
-        {data?.data?.data?.applied_coupon_code && (
+        {coupon.id && (
           <div className={classes.box__coupons__applied}>
             <div className={classes.box__coupons__content}>
               <span className={classes.box__coupons__content__img} />
               <div className={classes.box__coupons__applied__content}>
                 <h3 className={classes.box__coupons__content__applied__title}>
-                  Coupon applied...
+                  {coupon?.descrption}
                 </h3>
                 <h3 className={classes.box__coupons__content__subTitle}>
-                  DIWALI500
+                  {coupon?.code}
                 </h3>
               </div>
             </div>
@@ -309,5 +319,7 @@ export const CartPage = () => {
         <button className={classes.box__cart__order__btn}>Place Order</button>
       </div>
     </div>
+  ) : (
+    <CartLoader />
   );
 };

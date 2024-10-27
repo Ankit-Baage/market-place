@@ -7,6 +7,7 @@ export const CartLoader = () => {
       <div className={classes.box__info}></div>
       <div className={classes.box__info}></div>
       <div className={classes.box__info}></div>
+      <div className={classes.box__info}></div>
     </div>
   );
 };
