@@ -38,6 +38,7 @@ import { CategoryPage } from "./pages/category/CategoryPage";
 import { LaterPage } from "./pages/later/LaterPage";
 import { WishListPage } from "./pages/wishList/WishListPage";
 import { CouponsPage } from "./pages/coupons/CouponsPage";
+import { ReviewPage } from "./pages/review/ReviewPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -126,6 +127,16 @@ const router = createBrowserRouter([
             children: [
               { index: true, element: <CartPage /> },
               { path: "coupons", element: <CouponsPage /> },
+              {
+                path: "address",
+                element: <AddressOutlet />,
+                children: [
+                  { index: true, element: <AddressPage /> },
+                  { path: ":addressId", element: <AddressDetailPage /> },
+                  { path: "add", element: <AddressDetailPage /> },
+                ],
+              },
+              {path:"review", element:<ReviewPage/>}
             ],
           },
         ],

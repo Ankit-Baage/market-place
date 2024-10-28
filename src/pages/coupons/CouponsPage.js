@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { SearchBar } from "../../components/ui/searchBarWithBackBtn/SearchBar";
 import { Coupon } from "../../components/coupon/Coupon";
 import coupon_page from "../../assets/couponPage_img.svg";
 import classes from "./couponsPage.module.css";
 import useGetCouponsList from "../../tanstack-query/couponsList/useGetCouponsList";
 import { CartLoader } from "../../components/cart/cartLoader/CartLoader";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { couponAdded } from "../../store/coupon/couponSlice";
 

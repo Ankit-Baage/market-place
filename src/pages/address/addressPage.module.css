@@ -22,9 +22,6 @@
 
 }
 
-
-
-
 .box__btn {
   width: 24px;
   height: 24px;
@@ -68,4 +65,17 @@
   background-repeat: no-repeat;
   background-size: cover;
   cursor: pointer;
+}
+
+
+.box__btn__review {
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  border-radius: 4px;
+  background-color: #FF6F3F;
+  color: #FFFFFF;
+  padding: 18px;
+
 }

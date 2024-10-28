@@ -22,6 +22,7 @@ import {
   selectCouponState,
 } from "../../store/coupon/couponSlice";
 
+
 export const CartPage = () => {
   const dispatch = useDispatch();
   const coupon = useSelector(selectCouponState);
@@ -134,6 +135,10 @@ export const CartPage = () => {
   );
   const handleNavigateToCoupons = () => {
     navigate("coupons");
+  };
+
+  const handleNavigateToAddresses = () => {
+    navigate("address");
   };
   const handleRemoveCoupon = () => {
     dispatch(couponRemoved());
@@ -257,7 +262,14 @@ export const CartPage = () => {
         return params;
       });
     }
-  }, [coupon, data, data?.data?.data?.applied_coupon_code, dispatch, isSuccess, setSearchParams]);
+  }, [
+    coupon,
+    data,
+    data?.data?.data?.applied_coupon_code,
+    dispatch,
+    isSuccess,
+    setSearchParams,
+  ]);
 
   console.log(data?.data?.data);
   console.log("coupon :", coupon);
@@ -312,7 +324,9 @@ export const CartPage = () => {
           couponAmount={data?.data?.data?.applied_coupon_amount}
           couponCode={data?.data?.data?.applied_coupon_code}
         />
-        <button className={classes.box__cart__order__btn}>Place Order</button>
+        <button className={classes.box__cart__order__btn} onClick={handleNavigateToAddresses}>
+          Select Address
+        </button>
       </div>
     </div>
   ) : (
