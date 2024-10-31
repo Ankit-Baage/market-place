@@ -52,7 +52,7 @@ export const NewPhoneReviewItem = ({
 
           <div className={classes.box__qty}>
             <h2 className={classes.box__qty__key}>Qty:</h2>
-            <h3 className={classes.box__qty__value}>2</h3>
+            <h3 className={classes.box__qty__value}>{item.quantity}</h3>
           </div>
         </div>
       </div>
