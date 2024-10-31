@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Address } from "../../components/address/Address";
 import useGetAddressList from "../../tanstack-query/address/useGetAddressList";
-import { Link, useNavigate,useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { CartLoader } from "../../components/cart/cartLoader/CartLoader";
 import useSelectAddressMutation from "../../tanstack-query/address/useSelectAddressMutation";
 import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { onOpen } from "../../store/confirmationModal/confirmationModalSlice";
-import { selectCouponState } from "../../store/coupon/couponSlice";
-import {
-  selectAddressState,
-  setAddressId,
-} from "../../store/address/addressSlice";
+
+
 import { useLocation } from "react-router-dom";
 import classes from "./addressPage.module.css";
 
@@ -19,16 +16,12 @@ const getAddressHeading = (pathname) => {
   if (pathname === "/home/cart/address") {
     return "Select Address";
   }
-  return null; // No heading change for other paths
+  return null;
 };
 
 export const AddressPage = () => {
-  const coupon = useSelector(selectCouponState);
-  const address = useSelector(selectAddressState);
   const location = useLocation();
   const heading = getAddressHeading(location.pathname);
-
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const { data, isLoading, isSuccess } = useGetAddressList();
   const {
@@ -48,9 +41,8 @@ export const AddressPage = () => {
       const response = await mutateAsync(id);
       setSelectedAddressId(id);
       toast.success(response.message.displayMessage);
-      dispatch(setSelectedAddressId(id));
     } catch (error) {
-      toast.error(error.response.data.message.displayMessage);
+      toast.error(error.message.displayMessage);
     }
   };
   const handleNavigateToDetailPage = (id) => {
@@ -84,8 +76,7 @@ export const AddressPage = () => {
   };
 
   const handleNavigateToReview = () => {
-    dispatch(setAddressId({ id: selectedAddressId }));
-    navigate("/home/cart/review");
+    navigate("review");
   };
   useEffect(() => {
     if (isSuccess && data?.data?.data) {
@@ -94,14 +85,15 @@ export const AddressPage = () => {
         (address) => address.is_default === 1
       );
       setSelectedAddressId(defaultAddress?.id || null);
-      dispatch(setAddressId(defaultAddress?.id));
     }
   }, [isSuccess, data, dispatch, selectedAddressId]);
   return isSuccess ? (
     <div className={classes.box}>
       <button className={classes.box__btn} onClick={handleNavigateBack} />
       <div className={classes.box__wrapper}>
-        <h1 className={classes.box__wrapper__title}>{heading}</h1>
+        <h1 className={classes.box__wrapper__title}>
+          {heading || "My Addresses"}
+        </h1>
         {data?.data?.data.map((address) => (
           <Address
             key={address.id}

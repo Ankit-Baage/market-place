@@ -1,7 +1,7 @@
 import { cartGetListUrl } from "../../../config/config";
 import axiosInstance from "../../axios-middleware/axiosMiddleware";
 
-export const cartListRequest = async (coupon_code) => {
+export const cartListRequest = async (coupon_code, ) => {
   try {
     const response = await axiosInstance.get(
       cartGetListUrl(coupon_code),

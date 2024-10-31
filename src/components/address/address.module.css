@@ -72,6 +72,15 @@
   padding-left: 28px;
 }
 
+.box__card__info__review {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  justify-content: center;
+  padding-left: 0;
+  
+}
+
 .box__card__address {
   font-family: "Poppins", sans;
   font-weight: 400;

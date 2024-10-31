@@ -22,7 +22,6 @@ import {
   selectCouponState,
 } from "../../store/coupon/couponSlice";
 
-
 export const CartPage = () => {
   const dispatch = useDispatch();
   const coupon = useSelector(selectCouponState);
@@ -243,19 +242,22 @@ export const CartPage = () => {
         })
       );
     }
-  }, [coupon.id, dispatch, searchParams]);
+  }, [dispatch, searchParams]);
 
   useEffect(() => {
     if (isSuccess && data) {
       const couponCode = data?.data?.data?.applied_coupon_code;
-      if (couponCode) {
-        setSearchParams((params) => {
+
+      setSearchParams((params) => {
+        if (couponCode) {
           params.set("coupon", coupon.id);
-          return params;
-        });
-      } else {
-        dispatch(couponRemoved());
-      }
+        } else {
+          params.delete("coupon");
+          dispatch(couponRemoved());
+        }
+
+        return params;
+      });
     } else {
       setSearchParams((params) => {
         params.delete("coupon");
@@ -270,9 +272,8 @@ export const CartPage = () => {
     isSuccess,
     setSearchParams,
   ]);
+  console.log("couponId :", coupon.id);
 
-  console.log(data?.data?.data);
-  console.log("coupon :", coupon);
   return isSuccess ? (
     <div className={classes.box}>
       <SearchBar placeholder={placeholder} />
@@ -324,7 +325,10 @@ export const CartPage = () => {
           couponAmount={data?.data?.data?.applied_coupon_amount}
           couponCode={data?.data?.data?.applied_coupon_code}
         />
-        <button className={classes.box__cart__order__btn} onClick={handleNavigateToAddresses}>
+        <button
+          className={classes.box__cart__order__btn}
+          onClick={handleNavigateToAddresses}
+        >
           Select Address
         </button>
       </div>

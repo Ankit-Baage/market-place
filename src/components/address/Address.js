@@ -9,6 +9,7 @@ export const Address = ({
   onEdit,
   onOpenDeleteModal,
 }) => {
+  console.log(address);
   return (
     <div className={classes.box__card}>
       <label
@@ -37,6 +38,7 @@ export const Address = ({
           Phone Number: {address.mobile_no}
         </p>
       </div>
+
       <div className={classes.box__card__confirm}>
         <button className={classes.box__card__navigate} onClick={onEdit}>
           Edit Address

@@ -134,9 +134,9 @@ const router = createBrowserRouter([
                   { index: true, element: <AddressPage /> },
                   { path: ":addressId", element: <AddressDetailPage /> },
                   { path: "add", element: <AddressDetailPage /> },
+                  { path: "review", element: <ReviewPage /> },
                 ],
               },
-              {path:"review", element:<ReviewPage/>}
             ],
           },
         ],

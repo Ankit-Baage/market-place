@@ -206,16 +206,15 @@ const cart = "cart";
 export const cartListUrl = `${baseUrl}${version}${mode}${cart}`;
 
 export const cartGetListUrl = (coupon_code) => {
-  let url = baseUrl + version + mode + cart; 
+  let url = baseUrl + version + mode + cart;
 
-  if (coupon_code) {
-    url += `/?coupon_code=${coupon_code}&beta=1`;
-  } else {
-    url += "?beta=1";
-  }
+  // Add coupon_code if it exists; add `beta=1` for testing
+  url += coupon_code ? `/?coupon_code=${coupon_code}&beta=1` : "?beta=1";
 
   return url;
 };
+
+
 
 /////////addresses//////////////////
 const addresses = "addresses";
