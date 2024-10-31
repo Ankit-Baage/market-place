@@ -52,7 +52,9 @@ export const ReviewPage = () => {
   return (
     <div className={classes.box}>
       <SearchBar placeholder={placeholder} />
-      <AddressReview address={data?.data?.data?.address} />
+      {data?.data?.data?.address && (
+        <AddressReview address={data?.data?.data?.address} />
+      )}
       <div className={classes.box__cart}>{content}</div>
       <div className={classes.box__cart}>
         <div className={classes.box__coupons__applied}>
@@ -78,9 +80,7 @@ export const ReviewPage = () => {
           couponAmount={data?.data?.data?.applied_coupon_amount}
           couponCode={data?.data?.data?.applied_coupon_code}
         />
-        <button className={classes.box__cart__order__btn}>
-          Select Address
-        </button>
+        <button className={classes.box__cart__order__btn}>Place Order</button>
       </div>
     </div>
   );
