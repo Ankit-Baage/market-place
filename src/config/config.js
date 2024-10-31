@@ -207,14 +207,27 @@ export const cartListUrl = `${baseUrl}${version}${mode}${cart}`;
 
 export const cartGetListUrl = (coupon_code) => {
   let url = baseUrl + version + mode + cart;
-
-  // Add coupon_code if it exists; add `beta=1` for testing
   url += coupon_code ? `/?coupon_code=${coupon_code}&beta=1` : "?beta=1";
 
   return url;
 };
 
+///////////review Page//////////////////
 
+export const reviewListUrl = (coupon_code, address_id) => {
+  // Base URL
+  let url = `${baseUrl}${version}${mode}${cart}/review?address_id=${address_id}`;
+
+  // Append coupon_code if provided
+  if (coupon_code) {
+    url += `&coupon_code=${coupon_code}`;
+  }
+
+  // Append beta=1 at the end
+  url += "&beta=1";
+
+  return url;
+};
 
 /////////addresses//////////////////
 const addresses = "addresses";

@@ -279,6 +279,7 @@ export const CartPage = () => {
       <SearchBar placeholder={placeholder} />
       <div className={classes.box__cart}>{content}</div>
       <div className={classes.box__cart}>
+        <h3 className={classes.box__cart__order}>Order Summary</h3>
         {!data?.data?.data?.applied_coupon_code && (
           <button
             className={classes.box__coupons}

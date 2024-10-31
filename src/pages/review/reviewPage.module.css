@@ -29,6 +29,14 @@
   justify-content: center;
 
 }
+.box__cart__order {
+  font-family: "Poppins", sans;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 26px;
+  color: #2F3567;
+
+}
 
 .box__coupons {
   display: flex;

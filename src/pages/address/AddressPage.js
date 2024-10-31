@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Address } from "../../components/address/Address";
 import useGetAddressList from "../../tanstack-query/address/useGetAddressList";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { CartLoader } from "../../components/cart/cartLoader/CartLoader";
 import useSelectAddressMutation from "../../tanstack-query/address/useSelectAddressMutation";
 import { toast } from "react-toastify";
@@ -11,6 +11,7 @@ import { onOpen } from "../../store/confirmationModal/confirmationModalSlice";
 
 import { useLocation } from "react-router-dom";
 import classes from "./addressPage.module.css";
+import { setAddressId } from "../../store/address/addressSlice";
 
 const getAddressHeading = (pathname) => {
   if (pathname === "/home/cart/address") {
@@ -76,6 +77,7 @@ export const AddressPage = () => {
   };
 
   const handleNavigateToReview = () => {
+    dispatch(setAddressId({id: selectedAddressId}))
     navigate("review");
   };
   useEffect(() => {

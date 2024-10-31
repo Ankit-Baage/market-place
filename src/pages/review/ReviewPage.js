@@ -1,7 +1,10 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCouponState } from "../../store/coupon/couponSlice";
-import { selectAddressState } from "../../store/address/addressSlice";
+import { couponAdded, selectCouponState } from "../../store/coupon/couponSlice";
+import {
+  selectAddressState,
+  setAddressId,
+} from "../../store/address/addressSlice";
 import { useSearchParams } from "react-router-dom";
 import classes from "./reviewPage.module.css";
 import { SearchBar } from "../../components/ui/searchBarWithBackBtn/SearchBar";
@@ -14,16 +17,19 @@ import { VrpReviewItem } from "../../components/review/vrpReviewItem/VrpReviewIt
 import { SparesReviewItem } from "../../components/review/sparesReviewItem/SparesReviewItem";
 import { OpenBoxReviewItem } from "../../components/review/openBoxReviewItem/OpenBoxReviewItem";
 import { NewPhoneReviewItem } from "../../components/review/newPhoneReviewItem/NewPhoneReviewItem";
-import { AddressReview } from "../../components/review/addressreview/AddressReview";
+import { AddressReview } from "../../components/review/addressReview/AddressReview";
+import useGetReviewList from "../../tanstack-query/reviewList/useGetReviewList";
 
 export const ReviewPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const coupon = useSelector(selectCouponState);
   const address = useSelector(selectAddressState);
   const dispatch = useDispatch();
-  const { data, isSuccess, isLoading } = useGetCartList(coupon.id);
-  console.log("coupon :", coupon);
-  console.log("address :", address);
+  const { data, isSuccess, isLoading } = useGetReviewList({
+    coupon_code: coupon.id,
+    address_id: address.id,
+  });
+
   const placeholder = "Search...";
 
   const content = useMemo(() => {
@@ -49,29 +55,64 @@ export const ReviewPage = () => {
     return <EmptyCart />;
   }, [data?.data?.data?.cart_items, isLoading, isSuccess]);
 
+  useEffect(() => {
+    const couponIdFromUrl = searchParams.get("coupon");
+    const addressIdFromUrl = searchParams.get("address");
+
+    // Set Redux state only if URL params are present
+    if (couponIdFromUrl) {
+      dispatch(couponAdded({ id: couponIdFromUrl }));
+    }
+    if (addressIdFromUrl) {
+      dispatch(setAddressId({ id: addressIdFromUrl }));
+    }
+  }, [dispatch, searchParams]);
+
+  // Sync Redux state with URL parameters whenever Redux state changes
+  useEffect(() => {
+    setSearchParams((params) => {
+      if (coupon.id) {
+        params.set("coupon", coupon.id);
+      } else {
+        params.delete("coupon");
+      }
+
+      if (address.id) {
+        params.set("address", address.id);
+      } else {
+        params.delete("address");
+      }
+      return params;
+    });
+  }, [coupon.id, address.id, setSearchParams]);
+
+  console.log("coupon :", coupon.id);
+  console.log("address :", address.id);
+
   return (
     <div className={classes.box}>
-      <SearchBar placeholder={placeholder} />
+      {/* <SearchBar placeholder={placeholder} /> */}
       {data?.data?.data?.address && (
         <AddressReview address={data?.data?.data?.address} />
       )}
       <div className={classes.box__cart}>{content}</div>
       <div className={classes.box__cart}>
-        <div className={classes.box__coupons__applied}>
-          <div className={classes.box__coupons__content}>
-            <span className={classes.box__coupons__content__img} />
-            <div className={classes.box__coupons__applied__content}>
-              <h3 className={classes.box__coupons__content__applied__title}>
-                Coupon applied...
-              </h3>
-              <h3 className={classes.box__coupons__content__subTitle}>
-                {data?.data?.data?.applied_coupon_code}
-              </h3>
+        <h3 className={classes.box__cart__order}>Order Summary</h3>
+        {data?.data?.data?.applied_coupon_code && (
+          <div className={classes.box__coupons__applied}>
+            <div className={classes.box__coupons__content}>
+              <span className={classes.box__coupons__content__img} />
+              <div className={classes.box__coupons__applied__content}>
+                <h3 className={classes.box__coupons__content__applied__title}>
+                  Coupon applied...
+                </h3>
+                <h3 className={classes.box__coupons__content__subTitle}>
+                  {data?.data?.data?.applied_coupon_code}
+                </h3>
+              </div>
             </div>
           </div>
-
-          <button className={classes.box__coupons__remove}>Remove</button>
-        </div>
+        )}
 
         <OrderSummary
           subTotal={data?.data?.data.total_amount}
