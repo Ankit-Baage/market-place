@@ -4,6 +4,16 @@
   row-gap: 28px;
   justify-content: center;
 }
+.box__btn {
+  width: 24px;
+  height: 24px;
+  background-image: url('../../assets/arrow-left.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+
+}
 .box__address {
   display: flex;
   flex-direction: column;

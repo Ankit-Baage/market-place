@@ -5,7 +5,7 @@ import {
   selectAddressState,
   setAddressId,
 } from "../../store/address/addressSlice";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import classes from "./reviewPage.module.css";
 import { SearchBar } from "../../components/ui/searchBarWithBackBtn/SearchBar";
 import useGetCartList from "../../tanstack-query/cartList/useGetCartList";
@@ -25,6 +25,7 @@ export const ReviewPage = () => {
   const coupon = useSelector(selectCouponState);
   const address = useSelector(selectAddressState);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { data, isSuccess, isLoading } = useGetReviewList({
     coupon_code: coupon.id,
     address_id: address.id,
@@ -88,12 +89,19 @@ export const ReviewPage = () => {
 
   console.log("coupon :", coupon.id);
   console.log("address :", address.id);
+  const handleNavigate=()=>{
+    navigate("/home/cart")
+  }
 
   return (
     <div className={classes.box}>
       {/* <SearchBar placeholder={placeholder} /> */}
+      <button className={classes.box__btn} onClick={handleNavigate} />
       {data?.data?.data?.address && (
-        <AddressReview address={data?.data?.data?.address} />
+        <div className={classes.box__address}>
+          <h2 className={classes.box__address__title}>Selected address</h2>
+          <AddressReview address={data?.data?.data?.address} />
+        </div>
       )}
       <div className={classes.box__cart}>{content}</div>
       <div className={classes.box__cart}>
