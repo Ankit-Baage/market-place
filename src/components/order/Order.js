@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./order.module.css";
-import { formatNumber } from "../../utils/helpers/formatNumber";
+import { formatDate, formatNumber } from "../../utils/helpers/formatNumber";
 
 export const Order = ({ order }) => {
   return (
@@ -24,7 +24,7 @@ export const Order = ({ order }) => {
         </div>
         <div className={classes.box__upper__order__date}>
           <h1 className={classes.box__upper__order__date__text}>
-            {order.ordered_on}
+            {formatDate(order.ordered_on)}
           </h1>
           <span className={classes.box__expand}></span>
         </div>
