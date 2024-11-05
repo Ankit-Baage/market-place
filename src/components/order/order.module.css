@@ -1,0 +1,126 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  box-shadow: 0px 4px 16px 0px #00000014;
+  padding: 12px;
+  border-radius: 4px;
+}
+
+.box__upper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.box__upper__order {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  justify-content: center;
+
+}
+
+.box__upper__order__info {
+  display: flex;
+  column-gap: 4px;
+  align-items: center;
+}
+
+.box__upper__order__info__key {
+  font-size: 16px;
+  line-height: 18.2px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #989898;
+}
+
+.box__upper__order__info__value {
+  font-size: 16px;
+  line-height: 18.2px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #2F3567;
+}
+
+
+.box__upper__order__date {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  align-items: end;
+}
+.box__upper__order__date__text {
+  font-size: 12px;
+  line-height: 15.6px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #989898;
+
+}
+
+.box__expand {
+  width: 20px;
+  height: 20px;
+  background-image: url('../../assets/chevron-down.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+
+}
+
+
+
+.box__sep {
+  background-color: #EFEFEF;
+  height: 1.5px;
+}
+
+.box__upper__order__info__key__amt {
+  font-size: 12px;
+  line-height: 15.6px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #4A4C5F;
+
+}
+
+.box__upper__order__info__value__amt {
+  font-size: 14px;
+  line-height: 18.2px;
+  font-weight: 600;
+  font-family: "Poppins", sans;
+  color: #FF6F3F;
+
+}
+
+.box__downLoad {
+  display: flex;
+  column-gap: 4px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background-color: #46CD80;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.box__downLoad__icon {
+  width: 14px;
+  height: 14px;
+  background-image: url('../../assets/downLoadIcon.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+.box__downLoad__text {
+  font-size: 12px;
+  line-height: 15.6px;
+  font-weight: 600;
+  font-family: "Poppins", sans;
+  color: #FFFFFF;
+}

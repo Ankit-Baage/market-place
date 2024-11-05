@@ -39,6 +39,7 @@ import { LaterPage } from "./pages/later/LaterPage";
 import { WishListPage } from "./pages/wishList/WishListPage";
 import { CouponsPage } from "./pages/coupons/CouponsPage";
 import { ReviewPage } from "./pages/review/ReviewPage";
+import { OrdersPage } from "./pages/order/OrdersPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -112,6 +113,7 @@ const router = createBrowserRouter([
                   { path: "add", element: <AddressDetailPage /> },
                 ],
               },
+              { path: "orders", element: <OrdersPage /> },
             ],
           },
           {

@@ -13,20 +13,26 @@
   justify-content: center;
 }
 
-.box__profile__info {
+
+.box__profile {
+  height: 160px;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  display: flex;
-  flex-direction: column;
-  row-gap: 28px;
-  justify-content: center;
   background-image: url(../../assets/profile__back.svg);
   background-position: center;
   background-repeat: repeat;
   background-size: cover;
-  padding: 80px 16px 16px;
+  padding: 22px 16px 16px;
+}
+
+.box__profile__info {
+  display: flex;
+  flex-direction: column;
+  row-gap: 64px;
+  justify-content: center;
+
 
 }
 
@@ -69,7 +75,7 @@
   flex-direction: column;
   row-gap: 24px;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 164px;
 
 
 }
@@ -160,7 +166,7 @@
 .box__btn__img {
   width: 24px;
   height: 24px;
-  background-image: url('../../assets/profileLogOut.png');
+  background-image: url('../../assets/logOut.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

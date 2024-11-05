@@ -256,3 +256,7 @@ export const bestOpenBoxProductUrl = `${baseUrl}${version}${mode}open_box/?limit
 const coupons = "coupons";
 
 export const couponsListUrl = `${baseUrl}${version}${mode}${role}${coupons}`;
+
+//////////////////orders///////////////////
+const orders = "orders"
+export const ordersListUrl = `${baseUrl}${version}${mode}${orders}`;
