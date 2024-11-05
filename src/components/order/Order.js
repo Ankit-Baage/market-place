@@ -3,6 +3,7 @@ import classes from "./order.module.css";
 import { formatDate, formatNumber } from "../../utils/helpers/formatNumber";
 
 export const Order = ({ order }) => {
+  let is_invoice = 0;
   return (
     <div className={classes.box}>
       <div className={classes.box__upper}>
@@ -39,11 +40,12 @@ export const Order = ({ order }) => {
             Rs {formatNumber(order.total_amount)}
           </h1>
         </div>
-
-        <div className={classes.box__downLoad}>
-          <span className={classes.box__downLoad__icon} />
-          <h3 className={classes.box__downLoad__text}>Download Invoice</h3>
-        </div>
+        {order.is_invoice === 1 ? (
+          <div className={classes.box__downLoad}>
+            <span className={classes.box__downLoad__icon} />
+            <h3 className={classes.box__downLoad__text}>Download Invoice</h3>
+          </div>
+        ) : null}
       </div>
     </div>
   );
