@@ -48,18 +48,6 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Authentication />,
-
-        children: [
-          { index: true, element: <LoginPage /> },
-          {
-            path: "otpVerification",
-            element: <ProtectedOtpRoute element={<OtpVerification />} />,
-          },
-        ],
-      },
-      {
-        path: "/home",
         element: <Home />,
         children: [
           { index: true, element: <HomePage /> },
@@ -140,6 +128,18 @@ const router = createBrowserRouter([
                 ],
               },
             ],
+          },
+        ],
+      },
+      {
+        path: "authentication",
+        element: <Authentication />,
+
+        children: [
+          { index: true, element: <LoginPage /> },
+          {
+            path: "otpVerification",
+            element: <ProtectedOtpRoute element={<OtpVerification />} />,
           },
         ],
       },
