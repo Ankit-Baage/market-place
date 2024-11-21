@@ -56,8 +56,8 @@ export const updateProfileDataUrl = `${baseUrl}${version}${mode}${role}${updateP
 
 export const uploadImageUrl = `${baseUrl}${version}${mode}${role}${uploadImageEndPoint}`;
 
-export const vrpListUrl = (user_id) =>
-  `${baseUrl}${version}${mode}${vrpListEndPoint}?user_id=${user_id}`;
+export const vrpListUrl = (user_id, medium) =>
+  `${baseUrl}${version}${mode}${vrpListEndPoint}?user_id=${user_id}&mode=${medium}`;
 
 export const vrpProductDetailUrl = (requestId, user_id) =>
   `${baseUrl}${version}${mode}${vrpListEndPoint}${vrpProductDetailEndPoint(
@@ -93,8 +93,8 @@ export const vrpSortingListUrl = `${baseUrl}${version}${mode}${vrpListEndPoint}$
 
 //**Spares***//
 
-export const spareListUrl = (user_id) =>
-  `${baseUrl}${version}${mode}${spareListEndPoint}?user_id=${user_id}`;
+export const spareListUrl = (user_id, mode) =>
+  `${baseUrl}${version}${mode}${spareListEndPoint}?user_id=${user_id}&mode=${mode}`;
 
 export const spareDetailUrl = (requestId, user_id) =>
   `${baseUrl}${version}${mode}${spareListEndPoint}${spareDetailEndPoint(
@@ -122,8 +122,8 @@ export const spareFilterUrl = (filterType) =>
 /////////////********newPhone*********************///////
 const newPhoneDetailEndPoint = (requestId) => `details?request_id=${requestId}`;
 const newPhoneListEndPoint = "new_phones/";
-export const newPhoneListUrl = (user_id) =>
-  `${baseUrl}${version}${mode}${newPhoneListEndPoint}?user_id=${user_id}`;
+export const newPhoneListUrl = (user_id, mode) =>
+  `${baseUrl}${version}${mode}${newPhoneListEndPoint}?user_id=${user_id}&mode=${mode}`;
 
 const newPhoneFilterEndPoint = (filterType) => `filter?mode=${filterType}`;
 export const newPhoneFilterUrl = (filterType) =>
@@ -163,8 +163,8 @@ export const newPhoneVariantUrl = (sellerId, brand, model, color) =>
 
 const openBoxDetailEndPoint = (requestId) => `details?request_id=${requestId}`;
 const openBoxListEndPoint = "open_box/";
-export const openBoxListUrl = (user_id) =>
-  `${baseUrl}${version}${mode}${openBoxListEndPoint}?user_id=${user_id}`;
+export const openBoxListUrl = (user_id, mode) =>
+  `${baseUrl}${version}${mode}${openBoxListEndPoint}?user_id=${user_id}&mode=${mode}`;
 
 const openBoxFilterEndPoint = (filterType) => `filter?mode=${filterType}`;
 export const openBoxFilterUrl = (filterType) =>

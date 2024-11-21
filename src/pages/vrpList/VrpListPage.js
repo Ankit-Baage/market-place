@@ -38,7 +38,11 @@ export const VrpListPage = () => {
     p4_percent_end: null,
   });
   // const { data, isLoading, isError, isSuccess } = useGetVrpList();
-  const user_id = Cookies.get("user_id");
+  const authToken = Cookies.get("authToken");
+  const userId = Cookies.get("user_id");
+  const guestId = Cookies.get("guestId");
+  const medium = authToken ? "user" : "guest";
+  const user_id = guestId ? guestId : userId;
   const {
     data: add,
     error,
@@ -50,8 +54,10 @@ export const VrpListPage = () => {
 
   const { data, isSuccess, isLoading, refetch } = useGetVrpSortedList(
     filters,
-    user_id
+    user_id,
+    medium
   );
+  console.log("mode ", medium);
 
   const {
     mutateAsync,

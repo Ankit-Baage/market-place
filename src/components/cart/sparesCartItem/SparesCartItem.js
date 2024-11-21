@@ -22,7 +22,7 @@ export const SparesCartItem = ({
   return (
     <div className={classes.box}>
       <div className={classes.box__info}>
-        <Link to={`/home/spares/${item.id}`}>
+        <Link to={`spares/${item.id}`}>
           <img
             src={item.image}
             alt="item"

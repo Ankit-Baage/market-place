@@ -14,6 +14,7 @@ export const generateId = () => {
     Cookies.set("guestId", guestId);
     return guestId;
   }
+  
 
   return Cookies.get("guestId");
 };

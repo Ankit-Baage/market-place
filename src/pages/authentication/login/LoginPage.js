@@ -23,7 +23,7 @@ export const LoginPage = () => {
       const params = new URLSearchParams();
       params.set("process", numToAlpha);
 
-      navigate(`/otpVerification?${params.toString()}`);
+      navigate(`otpVerification?${params.toString()}`);
       toast.dismiss(loadingToastId);
       toast.success(response.message.displayMessage);
     } catch (error) {

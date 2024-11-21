@@ -107,7 +107,7 @@ const router = createBrowserRouter([
           {
             path: "address",
             element: <AddressOutlet />,
-            loader:checkAuthLoader,
+            loader: checkAuthLoader,
             children: [
               { index: true, element: <AddressPage /> },
               { path: ":addressId", element: <AddressDetailPage /> },
@@ -154,17 +154,17 @@ const router = createBrowserRouter([
       //   ],
       // },
       { path: "review", element: <ReviewPage /> },
-      {
-        path: "authentication",
-        element: <Authentication />,
+    ],
+  },
+  {
+    path: "authentication",
+    element: <Authentication />,
 
-        children: [
-          { index: true, element: <LoginPage /> },
-          {
-            path: "otpVerification",
-            element: <ProtectedOtpRoute element={<OtpVerification />} />,
-          },
-        ],
+    children: [
+      { index: true, element: <LoginPage /> },
+      {
+        path: "otpVerification",
+        element: <ProtectedOtpRoute element={<OtpVerification />} />,
       },
     ],
   },

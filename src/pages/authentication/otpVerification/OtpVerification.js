@@ -1,4 +1,5 @@
 import React from "react";
+import Cookies from "js-cookie";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { convertToNum } from "../../../utils/helpers/convertToNum";
@@ -54,7 +55,8 @@ export const OtpVerification = () => {
       console.log(response.status);
       const urlFragment = new URLSearchParams();
       urlFragment.set("authenticated", status);
-      navigate(`/home?${urlFragment.toString()}`);
+      navigate("/");
+      Cookies.remove("guestId")
       localStorage.removeItem("mobile_no");
       toast.dismiss(loadingToastId);
       toast.success(response.message.displayMessage);
