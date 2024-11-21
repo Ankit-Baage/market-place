@@ -1,8 +1,9 @@
-
+import Cookies from "js-cookie";
 import { addressUrl } from "../../../config/config";
 import axiosInstance from "../../axios-middleware/axiosMiddleware";
 
 export const addressRequest = async () => {
+  const authToken = Cookies.get("authToken");
   try {
     const response = await axiosInstance.get(
       addressUrl,

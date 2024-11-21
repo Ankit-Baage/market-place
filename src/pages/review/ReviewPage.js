@@ -90,7 +90,7 @@ export const ReviewPage = () => {
   console.log("coupon :", coupon.id);
   console.log("address :", address.id);
   const handleNavigate=()=>{
-    navigate("/home/cart")
+    navigate("/cart")
   }
 
   return (

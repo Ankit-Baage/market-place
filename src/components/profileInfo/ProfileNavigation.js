@@ -1,4 +1,5 @@
 import React from "react";
+import Cookies from "js-cookie";
 import profileNavigator from "../../assets/profileNavigator.svg";
 import laterNavigator from "../../assets/laterNavigator.svg";
 import cartNavigator from "../../assets/cartNavigator.svg";
@@ -101,12 +102,21 @@ export const ProfileNavigation = () => {
   const handleNavigate = () => {
     navigate(-1);
   };
+
+  const handleLogOut = () => {
+    Cookies.remove("authToken");
+    Cookies.remove("user_id");
+    navigate("/authentication");
+  };
   return (
     <div className={classes.box__wrapper}>
       <div className={classes.box}>
         <div className={classes.box__profile}>
           <div className={classes.box__profile__info}>
-            <button className={classes.box__profile__back} onClick={handleNavigate}/>
+            <button
+              className={classes.box__profile__back}
+              onClick={handleNavigate}
+            />
             <div className={classes.box__profile__user}>
               <span className={classes.box__profile__info__avatar}></span>
               <h2 className={classes.box__profile__info__name}>
@@ -129,7 +139,7 @@ export const ProfileNavigation = () => {
           </div>
         </div>
       </div>
-      <button className={classes.box__btn}>
+      <button className={classes.box__btn} onClick={handleLogOut}>
         <span className={classes.box__btn__img} />
         Logout
       </button>

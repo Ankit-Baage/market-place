@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import Cookies from "js-cookie";
 import classes from "./cartPage.module.css";
 import { SearchBar } from "../../components/ui/searchBarWithBackBtn/SearchBar";
 
@@ -25,7 +26,8 @@ import {
 export const CartPage = () => {
   const dispatch = useDispatch();
   const coupon = useSelector(selectCouponState);
-  const { data, isSuccess, isLoading } = useGetCartList(coupon.id);
+  const guestId = Cookies.get("guestId")
+  const { data, isSuccess, isLoading } = useGetCartList(coupon.id, guestId);
   const navigate = useNavigate();
 
   const [localQuantities, setLocalQuantities] = useState({});
@@ -133,11 +135,11 @@ export const CartPage = () => {
     [mutateAsync]
   );
   const handleNavigateToCoupons = () => {
-    navigate("coupons");
+    navigate("/coupons");
   };
 
   const handleNavigateToAddresses = () => {
-    navigate("address");
+    navigate("/profileInfo/address");
   };
   const handleRemoveCoupon = () => {
     dispatch(couponRemoved());
@@ -278,61 +280,63 @@ export const CartPage = () => {
     <div className={classes.box}>
       <SearchBar placeholder={placeholder} />
       <div className={classes.box__cart}>{content}</div>
-      <div className={classes.box__cart}>
-        <h3 className={classes.box__cart__order}>Order Summary</h3>
-        {!data?.data?.data?.applied_coupon_code && (
-          <button
-            className={classes.box__coupons}
-            onClick={handleNavigateToCoupons}
-          >
-            <div className={classes.box__coupons__content}>
-              <span className={classes.box__coupons__content__img} />
-              <h3 className={classes.box__coupons__content__title}>
-                Use Coupons
-              </h3>
-            </div>
-
-            <span className={classes.box__coupons__navigate} />
-          </button>
-        )}
-
-        {data?.data?.data?.applied_coupon_code && (
-          <div className={classes.box__coupons__applied}>
-            <div className={classes.box__coupons__content}>
-              <span className={classes.box__coupons__content__img} />
-              <div className={classes.box__coupons__applied__content}>
-                <h3 className={classes.box__coupons__content__applied__title}>
-                  Coupon applied...
-                </h3>
-                <h3 className={classes.box__coupons__content__subTitle}>
-                  {data?.data?.data?.applied_coupon_code}
+      {isSuccess && data?.data?.data?.cart_items.length > 0 && (
+        <div className={classes.box__cart}>
+          <h3 className={classes.box__cart__order}>Order Summary</h3>
+          {!data?.data?.data?.applied_coupon_code && (
+            <button
+              className={classes.box__coupons}
+              onClick={handleNavigateToCoupons}
+            >
+              <div className={classes.box__coupons__content}>
+                <span className={classes.box__coupons__content__img} />
+                <h3 className={classes.box__coupons__content__title}>
+                  Use Coupons
                 </h3>
               </div>
-            </div>
 
-            <button
-              className={classes.box__coupons__remove}
-              onClick={handleRemoveCoupon}
-            >
-              Remove
+              <span className={classes.box__coupons__navigate} />
             </button>
-          </div>
-        )}
+          )}
 
-        <OrderSummary
-          subTotal={data?.data?.data.total_amount}
-          gst={data?.data?.data?.gst_amount}
-          grandTotal={data?.data?.data?.final_amount}
-          couponAmount={data?.data?.data?.applied_coupon_amount}
-          couponCode={data?.data?.data?.applied_coupon_code}
-        />
-        <button
-          className={classes.box__cart__order__btn}
-          onClick={handleNavigateToAddresses}
-        >
-          Select Address
-        </button>
-      </div>
+          {data?.data?.data?.applied_coupon_code && (
+            <div className={classes.box__coupons__applied}>
+              <div className={classes.box__coupons__content}>
+                <span className={classes.box__coupons__content__img} />
+                <div className={classes.box__coupons__applied__content}>
+                  <h3 className={classes.box__coupons__content__applied__title}>
+                    Coupon applied...
+                  </h3>
+                  <h3 className={classes.box__coupons__content__subTitle}>
+                    {data?.data?.data?.applied_coupon_code}
+                  </h3>
+                </div>
+              </div>
+
+              <button
+                className={classes.box__coupons__remove}
+                onClick={handleRemoveCoupon}
+              >
+                Remove
+              </button>
+            </div>
+          )}
+
+          <OrderSummary
+            subTotal={data?.data?.data.total_amount}
+            gst={data?.data?.data?.gst_amount}
+            grandTotal={data?.data?.data?.final_amount}
+            couponAmount={data?.data?.data?.applied_coupon_amount}
+            couponCode={data?.data?.data?.applied_coupon_code}
+          />
+          <button
+            className={classes.box__cart__order__btn}
+            onClick={handleNavigateToAddresses}
+          >
+            Select Address
+          </button>
+        </div>
+      )}
     </div>
   ) : (
     <CartLoader />

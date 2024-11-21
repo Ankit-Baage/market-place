@@ -205,9 +205,12 @@ const cart = "cart";
 
 export const cartListUrl = `${baseUrl}${version}${mode}${cart}`;
 
+export const cartGetListGuestUrl =(guestId)=> `${baseUrl}${version}${mode}${cart}/guest?user_id=${guestId}`;
+export const cartLisGuestUrl =`${baseUrl}${version}${mode}${cart}/guest`;
+
 export const cartGetListUrl = (coupon_code) => {
   let url = baseUrl + version + mode + cart;
-  url += coupon_code ? `/?coupon_code=${coupon_code}&beta=1` : "?beta=1";
+  url += coupon_code ? `/?coupon_code=${coupon_code}` : "";
 
   return url;
 };

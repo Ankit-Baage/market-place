@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 import { Address } from "../../components/address/Address";
 import useGetAddressList from "../../tanstack-query/address/useGetAddressList";
-import {  useNavigate } from "react-router-dom";
+import {  redirect, useNavigate } from "react-router-dom";
 import { CartLoader } from "../../components/cart/cartLoader/CartLoader";
 import useSelectAddressMutation from "../../tanstack-query/address/useSelectAddressMutation";
 import { toast } from "react-toastify";
@@ -128,4 +129,13 @@ export const AddressPage = () => {
   ) : (
     <CartLoader />
   );
+};
+
+
+export const checkAuthLoader = () => {
+  const authToken = Cookies.get("authToken");
+  if (!authToken) {
+    return redirect("/authentication"); // Use a return statement for the redirect
+  }
+  return null; // Ensure the loader resolves properly for authenticated users
 };

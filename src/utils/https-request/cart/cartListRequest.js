@@ -1,10 +1,13 @@
-import { cartGetListUrl } from "../../../config/config";
+import Cookies from "js-cookie";
+import { cartGetListGuestUrl, cartGetListUrl } from "../../../config/config";
 import axiosInstance from "../../axios-middleware/axiosMiddleware";
 
-export const cartListRequest = async (coupon_code, ) => {
+export const cartListRequest = async (coupon_code, guestId) => {
+  const authToken = Cookies.get("authToken");
+  const url = authToken ? cartGetListUrl(coupon_code) : cartGetListGuestUrl(guestId);
   try {
     const response = await axiosInstance.get(
-      cartGetListUrl(coupon_code),
+      url,
 
       {
         headers: {
@@ -13,7 +16,7 @@ export const cartListRequest = async (coupon_code, ) => {
       }
     );
 
-    console.log(response.data.data)
+    console.log(response.data.data);
 
     return response;
   } catch (error) {

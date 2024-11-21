@@ -17,7 +17,7 @@ const footerData = [
     image: home,
     activeImage: homeActive,
     text: "Home",
-    path: "/home",
+    path: "/",
     exact: true,
   },
   {
