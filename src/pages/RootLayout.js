@@ -7,7 +7,11 @@ import { generateId } from "../utils/helpers/getAuth";
 
 export const RootLayout = () => {
   useEffect(() => {
-    generateId();
+    // Check if guestId already exists in cookies, if not, generate a new one
+    const guestId = Cookies.get("guestId");
+    if (!guestId) {
+      generateId(); // Only generate a new guestId if it doesn't exist
+    }
   }, []);
   return (
     <div className={classes.container}>
