@@ -1,10 +1,9 @@
-import { ordersListUrl } from "../../../config/config";
+import { orderDetailUrl } from "../../../config/config";
 import axiosInstance from "../../axios-middleware/axiosMiddleware";
 
-export const ordersListRequest = async (status) => {
+export const orderDetailRequest = async (order_id) => {
   try {
-    const response = await axiosInstance.get(ordersListUrl, {
-      params: status,
+    const response = await axiosInstance.get(orderDetailUrl(order_id), {
       headers: {
         "Content-Type": "application/json",
       },

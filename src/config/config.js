@@ -263,3 +263,5 @@ export const couponsListUrl = `${baseUrl}${version}${mode}${role}${coupons}`;
 //////////////////orders///////////////////
 const orders = "orders"
 export const ordersListUrl = `${baseUrl}${version}${mode}${orders}`;
+
+export const orderDetailUrl =(order_id)=>`${baseUrl}${version}${mode}${orders}/details?order_id=${order_id}`;

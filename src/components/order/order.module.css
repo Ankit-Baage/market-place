@@ -71,6 +71,106 @@
 
 }
 
+.box__content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 18px;
+}
+
+.box__content__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box__content__info__title {
+  font-size: 14px;
+  line-height: 18.2px;
+  font-weight: 600;
+  font-family: "Poppins", sans;
+  color: #2F3567;
+
+}
+
+.box__content__info__box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 12px;
+}
+.box__content__info__box__status {
+  font-size: 10px;
+  line-height: 13px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #F2B200;
+  padding: 8px;
+  border-radius: 40px;
+  background-color: #FBE8B3;
+}
+
+.box__content__expand {
+  width: 16px;
+  height: 16px;
+  background-image: url('../../assets/chevron-down.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  z-index: 9;
+
+}
+.box__content__detail {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-items: center;
+  align-items: center;
+  padding: 20px;
+}
+
+
+.box__content__detail__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 10px;
+
+}
+
+.box__content__detail__item__shipment {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 12px;
+  align-items: center;
+  background-color: #2F3567;
+  padding: 8px 7px 8px;
+}
+
+
+.box__content__detail__item__info__shipment {
+  font-size: 14px;
+  line-height: 18.2px;
+  font-weight: 600;
+  font-family: "Poppins", sans;
+  color: #FFFFFF;
+}
+
+.box__content__detail__item {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 12px;
+  align-items: center;
+}
+
+.box__content__detail__item__info {
+  font-size: 14px;
+  line-height: 18.2px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #4A4C5F;
+
+}
 
 
 .box__sep {

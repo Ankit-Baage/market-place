@@ -1,14 +1,15 @@
 export const formatNumber = (number) => {
-  const numberString = number.toString();
+  // Check if the input is a valid number
+  if (isNaN(Number(number))) {
+    return number; // Return the input unchanged if not a valid number
+  }
 
-  // Add commas after thousandth, tenth thousandth, and lakh digits
-  let formattedNumber = numberString.replace(
-    /\B(?=(\d{5}|(\d{3})+(?!\d)))/g,
-    ","
-  );
-
-  return formattedNumber;
+  // Convert the number to a string and format with commas
+  return Number(number)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
+
 
 export const formatDate = (unixTimestamp) => {
   const date = new Date(unixTimestamp * 1000); // Multiply by 1000 to convert seconds to milliseconds
