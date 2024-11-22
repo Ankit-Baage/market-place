@@ -144,15 +144,15 @@ const router = createBrowserRouter([
         // ],
       },
       { path: "coupons", element: <CouponsPage /> },
-      // {
-      //   path: "address",
-      //   element: <AddressOutlet />,
-      //   children: [
-      //     { index: true, element: <AddressPage /> },
-      //     { path: ":addressId", element: <AddressDetailPage /> },
-      //     { path: "add", element: <AddressDetailPage /> },
-      //   ],
-      // },
+      {
+        path: "address",
+        element: <AddressOutlet />,
+        children: [
+          { index: true, element: <AddressPage /> },
+          { path: ":addressId", element: <AddressDetailPage /> },
+          { path: "add", element: <AddressDetailPage /> },
+        ],
+      },
       { path: "review", element: <ReviewPage /> },
     ],
   },

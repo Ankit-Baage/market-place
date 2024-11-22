@@ -139,7 +139,7 @@ export const CartPage = () => {
   };
 
   const handleNavigateToAddresses = () => {
-    navigate("/profileInfo/address");
+    navigate("/address");
   };
   const handleRemoveCoupon = () => {
     dispatch(couponRemoved());

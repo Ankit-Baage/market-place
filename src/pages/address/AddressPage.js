@@ -2,20 +2,19 @@ import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { Address } from "../../components/address/Address";
 import useGetAddressList from "../../tanstack-query/address/useGetAddressList";
-import {  redirect, useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import { CartLoader } from "../../components/cart/cartLoader/CartLoader";
 import useSelectAddressMutation from "../../tanstack-query/address/useSelectAddressMutation";
 import { toast } from "react-toastify";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { onOpen } from "../../store/confirmationModal/confirmationModalSlice";
-
 
 import { useLocation } from "react-router-dom";
 import classes from "./addressPage.module.css";
 import { setAddressId } from "../../store/address/addressSlice";
 
 const getAddressHeading = (pathname) => {
-  if (pathname === "/home/cart/address") {
+  if (pathname === "/address") {
     return "Select Address";
   }
   return null;
@@ -78,8 +77,8 @@ export const AddressPage = () => {
   };
 
   const handleNavigateToReview = () => {
-    dispatch(setAddressId({id: selectedAddressId}))
-    navigate("review");
+    dispatch(setAddressId({ id: selectedAddressId }));
+    navigate("/review");
   };
   useEffect(() => {
     if (isSuccess && data?.data?.data) {
@@ -118,19 +117,20 @@ export const AddressPage = () => {
             <span className={classes.box__card__new__right} />
           </button>
         </div>
-        <button
-          className={classes.box__btn__review}
-          onClick={handleNavigateToReview}
-        >
-          Review & Checkout
-        </button>
+        {heading === "Select Address" && (
+          <button
+            className={classes.box__btn__review}
+            onClick={handleNavigateToReview}
+          >
+            Review & Checkout
+          </button>
+        )}
       </div>
     </div>
   ) : (
     <CartLoader />
   );
 };
-
 
 export const checkAuthLoader = () => {
   const authToken = Cookies.get("authToken");
