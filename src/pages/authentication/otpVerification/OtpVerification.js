@@ -49,14 +49,14 @@ export const OtpVerification = () => {
     try {
       const otp = Object.values(data).join("");
       const mobile_no = phoneNumber;
-      const response = await mutateAsync({ mobile_no, otp });
+      const user_id = Cookies.get("guestId")
+      const response = await mutateAsync({ mobile_no, otp, user_id });
 
       const status = response.status;
       console.log(response.status);
       const urlFragment = new URLSearchParams();
       urlFragment.set("authenticated", status);
       navigate("/");
-      Cookies.remove("guestId")
       localStorage.removeItem("mobile_no");
       toast.dismiss(loadingToastId);
       toast.success(response.message.displayMessage);

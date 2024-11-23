@@ -4,7 +4,7 @@ import axiosInstance from "../../axios-middleware/axiosMiddleware";
 
 export const cartListRequest = async (coupon_code, guestId) => {
   const authToken = Cookies.get("authToken");
-  const url = authToken ? cartGetListUrl(coupon_code) : cartGetListGuestUrl(guestId);
+  const url = authToken ? cartGetListUrl(coupon_code) : cartGetListGuestUrl(guestId, coupon_code);
   try {
     const response = await axiosInstance.get(
       url,

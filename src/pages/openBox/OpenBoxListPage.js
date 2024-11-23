@@ -38,10 +38,15 @@ export const OpenBoxListPage = () => {
   const navigate = useNavigate();
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const user_id = Cookies.get("user_id");
+  const authToken = Cookies.get("authToken");
+  const userId = Cookies.get("user_id");
+  const guestId = Cookies.get("guestId");
+  const medium = authToken ? "user" : "guest";
+  const user_id = authToken ? userId : guestId;
   const { data, isSuccess, isLoading, refetch } = useGetOpenBoxList(
     filters,
-    user_id
+    user_id,
+    medium
   );
 
   const {

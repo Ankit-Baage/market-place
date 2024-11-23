@@ -19,6 +19,7 @@ import { OpenBoxReviewItem } from "../../components/review/openBoxReviewItem/Ope
 import { NewPhoneReviewItem } from "../../components/review/newPhoneReviewItem/NewPhoneReviewItem";
 import { AddressReview } from "../../components/review/addressReview/AddressReview";
 import useGetReviewList from "../../tanstack-query/reviewList/useGetReviewList";
+import usePlaceOrderMutation from "../../tanstack-query/placeOrder/usePlaceOrderMutation";
 
 export const ReviewPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -30,8 +31,30 @@ export const ReviewPage = () => {
     coupon_code: coupon.id,
     address_id: address.id,
   });
+  const {
+    mutate,
+    isLoading: orderPosting,
+    isError: orderError,
+    isSuccess: orderSuccess,
+    // error,
+  } = usePlaceOrderMutation();
 
-  const placeholder = "Search...";
+  // const placeholder = "Search...";
+  const handlePlaceOrder = () => {
+    mutate(
+      { coupon_code: coupon.id, address_id: address.id },
+      {
+        onSuccess: (data) => {
+          console.log("Order placed successfully:", data);
+          navigate("/success");
+        },
+        onError: (error) => {
+          console.error("Failed to place order:", error);
+          navigate("/cart");
+        },
+      }
+    );
+  };
 
   const content = useMemo(() => {
     if (isLoading) {
@@ -89,9 +112,9 @@ export const ReviewPage = () => {
 
   console.log("coupon :", coupon.id);
   console.log("address :", address.id);
-  const handleNavigate=()=>{
-    navigate("/cart")
-  }
+  const handleNavigate = () => {
+    navigate("/cart");
+  };
 
   return (
     <div className={classes.box}>
@@ -129,7 +152,12 @@ export const ReviewPage = () => {
           couponAmount={data?.data?.data?.applied_coupon_amount}
           couponCode={data?.data?.data?.applied_coupon_code}
         />
-        <button className={classes.box__cart__order__btn}>Place Order</button>
+        <button
+          className={classes.box__cart__order__btn}
+          onClick={handlePlaceOrder}
+        >
+          Place Order
+        </button>
       </div>
     </div>
   );

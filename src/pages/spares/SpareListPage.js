@@ -32,12 +32,17 @@ export const SpareListPage = () => {
     end: null,
   });
   const navigate = useNavigate();
-  const user_id = Cookies.get("user_id");
+  const authToken = Cookies.get("authToken");
+  const userId = Cookies.get("user_id");
+  const guestId = Cookies.get("guestId");
+  const medium = authToken ? "user" : "guest";
+  const user_id = authToken ? userId : guestId;
 
   const [searchParams, setSearchParams] = useSearchParams();
   const { data, isSuccess, isLoading, refetch } = useGetSpareList(
     filters,
-    user_id
+    user_id,
+    medium
   );
   const {
     data: add,

@@ -41,6 +41,8 @@ import { CouponsPage } from "./pages/coupons/CouponsPage";
 import { ReviewPage } from "./pages/review/ReviewPage";
 import { OrdersPage } from "./pages/order/OrdersPage";
 import { CartOutLet } from "./pages/cart/CartOutLet";
+import { dropdownData, DropdownPage, NestedDropdown } from "./pages/test/TestPage";
+import { OrderSuccess } from "./components/orderSuccess/OrderSuccess";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -147,6 +149,7 @@ const router = createBrowserRouter([
       {
         path: "address",
         element: <AddressOutlet />,
+        loader:checkAuthLoader,
         children: [
           { index: true, element: <AddressPage /> },
           { path: ":addressId", element: <AddressDetailPage /> },
@@ -154,6 +157,7 @@ const router = createBrowserRouter([
         ],
       },
       { path: "review", element: <ReviewPage /> },
+      { path: "success", element: <OrderSuccess /> },
     ],
   },
   {
@@ -168,6 +172,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  // { path: "test", element: <NestedDropdown data={dropdownData} /> },
 ]);
 
 function App() {

@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { spareListRequest } from "../../utils/https-request/spares/spareListRequest";
 
-function useGetSpareList(filters, user_id) {
+function useGetSpareList(filters, user_id, medium) {
   const { data, isError, isLoading, isSuccess, refetch } = useQuery({
-    queryKey: ["spareList", filters,user_id],
-    queryFn:()=> spareListRequest(filters, user_id),
+    queryKey: ["spareList", filters,user_id, medium],
+    queryFn:()=> spareListRequest(filters, user_id, medium),
     refetchOnWindowFocus: false,
     retry: 2, // Maximum number of retries
     retryDelay: 1000,

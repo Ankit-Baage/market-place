@@ -1,10 +1,10 @@
 import { spareListUrl } from "../../../config/config";
 import axiosInstance from "../../axios-middleware/axiosMiddleware";
 
-export const spareListRequest = async (filters, user_id) => {
+export const spareListRequest = async (filters, user_id, medium) => {
   try {
     const response = await axiosInstance.get(
-      spareListUrl(user_id),
+      spareListUrl(user_id, medium),
 
       {
         params: filters,

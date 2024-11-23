@@ -42,7 +42,7 @@ export const VrpListPage = () => {
   const userId = Cookies.get("user_id");
   const guestId = Cookies.get("guestId");
   const medium = authToken ? "user" : "guest";
-  const user_id = guestId ? guestId : userId;
+  const user_id = authToken ? userId : guestId;
   const {
     data: add,
     error,

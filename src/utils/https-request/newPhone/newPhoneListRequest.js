@@ -1,10 +1,10 @@
 import { newPhoneListUrl} from "../../../config/config";
 import axiosInstance from "../../axios-middleware/axiosMiddleware";
 
-export const nePhoneListRequest = async (filters, user_id) => {
+export const nePhoneListRequest = async (filters, user_id, medium) => {
   try {
     const response = await axiosInstance.get(
-      newPhoneListUrl(user_id),
+      newPhoneListUrl(user_id, medium),
 
       {
         params: filters,

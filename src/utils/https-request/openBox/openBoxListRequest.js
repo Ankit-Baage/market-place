@@ -1,10 +1,10 @@
 import { openBoxListUrl} from "../../../config/config";
 import axiosInstance from "../../axios-middleware/axiosMiddleware";
 
-export const openBoxListRequest = async (filters,user_id) => {
+export const openBoxListRequest = async (filters,user_id, medium) => {
   try {
     const response = await axiosInstance.get(
-      openBoxListUrl(user_id),
+      openBoxListUrl(user_id, medium),
 
       {
         params: filters,

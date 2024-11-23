@@ -93,8 +93,8 @@ export const vrpSortingListUrl = `${baseUrl}${version}${mode}${vrpListEndPoint}$
 
 //**Spares***//
 
-export const spareListUrl = (user_id, mode) =>
-  `${baseUrl}${version}${mode}${spareListEndPoint}?user_id=${user_id}&mode=${mode}`;
+export const spareListUrl = (user_id, medium) =>
+  `${baseUrl}${version}${mode}${spareListEndPoint}?user_id=${user_id}&mode=${medium}`;
 
 export const spareDetailUrl = (requestId, user_id) =>
   `${baseUrl}${version}${mode}${spareListEndPoint}${spareDetailEndPoint(
@@ -122,8 +122,8 @@ export const spareFilterUrl = (filterType) =>
 /////////////********newPhone*********************///////
 const newPhoneDetailEndPoint = (requestId) => `details?request_id=${requestId}`;
 const newPhoneListEndPoint = "new_phones/";
-export const newPhoneListUrl = (user_id, mode) =>
-  `${baseUrl}${version}${mode}${newPhoneListEndPoint}?user_id=${user_id}&mode=${mode}`;
+export const newPhoneListUrl = (user_id, medium) =>
+  `${baseUrl}${version}${mode}${newPhoneListEndPoint}?user_id=${user_id}&mode=${medium}`;
 
 const newPhoneFilterEndPoint = (filterType) => `filter?mode=${filterType}`;
 export const newPhoneFilterUrl = (filterType) =>
@@ -163,8 +163,8 @@ export const newPhoneVariantUrl = (sellerId, brand, model, color) =>
 
 const openBoxDetailEndPoint = (requestId) => `details?request_id=${requestId}`;
 const openBoxListEndPoint = "open_box/";
-export const openBoxListUrl = (user_id, mode) =>
-  `${baseUrl}${version}${mode}${openBoxListEndPoint}?user_id=${user_id}&mode=${mode}`;
+export const openBoxListUrl = (user_id, medium) =>
+  `${baseUrl}${version}${mode}${openBoxListEndPoint}?user_id=${user_id}&mode=${medium}`;
 
 const openBoxFilterEndPoint = (filterType) => `filter?mode=${filterType}`;
 export const openBoxFilterUrl = (filterType) =>
@@ -205,8 +205,14 @@ const cart = "cart";
 
 export const cartListUrl = `${baseUrl}${version}${mode}${cart}`;
 
-export const cartGetListGuestUrl =(guestId)=> `${baseUrl}${version}${mode}${cart}/guest?user_id=${guestId}`;
-export const cartLisGuestUrl =`${baseUrl}${version}${mode}${cart}/guest`;
+export const cartGetListGuestUrl = (guestId, coupon_code) => {
+  let url =  `${baseUrl}${version}${mode}${cart}/guest?user_id=${guestId}`;
+  url += coupon_code ? `&coupon_code=${coupon_code}` : "";
+
+  return url;
+}
+ 
+export const cartLisGuestUrl = `${baseUrl}${version}${mode}${cart}/guest`;
 
 export const cartGetListUrl = (coupon_code) => {
   let url = baseUrl + version + mode + cart;
@@ -261,7 +267,18 @@ const coupons = "coupons";
 export const couponsListUrl = `${baseUrl}${version}${mode}${role}${coupons}`;
 
 //////////////////orders///////////////////
-const orders = "orders"
+const orders = "orders";
 export const ordersListUrl = `${baseUrl}${version}${mode}${orders}`;
 
-export const orderDetailUrl =(order_id)=>`${baseUrl}${version}${mode}${orders}/details?order_id=${order_id}`;
+export const orderDetailUrl = (order_id) =>
+  `${baseUrl}${version}${mode}${orders}/details?order_id=${order_id}`;
+
+/////////////placeOrder////////////////
+export const placeOrderUrl = (coupon_code, address_id) => {
+  let url = `${baseUrl}${version}${mode}${orders}/payment_processing_approval?address_id=${address_id}&mode=cart`;
+  if (coupon_code) {
+    url += `&coupon_code=${coupon_code}`;
+  }
+  return url;
+
+};

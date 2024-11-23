@@ -9,12 +9,16 @@ export const getAuthToken = () => {
 
 export const generateId = () => {
   const authToken = Cookies.get("authToken");
-  if (!authToken) {
-    const guestId = uuidv4();
-    Cookies.set("guestId", guestId);
-    return guestId;
-  }
-  
+  const guestId = Cookies.get("guestId");
 
-  return Cookies.get("guestId");
+  // Generate guestId only if both authToken and guestId are absent
+  if (!authToken && !guestId) {
+    const newGuestId = uuidv4();
+    Cookies.set("guestId", newGuestId);
+    return newGuestId;
+  }
+
+  // Return existing guestId if present
+  return guestId;
 };
+

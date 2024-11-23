@@ -12,7 +12,7 @@ import { NewPhoneItem } from "../../components/newPhone/NewPhoneItem";
 import axiosInstance from "../../utils/axios-middleware/axiosMiddleware";
 import { useQuery } from "@tanstack/react-query";
 import { Carousel } from "../../components/carousel/Carousel";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWishListMutation";
 
@@ -35,10 +35,18 @@ export const NewPhoneListPage = () => {
     end: null,
   });
   const navigate = useNavigate();
-  const user_id = Cookies.get('user_id');
+  const authToken = Cookies.get("authToken");
+  const userId = Cookies.get("user_id");
+  const guestId = Cookies.get("guestId");
+  const medium = authToken ? "user" : "guest";
+  const user_id = authToken ? userId : guestId;
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const { data, isSuccess, isLoading, refetch } = useGetNewPhoneList(filters,user_id);
+  const { data, isSuccess, isLoading, refetch } = useGetNewPhoneList(
+    filters,
+    user_id,
+    medium
+  );
 
   const {
     data: add,
@@ -111,7 +119,7 @@ export const NewPhoneListPage = () => {
     const data = {
       category_id: item.category_id,
       item_id: item.id,
-      master_product_id:item.master_product_id,
+      master_product_id: item.master_product_id,
     };
 
     try {

@@ -117,7 +117,7 @@ export const AddressPage = () => {
             <span className={classes.box__card__new__right} />
           </button>
         </div>
-        {heading === "Select Address" && (
+        {heading === "Select Address" && data?.data?.data.length > 0 && (
           <button
             className={classes.box__btn__review}
             onClick={handleNavigateToReview}
