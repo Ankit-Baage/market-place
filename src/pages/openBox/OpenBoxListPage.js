@@ -16,6 +16,8 @@ import { OpenBoxItem } from "../../components/openBox/OpenBoxItem";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWishListMutation";
+import { BannerSkeleton } from "../../components/skeletons/bannerSkeleton/BannerSeleton";
+import { ProductSkeleton } from "../../components/skeletons/productSkeleton/ProductSkeleton";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -43,17 +45,9 @@ export const OpenBoxListPage = () => {
   const guestId = Cookies.get("guestId");
   const medium = authToken ? "user" : "guest";
   const user_id = authToken ? userId : guestId;
-  const { data, isSuccess, isLoading, refetch } = useGetOpenBoxList(
-    filters,
-    user_id,
-    medium
-  );
+  const { data, isSuccess } = useGetOpenBoxList(filters, user_id, medium);
 
-  const {
-    data: add,
-    error,
-    isLoading: addisLoading,
-  } = useQuery({
+  const { data: add, isSuccess: addIsSuccess } = useQuery({
     queryKey: ["advertisements", "new_phones", "listing"],
     queryFn: fetchAdvertisements,
   });
@@ -140,12 +134,18 @@ export const OpenBoxListPage = () => {
         onSelection={(itemId) => handleRadioApplied(itemId)}
       />
 
-      <div className={classes.box__space}>
-        {add?.data?.length > 1 ? (
-          <Carousel images={add?.data} />
-        ) : (
-          <Advertisement image={add?.data[0].url} />
-        )}
+      {addIsSuccess ? (
+        <div className={classes.box__space}>
+          {add?.data?.length > 1 ? (
+            <Carousel images={add?.data} />
+          ) : (
+            <Advertisement image={add?.data[0].url} />
+          )}
+        </div>
+      ) : (
+        <BannerSkeleton />
+      )}
+      {isSuccess ? (
         <div className={classes.box__itemList}>
           {data?.map((openBoxItem) => (
             <OpenBoxItem
@@ -156,7 +156,9 @@ export const OpenBoxListPage = () => {
             />
           ))}
         </div>
-      </div>
+      ) : (
+        <ProductSkeleton />
+      )}
     </div>
   );
 };

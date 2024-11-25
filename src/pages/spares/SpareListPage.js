@@ -12,6 +12,8 @@ import { Carousel } from "../../components/carousel/Carousel";
 import Cookies from "js-cookie";
 import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWishListMutation";
 import { toast } from "react-toastify";
+import { BannerSkeleton } from "../../components/skeletons/bannerSkeleton/BannerSeleton";
+import { ProductSkeleton } from "../../components/skeletons/productSkeleton/ProductSkeleton";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -39,16 +41,8 @@ export const SpareListPage = () => {
   const user_id = authToken ? userId : guestId;
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const { data, isSuccess, isLoading, refetch } = useGetSpareList(
-    filters,
-    user_id,
-    medium
-  );
-  const {
-    data: add,
-    error,
-    isLoading: addisLoading,
-  } = useQuery({
+  const { data, isSuccess } = useGetSpareList(filters, user_id, medium);
+  const { data: add, isSuccess: addIsSuccess } = useQuery({
     queryKey: ["advertisements", "spares", "listing"],
     queryFn: fetchAdvertisements,
   });
@@ -113,7 +107,7 @@ export const SpareListPage = () => {
     const data = {
       category_id: item.category_id,
       item_id: item.id,
-      master_product_id:item.master_product_id,
+      master_product_id: item.master_product_id,
     };
 
     try {
@@ -132,14 +126,18 @@ export const SpareListPage = () => {
         onPriceApply={handlePriceApplied}
         onSelection={(itemId) => handleRadioApplied(itemId)}
       />
-      {/* <Advertisement image={spare_Advertisement} /> */}
-
-      <div className={classes.box__space}>
-        {add?.data?.length > 1 ? (
-          <Carousel images={add?.data} />
-        ) : (
-          <Advertisement image={add?.data[0].url} />
-        )}
+      {addIsSuccess ? (
+        <div className={classes.box__space}>
+          {add?.data?.length > 1 ? (
+            <Carousel images={add?.data} />
+          ) : (
+            <Advertisement image={add?.data[0].url} />
+          )}
+        </div>
+      ) : (
+        <BannerSkeleton />
+      )}
+      {isSuccess ? (
         <div className={classes.box__itemList}>
           {data?.map((spareItem, index) => (
             <SpareItem
@@ -150,7 +148,9 @@ export const SpareListPage = () => {
             />
           ))}
         </div>
-      </div>
+      ) : (
+        <ProductSkeleton />
+      )}
     </div>
   );
 };

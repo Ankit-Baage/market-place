@@ -13,7 +13,11 @@ import { BestSellingNewPhones } from "../../../components/bestSellingProduct/bes
 import { BestSellingOpenBox } from "../../../components/bestSellingProduct/bestSellingOpenBox/BestSellingOpenBox";
 
 export const BestSellingProductPage = () => {
-  const { data: vrpData, isLoading: vrpLoading } = useGetBestVrpProductList();
+  const {
+    data: vrpData,
+    isLoading: vrpLoading,
+    isSuccess: vrpIsSuccess,
+  } = useGetBestVrpProductList();
   const { data: sparesData, isLoading: sparesLoading } =
     useGetBestSparesProductList();
   const { data: newPhonesData, isLoading: newPhoneLoading } =

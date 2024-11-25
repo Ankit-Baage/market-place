@@ -21,3 +21,37 @@
   row-gap: 22px;
 
 }
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  row-gap: 28px;
+}
+
+.profile__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile__head__title {
+  font-family: "Poppins", sans;
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: 600;
+  color: #2F3567;
+}
+
+
+.profile__head__status {
+  align-self: center;
+  font-family: "Poppins", sans;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+  color: #FFFFFF;
+  padding: 10px 8px;
+  background-color: #F2B200;
+  border-radius: 4px;
+
+}

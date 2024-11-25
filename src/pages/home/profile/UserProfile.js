@@ -1,16 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import useGetProfileData from "../../../tanstack-query/profile/useGetProfile";
 import { UserDataForm } from "../../../components/form/userDataForm/UserDataForm";
 import { BrandIdentity } from "../../../components/brandIdentity/BrandIdentity";
-import classes from "./userProfile.module.css";
 import useUpdateProfileMutation from "../../../tanstack-query/profile/useUpdateProfile";
 import axiosInstance from "../../../utils/axios-middleware/axiosMiddleware";
 import { useDispatch } from "react-redux";
 import { openLoader } from "../../../store/loaderSlice";
-import { useNavigate } from "react-router-dom";
+import classes from "./userProfile.module.css";
+import { UserProfileSkeleton } from "../../../components/skeletons/userProfileSkeleton/UserProfileSkeleton";
+import { ButtonSkeleton } from "../../../components/skeletons/buttonSkeleton/ButtonSkeleton";
 
 export const UserProfile = () => {
-  const { data, isLoading, isError, refetch } = useGetProfileData();
+  const { data, isLoading, isError, isSuccess, refetch } = useGetProfileData();
   const {
     mutateAsync,
     isLoading: isMutating,
@@ -19,10 +21,6 @@ export const UserProfile = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  if (isLoading) {
-    return <div>Loading...</div>; // Display a loading indicator
-  }
 
   if (isError) {
     console.log(isError);
@@ -77,11 +75,27 @@ export const UserProfile = () => {
         <BrandIdentity />
       </div>
 
-      <UserDataForm
-        userData={data?.data?.data}
-        onSubmit={handleSubmit}
-        status={data?.data?.data.profile_status}
-      />
+      <div className={classes.profile}>
+        <div className={classes.profile__head}>
+          <h1 className={classes.profile__head__title}>Profile Details</h1>
+          {isSuccess ? (
+            <h2 className={classes.profile__head__status}>
+              {data?.data?.data.profile_status}
+            </h2>
+          ) : (
+            <ButtonSkeleton />
+          )}
+        </div>
+        {isSuccess ? (
+          <UserDataForm
+            userData={data?.data?.data}
+            onSubmit={handleSubmit}
+            status={data?.data?.data.profile_status}
+          />
+        ) : (
+          <UserProfileSkeleton />
+        )}
+      </div>
     </div>
   );
 };

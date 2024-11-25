@@ -15,6 +15,8 @@ import { Carousel } from "../../components/carousel/Carousel";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWishListMutation";
+import { BannerSkeleton } from "../../components/skeletons/bannerSkeleton/BannerSeleton";
+import { ProductSkeleton } from "../../components/skeletons/productSkeleton/ProductSkeleton";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -42,17 +44,9 @@ export const NewPhoneListPage = () => {
   const user_id = authToken ? userId : guestId;
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const { data, isSuccess, isLoading, refetch } = useGetNewPhoneList(
-    filters,
-    user_id,
-    medium
-  );
+  const { data, isSuccess } = useGetNewPhoneList(filters, user_id, medium);
 
-  const {
-    data: add,
-    error,
-    isLoading: addisLoading,
-  } = useQuery({
+  const { data: add, isSuccess: addIsSuccess } = useQuery({
     queryKey: ["advertisements", "new_phones", "listing"],
     queryFn: fetchAdvertisements,
   });
@@ -139,12 +133,18 @@ export const NewPhoneListPage = () => {
         onSelection={(itemId) => handleRadioApplied(itemId)}
       />
 
-      <div className={classes.box__space}>
-        {add?.data?.length > 1 ? (
-          <Carousel images={add?.data} />
-        ) : (
-          <Advertisement image={add?.data.url} />
-        )}
+      {addIsSuccess ? (
+        <div className={classes.box__space}>
+          {add?.data?.length > 1 ? (
+            <Carousel images={add?.data} />
+          ) : (
+            <Advertisement image={add?.data[0].url} />
+          )}
+        </div>
+      ) : (
+        <BannerSkeleton />
+      )}
+      {isSuccess ? (
         <div className={classes.box__itemList}>
           {data?.map((spareItem, index) => (
             <NewPhoneItem
@@ -155,7 +155,9 @@ export const NewPhoneListPage = () => {
             />
           ))}
         </div>
-      </div>
+      ) : (
+        <ProductSkeleton />
+      )}
     </div>
   );
 };

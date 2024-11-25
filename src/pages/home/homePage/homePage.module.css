@@ -27,7 +27,8 @@
 }
 
 .container__routes__btns {
-  width: max-content;
+  width: 130px;
+  height: 52px;
   display: flex;
   justify-content: center;
   column-gap: 4px;

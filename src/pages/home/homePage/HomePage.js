@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import classes from "./homePage.module.css";
 import Cookies from "js-cookie";
-import { getAuthToken } from "../../../utils/helpers/getAuth";
 import { Header } from "../../../components/header/Header";
 import { SearchInput } from "../../../components/searchInput/SearchInput";
 import prexo from "../../../assets/prexo.svg";
@@ -16,6 +14,8 @@ import axiosInstance from "../../../utils/axios-middleware/axiosMiddleware";
 import { useQuery } from "@tanstack/react-query";
 import { Advertisement } from "../../../components/vrpItem/advertisement/Advertisement";
 import { BestSellingProductPage } from "../bestSellingProducts/BestSellingProductPage";
+import { BannerSkeleton } from "../../../components/skeletons/bannerSkeleton/BannerSeleton";
+import classes from "./homePage.module.css";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -44,16 +44,15 @@ export const HomePage = () => {
   const carousel = useRef();
   const {
     data: add,
-    error,
-    isLoading: addisLoading,
+    isError,
+    isLoading,
+    isSuccess
   } = useQuery({
     queryKey: ["advertisements", "home", "landing"],
     queryFn: fetchAdvertisements,
   });
 
   useEffect(() => {
-    console.log("scrollWidth:", carousel.current.scrollWidth);
-    console.log("offsetWidth:", carousel.current.offsetWidth);
     setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
   }, []);
 
@@ -95,13 +94,17 @@ export const HomePage = () => {
       </div>
 
       <div className={classes.container__box__content}>
-        <div className={classes.container__carousel}>
-          {add?.data.length > 1 ? (
-            <Carousel images={add?.data} />
-          ) : (
-            <Advertisement image={add?.data[0].url} />
-          )}
-        </div>
+        {isSuccess ? (
+          <div className={classes.container__carousel}>
+            {add?.data.length > 1 ? (
+              <Carousel images={add?.data} />
+            ) : (
+              <Advertisement image={add?.data[0].url} />
+            )}
+          </div>
+        ) : (
+          <BannerSkeleton />
+        )}
 
         <BestSellingProductPage />
       </div>

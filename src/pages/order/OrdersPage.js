@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import useGetOrdersList from "../../tanstack-query/ordersList/useGetOrdersList";
 import classes from "./ordersPage.module.css";
 import { SearchBar } from "../../components/ui/searchBarWithBackBtn/SearchBar";
 import { Order } from "../../components/order/Order";
+import { CartLoader } from "../../components/cart/cartLoader/CartLoader";
 
 const tabs = [
   { id: 1, title: "All" },
@@ -13,14 +14,8 @@ const tabs = [
 
 export const OrdersPage = () => {
   const [status, setStatus] = useState();
-  const { data, isSuccess, isLoading, refetch } = useGetOrdersList(status);
+  const { data, isSuccess } = useGetOrdersList(status);
   const placeholder = "Search for mobile, accessories & more";
-
-  useEffect(() => {
-    if (data) {
-      console.log(data);
-    }
-  }, [data]);
 
   return (
     <div className={classes.box}>
@@ -32,11 +27,15 @@ export const OrdersPage = () => {
           </button>
         ))}
       </div>
-      <div className={classes.box__orders}>
-        {data?.data?.data.map((order) => (
-          <Order key={order.id} order={order} />
-        ))}
-      </div>
+      {isSuccess ? (
+        <div className={classes.box__orders}>
+          {data?.data?.data.map((order) => (
+            <Order key={order.id} order={order} />
+          ))}
+        </div>
+      ) : (
+        <CartLoader />
+      )}
     </div>
   );
 };

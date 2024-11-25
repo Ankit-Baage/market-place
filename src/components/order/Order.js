@@ -8,8 +8,7 @@ export const Order = ({ order }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedOrderId, setSelectedOrderId] = useState(null);
   const [openShipments, setOpenShipments] = useState({});
-  const { data, isLoading,  isSuccess } =
-    useGetOrderDetail(selectedOrderId);
+  const { data, isSuccess } = useGetOrderDetail(selectedOrderId);
 
   const shipments = useMemo(() => {
     if (isSuccess && data?.data?.data) {
@@ -40,7 +39,7 @@ export const Order = ({ order }) => {
   };
   console.log(shipments ? shipments : null);
   return (
-    <div className={classes.box}>
+    <motion.div className={classes.box}>
       <div className={classes.box__upper}>
         <div className={classes.box__upper__order}>
           <div className={classes.box__upper__order__info}>
@@ -72,6 +71,7 @@ export const Order = ({ order }) => {
       {shipments.map((shipment) => (
         <motion.div
           className={classes.box__content}
+          key={shipment.id}
           initial={{ height: 0, opacity: 0 }}
           animate={
             isExpanded
@@ -80,7 +80,6 @@ export const Order = ({ order }) => {
           }
           exit={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.3 }}
-          key={shipment.id}
         >
           <div className={classes.box__content__info}>
             <h1 className={classes.box__content__info__title}>
@@ -185,6 +184,6 @@ export const Order = ({ order }) => {
           </div>
         ) : null}
       </div>
-    </div>
+    </motion.div>
   );
 };

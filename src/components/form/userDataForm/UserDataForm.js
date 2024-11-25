@@ -11,7 +11,7 @@ import { CustomInput } from "../customInput/CustomInput";
 import { FileUploadInput } from "../fileUploadInput/FileUploadInput";
 import { Button } from "../../ui/button/Button";
 
-export const UserDataForm = ({ userData, onSubmit, status }) => {
+export const UserDataForm = ({ userData, onSubmit}) => {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const { register, handleSubmit, formState, setValue } = useForm({
     defaultValues: userData,
@@ -53,11 +53,11 @@ export const UserDataForm = ({ userData, onSubmit, status }) => {
   };
 
   return (
-    <div className={classes.profile}>
-      <div className={classes.profile__head}>
-        <h1 className={classes.profile__head__title}>Profile Details</h1>
-        <h2 className={classes.profile__head__status}>{status}</h2>
-      </div>
+    // <div className={classes.profile}>
+    //   <div className={classes.profile__head}>
+    //     <h1 className={classes.profile__head__title}>Profile Details</h1>
+    //     <h2 className={classes.profile__head__status}>{status}</h2>
+    //   </div>
       <form
         className={classes.form}
         onSubmit={handleSubmit(submitHandler)}
@@ -144,7 +144,6 @@ export const UserDataForm = ({ userData, onSubmit, status }) => {
           />
         </div>
       </form>
-      {/* <DevTool control={control} /> */}
-    </div>
+    // </div>
   );
 };

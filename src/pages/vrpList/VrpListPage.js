@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import classes from "./vrpListPage.module.css";
 
 import { VrpItem } from "../../components/vrpItem/VrpItem";
-import { Spinner } from "../../components/ui/spinner/Spinner";
 import { Advertisement } from "../../components/vrpItem/advertisement/Advertisement";
 import { FilterPage } from "./filter/FilterPage";
 import useGetVrpSortedList from "../../tanstack-query/vrp/useGetVrpSortedList";
@@ -13,6 +12,8 @@ import { Carousel } from "../../components/carousel/Carousel";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWishListMutation";
+import { BannerSkeleton } from "../../components/skeletons/bannerSkeleton/BannerSeleton";
+import { ProductSkeleton } from "../../components/skeletons/productSkeleton/ProductSkeleton";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -45,14 +46,13 @@ export const VrpListPage = () => {
   const user_id = authToken ? userId : guestId;
   const {
     data: add,
-    error,
-    isLoading: addIsLoading,
+    isSuccess: addIsSuccess,
   } = useQuery({
     queryKey: ["advertisements", "vrp", "listing"],
     queryFn: fetchAdvertisements,
   });
 
-  const { data, isSuccess, isLoading, refetch } = useGetVrpSortedList(
+  const { data, isSuccess, refetch } = useGetVrpSortedList(
     filters,
     user_id,
     medium
@@ -133,29 +133,32 @@ export const VrpListPage = () => {
         setFilterMode={setInFilterMode}
         filters={filters}
       />
-      {isLoading ? (
-        <Spinner />
-      ) : (
+      {addIsSuccess ? (
         <div className={classes.box__space}>
           {add?.data?.length > 1 ? (
             <Carousel images={add?.data} />
           ) : (
             <Advertisement image={add?.data[0].url} />
           )}
-
-          <div className={classes.box__item}>
-            {vrpListData?.map((vrpItem, index) => (
-              <VrpItem
-                key={vrpItem.request_id}
-                item={vrpItem}
-                index={index}
-                totalItems={vrpListData.length}
-                onClick={navigateToVrpDetail}
-                onWishList={(event) => handleAddToWishList(event, vrpItem)}
-              />
-            ))}
-          </div>
         </div>
+      ) : (
+        <BannerSkeleton />
+      )}
+      {isSuccess ? (
+        <div className={classes.box__item}>
+          {vrpListData?.map((vrpItem, index) => (
+            <VrpItem
+              key={vrpItem.request_id}
+              item={vrpItem}
+              index={index}
+              totalItems={vrpListData.length}
+              onClick={navigateToVrpDetail}
+              onWishList={(event) => handleAddToWishList(event, vrpItem)}
+            />
+          ))}
+        </div>
+      ) : (
+        <ProductSkeleton />
       )}
     </div>
   );

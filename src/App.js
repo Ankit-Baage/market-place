@@ -41,7 +41,11 @@ import { CouponsPage } from "./pages/coupons/CouponsPage";
 import { ReviewPage } from "./pages/review/ReviewPage";
 import { OrdersPage } from "./pages/order/OrdersPage";
 import { CartOutLet } from "./pages/cart/CartOutLet";
-import { dropdownData, DropdownPage, NestedDropdown } from "./pages/test/TestPage";
+import {
+  dropdownData,
+  DropdownPage,
+  NestedDropdown,
+} from "./pages/test/TestPage";
 import { OrderSuccess } from "./components/orderSuccess/OrderSuccess";
 const router = createBrowserRouter([
   {
@@ -103,9 +107,17 @@ const router = createBrowserRouter([
         element: <ProfileInfoPage />,
         children: [
           { index: true, element: <ProfileNavigation /> },
-          { path: "profile", element: <UserProfile /> },
-          { path: "later", element: <LaterPage /> },
-          { path: "wishList", element: <WishListPage /> },
+          {
+            path: "profile",
+            element: <UserProfile />,
+            loader: checkAuthLoader,
+          },
+          { path: "later", element: <LaterPage />, loader: checkAuthLoader },
+          {
+            path: "wishList",
+            element: <WishListPage />,
+            loader: checkAuthLoader,
+          },
           {
             path: "address",
             element: <AddressOutlet />,
@@ -149,7 +161,7 @@ const router = createBrowserRouter([
       {
         path: "address",
         element: <AddressOutlet />,
-        loader:checkAuthLoader,
+        loader: checkAuthLoader,
         children: [
           { index: true, element: <AddressPage /> },
           { path: ":addressId", element: <AddressDetailPage /> },

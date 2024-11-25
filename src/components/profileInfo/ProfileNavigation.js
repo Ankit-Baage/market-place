@@ -106,7 +106,7 @@ export const ProfileNavigation = () => {
   const handleLogOut = () => {
     Cookies.remove("authToken");
     Cookies.remove("user_id");
-    navigate("/authentication");
+    navigate("/");
   };
   return (
     <div className={classes.box__wrapper}>
