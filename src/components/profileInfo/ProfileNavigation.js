@@ -122,14 +122,12 @@ export const ProfileNavigation = () => {
     <div className={classes.box__wrapper}>
       <div className={classes.box}>
         <div className={classes.box__profile}>
-          
           <div className={classes.box__profile__info}>
             <button
               className={classes.box__profile__back}
               onClick={handleNavigate}
             />
             <div className={classes.box__profile__user}>
-              
               <span className={classes.box__profile__info__avatar}>
                 {getFirstLetter(data?.data?.data?.name)}
               </span>

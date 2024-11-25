@@ -11,28 +11,36 @@ import { BestSellingVrp } from "../../../components/bestSellingProduct/bestSelli
 import { BestSellingSpares } from "../../../components/bestSellingProduct/bestSellingSpares/BestSellingSpares";
 import { BestSellingNewPhones } from "../../../components/bestSellingProduct/bestSellingNewPhones/BestSellingNewPhones";
 import { BestSellingOpenBox } from "../../../components/bestSellingProduct/bestSellingOpenBox/BestSellingOpenBox";
+import { BestSellingSkeleton } from "../../../components/skeletons/bestSellingSkeleton/BestSellingSkeleton";
+import { BestSellingCardMessage } from "../../../components/skeletons/bestSellingCardMessage/BestSellingCardMessage";
 
 export const BestSellingProductPage = () => {
-  const {
-    data: vrpData,
-    isLoading: vrpLoading,
-    isSuccess: vrpIsSuccess,
-  } = useGetBestVrpProductList();
-  const { data: sparesData, isLoading: sparesLoading } =
+  const { data: vrpData, isSuccess: vrpIsSuccess } = useGetBestVrpProductList();
+  const { data: sparesData, isSuccess: sparesIsSuccess } =
     useGetBestSparesProductList();
-  const { data: newPhonesData, isLoading: newPhoneLoading } =
+  const { data: newPhonesData, isSuccess: newPhoneIsSuccess } =
     useGetBestNewPhonesProductList();
-  const { data: openBoxData, isLoading: openBoxLoading } =
+  const { data: openBoxData, isSuccess: openBoxIsSuccess } =
     useGetBestOpenBoxProductList();
 
   const navigate = useNavigate();
+
+  const getComponent = (isSuccess, data, Component) => {
+    if (!isSuccess) return BestSellingSkeleton; // Render skeleton if the API is not successful
+    if (data?.length === 0) return BestSellingCardMessage; // Render skeleton if data is empty
+    return Component; // Render actual component if data exists
+  };
 
   const bestSellingSections = [
     {
       title: "VRP (Hot Deals)",
       path: "vrp",
       data: vrpData?.data?.data,
-      component: BestSellingVrp,
+      component: getComponent(
+        vrpIsSuccess,
+        vrpData?.data?.data,
+        BestSellingVrp
+      ),
       keyField: "request_id",
       propName: "vrp",
     },
@@ -40,25 +48,37 @@ export const BestSellingProductPage = () => {
       title: "Spares (Hot Deals)",
       path: "spares",
       data: sparesData?.data?.data,
-      component: BestSellingSpares,
+      component: getComponent(
+        sparesIsSuccess,
+        sparesData?.data?.data,
+        BestSellingSpares
+      ),
       keyField: "id",
-      propName: "spares", // for Spares data
+      propName: "spares",
     },
     {
       title: "New Phones (Hot Deals)",
       path: "newPhone",
       data: newPhonesData?.data?.data,
-      component: BestSellingNewPhones,
+      component: getComponent(
+        newPhoneIsSuccess,
+        newPhonesData?.data?.data,
+        BestSellingNewPhones
+      ),
       keyField: "id",
-      propName: "newPhones", // for New Phones data
+      propName: "newPhones",
     },
     {
       title: "Open Box (Hot Deals)",
       path: "openBox",
       data: openBoxData?.data?.data,
-      component: BestSellingOpenBox,
+      component: getComponent(
+        openBoxIsSuccess,
+        openBoxData?.data?.data,
+        BestSellingOpenBox
+      ),
       keyField: "id",
-      propName: "openBox", // for Open Box data
+      propName: "openBox",
     },
   ];
 
