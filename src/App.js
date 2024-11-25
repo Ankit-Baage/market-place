@@ -11,7 +11,7 @@ import { HomePage } from "./pages/home/homePage/HomePage";
 import { Home } from "./pages/home/Home";
 import { Error } from "./components/error/Error";
 import { ProtectedOtpRoute } from "./route-guard/auth/ProtectedOtpRoute";
-import { UserProfile } from "./pages/home/profile/UserProfile";
+import { UserProfile } from "./pages/profile/UserProfile";
 import "./App.css";
 
 import { VrpPage } from "./pages/vrp/VrpPage";

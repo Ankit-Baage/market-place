@@ -15,6 +15,8 @@ import { LinkItem } from "../linkItem/LinkItem";
 
 import classes from "./profileNavigation.module.css";
 import { useNavigate } from "react-router-dom";
+import useGetUserProfile from "../../tanstack-query/userProfile/useGetUserProfile";
+import { getFirstLetter } from "../../utils/helpers/getFirstLetter";
 
 const navigators = [
   {
@@ -98,6 +100,13 @@ const extendedNavigators = [
 
 export const ProfileNavigation = () => {
   const navigate = useNavigate();
+  const authToken = Cookies.get("authToken");
+  const userId = Cookies.get("user_id");
+  const guestId = Cookies.get("guestId");
+  const user_id = authToken ? userId : guestId;
+
+  const { data, isLoading, isError, isSuccess, refetch } =
+    useGetUserProfile(user_id);
 
   const handleNavigate = () => {
     navigate(-1);
@@ -108,19 +117,24 @@ export const ProfileNavigation = () => {
     Cookies.remove("user_id");
     navigate("/");
   };
+  console.log(data);
   return (
     <div className={classes.box__wrapper}>
       <div className={classes.box}>
         <div className={classes.box__profile}>
+          
           <div className={classes.box__profile__info}>
             <button
               className={classes.box__profile__back}
               onClick={handleNavigate}
             />
             <div className={classes.box__profile__user}>
-              <span className={classes.box__profile__info__avatar}></span>
+              
+              <span className={classes.box__profile__info__avatar}>
+                {getFirstLetter(data?.data?.data?.name)}
+              </span>
               <h2 className={classes.box__profile__info__name}>
-                Shubham Srivastav
+                {data?.data?.data?.name}
               </h2>
             </div>
           </div>

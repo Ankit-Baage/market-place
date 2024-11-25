@@ -206,12 +206,12 @@ const cart = "cart";
 export const cartListUrl = `${baseUrl}${version}${mode}${cart}`;
 
 export const cartGetListGuestUrl = (guestId, coupon_code) => {
-  let url =  `${baseUrl}${version}${mode}${cart}/guest?user_id=${guestId}`;
+  let url = `${baseUrl}${version}${mode}${cart}/guest?user_id=${guestId}`;
   url += coupon_code ? `&coupon_code=${coupon_code}` : "";
 
   return url;
-}
- 
+};
+
 export const cartLisGuestUrl = `${baseUrl}${version}${mode}${cart}/guest`;
 
 export const cartGetListUrl = (coupon_code) => {
@@ -280,5 +280,9 @@ export const placeOrderUrl = (coupon_code, address_id) => {
     url += `&coupon_code=${coupon_code}`;
   }
   return url;
-
 };
+
+///////////UserProfile////////////////
+
+export const userProfileUrl = (user_id) =>
+  `${baseUrl}${version}${mode}accounts/user_profile?user_id=${user_id}`;

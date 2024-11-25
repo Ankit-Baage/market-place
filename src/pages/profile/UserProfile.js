@@ -1,15 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import useGetProfileData from "../../../tanstack-query/profile/useGetProfile";
-import { UserDataForm } from "../../../components/form/userDataForm/UserDataForm";
-import { BrandIdentity } from "../../../components/brandIdentity/BrandIdentity";
-import useUpdateProfileMutation from "../../../tanstack-query/profile/useUpdateProfile";
-import axiosInstance from "../../../utils/axios-middleware/axiosMiddleware";
+import useGetProfileData from "../../tanstack-query/profile/useGetProfile";
+import { UserDataForm } from "../../components/form/userDataForm/UserDataForm";
+import { BrandIdentity } from "../../components/brandIdentity/BrandIdentity";
+import useUpdateProfileMutation from "../../tanstack-query/profile/useUpdateProfile";
+import axiosInstance from "../../utils/axios-middleware/axiosMiddleware";
 import { useDispatch } from "react-redux";
-import { openLoader } from "../../../store/loaderSlice";
+import { openLoader } from "../../store/loaderSlice";
 import classes from "./userProfile.module.css";
-import { UserProfileSkeleton } from "../../../components/skeletons/userProfileSkeleton/UserProfileSkeleton";
-import { ButtonSkeleton } from "../../../components/skeletons/buttonSkeleton/ButtonSkeleton";
+import { UserProfileSkeleton } from "../../components/skeletons/userProfileSkeleton/UserProfileSkeleton";
+import { ButtonSkeleton } from "../../components/skeletons/buttonSkeleton/ButtonSkeleton";
 
 export const UserProfile = () => {
   const { data, isLoading, isError, isSuccess, refetch } = useGetProfileData();
