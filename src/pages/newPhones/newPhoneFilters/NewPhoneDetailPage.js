@@ -44,7 +44,11 @@ export const NewPhoneDetailPage = () => {
   // const [selectedColor, setSelectedColor] = useState(null);
   const [selectedVariant, setSelectedVariant] = useState(null);
   const params = useParams();
-  const user_id = Cookies.get("user_id");
+  const authToken = Cookies.get("authToken");
+  const userId = Cookies.get("user_id");
+  const guestId = Cookies.get("guestId");
+  const medium = authToken ? "user" : "guest";
+  const user_id = authToken ? userId : guestId;
 
   const requestId = params.requestId;
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -54,6 +58,7 @@ export const NewPhoneDetailPage = () => {
     {
       requestId,
       user_id,
+      medium
     }
   );
 

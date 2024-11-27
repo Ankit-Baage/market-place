@@ -48,12 +48,17 @@ export const OpenBoxDetailPage = () => {
   const requestId = params.requestId;
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const user_id = Cookies.get('user_id')
+  const authToken = Cookies.get("authToken");
+  const userId = Cookies.get("user_id");
+  const guestId = Cookies.get("guestId");
+  const medium = authToken ? "user" : "guest";
+  const user_id = authToken ? userId : guestId;
 
   const navigate = useNavigate();
   const { data, isError, isPending, isSuccess, refetch } = useGetOpenBoxDetail({
     requestId,
-    user_id
+    user_id,
+    medium
   });
 
   const handleColorSelect = (color) => {

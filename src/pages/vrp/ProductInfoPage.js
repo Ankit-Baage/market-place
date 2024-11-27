@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import useGetVrpProductDetail from "../../tanstack-query/vrp/useGetVrpProductDetail";
 import { ProductInfo } from "../../components/productDetail/vrp/productInfo/ProductInfo";
@@ -8,8 +8,16 @@ import { toast } from "react-toastify";
 
 export const ProductInfoPage = ({ requestId, onProductData }) => {
   const dispatch = useDispatch();
-  const user_id = Cookies.get('user_id')
-  const { data, isLoading, isSuccess } = useGetVrpProductDetail({ requestId, user_id });
+  const authToken = Cookies.get("authToken");
+  const userId = Cookies.get("user_id");
+  const guestId = Cookies.get("guestId");
+  const medium = authToken ? "user" : "guest";
+  const user_id = authToken ? userId : guestId;
+  const { data, isLoading, isSuccess } = useGetVrpProductDetail({
+    requestId,
+    user_id,
+    medium,
+  });
   const {
     mutateAsync,
     isLoading: isAdding,
@@ -44,5 +52,10 @@ export const ProductInfoPage = ({ requestId, onProductData }) => {
     }
   }, [data, isSuccess, onProductData]);
 
-  return <ProductInfo productData={data?.data.data} onWishList={handleAddToWishList}/>;
+  return (
+    <ProductInfo
+      productData={data?.data.data}
+      onWishList={handleAddToWishList}
+    />
+  );
 };

@@ -59,10 +59,10 @@ export const uploadImageUrl = `${baseUrl}${version}${mode}${role}${uploadImageEn
 export const vrpListUrl = (user_id, medium) =>
   `${baseUrl}${version}${mode}${vrpListEndPoint}?user_id=${user_id}&mode=${medium}`;
 
-export const vrpProductDetailUrl = (requestId, user_id) =>
+export const vrpProductDetailUrl = (requestId, user_id, medium) =>
   `${baseUrl}${version}${mode}${vrpListEndPoint}${vrpProductDetailEndPoint(
     requestId
-  )}&user_id=${user_id}`;
+  )}&user_id=${user_id}&mode=${medium}`;
 
 export const vrpProductModelTableUrl = (requestId) =>
   `${baseUrl}${version}${mode}${vrpListEndPoint}${vrpProductModelTableEndPoint(
@@ -96,10 +96,10 @@ export const vrpSortingListUrl = `${baseUrl}${version}${mode}${vrpListEndPoint}$
 export const spareListUrl = (user_id, medium) =>
   `${baseUrl}${version}${mode}${spareListEndPoint}?user_id=${user_id}&mode=${medium}`;
 
-export const spareDetailUrl = (requestId, user_id) =>
+export const spareDetailUrl = (requestId, user_id, medium) =>
   `${baseUrl}${version}${mode}${spareListEndPoint}${spareDetailEndPoint(
     requestId
-  )}&user_id=${user_id}`;
+  )}&user_id=${user_id}&mode=${medium}`;
 
 export const spareColorUrl = (sellerId, brand, model, partName) =>
   `${baseUrl}${version}${mode}${spareListEndPoint}${spareColorEndPoint(
@@ -131,10 +131,10 @@ export const newPhoneFilterUrl = (filterType) =>
     filterType
   )}`;
 
-export const newPhoneDetailUrl = (requestId, user_id) =>
+export const newPhoneDetailUrl = (requestId, user_id, medium) =>
   `${baseUrl}${version}${mode}${newPhoneListEndPoint}${newPhoneDetailEndPoint(
     requestId
-  )}&user_id=${user_id}`;
+  )}&user_id=${user_id}&mode=${medium}`;
 
 const newPhoneColorEndPoint = (sellerId, brand, model, ram, rom) =>
   `color_details?seller_id=${sellerId}&brand=${brand}&model=${model}&ram=${ram}&rom=${rom}`;
@@ -172,10 +172,10 @@ export const openBoxFilterUrl = (filterType) =>
     filterType
   )}`;
 
-export const openBoxDetailUrl = (requestId, user_id) =>
+export const openBoxDetailUrl = (requestId, user_id, medium) =>
   `${baseUrl}${version}${mode}${openBoxListEndPoint}${openBoxDetailEndPoint(
     requestId
-  )}&user_id=${user_id}`;
+  )}&user_id=${user_id}&mode=${medium}`;
 
 const openBoxColorEndPoint = (sellerId, brand, model, ram, rom) =>
   `color_details?seller_id=${sellerId}&brand=${brand}&model=${model}&ram=${ram}&rom=${rom}`;

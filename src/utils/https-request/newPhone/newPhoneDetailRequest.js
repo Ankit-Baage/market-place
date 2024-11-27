@@ -1,10 +1,10 @@
 import { newPhoneDetailUrl } from "../../../config/config";
 import axiosInstance from "../../axios-middleware/axiosMiddleware";
 
-export const newPhoneDetailRequest = async ({ requestId,user_id }) => {
+export const newPhoneDetailRequest = async ({ requestId, user_id, medium }) => {
   try {
     const response = await axiosInstance.get(
-      newPhoneDetailUrl(requestId, user_id),
+      newPhoneDetailUrl(requestId, user_id, medium),
 
       {
         headers: {

@@ -39,7 +39,11 @@ function reducer(state, action) {
 export const SpareDetailPage = () => {
   const [selectedColor, setSelectedColor] = useState(null);
   const params = useParams();
-  const user_id = Cookies.get("user_id");
+  const authToken = Cookies.get("authToken");
+  const userId = Cookies.get("user_id");
+  const guestId = Cookies.get("guestId");
+  const medium = authToken ? "user" : "guest";
+  const user_id = authToken ? userId : guestId;
 
   const requestId = params.requestId;
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -48,6 +52,7 @@ export const SpareDetailPage = () => {
   const { data, isError, isPending, isSuccess, refetch } = useGetSpareDetail({
     requestId,
     user_id,
+    medium,
   });
 
   const handleColorSelect = (color) => {

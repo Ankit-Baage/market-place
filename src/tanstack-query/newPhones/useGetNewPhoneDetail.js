@@ -4,15 +4,15 @@ import { newPhoneDetailRequest } from "../../utils/https-request/newPhone/newPho
 
 
 
-function useGetNewPhoneDetail({ requestId, user_id }) { // Destructure as an object
+function useGetNewPhoneDetail({ requestId, user_id, medium }) { // Destructure as an object
   const {
     data,
     isError,
     isLoading,
     isSuccess,
   } = useQuery({
-    queryKey: ["newPhoneDetail", requestId,user_id],
-    queryFn: () => newPhoneDetailRequest({ requestId,user_id }), // Wrapped in a function
+    queryKey: ["newPhoneDetail", requestId,user_id, medium],
+    queryFn: () => newPhoneDetailRequest({ requestId,user_id, medium }), // Wrapped in a function
     refetchOnWindowFocus: false,
     retry: 2,
     retryDelay: 1000,

@@ -1,10 +1,10 @@
 import { spareDetailUrl } from "../../../config/config";
 import axiosInstance from "../../axios-middleware/axiosMiddleware";
 
-export const spareDetailRequest = async ({ requestId, user_id }) => {
+export const spareDetailRequest = async ({ requestId, user_id, medium }) => {
   try {
     const response = await axiosInstance.get(
-      spareDetailUrl(requestId,user_id),
+      spareDetailUrl(requestId, user_id, medium),
 
       {
         headers: {

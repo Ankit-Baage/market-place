@@ -151,10 +151,12 @@ export const ProfileNavigation = () => {
           </div>
         </div>
       </div>
-      <button className={classes.box__btn} onClick={handleLogOut}>
-        <span className={classes.box__btn__img} />
-        Logout
-      </button>
+      {authToken && (
+        <button className={classes.box__btn} onClick={handleLogOut}>
+          <span className={classes.box__btn__img} />
+          Logout
+        </button>
+      )}
     </div>
   );
 };
