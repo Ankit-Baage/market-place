@@ -17,6 +17,7 @@ import classes from "./profileNavigation.module.css";
 import { useNavigate } from "react-router-dom";
 import useGetUserProfile from "../../tanstack-query/userProfile/useGetUserProfile";
 import { getFirstLetter } from "../../utils/helpers/getFirstLetter";
+import { HeartBeat } from "../skeletons/heartBeat/HeartBeat";
 
 const navigators = [
   {
@@ -113,10 +114,18 @@ export const ProfileNavigation = () => {
   };
 
   const handleLogOut = () => {
-    Cookies.remove("authToken");
-    Cookies.remove("user_id");
-    navigate("/");
+    if (authToken) {
+      // Remove session-related cookies
+      Cookies.remove("authToken");
+      Cookies.remove("user_id");
+      // Redirect to home after logging out
+      navigate("/");
+    } else {
+      // Redirect to login page
+      navigate("/authentication");
+    }
   };
+
   console.log(data);
   return (
     <div className={classes.box__wrapper}>
@@ -127,14 +136,18 @@ export const ProfileNavigation = () => {
               className={classes.box__profile__back}
               onClick={handleNavigate}
             />
-            <div className={classes.box__profile__user}>
-              <span className={classes.box__profile__info__avatar}>
-                {getFirstLetter(data?.data?.data?.name)}
-              </span>
-              <h2 className={classes.box__profile__info__name}>
-                {data?.data?.data?.name}
-              </h2>
-            </div>
+            {isSuccess ? (
+              <div className={classes.box__profile__user}>
+                <span className={classes.box__profile__info__avatar}>
+                  {getFirstLetter(data?.data?.data?.name)}
+                </span>
+                <h2 className={classes.box__profile__info__name}>
+                  {data?.data?.data?.name}
+                </h2>
+              </div>
+            ) : (
+              <HeartBeat />
+            )}
           </div>
         </div>
         <div className={classes.box__links}>
@@ -151,12 +164,11 @@ export const ProfileNavigation = () => {
           </div>
         </div>
       </div>
-      {authToken && (
-        <button className={classes.box__btn} onClick={handleLogOut}>
-          <span className={classes.box__btn__img} />
-          Logout
-        </button>
-      )}
+
+      <button className={classes.box__btn} onClick={handleLogOut}>
+        <span className={classes.box__btn__img} />
+        {authToken ? "Log Out" : "Log In"}
+      </button>
     </div>
   );
 };
