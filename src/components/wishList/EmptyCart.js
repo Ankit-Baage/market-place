@@ -16,7 +16,7 @@ export const EmptyCart = () => {
         Your wishlist is empty.
         </h3>
       </div>
-      <Link to="/home" className={classes.box__link}>Back to product</Link>
+      <Link to="/" className={classes.box__link}>Back to product</Link>
     </div>
   );
 };

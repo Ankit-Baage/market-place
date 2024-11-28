@@ -24,24 +24,32 @@ export const VrpProductDetail = ({ requestId, onDownLoad }) => {
 
   const handleProductData = useCallback(
     (categoryId, requestId, cart_status, wishlist_status) => {
-      if (
-        productInfo.category_id !== categoryId ||
-        productInfo.request_id !== requestId
-      ) {
-        setProductInfo({
-          category_id: categoryId,
-          request_id: requestId,
-          cart_status,
-          wishlist_status,
-        });
-        console.log("Product data received from child:", {
-          categoryId,
-          requestId,
-        });
-      }
+      setProductInfo((prevInfo) => {
+        if (
+          prevInfo.category_id !== categoryId ||
+          prevInfo.request_id !== requestId ||
+          prevInfo.cart_status !== cart_status ||
+          prevInfo.wishlist_status !== wishlist_status
+        ) {
+          console.log("Product data received from child:", {
+            categoryId,
+            requestId,
+            cart_status,
+            wishlist_status,
+          });
+          return {
+            category_id: categoryId,
+            request_id: requestId,
+            cart_status,
+            wishlist_status,
+          };
+        }
+        return prevInfo; // No changes, return the same state
+      });
     },
-    [productInfo]
+    []
   );
+  
 
   const handleAddToCart = async (event) => {
     event.stopPropagation();
@@ -81,7 +89,7 @@ export const VrpProductDetail = ({ requestId, onDownLoad }) => {
       </div>
       <div className={classes.btn}>
         <button className={classes.btn__addToCart} onClick={handleAddToCart}>
-          {productInfo.cart_status ? "Added" : "Add To Cart"}
+          {productInfo.cart_status?"Added":"Add To cart"}
         </button>
         <button className={classes.btn__buy}>Buy Now</button>
       </div>

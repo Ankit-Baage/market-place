@@ -18,6 +18,7 @@ export const SparesCartItem = ({
   const handleImageError = (e) => {
     e.target.src = dummyImage;
   };
+  console.log("cartPage: ",item)
 
   return (
     <div className={classes.box}>

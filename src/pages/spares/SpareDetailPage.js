@@ -1,5 +1,12 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, {
+  useEffect,
+  useReducer,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import useCartListQuantityMutation from "../../tanstack-query/cartList/useCartListQuantityMutation";
 import useGetSpareDetail from "../../tanstack-query/spares/useGetSpareDetail";
 import { Spinner } from "../../components/ui/spinner/Spinner";
 import { SpareDetail } from "../../components/spares/spareDetail/SpareDetail";
@@ -49,17 +56,65 @@ export const SpareDetailPage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const navigate = useNavigate();
+  const [localQuantities, setLocalQuantities] = useState({});
+  const [isUpdating, setIsUpdating] = useState(false);
   const { data, isError, isPending, isSuccess, refetch } = useGetSpareDetail({
     requestId,
     user_id,
     medium,
   });
+  const { mutate: updateQuantity } = useCartListQuantityMutation();
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);
     console.log("Selected color:", color.record_id);
     navigate(`/home/spares/${color.record_id}`);
   };
+
+  const handleQuantityUpdate = useCallback(
+    (operator, item = data?.data?.data) => {
+      let currentQuantity = localQuantities[item.id] || item.quantity;
+
+      // Check for decrement case and prevent going below 1
+      if (operator === "decrease" && currentQuantity === 1) {
+        toast.warn("Quantity cannot be less than 1");
+        return;
+      }
+
+      const data = {
+        operator,
+        category_id: item.category_id,
+        master_product_id: item.master_product_id,
+      };
+
+      // Set the loader for the API call
+      setIsUpdating(true);
+
+      // Make the API call to update the quantity
+      updateQuantity(data, {
+        onSuccess: (response) => {
+          // Based on the operator, adjust the local quantity only on success
+          const newQuantity =
+            operator === "increase" ? currentQuantity + 1 : currentQuantity - 1;
+
+          setLocalQuantities((prev) => ({
+            ...prev,
+            [item.id]: newQuantity, // Update local state with the new quantity
+          }));
+
+          toast.success(response.message.displayMessage);
+        },
+        onError: (error) => {
+          toast.error(error.response.data.message.displayMessage);
+        },
+        onSettled: () => {
+          // Clear the updating state once the API call finishes
+          setIsUpdating(false);
+        },
+      });
+    },
+    [data?.data?.data, localQuantities, updateQuantity]
+  );
 
   useEffect(() => {
     if (isSuccess && data) {
@@ -81,6 +136,8 @@ export const SpareDetailPage = () => {
         originalPrice: formatNumber(data.data.data.original_price),
         discountedPrice: formatNumber(data.data.data.discounted_price),
         discountPercentage: data.data.data.discount_percentage,
+        quantity: data.data.data.quantity,
+        onQuantityUpdate: handleQuantityUpdate,
       };
       const color = data.data.data.color;
       const partName = data.data.data.part_name;
@@ -98,7 +155,7 @@ export const SpareDetailPage = () => {
         },
       });
     }
-  }, [isSuccess, data]);
+  }, [isSuccess, data, handleQuantityUpdate]);
 
   const {
     spareCarouselData,
@@ -159,7 +216,12 @@ export const SpareDetailPage = () => {
     <SpareDetail
       spareData={data}
       images={spareCarouselData}
-      prices={prices}
+      prices={{
+        ...prices,
+        spareQuantity:
+          localQuantities[data?.data?.data.id] || data?.data?.data.quantity,
+        isUpdating,
+      }}
       colors={spareColors?.data.data}
       color={color}
       partName={data?.data.data.part_name}
@@ -169,6 +231,9 @@ export const SpareDetailPage = () => {
       cart_status={data?.data?.data.cart_status}
       wishlist_status={data?.data?.data.wishlist_status}
       onWishList={handleAddToWishList}
+      // onUpdateQuantity={(operator) =>
+      //   handleQuantityUpdate(operator, data?.data?.data)
+      // }
     />
   );
 };

@@ -26,9 +26,9 @@ export const BestSellingProductPage = () => {
   const navigate = useNavigate();
 
   const getComponent = (isSuccess, data, Component) => {
-    if (!isSuccess) return BestSellingSkeleton; // Render skeleton if the API is not successful
-    if (data?.length === 0) return BestSellingCardMessage; // Render skeleton if data is empty
-    return Component; // Render actual component if data exists
+    if (!isSuccess) return BestSellingSkeleton;
+    if (data?.length === 0) return BestSellingCardMessage;
+    return Component;
   };
 
   const bestSellingSections = [
@@ -95,9 +95,13 @@ export const BestSellingProductPage = () => {
               ></Link>
             </div>
             <div className={classes.box__content__container}>
-              {data?.map((item) => (
-                <Component key={item[keyField]} {...{ [propName]: item }} />
-              ))}
+              {Array.isArray(data) && data.length > 0 ? (
+                data.map((item) => (
+                  <Component key={item[keyField]} {...{ [propName]: item }} />
+                ))
+              ) : (
+                <Component />
+              )}
             </div>
             <hr className={classes.box__content__sep} />
           </div>

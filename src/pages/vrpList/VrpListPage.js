@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWishListMutation";
 import { BannerSkeleton } from "../../components/skeletons/bannerSkeleton/BannerSeleton";
 import { ProductSkeleton } from "../../components/skeletons/productSkeleton/ProductSkeleton";
+import { BestSellingCardMessage } from "../../components/skeletons/bestSellingCardMessage/BestSellingCardMessage";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -44,15 +45,12 @@ export const VrpListPage = () => {
   const guestId = Cookies.get("guestId");
   const medium = authToken ? "user" : "guest";
   const user_id = authToken ? userId : guestId;
-  const {
-    data: add,
-    isSuccess: addIsSuccess,
-  } = useQuery({
+  const { data: add, isSuccess: addIsSuccess } = useQuery({
     queryKey: ["advertisements", "vrp", "listing"],
     queryFn: fetchAdvertisements,
   });
 
-  const { data, isSuccess, refetch } = useGetVrpSortedList(
+  const { data, isLoading, isSuccess, refetch } = useGetVrpSortedList(
     filters,
     user_id,
     medium
@@ -128,11 +126,14 @@ export const VrpListPage = () => {
 
   return (
     <div className={classes.box}>
-      <FilterPage
-        onFilterSort={handleApplied}
-        setFilterMode={setInFilterMode}
-        filters={filters}
-      />
+      {isSuccess && vrpListData.length > 0 && (
+        <FilterPage
+          onFilterSort={handleApplied}
+          setFilterMode={setInFilterMode}
+          filters={filters}
+        />
+      )}
+
       {addIsSuccess ? (
         <div className={classes.box__space}>
           {add?.data?.length > 1 ? (
@@ -144,22 +145,28 @@ export const VrpListPage = () => {
       ) : (
         <BannerSkeleton />
       )}
-      {isSuccess ? (
-        <div className={classes.box__item}>
-          {vrpListData?.map((vrpItem, index) => (
-            <VrpItem
-              key={vrpItem.request_id}
-              item={vrpItem}
-              index={index}
-              totalItems={vrpListData.length}
-              onClick={navigateToVrpDetail}
-              onWishList={(event) => handleAddToWishList(event, vrpItem)}
-            />
-          ))}
-        </div>
-      ) : (
-        <ProductSkeleton />
-      )}
+      <div className={classes.box__item}>
+        {isLoading ? (
+          <ProductSkeleton /> // Render skeleton while loading
+        ) : isSuccess ? (
+          vrpListData?.length > 0 ? (
+            <div className={classes.box__item}>
+              {vrpListData.map((vrpItem, index) => (
+                <VrpItem
+                  key={vrpItem.request_id}
+                  item={vrpItem}
+                  index={index}
+                  totalItems={vrpListData.length}
+                  onClick={navigateToVrpDetail}
+                  onWishList={(event) => handleAddToWishList(event, vrpItem)}
+                />
+              ))}
+            </div>
+          ) : (
+            <BestSellingCardMessage />
+          )
+        ) : null}
+      </div>
     </div>
   );
 };

@@ -128,7 +128,7 @@
   height: 0;
   color: #FF6F3F;
 }
-input[type='checkbox']{
+.box__content__filter input[type='checkbox']{
   text-align: center;
   display: table-cell;
   vertical-align: middle;

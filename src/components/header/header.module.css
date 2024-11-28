@@ -5,8 +5,8 @@
 }
 
 
-.container__box__logo{
-  width:142px;
+.container__box__logo {
+  width: 142px;
   height: 36px;
   cursor: pointer;
 }
@@ -19,9 +19,17 @@
 }
 
 .container__box__notification {
-  width:24px;
+  width: 24px;
   height: 24px;
   cursor: pointer;
 
 }
 
+.box__btn {
+  width: 74px;
+  height: 29px;
+  background-image: url("../../assets/header__logOut.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

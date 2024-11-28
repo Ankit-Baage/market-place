@@ -1,0 +1,31 @@
+.box{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 32px;
+}
+
+.box__head {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.box__head__img {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+.box__head__title {
+  font-family: "Poppins", sans;
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 500;
+  color: #2F3567;
+}
+.box__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 8px;
+}

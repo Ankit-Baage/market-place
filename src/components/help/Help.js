@@ -7,6 +7,7 @@ import help__offer from "../../assets/help_offer.svg";
 import help__payment from "../../assets/help_payment.svg";
 import help__orders from "../../assets/help_orders.svg";
 import classes from "./help.module.css";
+import { Link } from "react-router-dom";
 
 const topics = [
   {
@@ -16,6 +17,7 @@ const topics = [
     backGroundColor: "#E4FDEF",
     border: "1px solid #CBFADF",
     borderRadius: "8px",
+    path:"account"
   },
   {
     id: 2,
@@ -24,6 +26,7 @@ const topics = [
     backGroundColor: "#FFF0EB",
     border: "1px solid #FCE6DE",
     borderRadius: "8px",
+    path:"products"
   },
   {
     id: 3,
@@ -32,6 +35,7 @@ const topics = [
     backGroundColor: "#F0F2FF",
     border: "1px solid #E1E5FD",
     borderRadius: "8px",
+    path:"returns&exchange"
   },
   {
     id: 4,
@@ -40,6 +44,7 @@ const topics = [
     backGroundColor: "#EBF7FF",
     border: "1px solid #DDF0FC",
     borderRadius: "8px",
+    path:"offers"
   },
   {
     id: 5,
@@ -56,6 +61,7 @@ const topics = [
     backGroundColor: "#E3FFFD",
     border: "1px solid #CEF4F2",
     borderRadius: "8px",
+    path:"orders"
   },
 ];
 
@@ -88,7 +94,8 @@ export const Help = () => {
         <h2 className={classes.box__help__title}>Browse Topics</h2>
         <div className={classes.box__help__tabs}>
           {topics.map((topic) => (
-            <div
+            <Link
+            to={topic.path}
               key={topic.id}
               style={{
                 backgroundColor: topic.backGroundColor,
@@ -105,7 +112,7 @@ export const Help = () => {
               <h3 className={classes.box__help__tabs__tab__name}>
                 {topic.title}
               </h3>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

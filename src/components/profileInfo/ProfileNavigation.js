@@ -106,7 +106,7 @@ export const ProfileNavigation = () => {
   const guestId = Cookies.get("guestId");
   const user_id = authToken ? userId : guestId;
 
-  const { data, isLoading, isError, isSuccess, refetch } =
+  const { data, isError, isSuccess, } =
     useGetUserProfile(user_id);
 
   const handleNavigate = () => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useCallback, useEffect, useReducer, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "../../../components/ui/spinner/Spinner";
 
@@ -10,8 +10,9 @@ import useGetOpenBoxVariant from "../../../tanstack-query/openBox/useGetOpenBoxV
 import useCartListSparesMutation from "../../../tanstack-query/cartList/useCartListSparesMutation";
 import { OpenBoxDetail } from "../../../components/openBox/openBoxDetail/OpenBoxDetail";
 import { toast } from "react-toastify";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 import useAddToWishListMutation from "../../../tanstack-query/wishList/useAddToWishListMutation";
+import useCartListQuantityMutation from "../../../tanstack-query/cartList/useCartListQuantityMutation";
 
 const initialState = {
   newPhoneCarouselData: null,
@@ -42,24 +43,27 @@ function reducer(state, action) {
 }
 
 export const OpenBoxDetailPage = () => {
- 
   const params = useParams();
 
   const requestId = params.requestId;
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [localQuantities, setLocalQuantities] = useState({});
+  const [isUpdating, setIsUpdating] = useState(false);
 
   const authToken = Cookies.get("authToken");
   const userId = Cookies.get("user_id");
   const guestId = Cookies.get("guestId");
   const medium = authToken ? "user" : "guest";
   const user_id = authToken ? userId : guestId;
+ 
 
   const navigate = useNavigate();
   const { data, isError, isPending, isSuccess, refetch } = useGetOpenBoxDetail({
     requestId,
     user_id,
-    medium
+    medium,
   });
+  const { mutate: updateQuantity } = useCartListQuantityMutation();
 
   const handleColorSelect = (color) => {
     // setSelectedColor(color);
@@ -73,6 +77,50 @@ export const OpenBoxDetailPage = () => {
 
     navigate(`/home/openBox/${requestId}`);
   };
+  const handleQuantityUpdate = useCallback(
+    (operator, item = data?.data?.data) => {
+      let currentQuantity = localQuantities[item.id] || item.quantity;
+
+      // Check for decrement case and prevent going below 1
+      if (operator === "decrease" && currentQuantity === 1) {
+        toast.warn("Quantity cannot be less than 1");
+        return;
+      }
+
+      const data = {
+        operator,
+        category_id: item.category_id,
+        master_product_id: item.master_product_id,
+      };
+
+      // Set the loader for the API call
+      setIsUpdating(true);
+
+      // Make the API call to update the quantity
+      updateQuantity(data, {
+        onSuccess: (response) => {
+          // Based on the operator, adjust the local quantity only on success
+          const newQuantity =
+            operator === "increase" ? currentQuantity + 1 : currentQuantity - 1;
+
+          setLocalQuantities((prev) => ({
+            ...prev,
+            [item.id]: newQuantity, // Update local state with the new quantity
+          }));
+
+          toast.success(response.message.displayMessage);
+        },
+        onError: (error) => {
+          toast.error(error.response.data.message.displayMessage);
+        },
+        onSettled: () => {
+          // Clear the updating state once the API call finishes
+          setIsUpdating(false);
+        },
+      });
+    },
+    [data?.data?.data, localQuantities, updateQuantity]
+  );
 
   useEffect(() => {
     if (isSuccess && data) {
@@ -95,6 +143,8 @@ export const OpenBoxDetailPage = () => {
         originalPrice: formatNumber(data.data.data.original_price),
         discountedPrice: formatNumber(data.data.data.discounted_price),
         discountPercentage: data.data.data.discount_percentage,
+        quantity: data.data.data.quantity,
+        onQuantityUpdate: handleQuantityUpdate,
       };
       const color = data.data.data.color;
       const variantQuery = {
@@ -118,7 +168,7 @@ export const OpenBoxDetailPage = () => {
         },
       });
     }
-  }, [isSuccess, data]);
+  }, [isSuccess, data, handleQuantityUpdate]);
 
   const {
     newPhoneCarouselData,
@@ -143,7 +193,6 @@ export const OpenBoxDetailPage = () => {
     isSuccess: isAdded,
   } = useAddToWishListMutation();
 
-
   const handleAddToWishList = async () => {
     const payLoad = {
       category_id: data?.data?.data?.category_id,
@@ -158,7 +207,6 @@ export const OpenBoxDetailPage = () => {
       toast.error(error.message.displayMessage);
     }
   };
-
 
   const handleAddToCart = async (event) => {
     event.stopPropagation();
@@ -182,7 +230,12 @@ export const OpenBoxDetailPage = () => {
   ) : (
     <OpenBoxDetail
       images={newPhoneCarouselData}
-      prices={prices}
+      prices={{
+        ...prices,
+        openBoxQuantity:
+          localQuantities[data?.data?.data.id] || data?.data?.data.quantity,
+        isUpdating,
+      }}
       colors={newPhoneColors?.data.data}
       color={color}
       partName={data?.data.data.part_name}

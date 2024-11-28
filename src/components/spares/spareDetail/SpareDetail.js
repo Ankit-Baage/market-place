@@ -51,6 +51,7 @@ export const SpareDetail = ({
   }, [images, validateImages]);
 
   console.log(validationResults);
+  console.log("sparesDetail ",spareData?.data?.data)
 
   const imageArray = Object.keys(validationResults).filter(
     (key) => validationResults[key] === true

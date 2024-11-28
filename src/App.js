@@ -8,7 +8,6 @@ import { OtpVerification } from "./pages/authentication/otpVerification/OtpVerif
 import { DevTool } from "@hookform/devtools";
 import { HomePage } from "./pages/home/homePage/HomePage";
 
-import { Home } from "./pages/home/Home";
 import { Error } from "./components/error/Error";
 import { ProtectedOtpRoute } from "./route-guard/auth/ProtectedOtpRoute";
 import { UserProfile } from "./pages/profile/UserProfile";
@@ -40,13 +39,10 @@ import { WishListPage } from "./pages/wishList/WishListPage";
 import { CouponsPage } from "./pages/coupons/CouponsPage";
 import { ReviewPage } from "./pages/review/ReviewPage";
 import { OrdersPage } from "./pages/order/OrdersPage";
-import { CartOutLet } from "./pages/cart/CartOutLet";
-import {
-  dropdownData,
-  DropdownPage,
-  NestedDropdown,
-} from "./pages/test/TestPage";
+
 import { OrderSuccess } from "./components/orderSuccess/OrderSuccess";
+import { Help } from "./components/help/Help";
+import { Account } from "./components/help/account/Account";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -128,7 +124,7 @@ const router = createBrowserRouter([
               { path: "add", element: <AddressDetailPage /> },
             ],
           },
-          { path: "orders", element: <OrdersPage /> },
+          { path: "orders", element: <OrdersPage />, loader: checkAuthLoader },
         ],
       },
       {
@@ -138,6 +134,13 @@ const router = createBrowserRouter([
       {
         path: "help",
         element: <HelpPage />,
+        children: [
+          { index: true, element: <Help /> },
+          {
+            path: "account",
+            element: <Account />,
+          },
+        ],
       },
       {
         path: "cart",

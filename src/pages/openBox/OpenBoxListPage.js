@@ -18,6 +18,7 @@ import { toast } from "react-toastify";
 import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWishListMutation";
 import { BannerSkeleton } from "../../components/skeletons/bannerSkeleton/BannerSeleton";
 import { ProductSkeleton } from "../../components/skeletons/productSkeleton/ProductSkeleton";
+import { BestSellingCardMessage } from "../../components/skeletons/bestSellingCardMessage/BestSellingCardMessage";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -45,7 +46,11 @@ export const OpenBoxListPage = () => {
   const guestId = Cookies.get("guestId");
   const medium = authToken ? "user" : "guest";
   const user_id = authToken ? userId : guestId;
-  const { data, isSuccess } = useGetOpenBoxList(filters, user_id, medium);
+  const {
+    data: openBoxListData,
+    isSuccess,
+    isLoading,
+  } = useGetOpenBoxList(filters, user_id, medium);
 
   const { data: add, isSuccess: addIsSuccess } = useQuery({
     queryKey: ["advertisements", "new_phones", "listing"],
@@ -128,11 +133,13 @@ export const OpenBoxListPage = () => {
 
   return (
     <div className={classes.box}>
-      <OpenBoxFilterPage
-        onApply={handleApplied}
-        onPriceApply={handlePriceApplied}
-        onSelection={(itemId) => handleRadioApplied(itemId)}
-      />
+      {isSuccess && openBoxListData.length > 0 && (
+        <OpenBoxFilterPage
+          onApply={handleApplied}
+          onPriceApply={handlePriceApplied}
+          onSelection={(itemId) => handleRadioApplied(itemId)}
+        />
+      )}
 
       {addIsSuccess ? (
         <div className={classes.box__space}>
@@ -145,20 +152,28 @@ export const OpenBoxListPage = () => {
       ) : (
         <BannerSkeleton />
       )}
-      {isSuccess ? (
-        <div className={classes.box__itemList}>
-          {data?.map((openBoxItem) => (
-            <OpenBoxItem
-              key={openBoxItem.id}
-              item={openBoxItem}
-              onClick={navigateToNewPhoneDetail}
-              onWishList={(event) => handleAddToWishList(event, openBoxItem)}
-            />
-          ))}
-        </div>
-      ) : (
-        <ProductSkeleton />
-      )}
+      <div className={classes.box__item}>
+        {isLoading ? (
+          <ProductSkeleton /> // Render skeleton while loading
+        ) : isSuccess ? (
+          openBoxListData?.length > 0 ? (
+            <div className={classes.box__item}>
+              {openBoxListData?.map((openBoxItem) => (
+                <OpenBoxItem
+                  key={openBoxItem.id}
+                  item={openBoxItem}
+                  onClick={navigateToNewPhoneDetail}
+                  onWishList={(event) =>
+                    handleAddToWishList(event, openBoxItem)
+                  }
+                />
+              ))}
+            </div>
+          ) : (
+            <BestSellingCardMessage />
+          )
+        ) : null}
+      </div>
     </div>
   );
 };

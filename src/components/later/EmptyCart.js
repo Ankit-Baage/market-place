@@ -16,7 +16,7 @@ export const EmptyCart = () => {
         Nothing saved for later yet.
         </h3>
       </div>
-      <Link to="/home" className={classes.box__link}>Back to product</Link>
+      <Link to="/" className={classes.box__link}>Back to product</Link>
     </div>
   );
 };

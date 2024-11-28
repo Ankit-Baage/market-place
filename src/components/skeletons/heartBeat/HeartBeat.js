@@ -5,7 +5,6 @@ export const HeartBeat = () => {
   return (
     <div style={{
       display: 'flex',
-      // justifyContent: 'center',
       alignItems: 'center',
       columnGap: '8px',
     }}>
@@ -33,7 +32,7 @@ export const HeartBeat = () => {
           fontWeight: 500,
           fontSize: "12px",
           lineHeight: "18px",
-          color: "##FFFFFF",
+          color: "#FFFFFF",
         }}
       >
         Loading...

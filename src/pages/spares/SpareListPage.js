@@ -14,6 +14,7 @@ import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWish
 import { toast } from "react-toastify";
 import { BannerSkeleton } from "../../components/skeletons/bannerSkeleton/BannerSeleton";
 import { ProductSkeleton } from "../../components/skeletons/productSkeleton/ProductSkeleton";
+import { BestSellingCardMessage } from "../../components/skeletons/bestSellingCardMessage/BestSellingCardMessage";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -41,7 +42,11 @@ export const SpareListPage = () => {
   const user_id = authToken ? userId : guestId;
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const { data, isSuccess } = useGetSpareList(filters, user_id, medium);
+  const {
+    data: sparesListData,
+    isSuccess,
+    isLoading,
+  } = useGetSpareList(filters, user_id, medium);
   const { data: add, isSuccess: addIsSuccess } = useQuery({
     queryKey: ["advertisements", "spares", "listing"],
     queryFn: fetchAdvertisements,
@@ -121,11 +126,14 @@ export const SpareListPage = () => {
 
   return (
     <div className={classes.box}>
-      <SparesFilterPage
-        onApply={handleApplied}
-        onPriceApply={handlePriceApplied}
-        onSelection={(itemId) => handleRadioApplied(itemId)}
-      />
+      {isSuccess && sparesListData.length > 0 && (
+        <SparesFilterPage
+          onApply={handleApplied}
+          onPriceApply={handlePriceApplied}
+          onSelection={(itemId) => handleRadioApplied(itemId)}
+        />
+      )}
+
       {addIsSuccess ? (
         <div className={classes.box__space}>
           {add?.data?.length > 1 ? (
@@ -137,20 +145,27 @@ export const SpareListPage = () => {
       ) : (
         <BannerSkeleton />
       )}
-      {isSuccess ? (
-        <div className={classes.box__itemList}>
-          {data?.map((spareItem, index) => (
-            <SpareItem
-              key={spareItem.id}
-              item={spareItem}
-              onClick={navigateToSpareDetail}
-              onWishList={(event) => handleAddToWishList(event, spareItem)}
-            />
-          ))}
-        </div>
-      ) : (
-        <ProductSkeleton />
-      )}
+
+      <div className={classes.box__itemList}>
+        {isLoading ? (
+          <ProductSkeleton />
+        ) : isSuccess ? (
+          sparesListData.length > 0 ? (
+            <div className={classes.box__itemList}>
+              {sparesListData?.map((spareItem) => (
+                <SpareItem
+                  key={spareItem.id}
+                  item={spareItem}
+                  onClick={navigateToSpareDetail}
+                  onWishList={(event) => handleAddToWishList(event, spareItem)}
+                />
+              ))}
+            </div>
+          ) : (
+            <BestSellingCardMessage />
+          )
+        ) : null}
+      </div>
     </div>
   );
 };

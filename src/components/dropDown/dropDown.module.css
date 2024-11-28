@@ -1,0 +1,103 @@
+.dropDown__wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+
+}
+
+.dropdown {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  justify-content: center;
+}
+
+.dropdown__label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Poppins", sans;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 600;
+  color: #4A4C5F;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.dropdown__icon {
+  position: absolute;
+  top: 8px;
+  right: 26px;
+  width: 12px;
+  height: 6px;
+  background-image: url(../../assets/chevron-down.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  z-index: -1;
+  transition: transform 0.3s ease;
+}
+
+.dropDown__input {
+  display: none;
+}
+
+.dropdown__menu {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  justify-content: center;
+  max-height: 0;
+  overflow: hidden; 
+  opacity: 0; 
+  transition: max-height 0.9s ease, opacity 0.9s ease; 
+}
+
+
+.dropdown__menu__item {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  justify-content: center;
+  padding: 12px;
+  color: #989898;
+  font-family: "Poppins", sans;
+  font-size: 12px;
+  line-height: 15.6px;
+  font-weight: 400;
+  background-color: #FFFFFF;
+}
+
+.dropdown__menu__item__active {
+  color: #313131;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  background-color: #F5F6FA;
+}
+
+
+
+.dropDown__input:checked ~ .dropdown__menu {
+  max-height: 500px;
+  opacity: 1;
+  transition: max-height 0.9s ease, opacity 0.9s ease;
+}
+/* .dropdown__menu {
+  display: flex;
+} */
+
+.dropDown__input:checked+.dropdown__icon {
+  transform: rotate(180deg);
+
+}
+
+.dropDown__sep {
+  height: 1px;
+  background-color: #E9E9E9;
+
+}

@@ -46,7 +46,7 @@ export const CouponsPage = () => {
               alt="coupons"
             />
           </div>
-          <div className={classes.box__coupons__search}>
+          {/* <div className={classes.box__coupons__search}>
             <label
               htmlFor="searchInput"
               className={classes.box__coupons__search__label}
@@ -59,7 +59,7 @@ export const CouponsPage = () => {
               />
             </label>
             <button className={classes.box__coupons__search__btn}>Apply</button>
-          </div>
+          </div> */}
         </div>
         <div className={classes.box__coupons__container}>
           <h3 className={classes.box__coupons__container__title}>

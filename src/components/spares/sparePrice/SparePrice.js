@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./sparePrice.module.css";
 
 export const SparePrice = ({ prices }) => {
+  console.log("prices :", prices);
   return (
     <div className={classes.box}>
       <div className={classes.box__info}>
@@ -20,13 +21,25 @@ export const SparePrice = ({ prices }) => {
             </span>
           </div>
           <div className={classes.box__quantity}>
-            <button className={classes.box__quantity__decrement}>-</button>
-            <h2 className={classes.box__quantity__text}>3</h2>
-            <button className={classes.box__quantity__increment}>+</button>
+            <button
+              className={classes.box__quantity__decrement}
+              onClick={() => prices.onQuantityUpdate("decrease")}
+              disabled={prices.isUpdating}
+            >
+              -
+            </button>
+            <h2 className={classes.box__quantity__text}>{prices.spareQuantity}</h2>
+            <button
+              className={classes.box__quantity__increment}
+              onClick={() => prices.onQuantityUpdate("increase")}
+              disabled={prices.isUpdating}
+            >
+              +
+            </button>
           </div>
         </div>
       </div>
-      <hr className={classes.box__divider}/>
+      <hr className={classes.box__divider} />
     </div>
   );
 };

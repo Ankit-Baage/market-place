@@ -17,6 +17,7 @@ import { toast } from "react-toastify";
 import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWishListMutation";
 import { BannerSkeleton } from "../../components/skeletons/bannerSkeleton/BannerSeleton";
 import { ProductSkeleton } from "../../components/skeletons/productSkeleton/ProductSkeleton";
+import { BestSellingCardMessage } from "../../components/skeletons/bestSellingCardMessage/BestSellingCardMessage";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -44,7 +45,11 @@ export const NewPhoneListPage = () => {
   const user_id = authToken ? userId : guestId;
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const { data, isSuccess } = useGetNewPhoneList(filters, user_id, medium);
+  const {
+    data: newPhonesListData,
+    isSuccess,
+    isLoading,
+  } = useGetNewPhoneList(filters, user_id, medium);
 
   const { data: add, isSuccess: addIsSuccess } = useQuery({
     queryKey: ["advertisements", "new_phones", "listing"],
@@ -127,11 +132,13 @@ export const NewPhoneListPage = () => {
 
   return (
     <div className={classes.box}>
-      <NewPhoneFilterPage
-        onApply={handleApplied}
-        onPriceApply={handlePriceApplied}
-        onSelection={(itemId) => handleRadioApplied(itemId)}
-      />
+      {isSuccess && newPhonesListData.length > 0 && (
+        <NewPhoneFilterPage
+          onApply={handleApplied}
+          onPriceApply={handlePriceApplied}
+          onSelection={(itemId) => handleRadioApplied(itemId)}
+        />
+      )}
 
       {addIsSuccess ? (
         <div className={classes.box__space}>
@@ -144,20 +151,28 @@ export const NewPhoneListPage = () => {
       ) : (
         <BannerSkeleton />
       )}
-      {isSuccess ? (
-        <div className={classes.box__itemList}>
-          {data?.map((spareItem, index) => (
-            <NewPhoneItem
-              key={spareItem.id}
-              item={spareItem}
-              onClick={navigateToNewPhoneDetail}
-              onWishList={(event) => handleAddToWishList(event, spareItem)}
-            />
-          ))}
-        </div>
-      ) : (
-        <ProductSkeleton />
-      )}
+      <div className={classes.box__item}>
+        {isLoading ? (
+          <ProductSkeleton /> 
+        ) : isSuccess ? (
+          newPhonesListData?.length > 0 ? (
+            <div className={classes.box__item}>
+              {newPhonesListData.map((newPhoneItem) => (
+                <NewPhoneItem
+                  key={newPhoneItem.id}
+                  item={newPhoneItem}
+                  onClick={navigateToNewPhoneDetail}
+                  onWishList={(event) =>
+                    handleAddToWishList(event, newPhoneItem)
+                  }
+                />
+              ))}
+            </div>
+          ) : (
+            <BestSellingCardMessage />
+          )
+        ) : null}
+      </div>
     </div>
   );
 };
