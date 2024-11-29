@@ -3,6 +3,7 @@ import category_vrp from "../../assets/category_vrp.svg";
 import category_prexo from "../../assets/category_prexo.svg";
 import category_spares from "../../assets/category_spares.svg";
 import category_newPhones from "../../assets/category_newPhones.svg";
+import category_openBox from "../../assets/category__openBox.svg"
 import classes from "./category.module.css";
 import { Link } from "react-router-dom";
 
@@ -22,11 +23,11 @@ export const Category = () => {
       </Link>
       <div className={classes.box__others}>
         <Link className={classes.box__others__prexo} to="/prexo">
-          <h2 className={classes.box__others__prexo__title}>Prexo</h2>
+          <h2 className={classes.box__others__prexo__title}>Open Box</h2>
           <img
             className={classes.box__others__prexo__img}
             src={category_prexo}
-            alt="prexo"
+            alt="Open Box"
           />
         </Link>
         <Link className={classes.box__others__spares} to="/spares">
