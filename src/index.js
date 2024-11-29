@@ -9,9 +9,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 
 import "./index.css";
-import { Backdrop } from "./components/ui/backDrop/Backdrop";
-import { Loader } from "./components/ui/loader/Loader";
-import { Spinner } from "./components/ui/spinner/Spinner";
+
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import { ConfirmationModal } from "./components/modal/confirmationModal/ConfirmationModal";
 

@@ -8,7 +8,7 @@ export const Error = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { from } = location.state || { from: '/' };
-  console.log(error);
+  console.log("errorPage: ",error);
   let message = "Something went wrong!";
   // console.log(error)
   if (error.status === 404) {

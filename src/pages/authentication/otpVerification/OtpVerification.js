@@ -11,7 +11,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 export const OtpVerification = () => {
-  const { mutateAsync, isLoading, isSuccess } = useOtpVerificationMutation();
+  const { mutateAsync } = useOtpVerificationMutation();
 
   const {
     mutateAsync: resendOtp,
@@ -49,23 +49,24 @@ export const OtpVerification = () => {
     try {
       const otp = Object.values(data).join("");
       const mobile_no = phoneNumber;
-      const user_id = Cookies.get("guestId")
+      const user_id = Cookies.get("guestId");
       const response = await mutateAsync({ mobile_no, otp, user_id });
 
-      const status = response.status;
-      console.log(response.status);
-      const urlFragment = new URLSearchParams();
-      urlFragment.set("authenticated", status);
-      navigate("/");
       localStorage.removeItem("mobile_no");
       toast.dismiss(loadingToastId);
       toast.success(response.message.displayMessage);
+      navigate("/");
     } catch (error) {
       toast.dismiss(loadingToastId);
-      toast.error(error.data.message.displayMessage);
-
-      navigate("/error", { state: { error } });
-    }
+      if (error?.customMessage) {
+        toast.error(error.customMessage);
+        console.log(error);
+      } else if (error?.data?.message?.displayMessage) {
+        toast.error(error.data.message.displayMessage);
+      } else {
+        toast.error("An unexpected error occurred. Please try again.");
+      }
+    } 
   };
 
   return (

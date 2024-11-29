@@ -10,10 +10,12 @@ import newPhoneFilterReducer from "./newPhoneFilter/newPhoneFilterSlice";
 import confirmationModalReducer from "./confirmationModal/confirmationModalSlice" ;
 import couponReducer from "./coupon/couponSlice";
 import addressReducer from "./address/addressSlice";
+import errorReducer from "./error/errorSlice"
 
 export const store = configureStore({
   reducer: {
     backdrop: backdropReducer,
+    error: errorReducer,
 
     loader: loaderReducer,
     phoneNumber: phoneNumberReducer,

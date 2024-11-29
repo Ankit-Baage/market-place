@@ -17,7 +17,7 @@ const topics = [
     backGroundColor: "#E4FDEF",
     border: "1px solid #CBFADF",
     borderRadius: "8px",
-    path:"account"
+    path: "account",
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ const topics = [
     backGroundColor: "#FFF0EB",
     border: "1px solid #FCE6DE",
     borderRadius: "8px",
-    path:"product"
+    path: "product",
   },
   {
     id: 3,
@@ -35,7 +35,7 @@ const topics = [
     backGroundColor: "#F0F2FF",
     border: "1px solid #E1E5FD",
     borderRadius: "8px",
-    path:"return"
+    path: "return",
   },
   {
     id: 4,
@@ -44,7 +44,7 @@ const topics = [
     backGroundColor: "#EBF7FF",
     border: "1px solid #DDF0FC",
     borderRadius: "8px",
-    path:"offer"
+    path: "offer",
   },
   {
     id: 5,
@@ -53,7 +53,7 @@ const topics = [
     backGroundColor: "#FAF0FF",
     border: "1px solid #F4E4FD",
     borderRadius: "8px",
-     path:"payment"
+    path: "payment",
   },
   {
     id: 6,
@@ -62,7 +62,7 @@ const topics = [
     backGroundColor: "#E3FFFD",
     border: "1px solid #CEF4F2",
     borderRadius: "8px",
-    path:"order"
+    path: "order",
   },
 ];
 
@@ -80,8 +80,8 @@ export const Help = () => {
         <div className={classes.box__content__info}>
           <h1 className={classes.box__content__info__title}>Help Center</h1>
           <p className={classes.box__content__info__para}>
-            Lorium was an ancient village of ancient Etruria, Italy, on the Via
-            Aurelia.
+            Find answers to FAQs, product details, and support for returns,
+            shipping, and warranties. We're here to assist you!
           </p>
         </div>
 
@@ -96,7 +96,7 @@ export const Help = () => {
         <div className={classes.box__help__tabs}>
           {topics.map((topic) => (
             <Link
-            to={topic.path}
+              to={topic.path}
               key={topic.id}
               style={{
                 backgroundColor: topic.backGroundColor,
@@ -122,10 +122,13 @@ export const Help = () => {
         {faqs.map((faq) => (
           <div key={faq.id} className={classes.box__faqs__faq}>
             <div className={classes.box__faqs__faq__content}>
-              <h3 className={classes.box__faqs__faq__content__title}> {faq.query}</h3>
-              <button className={classes.box__faqs__faq__content__btn}/>
+              <h3 className={classes.box__faqs__faq__content__title}>
+                {" "}
+                {faq.query}
+              </h3>
+              <button className={classes.box__faqs__faq__content__btn} />
             </div>
-            <hr className={classes.box__item__divider}/>
+            <hr className={classes.box__item__divider} />
           </div>
         ))}
       </div>

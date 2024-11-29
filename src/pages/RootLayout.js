@@ -5,12 +5,12 @@ import classes from "./rootLayout.module.css";
 import { Footer } from "../components/footer/Footer";
 import { generateId } from "../utils/helpers/getAuth";
 
+
 export const RootLayout = () => {
   useEffect(() => {
-    // Check if guestId already exists in cookies, if not, generate a new one
     const guestId = Cookies.get("guestId");
     if (!guestId) {
-      generateId(); // Only generate a new guestId if it doesn't exist
+      generateId();
     }
   }, []);
   return (

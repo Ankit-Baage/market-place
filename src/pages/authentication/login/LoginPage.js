@@ -8,7 +8,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 export const LoginPage = () => {
-  const { mutateAsync, isLoading, isSuccess, isPending } =
+  const { mutateAsync } =
     useRequestOtpMutation();
   const navigate = useNavigate();
 
@@ -17,6 +17,7 @@ export const LoginPage = () => {
     try {
       const mobile_no = data.phoneNumber;
       const response = await mutateAsync(mobile_no);
+
       localStorage.setItem("mobile_no", mobile_no);
 
       const numToAlpha = convertToAlphabets(mobile_no);
@@ -28,9 +29,15 @@ export const LoginPage = () => {
       toast.success(response.message.displayMessage);
     } catch (error) {
       toast.dismiss(loadingToastId);
-      toast.error(error.data.message.displayMessage);
-
-      navigate("/error", { state: { error } });
+      console.log("otp :",error)
+      if (error?.customMessage) {
+        toast.error(error.customMessage);
+        console.log(error)
+      } else if (error?.data?.message?.displayMessage) {
+        toast.error(error.data.message.displayMessage);
+      } else {
+        toast.error("An unexpected error occurred. Please try again.");
+      }
     }
   };
 

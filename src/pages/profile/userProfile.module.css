@@ -4,6 +4,7 @@
   flex-direction: column;
   row-gap: 32px;
 }
+
 .box__profile__back {
   width: 24px;
   height: 24px;
@@ -42,16 +43,39 @@
   color: #2F3567;
 }
 
-
 .profile__head__status {
   align-self: center;
   font-family: "Poppins", sans;
   font-size: 12px;
   line-height: 18px;
   font-weight: 500;
-  color: #FFFFFF;
   padding: 10px 8px;
-  background-color: #F2B200;
   border-radius: 4px;
+
+}
+
+
+.profile__head__status__incomplete {
+  color: #2F3567;
+  background-color: #FFE8DF;
+  border: 1px solid #FF6F3F;
+
+
+}
+
+.profile__head__status__pending {
+  color: #FFFFFF;
+  background-color: #FF6F3F;
+
+}
+.profile__head__status__completed {
+  color: #FFFFFF;
+  background-color: #46CD80;
+
+}
+
+.profile__head__status__rejected {
+  color: #FFFFFF;
+  background-color: #FE0000;
 
 }

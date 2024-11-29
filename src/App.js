@@ -55,18 +55,7 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     errorElement: <Error />,
     children: [
-      // {
-      //   path: "/",
-      //   element: <Authentication />,
 
-      //   children: [
-      //     { index: true, element: <LoginPage /> },
-      //     {
-      //       path: "otpVerification",
-      //       element: <ProtectedOtpRoute element={<OtpVerification />} />,
-      //     },
-      //   ],
-      // },
       {
         path: "/",
         element: <HomePage />,

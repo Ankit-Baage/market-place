@@ -29,13 +29,6 @@ export const otpVerificationRequest = async (data) => {
 
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error("Axios error:", error.message);
-      throw new Error("Server error");
-    } else {
-      // Non-Axios error
-      console.error("Non-Axios error:", error.message);
-      throw error; // Re-throw the original error
-    }
+    throw error;
   }
 };

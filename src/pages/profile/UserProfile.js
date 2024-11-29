@@ -79,7 +79,19 @@ export const UserProfile = () => {
         <div className={classes.profile__head}>
           <h1 className={classes.profile__head__title}>Profile Details</h1>
           {isSuccess ? (
-            <h2 className={classes.profile__head__status}>
+            <h2
+              className={`${classes.profile__head__status} ${
+                data?.data?.data.profile_status === "Pending"
+                  ? classes.profile__head__status__pending
+                  : data?.data?.data.profile_status === "Incomplete"
+                  ? classes.profile__head__status__incomplete
+                  : data?.data?.data.profile_status === "Completed"
+                  ? classes.profile__head__status__completed
+                  : data?.data?.data.profile_status === "Rejected"
+                  ? classes.profile__head__status__rejected
+                  : ""
+              }`}
+            >
               {data?.data?.data.profile_status}
             </h2>
           ) : (
