@@ -43,6 +43,12 @@ import { OrdersPage } from "./pages/order/OrdersPage";
 import { OrderSuccess } from "./components/orderSuccess/OrderSuccess";
 import { Help } from "./components/help/Help";
 import { Account } from "./components/help/account/Account";
+import { Product } from "./components/help/product/Product";
+import { Return } from "./components/help/return/Return";
+import { Offer } from "./components/help/offer/Offer";
+import { Payment } from "./components/help/payment/Payment";
+import { Order } from "./components/order/Order";
+import { OrderHelp } from "./components/help/order_help/Order";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -139,6 +145,26 @@ const router = createBrowserRouter([
           {
             path: "account",
             element: <Account />,
+          },
+          {
+            path: "product",
+            element: <Product />,
+          },
+          {
+            path: "return",
+            element: <Return />,
+          },
+          {
+            path: "offer",
+            element: <Offer />,
+          },
+          {
+            path: "payment",
+            element: <Payment />,
+          },
+          {
+            path: "order",
+            element: <OrderHelp />,
           },
         ],
       },

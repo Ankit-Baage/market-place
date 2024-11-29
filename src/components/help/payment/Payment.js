@@ -1,7 +1,7 @@
 import React from "react";
-import accountImage from "../../../assets/help__account.svg";
+import paymentImage from "../../../assets/help__payment.svg";
 import Dropdown from "../../dropDown/DropDown";
-import classes from "./account.module.css";
+import classes from "./payment.module.css";
 import { Link } from "react-router-dom";
 
 export const dropdowns = [
@@ -57,17 +57,17 @@ export const dropdowns = [
   },
 ];
 
-export const Account = () => {
+export const Payment = () => {
   return (
     <div className={classes.box}>
       <div className={classes.box__head}>
         <div className={classes.box__head__info}>
           <img
-            src={accountImage}
-            alt="help account"
+            src={paymentImage}
+            alt="payment help"
             className={classes.box__head__img}
           />
-          <h1 className={classes.box__head__title}>Account</h1>
+          <h1 className={classes.box__head__title}>Payments</h1>
         </div>
         <p className={classes.box__head__para}>
           For account related issues refer to the below question to get the
