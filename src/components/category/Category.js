@@ -3,7 +3,7 @@ import category_vrp from "../../assets/category_vrp.svg";
 import category_prexo from "../../assets/category_prexo.svg";
 import category_spares from "../../assets/category_spares.svg";
 import category_newPhones from "../../assets/category_newPhones.svg";
-import category_openBox from "../../assets/category__openBox.svg"
+import category_openBox from "../../assets/category__openBox.svg";
 import classes from "./category.module.css";
 import { Link } from "react-router-dom";
 
@@ -15,8 +15,8 @@ export const Category = () => {
         <div className={classes.box__vrp__content}>
           <h2 className={classes.box__vrp__content__title}>VRP</h2>
           <p className={classes.box__vrp__content__para}>
-            Lorium was an ancient village of ancient Etruria, Italy, on the Via
-            Aurelia,
+            High-quality products under various quality grades to meet your
+            specific needs.
           </p>
         </div>
         <img className={classes.box__vrp__img} src={category_vrp} alt="/vrp" />
@@ -43,8 +43,8 @@ export const Category = () => {
         <div className={classes.box__newPhones__content}>
           <h2 className={classes.box__newPhones__content__title}>New Phones</h2>
           <p className={classes.box__newPhones__content__para}>
-            Lorium was an ancient village of ancient Etruria, Italy, on the Via
-            Aurelia,
+            Seal-packed, brand-new phones with latest technology and untouched
+            quality.
           </p>
         </div>
         <img
