@@ -328,6 +328,7 @@ export const CartPage = () => {
             grandTotal={data?.data?.data?.final_amount}
             couponAmount={data?.data?.data?.applied_coupon_amount}
             couponCode={data?.data?.data?.applied_coupon_code}
+            originalAmount={data?.data?.data?.original_amount}
           />
           <button
             className={classes.box__cart__order__btn}

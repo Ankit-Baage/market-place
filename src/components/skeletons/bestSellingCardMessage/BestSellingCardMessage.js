@@ -9,7 +9,8 @@ export const BestSellingCardMessage = () => {
       <div className={classes.box__content}>
         <h1 className={classes.box__content__text}>Coming Soon</h1>
         <h2 className={classes.box__content__text__sub}>
-          Exciting Products are on their way! Stay tuned for the best deals.
+        Exciting products are coming soon—stay 
+        tuned for the best deals!
         </h2>
       </div>
     </div>
