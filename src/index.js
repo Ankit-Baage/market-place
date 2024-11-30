@@ -13,14 +13,15 @@ import "./index.css";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import { ConfirmationModal } from "./components/modal/confirmationModal/ConfirmationModal";
 
+
+
+
 const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <QueryClientProvider client={queryClient}>
     <Provider store={store}>
-      {/* <Spinner />
-      <Loader /> */}
       <ConfirmationModal />
       <App />
       <ToastContainer

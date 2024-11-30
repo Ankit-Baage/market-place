@@ -1,7 +1,7 @@
 import React from "react";
-import productImage from "../../../assets/help__product.svg";
+import grievanceNavigator from "../../../assets/grievanceNavigator.svg";
 import Dropdown from "../../dropDown/DropDown";
-import classes from "./product.module.css";
+import classes from "./grievance.module.css";
 import { Link } from "react-router-dom";
 
 export const dropdowns = [
@@ -57,17 +57,17 @@ export const dropdowns = [
   },
 ];
 
-export const Product = () => {
+export const Grievance = () => {
   return (
     <div className={classes.box}>
       <div className={classes.box__head}>
         <div className={classes.box__head__info}>
           <img
-            src={productImage}
-            alt="product help"
+            src={grievanceNavigator}
+            alt="Grievance Officer"
             className={classes.box__head__img}
           />
-          <h1 className={classes.box__head__title}>Products</h1>
+          <h1 className={classes.box__head__title}>Grievance Officer</h1>
         </div>
         <p className={classes.box__head__para}>
           At Mobigarage, we specialize in offering a diverse range of products
@@ -81,7 +81,7 @@ export const Product = () => {
           for every customer.
         </p>
       </div>
-      <div className={classes.box__container}>
+      {/* <div className={classes.box__container}>
         {dropdowns.map((dropdown) => (
           <Dropdown
             key={dropdown.id}
@@ -90,7 +90,7 @@ export const Product = () => {
             options={dropdown.options}
           />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

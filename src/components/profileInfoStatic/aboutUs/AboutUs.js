@@ -1,8 +1,8 @@
 import React from "react";
-import accountImage from "../../../assets/help__account.svg";
+import aboutNavigator from "../../../assets/aboutNavigator.svg";
 import Dropdown from "../../dropDown/DropDown";
-import classes from "./account.module.css";
 import { Link } from "react-router-dom";
+import classes from "./aboutUs.module.css";
 
 export const dropdowns = [
   {
@@ -36,7 +36,9 @@ export const dropdowns = [
     options: [
       {
         id: "2_1",
-        contents: ['You can update your details in the "Account Details" section.'],
+        contents: [
+          'You can update your details in the "Account Details" section.',
+        ],
       },
     ],
   },
@@ -46,7 +48,9 @@ export const dropdowns = [
     options: [
       {
         id: "3_1",
-        contents: ['Yes, you can reset your password anytime from the "Password" section.'],
+        contents: [
+          'Yes, you can reset your password anytime from the "Password" section.',
+        ],
       },
     ],
   },
@@ -56,7 +60,9 @@ export const dropdowns = [
     options: [
       {
         id: "4_1",
-        contents: ['Your order history is available under the "Order History" tab.'],
+        contents: [
+          'Your order history is available under the "Order History" tab.',
+        ],
       },
     ],
   },
@@ -76,38 +82,33 @@ export const dropdowns = [
     options: [
       {
         id: "6_1",
-        contents: ['Contact customer support if you wish to delete your account.'],
+        contents: [
+          "Contact customer support if you wish to delete your account.",
+        ],
       },
     ],
   },
 ];
 
-
-export const Account = () => {
+export const AboutUs = () => {
   return (
     <div className={classes.box}>
       <div className={classes.box__head}>
         <div className={classes.box__head__info}>
           <img
-            src={accountImage}
-            alt="help account"
+            src={aboutNavigator}
+            alt="About Us"
             className={classes.box__head__img}
           />
-          <h1 className={classes.box__head__title}>Account</h1>
+          <h1 className={classes.box__head__title}>About Us</h1>
         </div>
         <p className={classes.box__head__para}>
-          With your account, you have complete control over your shopping
-          experience. You can easily update your personal information, change
-          your password, and manage your saved payment methods for quicker
-          checkouts. Track the status of all your orders, view past purchases,
-          and access detailed invoices. Keep your saved addresses up-to-date for
-          faster delivery and manage your wishlist to track your favorite
-          phones. Additionally, customize your preferences and notification
-          settings to stay informed about special offers, order updates, and
-          more.
+          Learn about who we are, our mission, and how we aim to provide the
+          best mobile shopping experience. Discover the values that drive our
+          marketplace and our commitment to customer satisfaction.
         </p>
       </div>
-      <div className={classes.box__container}>
+      {/* <div className={classes.box__container}>
         {dropdowns.map((dropdown) => (
           <Dropdown
             key={dropdown.id}
@@ -116,7 +117,7 @@ export const Account = () => {
             options={dropdown.options}
           />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

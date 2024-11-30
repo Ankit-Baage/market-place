@@ -70,9 +70,15 @@ export const Return = () => {
           <h1 className={classes.box__head__title}>Returns & Exchanges</h1>
         </div>
         <p className={classes.box__head__para}>
-          For account related issues refer to the below question to get the
-          complete information and if you’re still unable to access your
-          account? Click on the contact us option to talk to our customer care.
+          We strive to ensure you're completely satisfied with your purchase. If
+          you receive a defective, damaged, or incorrect item, you can easily
+          initiate a return or exchange within our specified return period. Our
+          process is simple: request a return through your account, and we’ll
+          arrange for the item to be picked up from your location. Once the
+          returned item is verified, you’ll receive a refund or a replacement
+          based on your preference. For exchanges, select a replacement product
+          of equal value, and we’ll ship it to you as soon as possible. Our goal
+          is to make returns and exchanges smooth and worry-free.
         </p>
       </div>
       <div className={classes.box__container}>

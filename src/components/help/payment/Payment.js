@@ -70,9 +70,15 @@ export const Payment = () => {
           <h1 className={classes.box__head__title}>Payments</h1>
         </div>
         <p className={classes.box__head__para}>
-          For account related issues refer to the below question to get the
-          complete information and if you’re still unable to access your
-          account? Click on the contact us option to talk to our customer care.
+          We offer a variety of payment methods to make your shopping experience
+          convenient and secure. Choose from credit or debit cards, net banking,
+          UPI, wallets, or cash on delivery (COD) for eligible orders. All
+          online payments are processed through secure gateways to protect your
+          financial information. You’ll receive an instant confirmation and an
+          invoice for every successful transaction. For added convenience, you
+          can save your preferred payment methods for faster checkout in the
+          future. Rest assured, your payment details are kept private and secure
+          at all times.
         </p>
       </div>
       <div className={classes.box__container}>

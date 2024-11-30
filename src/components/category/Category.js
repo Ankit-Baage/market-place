@@ -22,7 +22,7 @@ export const Category = () => {
         <img className={classes.box__vrp__img} src={category_vrp} alt="/vrp" />
       </Link>
       <div className={classes.box__others}>
-        <Link className={classes.box__others__prexo} to="/prexo">
+        <Link className={classes.box__others__prexo} to="/openBox">
           <h2 className={classes.box__others__prexo__title}>Open Box</h2>
           <img
             className={classes.box__others__prexo__img}

@@ -5,7 +5,6 @@ import classes from "./rootLayout.module.css";
 import { Footer } from "../components/footer/Footer";
 import { generateId } from "../utils/helpers/getAuth";
 
-
 export const RootLayout = () => {
   useEffect(() => {
     const guestId = Cookies.get("guestId");
@@ -13,6 +12,7 @@ export const RootLayout = () => {
       generateId();
     }
   }, []);
+
   return (
     <div className={classes.container}>
       <div className={classes.container__outlet}>

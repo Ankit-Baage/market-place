@@ -70,9 +70,15 @@ export const Offer = () => {
           <h1 className={classes.box__head__title}>Offers/Coupons</h1>
         </div>
         <p className={classes.box__head__para}>
-          For account related issues refer to the below question to get the
-          complete information and if you’re still unable to access your
-          account? Click on the contact us option to talk to our customer care.
+          Make the most of your shopping experience with our exclusive offers
+          and discount coupons. Stay updated on the latest deals and promotions
+          to save more on your favorite phones and accessories. You can find
+          available offers directly on the product pages or during checkout.
+          Apply coupon codes effortlessly to enjoy instant savings. Whether it’s
+          seasonal sales, special discounts, or first-time buyer offers, we
+          ensure there’s always something for everyone. Keep an eye on your
+          notifications and emails for personalized deals and limited-time
+          promotions.
         </p>
       </div>
       <div className={classes.box__container}>

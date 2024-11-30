@@ -70,9 +70,14 @@ export const OrderHelp = () => {
           <h1 className={classes.box__head__title}>Orders</h1>
         </div>
         <p className={classes.box__head__para}>
-          For account related issues refer to the below question to get the
-          complete information and if you’re still unable to access your
-          account? Click on the contact us option to talk to our customer care.
+          Stay on top of your shopping with a seamless order management system.
+          Once you place an order, you can track its status in real-time, from
+          confirmation to delivery, directly from your account. Need to make
+          changes? Contact our support team before the order is shipped. You can
+          also view detailed information about your past purchases, including
+          product details, invoices, and payment summaries. Whether it’s a new
+          order or a reorder from your history, managing your purchases has
+          never been easier.
         </p>
       </div>
       <div className={classes.box__container}>

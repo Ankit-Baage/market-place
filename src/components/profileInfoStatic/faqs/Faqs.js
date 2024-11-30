@@ -1,7 +1,7 @@
 import React from "react";
-import productImage from "../../../assets/help__product.svg";
+import faqNavigator from "../../../assets/faqNavigator.svg";
 import Dropdown from "../../dropDown/DropDown";
-import classes from "./product.module.css";
+import classes from "./faqs.module.css";
 import { Link } from "react-router-dom";
 
 export const dropdowns = [
@@ -57,31 +57,25 @@ export const dropdowns = [
   },
 ];
 
-export const Product = () => {
+export const Faqs = () => {
   return (
     <div className={classes.box}>
       <div className={classes.box__head}>
         <div className={classes.box__head__info}>
           <img
-            src={productImage}
-            alt="product help"
+            src={faqNavigator}
+            alt="Faqs"
             className={classes.box__head__img}
           />
-          <h1 className={classes.box__head__title}>Products</h1>
+          <h1 className={classes.box__head__title}>FAQs</h1>
         </div>
         <p className={classes.box__head__para}>
-          At Mobigarage, we specialize in offering a diverse range of products
-          to meet all your mobile needs. Our product categories include VRP for
-          premium quality devices, Prexo for refurbished products, Spare for
-          individual parts like batteries and chargers, Open Box for unboxed
-          phones with essential accessories, and New Phones for brand-new,
-          seal-packed devices. Whether you're looking for affordability,
-          reliability, or the latest technology, Mobigarage has you covered. Our
-          commitment is to provide quality, transparency, and excellent value
-          for every customer.
+          Have questions? We’ve got answers! Browse our Frequently Asked
+          Questions for quick solutions to common queries about orders,
+          payments, shipping, and more.
         </p>
       </div>
-      <div className={classes.box__container}>
+      {/* <div className={classes.box__container}>
         {dropdowns.map((dropdown) => (
           <Dropdown
             key={dropdown.id}
@@ -90,7 +84,7 @@ export const Product = () => {
             options={dropdown.options}
           />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

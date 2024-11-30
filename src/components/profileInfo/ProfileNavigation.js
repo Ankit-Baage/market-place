@@ -65,7 +65,7 @@ const extendedNavigators = [
     title: "About Us",
     subTitle: "know about us",
     image: aboutNavigator,
-    path: "aboutUs",
+    path: "/otherDetails/aboutUs",
   },
 
   {
@@ -73,14 +73,14 @@ const extendedNavigators = [
     title: "FAQs",
     subTitle: "Commonly asked questions",
     image: faqNavigator,
-    path: "faq",
+    path: "/otherDetails/faqs",
   },
   {
     id: 3,
     title: "Terms of Use",
     subTitle: "Usage guidelines",
     image: termNavigator,
-    path: "term",
+    path: "/otherDetails/termsOfUse",
   },
 
   {
@@ -88,14 +88,14 @@ const extendedNavigators = [
     title: "Privacy Policy",
     subTitle: "Data protection details",
     image: policyNavigator,
-    path: "policy",
+    path: "/otherDetails/privacyPolicy",
   },
   {
     id: 5,
     title: "Grievance Officer",
     subTitle: "Contact for complaints",
     image: grievanceNavigator,
-    path: "grievance",
+    path: "/otherDetails/grievance",
   },
 ];
 

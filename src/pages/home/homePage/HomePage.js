@@ -49,6 +49,9 @@ export const HomePage = () => {
     isSuccess
   } = useQuery({
     queryKey: ["advertisements", "home", "landing"],
+    refetchOnWindowFocus: false,
+    retry: 2,
+    retryDelay: 1000,
     queryFn: fetchAdvertisements,
   });
 

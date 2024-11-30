@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { Navigate, redirect } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const attachTokenMiddleware = (config) => {
   const authToken = Cookies.get("authToken");
@@ -24,11 +24,11 @@ axiosInstance.interceptors.response.use(
       if (status === 401) {
         window.location = "/authentication";
       }
-    } else if (!navigator.onLine || error.message === "Network Error") {
+    } else if (!navigator.onLine || error.message) {
       console.log("No internet connection. Please check your network.");
       error.customMessage =
         "No internet connection. Please check your network.";
-      throw error
+      toast.warning(error.customMessage);
     }
 
     throw error;
