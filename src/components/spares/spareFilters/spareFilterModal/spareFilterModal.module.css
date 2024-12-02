@@ -11,33 +11,35 @@
 .box {
   position: absolute;
   width: 100%;
-  overflow: hidden;
+  height: 60vh;
   bottom: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   border: 1px solid #D3D3D3;
   background-color: #FFFFFF;
-  padding: 0 16px;
   border-radius: 10px 10px 0 0;
 }
-
 .box__content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.box__content__head__wrapper {
+  border: 1px solid #D3D3D3;
+  background-color: #FFFFFF;
+  border-radius: 10px 10px 0 0;
+  position: absolute;
   width: 100%;
+  max-height: 60%;
+  bottom: 0;
+  padding: 12px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  row-gap: 17px;
+  row-gap: 16px;
+}
+
+.box__content__wrapper {
+  flex-shrink: 0;
   position: sticky;
   top: 0;
-  background-color: #FFFFFF;
-  z-index: 20;
-  padding-top: 12px;
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 16px;
 
 }
 
@@ -45,6 +47,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
 
 }
 
@@ -77,15 +80,16 @@
   display: flex;
   flex-direction: column;
   row-gap: 18px;
-  justify-content: center;
-  flex-grow: 1; /* Take remaining space */
-  overflow-y: auto; 
-  max-height: 500px;
-  padding: 4px
+  align-items: flex-start; /* Align items to the top */
+  flex: 1; /* Take remaining space */
+  overflow-y: auto; /* Allow scrolling */
+  padding-left: 4px;
 }
 
 .box__content__filter__option {
   position: relative;
+  display: flex;
+  align-items: center;
   padding-left: 28px;
   font-family: "Poppins", sans;
   font-weight: 400;
@@ -136,20 +140,21 @@
 }
 
 .box__content__filter__option input:checked~.box__content__filter__option__label::after {
- 
+
   display: block;
   content: '\2713';
   width: 6px;
   height: 0;
   color: #FF6F3F;
 }
-.box__content__filter input[type='checkbox']{
+
+.box__content__filter input[type='checkbox'] {
   text-align: center;
   display: table-cell;
   vertical-align: middle;
   width: 20px !important;
   height: 20px !important;
-  appearance:none;
+  appearance: none;
 }
 
 
@@ -157,15 +162,16 @@
 .box__content__filter__labelText__checked {
   color: #FF6F3F;
 }
+
 .box__btn__wrapper {
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  row-gap: 17px;
-  justify-self: center;
+  justify-content: center;
+  row-gap: 16px;
   position: sticky;
   bottom: 0;
-  background-color: #FFFFFF;
-  padding: 12px 0px;
+  z-index: 9;
 
 }
 
@@ -174,7 +180,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-left: 36px; 
+  padding: 0 18px;
 }
 
 

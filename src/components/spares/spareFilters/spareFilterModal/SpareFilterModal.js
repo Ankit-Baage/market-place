@@ -40,15 +40,22 @@ export const SpareFilterModal = ({
   };
   return (
     <div className={classes.backdrop} onClick={filterClose}>
-      <motion.div
+      {/* <motion.div
         onClick={(e) => e.stopPropagation()}
         className={classes.box}
         initial={{ y: "100%" }}
         animate={{ y: 0, transition: { duration: 0.5, ease: "easeInOut" } }}
         exit={{ y: "100%", transition: { duration: 0.5, ease: "easeInOut" } }}
-      >
-        <div className={classes.box__content}>
-          <div className={classes.box__content__head__wrapper}>
+      > */}
+        <motion.div
+          className={classes.box__content}
+          onClick={(e) => e.stopPropagation()}
+          // className={classes.box}
+          initial={{ y: "100%" }}
+          animate={{ y: 0, transition: { duration: 0.5, ease: "easeInOut" } }}
+          exit={{ y: "100%", transition: { duration: 0.5, ease: "easeInOut" } }}
+        >
+          <div className={classes.box__content__wrapper}>
             <div className={classes.box__content__head}>
               <h1 className={classes.box__content__head__title}>
                 {filters.type.charAt(0).toUpperCase() + filters.type.slice(1)}
@@ -85,24 +92,26 @@ export const SpareFilterModal = ({
               </label>
             ))}
           </div>
-        </div>
-
-        <div className={classes.box__btn__wrapper}>
-          <hr className={classes.box__content__divider} />
-          <div className={classes.box__btn}>
-            <button className={classes.box__btn__clear} onClick={clearHandler}>
-              Clear All
-            </button>
-            <button
-              className={classes.box__btn__apply}
-              disabled={isApplyDisabled}
-              onClick={handleApply}
-            >
-              Apply
-            </button>
+          <div className={classes.box__btn__wrapper}>
+            <hr className={classes.box__content__divider} />
+            <div className={classes.box__btn}>
+              <button
+                className={classes.box__btn__clear}
+                onClick={clearHandler}
+              >
+                Clear All
+              </button>
+              <button
+                className={classes.box__btn__apply}
+                disabled={isApplyDisabled}
+                onClick={handleApply}
+              >
+                Apply
+              </button>
+            </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      {/* </motion.div> */}
     </div>
   );
 };
