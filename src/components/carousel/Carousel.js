@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence, wrap } from "framer-motion";
 import "./carousel.css";
-import carousel_image from "../../assets/carouselImage_1.svg";
 
-// const images = [
-//   { id: 0, image: "https://mgstorageaccount.blob.core.windows.net/mgbucket/vrp_add190424_1.png" },
-//   { id: 1, image: "https://mgstorageaccount.blob.core.windows.net/mgbucket/vrp_add190424_2.png" },
-//   { id: 2, image: carousel_image },
-// ];
 
 const sliderVariants = {
   incoming: (direction) => ({
@@ -28,14 +22,13 @@ const sliderTransition = {
   ease: [0.56, 0.03, 0.12, 1.04],
 };
 
-export const Carousel = ({images}) => {
+export const Carousel = ({ images }) => {
   const [[imageCount, direction], setImageCount] = useState([0, 0]);
   const activeImageIndex = wrap(0, images.length, imageCount);
 
   const swipeToImage = (swipeDirection) => {
     setImageCount([imageCount + swipeDirection, swipeDirection]);
     console.log(images[activeImageIndex].url);
-    
   };
   const dragEndHandler = (dragInfo) => {
     const draggedDistance = dragInfo.offset.x;
@@ -56,7 +49,7 @@ export const Carousel = ({images}) => {
     }
     setImageCount([imageId, changeDirection]);
   };
-  console.log(images)
+  console.log(images);
 
   return (
     <div className="box">

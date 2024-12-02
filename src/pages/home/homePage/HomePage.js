@@ -14,8 +14,9 @@ import axiosInstance from "../../../utils/axios-middleware/axiosMiddleware";
 import { useQuery } from "@tanstack/react-query";
 import { Advertisement } from "../../../components/vrpItem/advertisement/Advertisement";
 import { BestSellingProductPage } from "../bestSellingProducts/BestSellingProductPage";
-import { BannerSkeleton } from "../../../components/skeletons/bannerSkeleton/BannerSeleton";
+import { BannerSkeleton } from "../../../components/skeletons/bannerSkeleton/BannerSkeleton";
 import classes from "./homePage.module.css";
+import { useSelector } from "react-redux";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -38,6 +39,15 @@ const buttonRoutes = [
 export const HomePage = () => {
   const navigate = useNavigate();
   const [width, setWidth] = useState(0);
+
+
+  const { params } = useSelector(
+    (state) => state.advertisementParams.params
+  );
+
+
+
+
 
   const placeholder = "Search for mobile, accessories & more";
 
@@ -64,6 +74,7 @@ export const HomePage = () => {
     console.log(Cookies.get("authToken"));
     navigate("/");
   };
+  console.log("params", params)
   return (
     <div className={classes.container}>
       <div className={classes.container__box}>
@@ -102,7 +113,7 @@ export const HomePage = () => {
             {add?.data.length > 1 ? (
               <Carousel images={add?.data} />
             ) : (
-              <Advertisement image={add?.data[0].url} />
+              <Advertisement image={add?.data} />
             )}
           </div>
         ) : (

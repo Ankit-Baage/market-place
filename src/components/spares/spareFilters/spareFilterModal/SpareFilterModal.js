@@ -7,10 +7,12 @@ export const SpareFilterModal = ({
   onApply,
   filterData,
   onClose,
-  onClear
+  onClear,
 }) => {
-  const [filters, setFilters] = useState({ ...filterData, options: filterData.options || [] });
-
+  const [filters, setFilters] = useState({
+    ...filterData,
+    options: filterData.options || [],
+  });
 
   const handleCheckboxChange = (event) => {
     const optionId = event.currentTarget.id;
@@ -24,14 +26,13 @@ export const SpareFilterModal = ({
   };
 
   const clearHandler = () => {
-    onClear()
-    setFilters({ ...filterData, options:  [] })
+    onClear();
+    setFilters({ ...filterData, options: [] });
   };
   const isApplyDisabled = filters.options.length === 0;
 
   const handleApply = () => {
     onApply(filters);
-    
   };
 
   const filterClose = () => {
@@ -47,16 +48,19 @@ export const SpareFilterModal = ({
         exit={{ y: "100%", transition: { duration: 0.5, ease: "easeInOut" } }}
       >
         <div className={classes.box__content}>
-          <div className={classes.box__content__head}>
-            <h1 className={classes.box__content__head__title}>
-              {(filters.type).charAt(0).toUpperCase() + (filters.type).slice(1)}
-            </h1>
-            <button
-              className={classes.backdrop__btn}
-              onClick={filterClose}
-            ></button>
+          <div className={classes.box__content__head__wrapper}>
+            <div className={classes.box__content__head}>
+              <h1 className={classes.box__content__head__title}>
+                {filters.type.charAt(0).toUpperCase() + filters.type.slice(1)}
+              </h1>
+              <button
+                className={classes.backdrop__btn}
+                onClick={filterClose}
+              ></button>
+            </div>
+            <hr className={classes.box__content__divider} />
           </div>
-          <hr className={classes.box__content__divider} />
+
           <div className={classes.box__content__filter}>
             {optionsData.map((item) => (
               <label
@@ -82,14 +86,21 @@ export const SpareFilterModal = ({
             ))}
           </div>
         </div>
-        <hr className={classes.box__content__divider} />
-        <div className={classes.box__btn}>
-          <button className={classes.box__btn__clear} onClick={clearHandler}>
-            Clear All
-          </button>
-          <button className={classes.box__btn__apply} disabled={isApplyDisabled} onClick={handleApply}>
-            Apply
-          </button>
+
+        <div className={classes.box__btn__wrapper}>
+          <hr className={classes.box__content__divider} />
+          <div className={classes.box__btn}>
+            <button className={classes.box__btn__clear} onClick={clearHandler}>
+              Clear All
+            </button>
+            <button
+              className={classes.box__btn__apply}
+              disabled={isApplyDisabled}
+              onClick={handleApply}
+            >
+              Apply
+            </button>
+          </div>
         </div>
       </motion.div>
     </div>

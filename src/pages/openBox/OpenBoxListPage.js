@@ -16,7 +16,7 @@ import { OpenBoxItem } from "../../components/openBox/OpenBoxItem";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWishListMutation";
-import { BannerSkeleton } from "../../components/skeletons/bannerSkeleton/BannerSeleton";
+import { BannerSkeleton } from "../../components/skeletons/bannerSkeleton/BannerSkeleton";
 import { ProductSkeleton } from "../../components/skeletons/productSkeleton/ProductSkeleton";
 import { BestSellingCardMessage } from "../../components/skeletons/bestSellingCardMessage/BestSellingCardMessage";
 
@@ -146,7 +146,7 @@ export const OpenBoxListPage = () => {
           {add?.data?.length > 1 ? (
             <Carousel images={add?.data} />
           ) : (
-            <Advertisement image={add?.data[0].url} />
+            <Advertisement image={add?.data} />
           )}
         </div>
       ) : (
