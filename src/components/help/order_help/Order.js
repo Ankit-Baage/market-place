@@ -7,55 +7,66 @@ import { Link } from "react-router-dom";
 export const dropdowns = [
   {
     id: 1,
-    title: "How do i login to my Mobigarage account?",
+    title: "How can I track the status of my order?",
     options: [
       {
         id: "1_1",
         contents: [
-          "You can log in to your Mobigarage account with these 3 simple steps:",
-          <>
-            Click on{" "}
-            <Link to="/authentication" style={{ color: "#FF6F3F" }}>
-              LOG IN/SIGN UP
-            </Link>{" "}
-            and enter your mobile number then click on{" "}
-            <Link to="/authentication" style={{ color: "#FF6F3F" }}>
-              CONTINUE
-            </Link>
-            .
-          </>,
-          "An OTP will be sent to the mobile number entered by you.",
-          "Verify the OTP, and post successful verification, you will be able to log in to Mobigarage.",
+          "You can track your order in real-time, from confirmation to delivery, directly from your account.",
         ],
       },
     ],
   },
   {
     id: 2,
-    title: "How do i login to my Mobigarage account?",
+    title: "Can I make changes to my order after placing it?",
     options: [
       {
         id: "2_1",
         contents: [
-          "You can log in to your Mobigarage account with these 3 simple steps:",
-          <>
-            Click on{" "}
-            <Link to="/authentication" style={{ color: "#FF6F3F" }}>
-              LOG IN/SIGN UP
-            </Link>{" "}
-            and enter your mobile number then click on{" "}
-            <Link to="/authentication" style={{ color: "#FF6F3F" }}>
-              CONTINUE
-            </Link>
-            .
-          </>,
-          "An OTP will be sent to the mobile number entered by you.",
-          "Verify the OTP, and post successful verification, you will be able to log in to Mobigarage.",
+          "Yes, you can contact our support team to make changes, but only before the order is shipped.",
+        ],
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "Where can I find details about my past purchases?",
+    options: [
+      {
+        id: "3_1",
+        contents: [
+          "Your account provides access to detailed information about past purchases, including product details, invoices, and payment summaries.",
+        ],
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: "Is it possible to reorder a product I previously purchased?",
+    options: [
+      {
+        id: "4_1",
+        contents: [
+          "Yes, you can easily reorder items from your purchase history.",
+        ],
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: "How does the order management system make shopping easier?",
+    options: [
+      {
+        id: "5_1",
+        contents: [
+          "It provides real-time tracking, order modification options, and access to past purchase details, making order management seamless and convenient.",
         ],
       },
     ],
   },
 ];
+
 
 export const OrderHelp = () => {
   return (
@@ -70,14 +81,10 @@ export const OrderHelp = () => {
           <h1 className={classes.box__head__title}>Orders</h1>
         </div>
         <p className={classes.box__head__para}>
-          Stay on top of your shopping with a seamless order management system.
-          Once you place an order, you can track its status in real-time, from
-          confirmation to delivery, directly from your account. Need to make
-          changes? Contact our support team before the order is shipped. You can
-          also view detailed information about your past purchases, including
-          product details, invoices, and payment summaries. Whether it’s a new
-          order or a reorder from your history, managing your purchases has
-          never been easier.
+          Easily manage your orders with real-time tracking from confirmation to
+          delivery. Contact support for changes before shipping. Access past
+          purchase details, invoices, and payment summaries, or quickly
+          reorder—all from your account.
         </p>
       </div>
       <div className={classes.box__container}>

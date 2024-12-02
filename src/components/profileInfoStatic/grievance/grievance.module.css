@@ -49,3 +49,58 @@
   justify-content: center;
   row-gap: 8px;
 }
+
+.box__benefits {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  justify-content: center;
+}
+
+.box__benefits__title {
+  font-family: "Poppins", sans;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  color: #989898;
+}
+
+.box__benefits__content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  justify-content: center;
+}
+
+.box__benefits__content__info {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  justify-content: center;
+
+}
+
+.box__benefits__content__info__desc_1 {
+  font-family: "Poppins", sans;
+  font-size: 12px;
+  line-height: 15.6px;
+  font-weight: 400;
+  color: #2F3567;
+}
+
+.box__benefits__content__info__desc {
+  font-family: "Poppins", sans;
+  font-size: 12px;
+  line-height: 15.6px;
+  font-weight: 400;
+  color: #989898;
+}
+
+.box__benefits__content__contact {
+  font-family: "Poppins", sans;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 500;
+  color: #2F3567;
+  
+}

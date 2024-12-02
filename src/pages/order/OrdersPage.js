@@ -4,6 +4,7 @@ import classes from "./ordersPage.module.css";
 import { SearchBar } from "../../components/ui/searchBarWithBackBtn/SearchBar";
 import { Order } from "../../components/order/Order";
 import { CartLoader } from "../../components/cart/cartLoader/CartLoader";
+import { EmptyOrder } from "../../components/order/EmptyOrder";
 
 const tabs = [
   { id: 1, title: "All" },
@@ -14,28 +15,31 @@ const tabs = [
 
 export const OrdersPage = () => {
   const [status, setStatus] = useState();
-  const { data, isSuccess } = useGetOrdersList(status);
+  const { data, isSuccess, isLoading } = useGetOrdersList(status);
   const placeholder = "Search for mobile, accessories & more";
 
   return (
     <div className={classes.box}>
       <SearchBar placeholder={placeholder} />
-      <div className={classes.box__tabs}>
-        {tabs.map((tab) => (
-          <button className={classes.box__tabs__tab} key={tab.id}>
-            {tab.title}
-          </button>
-        ))}
-      </div>
-      {isSuccess ? (
-        <div className={classes.box__orders}>
-          {data?.data?.data.map((order) => (
-            <Order key={order.id} order={order} />
+      {data?.data?.data?.length > 0 && (
+        <div className={classes.box__tabs}>
+          {tabs.map((tab) => (
+            <button className={classes.box__tabs__tab} key={tab.id}>
+              {tab.title}
+            </button>
           ))}
         </div>
-      ) : (
-        <CartLoader />
       )}
+
+      <div className={classes.box__orders}>
+        {isLoading ? (
+          <CartLoader />
+        ) : isSuccess && data?.data?.data?.length > 0 ? (
+          data.data.data.map((order) => <Order key={order.id} order={order} />)
+        ) : (
+          <EmptyOrder />
+        )}
+      </div>
     </div>
   );
 };

@@ -103,9 +103,15 @@ export const AboutUs = () => {
           <h1 className={classes.box__head__title}>About Us</h1>
         </div>
         <p className={classes.box__head__para}>
-          Learn about who we are, our mission, and how we aim to provide the
-          best mobile shopping experience. Discover the values that drive our
-          marketplace and our commitment to customer satisfaction.
+          MobiGarage is a pre-owned business scaling platform. Established in
+          2019, it has been a pioneer in bringing refurbished smartphones to the
+          tier 2, 3, & beyond markets. It is an organized platform that
+          successfully integrates the existing extensive retail footprint of
+          phone sellers and repair kiosks. MobiGarage is increasing the
+          accessibility to quality and affordable smartphones for its end
+          customer. It is shortening the gaps in the stock inventory and prices
+          which are usually experienced in the unorganized pre-owned
+          device industry.
         </p>
       </div>
       {/* <div className={classes.box__container}>

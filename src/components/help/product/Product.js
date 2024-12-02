@@ -1,61 +1,96 @@
 import React from "react";
 import productImage from "../../../assets/help__product.svg";
 import Dropdown from "../../dropDown/DropDown";
-import classes from "./product.module.css";
 import { Link } from "react-router-dom";
+import classes from "./product.module.css";
 
 export const dropdowns = [
   {
     id: 1,
-    title: "How do i login to my Mobigarage account?",
+    title: "What is VRP at Mobigarage?",
     options: [
       {
         id: "1_1",
         contents: [
-          "You can log in to your Mobigarage account with these 3 simple steps:",
-          <>
-            Click on{" "}
-            <Link to="/authentication" style={{ color: "#FF6F3F" }}>
-              LOG IN/SIGN UP
-            </Link>{" "}
-            and enter your mobile number then click on{" "}
-            <Link to="/authentication" style={{ color: "#FF6F3F" }}>
-              CONTINUE
-            </Link>
-            .
-          </>,
-          "An OTP will be sent to the mobile number entered by you.",
-          "Verify the OTP, and post successful verification, you will be able to log in to Mobigarage.",
+          "VRP offers premium quality mobile devices for customers seeking high-end options.",
         ],
       },
     ],
   },
   {
     id: 2,
-    title: "How do i login to my Mobigarage account?",
+    title: "What products are available under Prexo?",
     options: [
       {
         id: "2_1",
         contents: [
-          "You can log in to your Mobigarage account with these 3 simple steps:",
-          <>
-            Click on{" "}
-            <Link to="/authentication" style={{ color: "#FF6F3F" }}>
-              LOG IN/SIGN UP
-            </Link>{" "}
-            and enter your mobile number then click on{" "}
-            <Link to="/authentication" style={{ color: "#FF6F3F" }}>
-              CONTINUE
-            </Link>
-            .
-          </>,
-          "An OTP will be sent to the mobile number entered by you.",
-          "Verify the OTP, and post successful verification, you will be able to log in to Mobigarage.",
+          "Prexo features refurbished phones, providing a cost-effective and eco-friendly choice.",
+        ],
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "What items are included in the Spare category?",
+    options: [
+      {
+        id: "3_1",
+        contents: [
+          "Spare includes individual mobile parts like batteries, chargers, and other accessories for repairs.",
+        ],
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: "What does the Open Box category offer?",
+    options: [
+      {
+        id: "4_1",
+        contents: [
+          "Open Box features unboxed phones along with essential accessories, offering great value on slightly used devices.",
+        ],
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: "What types of phones can I find in the New Phones category?",
+    options: [
+      {
+        id: "5_1",
+        contents: [
+          "The New Phones category offers brand-new, seal-packed devices for customers wanting the latest models.",
+        ],
+      },
+    ],
+  },
+  {
+    id: 6,
+    title: "Which category is best for budget-friendly options?",
+    options: [
+      {
+        id: "6_1",
+        contents: [
+          "The Prexo and Open Box categories are ideal for affordable options without compromising quality.",
+        ],
+      },
+    ],
+  },
+  {
+    id: 7,
+    title: "How does Mobigarage ensure product quality across categories?",
+    options: [
+      {
+        id: "7_1",
+        contents: [
+          "We prioritize quality, transparency, and customer value across all categories, ensuring you get reliable products.",
         ],
       },
     ],
   },
 ];
+
 
 export const Product = () => {
   return (
@@ -70,15 +105,12 @@ export const Product = () => {
           <h1 className={classes.box__head__title}>Products</h1>
         </div>
         <p className={classes.box__head__para}>
-          At Mobigarage, we specialize in offering a diverse range of products
-          to meet all your mobile needs. Our product categories include VRP for
-          premium quality devices, Prexo for refurbished products, Spare for
-          individual parts like batteries and chargers, Open Box for unboxed
-          phones with essential accessories, and New Phones for brand-new,
-          seal-packed devices. Whether you're looking for affordability,
-          reliability, or the latest technology, Mobigarage has you covered. Our
-          commitment is to provide quality, transparency, and excellent value
-          for every customer.
+          At Mobigarage, we offer a wide range of mobile products, including VRP
+          for premium devices, Prexo for refurbished phones, Spare for
+          individual parts, Open Box for unboxed phones with accessories, and
+          New Phones for brand-new devices. Whether you seek affordability,
+          reliability, or the latest technology, we provide quality and value
+          for every customer.
         </p>
       </div>
       <div className={classes.box__container}>

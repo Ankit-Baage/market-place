@@ -36,7 +36,9 @@ export const dropdowns = [
     options: [
       {
         id: "2_1",
-        contents: ['You can update your details in the "Account Details" section.'],
+        contents: [
+          'You can update your details in the "Account Details" section.',
+        ],
       },
     ],
   },
@@ -46,7 +48,9 @@ export const dropdowns = [
     options: [
       {
         id: "3_1",
-        contents: ['Yes, you can reset your password anytime from the "Password" section.'],
+        contents: [
+          'Yes, you can reset your password anytime from the "Password" section.',
+        ],
       },
     ],
   },
@@ -56,7 +60,9 @@ export const dropdowns = [
     options: [
       {
         id: "4_1",
-        contents: ['Your order history is available under the "Order History" tab.'],
+        contents: [
+          'Your order history is available under the "Order History" tab.',
+        ],
       },
     ],
   },
@@ -76,12 +82,13 @@ export const dropdowns = [
     options: [
       {
         id: "6_1",
-        contents: ['Contact customer support if you wish to delete your account.'],
+        contents: [
+          "Contact customer support if you wish to delete your account.",
+        ],
       },
     ],
   },
 ];
-
 
 export const Account = () => {
   return (
@@ -96,15 +103,11 @@ export const Account = () => {
           <h1 className={classes.box__head__title}>Account</h1>
         </div>
         <p className={classes.box__head__para}>
-          With your account, you have complete control over your shopping
-          experience. You can easily update your personal information, change
-          your password, and manage your saved payment methods for quicker
-          checkouts. Track the status of all your orders, view past purchases,
-          and access detailed invoices. Keep your saved addresses up-to-date for
-          faster delivery and manage your wishlist to track your favorite
-          phones. Additionally, customize your preferences and notification
-          settings to stay informed about special offers, order updates, and
-          more.
+          With your account, you can update personal info, change your password,
+          and manage saved payment methods for faster checkouts. Track orders,
+          view past purchases, and access invoices. Keep addresses updated for
+          quicker delivery and manage your wishlist. Customize preferences and
+          notifications for offers and updates.
         </p>
       </div>
       <div className={classes.box__container}>

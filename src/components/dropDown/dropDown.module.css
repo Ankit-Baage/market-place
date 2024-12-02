@@ -29,7 +29,8 @@
 .dropdown__icon {
   position: absolute;
   top: 8px;
-  right: 26px;
+  right:0;
+  display: block;
   width: 12px;
   height: 6px;
   background-image: url(../../assets/chevron-down.svg);

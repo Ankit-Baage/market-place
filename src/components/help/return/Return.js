@@ -7,50 +7,60 @@ import { Link } from "react-router-dom";
 export const dropdowns = [
   {
     id: 1,
-    title: "How do i login to my Mobigarage account?",
+    title: "What should I do if I receive a defective, damaged, or incorrect item?",
     options: [
       {
         id: "1_1",
         contents: [
-          "You can log in to your Mobigarage account with these 3 simple steps:",
-          <>
-            Click on{" "}
-            <Link to="/authentication" style={{ color: "#FF6F3F" }}>
-              LOG IN/SIGN UP
-            </Link>{" "}
-            and enter your mobile number then click on{" "}
-            <Link to="/authentication" style={{ color: "#FF6F3F" }}>
-              CONTINUE
-            </Link>
-            .
-          </>,
-          "An OTP will be sent to the mobile number entered by you.",
-          "Verify the OTP, and post successful verification, you will be able to log in to Mobigarage.",
+          "If you receive a defective, damaged, or incorrect item, you can initiate a return or exchange within the specified return period through your account.",
         ],
       },
     ],
   },
   {
     id: 2,
-    title: "How do i login to my Mobigarage account?",
+    title: "How do I request a return for my order?",
     options: [
       {
         id: "2_1",
         contents: [
-          "You can log in to your Mobigarage account with these 3 simple steps:",
-          <>
-            Click on{" "}
-            <Link to="/authentication" style={{ color: "#FF6F3F" }}>
-              LOG IN/SIGN UP
-            </Link>{" "}
-            and enter your mobile number then click on{" "}
-            <Link to="/authentication" style={{ color: "#FF6F3F" }}>
-              CONTINUE
-            </Link>
-            .
-          </>,
-          "An OTP will be sent to the mobile number entered by you.",
-          "Verify the OTP, and post successful verification, you will be able to log in to Mobigarage.",
+          "Simply log in to your account and request a return. We’ll arrange for the item to be picked up from your location.",
+        ],
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "What happens after the returned item is picked up?",
+    options: [
+      {
+        id: "3_1",
+        contents: [
+          "Once the returned item is verified, you’ll receive either a refund or a replacement based on your preference.",
+        ],
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: "Can I exchange an item for a different product?",
+    options: [
+      {
+        id: "4_1",
+        contents: [
+          "Exchanges are only allowed for replacement products of equal value. Select your replacement during the exchange process, and we’ll ship it to you as soon as possible.",
+        ],
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: "What is the company’s approach to returns and exchanges?",
+    options: [
+      {
+        id: "5_1",
+        contents: [
+          "We aim to make the returns and exchanges process simple, smooth, and worry-free for our customers.",
         ],
       },
     ],
@@ -70,15 +80,12 @@ export const Return = () => {
           <h1 className={classes.box__head__title}>Returns & Exchanges</h1>
         </div>
         <p className={classes.box__head__para}>
-          We strive to ensure you're completely satisfied with your purchase. If
-          you receive a defective, damaged, or incorrect item, you can easily
-          initiate a return or exchange within our specified return period. Our
-          process is simple: request a return through your account, and we’ll
-          arrange for the item to be picked up from your location. Once the
-          returned item is verified, you’ll receive a refund or a replacement
-          based on your preference. For exchanges, select a replacement product
-          of equal value, and we’ll ship it to you as soon as possible. Our goal
-          is to make returns and exchanges smooth and worry-free.
+          If you receive a defective, damaged, or incorrect item, initiate a
+          return or exchange within the specified period via your account. We’ll
+          arrange pickup, verify the item, and process a refund or replacement
+          based on your preference. For exchanges, select a product of equal
+          value, and we’ll ship it quickly. Our goal is to ensure a smooth,
+          worry-free process.
         </p>
       </div>
       <div className={classes.box__container}>
