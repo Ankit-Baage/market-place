@@ -22,7 +22,7 @@ export const OpenBoxCartItem = ({
   return (
     <div className={classes.box}>
       <div className={classes.box__info}>
-        <Link to={`openBox/${item.id}`}>
+        <Link to={`/openBox/${item.id}`}>
           <img
             src={item.image}
             alt="item"

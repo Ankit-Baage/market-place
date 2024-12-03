@@ -23,7 +23,7 @@ export const NewPhoneCartItem = ({
   return (
     <div className={classes.box}>
       <div className={classes.box__info}>
-        <Link to={`newPhone/${item.id}`}>
+        <Link to={`/newPhone/${item.id}`}>
           <img
             src={item.image}
             alt="item"
