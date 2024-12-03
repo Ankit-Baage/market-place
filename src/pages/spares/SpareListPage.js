@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import { BannerSkeleton } from "../../components/skeletons/bannerSkeleton/BannerSkeleton";
 import { ProductSkeleton } from "../../components/skeletons/productSkeleton/ProductSkeleton";
 import { BestSellingCardMessage } from "../../components/skeletons/bestSellingCardMessage/BestSellingCardMessage";
+import useGetCategoryList from "../../tanstack-query/categoryList/useGetCategoryList";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -27,6 +28,7 @@ const fetchAdvertisements = async () => {
 };
 
 export const SpareListPage = () => {
+  const category = "spares";
   const [filters, setFilters] = useState({
     brand: null,
     spare: null,
@@ -40,6 +42,13 @@ export const SpareListPage = () => {
   const guestId = Cookies.get("guestId");
   const medium = authToken ? "user" : "guest";
   const user_id = authToken ? userId : guestId;
+
+  const { data: categoryListData, isSuccess: isCategoryListDataSuccess } =
+    useGetCategoryList(category, user_id, medium, filters);
+
+  if (isCategoryListDataSuccess) {
+    console.log("categoryList", categoryListData);
+  }
 
   const [searchParams, setSearchParams] = useSearchParams();
   const {
@@ -126,13 +135,11 @@ export const SpareListPage = () => {
 
   return (
     <div className={classes.box}>
-      {isSuccess && sparesListData.length > 0 && (
-        <SparesFilterPage
-          onApply={handleApplied}
-          onPriceApply={handlePriceApplied}
-          onSelection={(itemId) => handleRadioApplied(itemId)}
-        />
-      )}
+      <SparesFilterPage
+        onApply={handleApplied}
+        onPriceApply={handlePriceApplied}
+        onSelection={(itemId) => handleRadioApplied(itemId)}
+      />
 
       {addIsSuccess ? (
         <div className={classes.box__space}>

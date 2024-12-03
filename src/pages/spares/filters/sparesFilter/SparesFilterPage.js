@@ -123,7 +123,7 @@ export const SparesFilterPage = ({ onApply, onPriceApply, onClear, onSelection }
             />
           ) : (
             <SpareFilterModal
-              optionsData={data?.data.data}
+              optionsData={data?.data?.data}
               onApply={handleApply}
               filterType={filters.type}
               filterData={{

@@ -68,14 +68,14 @@ export const OpenBoxDetailPage = () => {
   const handleColorSelect = (color) => {
     // setSelectedColor(color);
     // console.log("Selected color:", color.record_id);
-    navigate(`/home/openBox/${color.record_id}`);
+    navigate(`/openBox/${color.record_id}`);
   };
 
   const handleVariantSelect = (requestId) => {
     // setSelectedVariant(requestId);
     console.log("variant :", requestId);
 
-    navigate(`/home/openBox/${requestId}`);
+    navigate(`/openBox/${requestId}`);
   };
   const handleQuantityUpdate = useCallback(
     (operator, item = data?.data?.data) => {
@@ -124,36 +124,36 @@ export const OpenBoxDetailPage = () => {
 
   useEffect(() => {
     if (isSuccess && data) {
-      const newPhoneCarouselData = data.data.data.images;
+      const newPhoneCarouselData = data?.data?.data?.images;
       const newPhoneDescription = [
-        { id: 1, desc: data.data.data.description_1 },
-        { id: 2, desc: data.data.data.description_2 },
-        { id: 3, desc: data.data.data.description_3 },
+        { id: 1, desc: data?.data?.data?.description_1 },
+        { id: 2, desc: data?.data?.data?.description_2 },
+        { id: 3, desc: data?.data?.data?.description_3 },
         { id: 4, desc: data.data.data.description_4 },
       ];
 
       const colorQuery = {
-        sellerId: data.data.data.seller_id,
-        brand: data.data.data.brand,
-        model: data.data.data.model,
-        ram: data.data.data.ram,
-        rom: data.data.data.rom,
+        sellerId: data?.data?.data?.seller_id,
+        brand: data?.data?.data?.brand,
+        model: encodeURIComponent(data?.data?.data?.model),
+        ram: data?.data?.data?.ram,
+        rom: data?.data?.data?.rom,
       };
       const prices = {
-        originalPrice: formatNumber(data.data.data.original_price),
-        discountedPrice: formatNumber(data.data.data.discounted_price),
-        discountPercentage: data.data.data.discount_percentage,
-        quantity: data.data.data.quantity,
+        originalPrice: formatNumber(data?.data?.data?.original_price),
+        discountedPrice: formatNumber(data?.data?.data?.discounted_price),
+        discountPercentage: data?.data?.data?.discount_percentage,
+        quantity: data?.data?.data?.quantity,
         onQuantityUpdate: handleQuantityUpdate,
       };
-      const color = data.data.data.color;
+      const color = data?.data?.data?.color;
       const variantQuery = {
-        sellerId: data.data.data.seller_id,
-        brand: data.data.data.brand,
-        model: data.data.data.model,
-        color: data.data.data.color,
+        sellerId: data?.data?.data?.seller_id,
+        brand: data?.data?.data?.brand,
+        model: encodeURIComponent(data?.data?.data?.model),
+        color: data?.data?.data?.color,
       };
-      const variant = { ram: data.data.data.ram, rom: data.data.data.rom };
+      const variant = { ram: data?.data?.data?.ram, rom: data?.data?.data?.rom };
 
       dispatch({
         type: "SET_DATA",
@@ -179,6 +179,9 @@ export const OpenBoxDetailPage = () => {
     color,
     variant,
   } = state;
+
+  const { sellerId, brand, model, ram, rom } = colorQuery || {};
+  const shouldFetch = sellerId && brand && model && ram && rom; 
 
   const { data: newPhoneColors, isSuccess: isNewPhoneSuccess } =
     useGetOpenBoxColors(colorQuery);

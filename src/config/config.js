@@ -286,3 +286,9 @@ export const placeOrderUrl = (coupon_code, address_id) => {
 
 export const userProfileUrl = (user_id) =>
   `${baseUrl}${version}${mode}accounts/user_profile?user_id=${user_id}`;
+
+
+//////////optimization//////////////
+
+export const categoryListUrl = (category,user_id, medium) =>
+  `${baseUrl}${version}${mode}${category}/?user_id=${user_id}&mode=${medium}`;

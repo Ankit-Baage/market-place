@@ -1,8 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import React from "react";
 import { Category } from "../../components/category/Category";
 import { Header } from "../../components/header/Header";
-import { SearchInput } from "../../components/searchInput/SearchInput";
 import classes from "./categoryPage.module.css";
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "../../utils/axios-middleware/axiosMiddleware";
@@ -10,6 +8,7 @@ import { SearchBar } from "../../components/ui/searchBarWithBackBtn/SearchBar";
 import { Carousel } from "../../components/carousel/Carousel";
 import { Advertisement } from "../../components/vrpItem/advertisement/Advertisement";
 import { useNavigate } from "react-router-dom";
+import { BannerSkeleton } from "../../components/skeletons/bannerSkeleton/BannerSkeleton";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -22,18 +21,12 @@ const fetchAdvertisements = async () => {
 };
 
 export const CategoryPage = () => {
- 
   const placeholder = "Search for mobile, accessories & more";
 
-  const {
-    data: add,
-    error,
-    isLoading: addisLoading,
-  } = useQuery({
+  const { data: add, isSuccess } = useQuery({
     queryKey: ["advertisements", "home", "landing"],
     queryFn: fetchAdvertisements,
   });
-
 
   return (
     <div className={classes.container}>
@@ -43,13 +36,17 @@ export const CategoryPage = () => {
         <div className={classes.container__search}>
           <SearchBar placeholder={placeholder} />
         </div>
-        <div className={classes.container__carousel}>
-          {add?.data.length > 1 ? (
-            <Carousel images={add?.data} />
-          ) : (
-            <Advertisement image={add?.data[0].url} />
-          )}
-        </div>
+        {isSuccess ? (
+          <div className={classes.container__carousel}>
+            {add?.data.length > 1 ? (
+              <Carousel images={add?.data} />
+            ) : (
+              <Advertisement image={add?.data} />
+            )}
+          </div>
+        ) : (
+          <BannerSkeleton />
+        )}
       </div>
       <Category />
     </div>

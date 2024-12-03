@@ -10,8 +10,23 @@ import { OpenBoxColors } from "../openBoxColor/OpenBoxColors";
 import { OpenBoxPrice } from "../openBoxPrice/OpenBoxPrice";
 import { OpenBoxHighlights } from "../openBoxHighlights/OpenBoxHighlights";
 import { OpenBoxOffers } from "../openBoxOffers/OpenBoxOffers";
+import axiosInstance from "../../../utils/axios-middleware/axiosMiddleware";
+import { useQuery } from "@tanstack/react-query";
+import { Carousel } from "../../carousel/Carousel";
+import { Advertisement } from "../../vrpItem/advertisement/Advertisement";
+import { BannerSkeleton } from "../../skeletons/bannerSkeleton/BannerSkeleton";
 
 const dummyArray = [dummy];
+
+const fetchAdvertisements = async () => {
+  const response = await axiosInstance.get(
+    "https://dev.backend.mobigarage.com/v1/mp/admin/advertisement",
+    {
+      params: { category: "open_box", page: "listing" },
+    }
+  );
+  return response.data;
+};
 
 export const OpenBoxDetail = ({
   images,
@@ -28,8 +43,12 @@ export const OpenBoxDetail = ({
   onAddToCart,
   cart_status,
   wishlist_status,
-  onWishList
+  onWishList,
 }) => {
+  const { data: add, isSuccess: addIsSuccess } = useQuery({
+    queryKey: ["advertisements", "open_box", "listing"],
+    queryFn: fetchAdvertisements,
+  });
   const [validationResults, setValidationResults] = useState({});
 
   // Function to check if an image URL is valid
@@ -62,7 +81,7 @@ export const OpenBoxDetail = ({
   return (
     <div className={classes.box}>
       <div className={classes.box__spareIntro}>
-      <span
+        <span
           className={
             wishlist_status === 1
               ? classes.box__info__fav__active
@@ -70,13 +89,21 @@ export const OpenBoxDetail = ({
           }
           onClick={onWishList}
         />
-        <ProductCarousel
-          imageData={imageArray.length < 1 ? dummyArray : imageArray}
-        />
+        {addIsSuccess ? (
+          <div className={classes.box__space}>
+            {add?.data?.length > 1 ? (
+              <Carousel images={add?.data} />
+            ) : (
+              <Advertisement image={add?.data} />
+            )}
+          </div>
+        ) : (
+          <BannerSkeleton />
+        )}
         <div className={classes.box__spareName}>
           <h1
             className={classes.box__spareName__title}
-          >{`${infoSpecs.model} ${infoSpecs.ram}/${infoSpecs.rom} (${color})`}</h1>
+          >{`${decodeURIComponent(infoSpecs.model)} ${infoSpecs.ram}/${infoSpecs.rom} (${color})`}</h1>
           <h2 className={classes.box__spareName__subtitle}>Open Box</h2>
           <hr className={classes.box__item__divider} />
         </div>
@@ -117,7 +144,7 @@ export const OpenBoxDetail = ({
           className={`${classes.box__btns__btn} ${classes.box__btns__add}`}
           onClick={onAddToCart}
         >
-          {cart_status?"Added" : "Add To cart"}
+          {cart_status ? "Added" : "Add To cart"}
         </button>
         <button
           className={`${classes.box__btns__btn} ${classes.box__btns__buy}`}

@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useReducer,
-  useState,
-  useCallback,
-  useMemo,
-} from "react";
+import React, { useEffect, useReducer, useState, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useCartListQuantityMutation from "../../tanstack-query/cartList/useCartListQuantityMutation";
 import useGetSpareDetail from "../../tanstack-query/spares/useGetSpareDetail";
@@ -68,7 +62,7 @@ export const SpareDetailPage = () => {
   const handleColorSelect = (color) => {
     setSelectedColor(color);
     console.log("Selected color:", color.record_id);
-    navigate(`/home/spares/${color.record_id}`);
+    navigate(`/spares/${color.record_id}`);
   };
 
   const handleQuantityUpdate = useCallback(
@@ -167,7 +161,12 @@ export const SpareDetailPage = () => {
   } = state;
 
   const { data: spareColors, isSuccess: isSpareColorSuccess } =
-    useGetSpareColors(colorQuery);
+    useGetSpareColors({
+      sellerId: colorQuery?.sellerId,
+      brand: encodeURIComponent(colorQuery?.brand),
+      model: encodeURIComponent(colorQuery?.model),
+      part: encodeURIComponent(colorQuery?.part),
+    });
   // console.log(colors?.data.data);
   console.log(spareColors?.data.data);
 

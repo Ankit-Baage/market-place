@@ -54,8 +54,7 @@ export const HomePage = () => {
   const carousel = useRef();
   const {
     data: add,
-    isError,
-    isLoading,
+
     isSuccess
   } = useQuery({
     queryKey: ["advertisements", "home", "landing"],

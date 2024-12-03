@@ -24,7 +24,7 @@ const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
     "https://dev.backend.mobigarage.com/v1/mp/admin/advertisement",
     {
-      params: { category: "new_phones", page: "listing" },
+      params: { category: "open_box", page: "listing" },
     }
   );
   return response.data;
@@ -53,7 +53,7 @@ export const OpenBoxListPage = () => {
   } = useGetOpenBoxList(filters, user_id, medium);
 
   const { data: add, isSuccess: addIsSuccess } = useQuery({
-    queryKey: ["advertisements", "new_phones", "listing"],
+    queryKey: ["advertisements", "open_box", "listing"],
     queryFn: fetchAdvertisements,
   });
 

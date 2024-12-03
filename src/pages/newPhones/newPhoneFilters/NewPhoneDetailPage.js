@@ -69,14 +69,14 @@ export const NewPhoneDetailPage = () => {
   const handleColorSelect = (color) => {
     // setSelectedColor(color);
     // console.log("Selected color:", color.record_id);
-    navigate(`/home/newPhone/${color.record_id}`);
+    navigate(`/newPhone/${color.record_id}`);
   };
 
   const handleVariantSelect = (requestId) => {
     // setSelectedVariant(requestId);
     console.log("variant :", requestId);
 
-    navigate(`/home/newPhone/${requestId}`);
+    navigate(`/newPhone/${requestId}`);
   };
   const handleQuantityUpdate = useCallback(
     (operator, item = data?.data?.data) => {
@@ -169,7 +169,7 @@ export const NewPhoneDetailPage = () => {
         },
       });
     }
-  }, [isSuccess, data]);
+  }, [isSuccess, data, handleQuantityUpdate]);
 
   const {
     newPhoneCarouselData,
@@ -182,7 +182,13 @@ export const NewPhoneDetailPage = () => {
   } = state;
 
   const { data: newPhoneColors, isSuccess: isNewPhoneSuccess } =
-    useGetNewPhoneColors(colorQuery);
+    useGetNewPhoneColors({
+      sellerId: colorQuery?.sellerId,
+      brand: encodeURIComponent(colorQuery?.brand),
+      model: encodeURIComponent(colorQuery?.model),
+      ram: encodeURIComponent(colorQuery?.ram),
+      rom: encodeURIComponent(colorQuery?.rom),
+    });
 
   const { data: newPhoneVariant, isSuccess: isNewPhoneVariantSuccess } =
     useGetNewPhoneVariant(variantQuery);

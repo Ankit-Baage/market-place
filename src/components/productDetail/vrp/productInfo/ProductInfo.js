@@ -4,9 +4,27 @@ import { formatNumber } from "../../../../utils/helpers/formatNumber";
 import classes from "./productInfo.module.css";
 import { Advertisement } from "../../../vrpItem/advertisement/Advertisement";
 import vrpAdd from "../../../../assets/vrpAdd.png";
+import axiosInstance from "../../../../utils/axios-middleware/axiosMiddleware";
+import { useQuery } from "@tanstack/react-query";
+import { Carousel } from "../../../carousel/Carousel";
+import { BannerSkeleton } from "../../../skeletons/bannerSkeleton/BannerSkeleton";
+
+const fetchAdvertisements = async () => {
+  const response = await axiosInstance.get(
+    "https://dev.backend.mobigarage.com/v1/mp/admin/advertisement",
+    {
+      params: { category: "vrp", page: "listing" },
+    }
+  );
+  return response.data;
+};
 
 export const ProductInfo = ({ productData, onWishList }) => {
   console.log(productData?productData:null)
+  const { data: add, isSuccess: addIsSuccess } = useQuery({
+    queryKey: ["advertisements", "vrp", "listing"],
+    queryFn: fetchAdvertisements,
+  });
   return (
     <div>
       {" "}
@@ -27,7 +45,17 @@ export const ProductInfo = ({ productData, onWishList }) => {
             onClick={onWishList}
           />
         </div>
-        <Advertisement image={vrpAdd} />
+        {addIsSuccess ? (
+        <div className={classes.box__space}>
+          {add?.data?.length > 1 ? (
+            <Carousel images={add?.data} />
+          ) : (
+            <Advertisement image={add?.data} />
+          )}
+        </div>
+      ) : (
+        <BannerSkeleton />
+      )}
       </div>
       <div className={classes.box__specs}>
         <div className={classes.box__specs__info}>
