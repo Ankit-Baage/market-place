@@ -7,8 +7,6 @@ import {
 } from "../../store/address/addressSlice";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import classes from "./reviewPage.module.css";
-import { SearchBar } from "../../components/ui/searchBarWithBackBtn/SearchBar";
-import useGetCartList from "../../tanstack-query/cartList/useGetCartList";
 import { CartLoader } from "../../components/cart/cartLoader/CartLoader";
 
 import { EmptyCart } from "../../components/cart/EmptyCart";
@@ -147,6 +145,7 @@ export const ReviewPage = () => {
 
         <OrderSummary
           subTotal={data?.data?.data.total_amount}
+          originalAmount={data?.data?.data?.original_amount}
           gst={data?.data?.data?.gst_amount}
           grandTotal={data?.data?.data?.final_amount}
           couponAmount={data?.data?.data?.applied_coupon_amount}

@@ -112,10 +112,10 @@ export const AddressPage = () => {
             Add a New Address <span className={classes.box__card__new__right} />
           </button>
 
-          <button className={classes.box__card__new__btn}>
+          {/* <button className={classes.box__card__new__btn}>
             Find a pickup location near you
             <span className={classes.box__card__new__right} />
-          </button>
+          </button> */}
         </div>
         {heading === "Select Address" && data?.data?.data.length > 0 && (
           <button
