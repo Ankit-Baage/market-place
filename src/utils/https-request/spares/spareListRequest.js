@@ -18,14 +18,6 @@ export const spareListRequest = async (filters, user_id, medium) => {
 
     return response.data.data;
   } catch (error) {
-    if (axiosInstance.isAxiosError(error)) {
-      // Axios error (e.g., network error, 404 Not Found)
-      // console.error("Axios error:", error.message);
-      throw new Error("Server error");
-    } else {
-      // Non-Axios error
-      // console.error("Non-Axios error:", error.message);
-      throw error; // Re-throw the original error
-    }
+    throw error; // Re-throw the original error
   }
 };

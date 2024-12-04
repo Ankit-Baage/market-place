@@ -17,10 +17,8 @@ const filterButtons = [
   { id: "price", label: "Price" },
 ];
 
-export const SparesFilterPage = ({
-  onClear,
-}) => {
-  const selectedFilters = useSelector(selectFilterOptions)
+export const SparesFilterPage = () => {
+  const selectedFilters = useSelector(selectFilterOptions);
   const [filters, setFilters] = useState({
     spare: [],
     brand: [],
@@ -29,7 +27,7 @@ export const SparesFilterPage = ({
     end: null,
     sort: null,
   });
-  console.log("redux",selectedFilters)
+  console.log("redux", selectedFilters);
   const [currentFilterType, setCurrentFilterType] = useState(null);
   const [inFilterMode, setInFilterMode] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -52,7 +50,7 @@ export const SparesFilterPage = ({
     setFilters(newFilters);
     const urlParams = Array.from(searchParams.entries());
     let activeFilters = urlParams.map(([key]) => key);
-    if (activeFilters.includes("start" ||"end" || "sort")) {
+    if (activeFilters.includes("start" || "end" || "sort")) {
       activeFilters = [...activeFilters, "price"];
     }
     setActiveFilters(activeFilters);
@@ -65,7 +63,7 @@ export const SparesFilterPage = ({
     setCurrentFilterType(mode);
     setInFilterMode(true);
   };
-  console.log("currentFilter :",currentFilterType)
+  console.log("currentFilter :", currentFilterType);
 
   const handlePriceChange = (start, end) => {
     if (filters.sort) {
@@ -104,30 +102,71 @@ export const SparesFilterPage = ({
     setInFilterMode(false);
   };
 
-  const handleClear = () => {
-    const newFilters = { ...filters, [currentFilterType]: null };
+  const handleClear = (event, filterType) => {
+    if (!inFilterMode) {
+      event.stopPropagation();
+    }
+
+    // Check if the filterType is "price" and clear all related sub-filters
+    let newFilters = { ...filters };
+    if (filterType === "price") {
+      newFilters = { ...newFilters, start: null, end: null, sort: null };
+    } else {
+      newFilters = { ...newFilters, [filterType]: null };
+    }
     setFilters(newFilters);
+
+    // Update URL search params to clear the corresponding filters
     setSearchParams((params) => {
-      params.delete(currentFilterType);
+      if (filterType === "price") {
+        params.delete("start");
+        params.delete("end");
+        params.delete("sort");
+      } else {
+        params.delete(filterType);
+      }
       return params;
     });
-    setInFilterMode(false);
+
+    handleClose();
   };
 
   return (
     <div className={classes.box}>
-      {filterButtons.map((button) => (
-        <button
-          className={`${classes.box__filter} ${
-            isActive(button.id) && classes.active
-          }`}
-          key={button.id}
-          id={button.id}
-          onClick={handleFilter}
-        >
-          {button.label} <span className={classes.box__filter__chevron} />
+      <div className={classes.box__btns}>
+        {filterButtons.map((button) => (
+          <button
+            className={`${classes.box__filter} ${
+              isActive(button.id) && classes.active
+            }`}
+            key={button.id}
+            id={button.id}
+            onClick={handleFilter}
+          >
+            {button.label}
+
+            <span
+              className={`${classes.box__filter__chevron} ${
+                isActive(button.id) ? classes.box__filter__chevron__active : ""
+              }`}
+              onClick={(event) => {
+                if (isActive(button.id)) {
+                  event.stopPropagation(); // Prevents the parent filter button click event
+                  handleClear(event, button.id); // Trigger clear functionality
+                } else {
+                  handleFilter(event); // Trigger filter mode if not active
+                }
+              }}
+            ></span>
+          </button>
+        ))}
+      </div>
+
+      {/* {activeFilters.length > 0 && (
+        <button className={classes.box__filter__clear} onClick={handleClearAll}>
+          Clear Filters
         </button>
-      ))}
+      )} */}
       <AnimatePresence>
         {isSuccess &&
           inFilterMode &&
@@ -135,7 +174,6 @@ export const SparesFilterPage = ({
             <SparesPriceFilterPage
               optionsData={data?.data.data}
               onApply={handlePriceChange}
-              onClear={onClear}
               onClose={handleClose}
               onRadioApplied={(itemId) => handleRadio(itemId)}
             />

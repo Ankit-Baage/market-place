@@ -1,16 +1,25 @@
 .box {
   display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  /* align-items: center; */
+  justify-content: space-between;
+
+}
+.box__btns {
+  display: flex;
   align-items: center;
+  column-gap: 8px;
   justify-content: space-between;
 
 }
 
 .box__filter {
+  width: 80px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  column-gap: 8px;
-  padding: 9px 4px 9px 8px;
+  padding: 9px 4px;
   border-radius: 32px;
   background-color: #F5F5F5;
   font-family: "Poppins", sans;
@@ -22,15 +31,27 @@
 }
 
 .box__filter__chevron {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   background-image: url(../../../../assets/chevron-down.svg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
+.box__filter__chevron__active {
+  z-index: 103;
+  width: 20px;
+  height: 20px;
+  background-image: url(../../../../assets/close_icon.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .active {
+  justify-content: space-between;
+  column-gap: 4px;
   background-color: #FFE5DC;
   border: 1px solid #FF6F3F
 }

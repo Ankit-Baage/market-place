@@ -67,6 +67,7 @@ export const SpareListPage = () => {
     isPending,
   } = useAddToWishListMutation();
   useEffect(() => {
+    
     const newFilters = {
       brand: searchParams.get("brand") || null,
       spare: searchParams.get("spare") || null,
@@ -112,7 +113,7 @@ export const SpareListPage = () => {
 
   return (
     <div className={classes.box}>
-      {isSuccess && sparesListData.length > 0 && <SparesFilterPage />}
+      <SparesFilterPage />
 
       {addIsSuccess ? (
         <div className={classes.box__space}>

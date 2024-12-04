@@ -2,7 +2,7 @@ import React from "react";
 import bestSellingImage from "../../../assets/bestSelling__comingSoon.svg";
 import classes from "./bestSellingCardMessage.module.css";
 
-export const BestSellingCardMessage = () => {
+export const BestSellingCardMessage = ({message}) => {
   return (
     <div className={classes.box}>
       <img src={bestSellingImage} alt="coming soon" className={classes.box__img}/>
