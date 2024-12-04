@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { categoryListRequest } from "../../utils/https-request/category/categoryRequest";
 
 function useGetCategoryList(category, user_id, medium, filters) {
-  const { data, isError, isLoading, isSuccess, refetch } = useQuery({
+  const { data, isError, isLoading, isSuccess } = useQuery({
     queryKey: [`${category}List`, user_id, medium, filters],
     queryFn: () => categoryListRequest(category, user_id, medium, filters),
     refetchOnWindowFocus: false,
@@ -10,7 +10,7 @@ function useGetCategoryList(category, user_id, medium, filters) {
     retryDelay: 1000,
   });
   // console.log(filters);
-  return { data, isError, isLoading, isSuccess, refetch };
+  return { data, isError, isLoading, isSuccess };
 }
 
 export default useGetCategoryList;

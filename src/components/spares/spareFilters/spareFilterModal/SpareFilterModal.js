@@ -13,7 +13,6 @@ export const SpareFilterModal = ({
     ...filterData,
     options: filterData.options || [],
   });
-  console.log("filterData: ", filterData)
 
   const handleCheckboxChange = (event) => {
     const optionId = event.currentTarget.id;
@@ -24,7 +23,6 @@ export const SpareFilterModal = ({
         ? [...prevFilters.options, optionId]
         : prevFilters.options.filter((id) => id !== optionId),
     }));
-    console.log("spares",filters)
   };
 
   const clearHandler = () => {

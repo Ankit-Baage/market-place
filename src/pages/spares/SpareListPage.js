@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import classes from "./spareListPage.module.css";
 import { Advertisement } from "../../components/vrpItem/advertisement/Advertisement";
@@ -15,7 +15,11 @@ import { toast } from "react-toastify";
 import { BannerSkeleton } from "../../components/skeletons/bannerSkeleton/BannerSkeleton";
 import { ProductSkeleton } from "../../components/skeletons/productSkeleton/ProductSkeleton";
 import { BestSellingCardMessage } from "../../components/skeletons/bestSellingCardMessage/BestSellingCardMessage";
-import useGetCategoryList from "../../tanstack-query/categoryList/useGetCategoryList";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectFilterOptions,
+  setFilterOption,
+} from "../../store/catergory/categorySlice";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -28,27 +32,22 @@ const fetchAdvertisements = async () => {
 };
 
 export const SpareListPage = () => {
-  const category = "spares";
-  const [filters, setFilters] = useState({
-    brand: null,
-    spare: null,
-    model: null,
-    start: null,
-    end: null,
-  });
+  // const [filters, setFilters] = useState({
+  //   brand: null,
+  //   spare: null,
+  //   model: null,
+  //   start: null,
+  //   end: null,
+  // });
+
+  const filters = useSelector(selectFilterOptions);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const authToken = Cookies.get("authToken");
   const userId = Cookies.get("user_id");
   const guestId = Cookies.get("guestId");
   const medium = authToken ? "user" : "guest";
   const user_id = authToken ? userId : guestId;
-
-  const { data: categoryListData, isSuccess: isCategoryListDataSuccess } =
-    useGetCategoryList(category, user_id, medium, filters);
-
-  if (isCategoryListDataSuccess) {
-    console.log("categoryList", categoryListData);
-  }
 
   const [searchParams, setSearchParams] = useSearchParams();
   const {
@@ -72,49 +71,27 @@ export const SpareListPage = () => {
       brand: searchParams.get("brand") || null,
       spare: searchParams.get("spare") || null,
       model: searchParams.get("model") || null,
-      price: { start: null, end: null },
+      start: searchParams.get("start") || null,
+      end: searchParams.get("end") || null,
+      sort: searchParams.get("sort") || null,
     };
-    setFilters(newFilters);
-  }, [searchParams]);
+    // setFilters(newFilters);
+    dispatch(
+      setFilterOption({
+        brand: newFilters.brand,
+        spare: newFilters.spare,
+        model: newFilters.model,
+        start: newFilters.start,
+        end: newFilters.end,
+        sort: newFilters.sort,
+      })
+    );
+  }, [dispatch, searchParams]);
 
   const navigateToSpareDetail = (requestId) => {
     navigate(`${requestId}`);
   };
-  console.log(filters);
 
-  const handleApplied = (selectedFilters) => {
-    const { type, options } = selectedFilters;
-    const newFilters = { ...filters, [type]: options.join(",") };
-
-    setFilters(newFilters);
-  };
-
-  const handlePriceApplied = (start, end) => {
-    setSearchParams((params) => {
-      params.set("start", start);
-      params.set("end", end);
-      return params.toString();
-    });
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      start: start,
-      end: end,
-    }));
-    const sortParams = searchParams.get("sort");
-    if (sortParams) {
-      setFilters((prevFilters) => ({
-        ...prevFilters,
-        sort: sortParams,
-      }));
-    }
-  };
-
-  const handleRadioApplied = (itemId) => {
-    setSearchParams((params) => {
-      params.set("sort", itemId);
-      return params.toString();
-    });
-  };
   const handleAddToWishList = async (event, item) => {
     event.stopPropagation();
 
@@ -135,11 +112,7 @@ export const SpareListPage = () => {
 
   return (
     <div className={classes.box}>
-      <SparesFilterPage
-        onApply={handleApplied}
-        onPriceApply={handlePriceApplied}
-        onSelection={(itemId) => handleRadioApplied(itemId)}
-      />
+      {isSuccess && sparesListData.length > 0 && <SparesFilterPage />}
 
       {addIsSuccess ? (
         <div className={classes.box__space}>

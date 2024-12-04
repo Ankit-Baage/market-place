@@ -79,11 +79,11 @@
 .box__content__filter {
   display: flex;
   flex-direction: column;
-  row-gap: 18px;
+  row-gap: 12px;
   align-items: flex-start; /* Align items to the top */
   flex: 1; /* Take remaining space */
   overflow-y: auto; /* Allow scrolling */
-  padding-left: 4px;
+  padding:4px;
 }
 
 .box__content__filter__option {
@@ -100,7 +100,7 @@
 }
 
 .box__content__filter__option__input {
-  display: block
+  display: none
 }
 
 .box__content__filter__option__label {
@@ -146,15 +146,6 @@
   width: 6px;
   height: 0;
   color: #FF6F3F;
-}
-
-.box__content__filter input[type='checkbox'] {
-  text-align: center;
-  display: table-cell;
-  vertical-align: middle;
-  width: 20px !important;
-  height: 20px !important;
-  appearance: none;
 }
 
 

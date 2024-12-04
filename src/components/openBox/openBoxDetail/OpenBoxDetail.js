@@ -18,16 +18,6 @@ import { BannerSkeleton } from "../../skeletons/bannerSkeleton/BannerSkeleton";
 
 const dummyArray = [dummy];
 
-const fetchAdvertisements = async () => {
-  const response = await axiosInstance.get(
-    "https://dev.backend.mobigarage.com/v1/mp/admin/advertisement",
-    {
-      params: { category: "open_box", page: "listing" },
-    }
-  );
-  return response.data;
-};
-
 export const OpenBoxDetail = ({
   images,
   prices,
@@ -45,10 +35,6 @@ export const OpenBoxDetail = ({
   wishlist_status,
   onWishList,
 }) => {
-  const { data: add, isSuccess: addIsSuccess } = useQuery({
-    queryKey: ["advertisements", "open_box", "listing"],
-    queryFn: fetchAdvertisements,
-  });
   const [validationResults, setValidationResults] = useState({});
 
   // Function to check if an image URL is valid
@@ -89,21 +75,14 @@ export const OpenBoxDetail = ({
           }
           onClick={onWishList}
         />
-        {addIsSuccess ? (
-          <div className={classes.box__space}>
-            {add?.data?.length > 1 ? (
-              <Carousel images={add?.data} />
-            ) : (
-              <Advertisement image={add?.data} />
-            )}
-          </div>
-        ) : (
-          <BannerSkeleton />
-        )}
+        <ProductCarousel
+          imageData={imageArray.length < 1 ? dummyArray : imageArray}
+        />
+
         <div className={classes.box__spareName}>
-          <h1
-            className={classes.box__spareName__title}
-          >{`${decodeURIComponent(infoSpecs.model)} ${infoSpecs.ram}/${infoSpecs.rom} (${color})`}</h1>
+          <h1 className={classes.box__spareName__title}>{`${decodeURIComponent(
+            infoSpecs.model
+          )} ${infoSpecs.ram}/${infoSpecs.rom} (${color})`}</h1>
           <h2 className={classes.box__spareName__subtitle}>Open Box</h2>
           <hr className={classes.box__item__divider} />
         </div>

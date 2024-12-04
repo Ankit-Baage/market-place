@@ -41,7 +41,6 @@ export const SparesPriceFilterPage = ({
   };
   const handleSelect = (itemId) => {
     onRadioApplied(itemId);
-    console.log(itemId)
   };
 
   const handleClear = () => {

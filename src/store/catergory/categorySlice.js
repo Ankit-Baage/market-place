@@ -9,6 +9,7 @@ const initialState = {
     model: null,
     start: null,
     end: null,
+    sort:null,
   },
 };
 
@@ -16,28 +17,22 @@ const categorySlice = createSlice({
   name: "category",
   initialState,
   reducers: {
-    setCategory: (state, action) => {
+    setCategory(state, action) {
       state.category = action.payload;
     },
-    setCategoryFilter: (state, action) => {
+    setCategoryFilter(state, action) {
       state.categoryFilter = action.payload;
     },
-    setFilterOption: (state, action) => {
-      const { key, value } = action.payload;
-      if (key in state.filterOptions) {
-        state.filterOptions[key] = value;
-      } else if (key in state.filterOptions.price) {
-        state.filterOptions.price[key] = value;
-      }
+    setFilterOption(state, action) {
+      state.filterOptions.brand = action.payload.brand;
+      state.filterOptions.model = action.payload.model;
+      state.filterOptions.spare = action.payload.spare;
+      state.filterOptions.start = action.payload.start;
+      state.filterOptions.end = action.payload.end;
+      state.filterOptions.sort = action.payload.sort;
     },
-    resetFilterOptions: (state) => {
-      state.filterOptions = {
-        brand: null,
-        spare: null,
-        model: null,
-        start: null,
-        end: null,
-      };
+    resetFilterOptions(state) {
+      state.filterOptions = { ...initialState.filterOptions };
     },
   },
 });
@@ -50,5 +45,6 @@ export const {
 } = categorySlice.actions;
 
 export const selectCategoryState = (state) => state.category;
+export const selectFilterOptions = (state) => state.category.filterOptions;
 
 export default categorySlice.reducer;

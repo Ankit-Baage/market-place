@@ -7,6 +7,8 @@ import { SpareFilterModal } from "../../../../components/spares/spareFilters/spa
 import { useSearchParams } from "react-router-dom";
 
 import { SparesPriceFilterPage } from "./SparesPriceFilterPage";
+import { useSelector } from "react-redux";
+import { selectFilterOptions } from "../../../../store/catergory/categorySlice";
 
 const filterButtons = [
   { id: "spare", label: "Spares" },
@@ -15,15 +17,19 @@ const filterButtons = [
   { id: "price", label: "Price" },
 ];
 
-export const SparesFilterPage = ({ onApply, onPriceApply, onClear, onSelection }) => {
+export const SparesFilterPage = ({
+  onClear,
+}) => {
+  const selectedFilters = useSelector(selectFilterOptions)
   const [filters, setFilters] = useState({
     spare: [],
     brand: [],
     model: [],
     start: [],
-    end: [],
+    end: null,
     sort: null,
   });
+  console.log("redux",selectedFilters)
   const [currentFilterType, setCurrentFilterType] = useState(null);
   const [inFilterMode, setInFilterMode] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -40,20 +46,18 @@ export const SparesFilterPage = ({ onApply, onPriceApply, onClear, onSelection }
 
       start: searchParams.get("start") || null,
       end: searchParams.get("end") || null,
-      sort: searchParams.get("sort")||null,
+      sort: searchParams.get("sort") || null,
     };
-    // console.log(filters.price.start);
+
     setFilters(newFilters);
     const urlParams = Array.from(searchParams.entries());
     let activeFilters = urlParams.map(([key]) => key);
-    if(activeFilters.includes(("start"&&"end")  || "sort")) {
-      activeFilters = [...activeFilters, "price"]
+    if (activeFilters.includes("start" ||"end" || "sort")) {
+      activeFilters = [...activeFilters, "price"];
     }
     setActiveFilters(activeFilters);
   }, [searchParams]);
 
-  console.log(filters);
-  console.log(activeFilters)
   const isActive = (buttonId) => activeFilters.includes(buttonId);
 
   const handleFilter = (event) => {
@@ -61,26 +65,40 @@ export const SparesFilterPage = ({ onApply, onPriceApply, onClear, onSelection }
     setCurrentFilterType(mode);
     setInFilterMode(true);
   };
+  console.log("currentFilter :",currentFilterType)
 
   const handlePriceChange = (start, end) => {
-    onPriceApply(start, end);
+    if (filters.sort) {
+      setSearchParams((params) => {
+        params.set("sort", filters.sort);
+        return params.toString();
+      });
+    }
+    setSearchParams((params) => {
+      params.set("start", start);
+      params.set("end", end);
+      return params.toString();
+    });
+
     handleClose();
+  };
+
+  const handleRadio = (itemId) => {
+    setFilters((prev) => ({
+      ...prev,
+      sort: itemId,
+    }));
   };
   const handleApply = (appliedFilters) => {
     const { type, options } = appliedFilters;
+
     setSearchParams((params) => {
       params.set(type, options.join(","));
       return params;
     });
 
-    onApply(appliedFilters);
     handleClose();
   };
-
-  const handleRadio =(itemId)=>{
-    console.log(itemId);
-    onSelection(itemId)
-  }
 
   const handleClose = () => {
     setInFilterMode(false);
@@ -119,11 +137,11 @@ export const SparesFilterPage = ({ onApply, onPriceApply, onClear, onSelection }
               onApply={handlePriceChange}
               onClear={onClear}
               onClose={handleClose}
-              onRadioApplied ={(itemId)=>handleRadio(itemId)}
+              onRadioApplied={(itemId) => handleRadio(itemId)}
             />
           ) : (
             <SpareFilterModal
-              optionsData={data?.data?.data}
+              optionsData={data?.data.data}
               onApply={handleApply}
               filterType={filters.type}
               filterData={{

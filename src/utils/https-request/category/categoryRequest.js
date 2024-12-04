@@ -5,7 +5,7 @@ export const categoryListRequest = async (
   category,
   user_id,
   medium,
-  filters,
+  filters
 ) => {
   try {
     const response = await axiosInstance.get(
@@ -17,8 +17,8 @@ export const categoryListRequest = async (
         },
       }
     );
-    console.log("category :", response?.data?.data)
-    return response;
+
+    return response?.data?.data;
   } catch (error) {
     throw error;
   }
