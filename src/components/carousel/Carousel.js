@@ -1,6 +1,27 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence, wrap } from "framer-motion";
 import "./carousel.css";
+import { useNavigate } from "react-router-dom";
+import { getParamsFromAdd } from "../../utils/helpers/getParamsFromAdd";
+const convertFiltersToQueryParams = (filters) => {
+  const queryParams = [];
+
+  // Loop through each filter and generate the query string
+  for (const key in filters) {
+    if (filters[key] && filters[key] !== null) {
+      // If the filter has a value, join the array values by commas (if any)
+      const value = Array.isArray(filters[key])
+        ? filters[key].join(",")
+        : filters[key];
+
+      // Push the formatted query parameter
+      queryParams.push(`${key}=${encodeURIComponent(value)}`);
+    }
+  }
+
+  // Join all query parameters with '&' and return the result
+  return queryParams.join("&");
+};
 
 
 const sliderVariants = {
@@ -23,6 +44,7 @@ const sliderTransition = {
 };
 
 export const Carousel = ({ images }) => {
+  const navigate = useNavigate()
   const [[imageCount, direction], setImageCount] = useState([0, 0]);
   const activeImageIndex = wrap(0, images.length, imageCount);
 
@@ -49,13 +71,37 @@ export const Carousel = ({ images }) => {
     }
     setImageCount([imageId, changeDirection]);
   };
-  console.log(images);
+  console.log("carousel",images);
+  const handleClick = (item) => {
+    const filters = getParamsFromAdd(item.params);
+    // dispatch(
+    //   setFilterOption({
+    //     brand: filters.brand,
+    //     spare: filters.spare,
+    //     model: filters.model,
+    //     start: filters.start,
+    //     end: filters.end,
+    //     sort: filters.sort,
+    //   })
+    // );
+    const queryParams = convertFiltersToQueryParams(filters);
+
+    // // Log the query string or set it in the URL
+    console.log("Generated Query Params:", queryParams);
+
+    // Example: You can redirect to the new URL or update the browser's location
+    const newUrl = `${item.navigate_to_page}?${queryParams}`;
+    navigate(newUrl)
+    console.log(filters);
+    console.log(item)
+  };
 
   return (
     <div className="box">
       <div className="slider">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
+          onClick={()=>handleClick(images[activeImageIndex])}
             key={imageCount}
             style={{
               backgroundImage: `url(${images[activeImageIndex].url})`,

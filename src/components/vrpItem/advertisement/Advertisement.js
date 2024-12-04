@@ -43,7 +43,6 @@ export const Advertisement = ({ image }) => {
     //     sort: filters.sort,
     //   })
     // );
-    // navigate(`/${image[0].navigate_to_page}`)
     const queryParams = convertFiltersToQueryParams(filters);;
 
     // Log the query string or set it in the URL
