@@ -3,13 +3,10 @@ import React, { useEffect, useState } from "react";
 import classes from "../../spares/filters/sparesFilter/sparesFilter.module.css";
 import { AnimatePresence } from "framer-motion";
 
-
 import { useSearchParams } from "react-router-dom";
 import { SparesPriceFilterPage } from "../../spares/filters/sparesFilter/SparesPriceFilterPage";
 import { SpareFilterModal } from "../../../components/spares/spareFilters/spareFilterModal/SpareFilterModal";
 import useGetFilterOpenBoxOption from "../../../tanstack-query/openBox/useGetFiltersOpenBoxOption";
-
-
 
 const filterButtons = [
   { id: "brand", label: "Brand" },
@@ -39,7 +36,7 @@ export const OpenBoxFilterPage = ({
   const [activeFilters, setActiveFilters] = useState([]);
 
   const { data, isSuccess, isLoading, refetch } =
-  useGetFilterOpenBoxOption(currentFilterType);
+    useGetFilterOpenBoxOption(currentFilterType);
 
   useEffect(() => {
     const newFilters = {
@@ -61,7 +58,6 @@ export const OpenBoxFilterPage = ({
     setActiveFilters(activeFilters);
   }, [searchParams]);
 
- 
   const isActive = (buttonId) => activeFilters.includes(buttonId);
 
   const handleFilter = (event) => {
@@ -106,18 +102,22 @@ export const OpenBoxFilterPage = ({
 
   return (
     <div className={classes.box}>
-      {filterButtons.map((button) => (
-        <button
-          className={`${classes.box__filter} ${
-            isActive(button.id) && classes.active
-          }`}
-          key={button.id}
-          id={button.id}
-          onClick={handleFilter}
-        >
-          {button.label} <span className={classes.box__filter__chevron} />
-        </button>
-      ))}
+      <div className={classes.box__btns}>
+        {" "}
+        {filterButtons.map((button) => (
+          <button
+            className={`${classes.box__filter} ${
+              isActive(button.id) && classes.active
+            }`}
+            key={button.id}
+            id={button.id}
+            onClick={handleFilter}
+          >
+            {button.label} <span className={classes.box__filter__chevron} />
+          </button>
+        ))}
+      </div>
+
       <AnimatePresence>
         {isSuccess &&
           inFilterMode &&

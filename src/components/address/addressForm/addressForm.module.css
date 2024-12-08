@@ -122,7 +122,7 @@
 
 .box__content__filter__option {
   position: relative;
-  /* padding-left: 28px; */
+  padding-left: 20px;
   font-family: "Poppins", sans;
   font-weight: 400;
   font-size: 14px;

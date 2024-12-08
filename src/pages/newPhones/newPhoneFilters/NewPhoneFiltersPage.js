@@ -3,13 +3,10 @@ import React, { useEffect, useState } from "react";
 import classes from "../../spares/filters/sparesFilter/sparesFilter.module.css";
 import { AnimatePresence } from "framer-motion";
 
-
 import { useSearchParams } from "react-router-dom";
 import { SparesPriceFilterPage } from "../../spares/filters/sparesFilter/SparesPriceFilterPage";
 import { SpareFilterModal } from "../../../components/spares/spareFilters/spareFilterModal/SpareFilterModal";
 import useGetFilterNewPhoneOption from "../../../tanstack-query/newPhones/useGetFiltersNewPhoneOption";
-
-
 
 const filterButtons = [
   { id: "brand", label: "Brand" },
@@ -39,7 +36,7 @@ export const NewPhoneFilterPage = ({
   const [activeFilters, setActiveFilters] = useState([]);
 
   const { data, isSuccess, isLoading, refetch } =
-  useGetFilterNewPhoneOption(currentFilterType);
+    useGetFilterNewPhoneOption(currentFilterType);
 
   useEffect(() => {
     const newFilters = {
@@ -107,18 +104,22 @@ export const NewPhoneFilterPage = ({
 
   return (
     <div className={classes.box}>
-      {filterButtons.map((button) => (
-        <button
-          className={`${classes.box__filter} ${
-            isActive(button.id) && classes.active
-          }`}
-          key={button.id}
-          id={button.id}
-          onClick={handleFilter}
-        >
-          {button.label} <span className={classes.box__filter__chevron} />
-        </button>
-      ))}
+      <div className={classes.box__btns}>
+        {" "}
+        {filterButtons.map((button) => (
+          <button
+            className={`${classes.box__filter} ${
+              isActive(button.id) && classes.active
+            }`}
+            key={button.id}
+            id={button.id}
+            onClick={handleFilter}
+          >
+            {button.label} <span className={classes.box__filter__chevron} />
+          </button>
+        ))}
+      </div>
+
       <AnimatePresence>
         {isSuccess &&
           inFilterMode &&

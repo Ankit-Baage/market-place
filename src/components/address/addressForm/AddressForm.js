@@ -67,14 +67,14 @@ export const AddressForm = ({
             register={register}
           />
 
-          <div className={classes.form__location}>
+          {/* <div className={classes.form__location}>
             <h4 className={classes.form__location__text}>
               May be used to assist delivery
             </h4>
             <button type="button" className={classes.form__location__btn}>
               Use my location
             </button>
-          </div>
+          </div> */}
 
           <CustomInput
             type="text"

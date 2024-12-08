@@ -1,9 +1,7 @@
 import React from "react";
 import classes from "./advertisement.module.css";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import {  useNavigate } from "react-router-dom";
 import { getParamsFromAdd } from "../../../utils/helpers/getParamsFromAdd";
-import { setFilterOption } from "../../../store/catergory/categorySlice";
 
 const convertFiltersToQueryParams = (filters) => {
   const queryParams = [];
@@ -28,21 +26,11 @@ const convertFiltersToQueryParams = (filters) => {
 export const Advertisement = ({ image }) => {
   console.log("advertisement", image);
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const filters = getParamsFromAdd(image[0].params);
 
   const handleClick = () => {
-    // dispatch(
-    //   setFilterOption({
-    //     brand: filters.brand,
-    //     spare: filters.spare,
-    //     model: filters.model,
-    //     start: filters.start,
-    //     end: filters.end,
-    //     sort: filters.sort,
-    //   })
-    // );
+
     const queryParams = convertFiltersToQueryParams(filters);;
 
     // Log the query string or set it in the URL

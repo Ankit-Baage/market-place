@@ -23,7 +23,6 @@ const convertFiltersToQueryParams = (filters) => {
   return queryParams.join("&");
 };
 
-
 const sliderVariants = {
   incoming: (direction) => ({
     x: direction > 0 ? "100%" : "-100%",
@@ -44,7 +43,7 @@ const sliderTransition = {
 };
 
 export const Carousel = ({ images }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [[imageCount, direction], setImageCount] = useState([0, 0]);
   const activeImageIndex = wrap(0, images.length, imageCount);
 
@@ -71,19 +70,9 @@ export const Carousel = ({ images }) => {
     }
     setImageCount([imageId, changeDirection]);
   };
-  console.log("carousel",images);
+  console.log("carousel", images);
   const handleClick = (item) => {
     const filters = getParamsFromAdd(item.params);
-    // dispatch(
-    //   setFilterOption({
-    //     brand: filters.brand,
-    //     spare: filters.spare,
-    //     model: filters.model,
-    //     start: filters.start,
-    //     end: filters.end,
-    //     sort: filters.sort,
-    //   })
-    // );
     const queryParams = convertFiltersToQueryParams(filters);
 
     // // Log the query string or set it in the URL
@@ -91,21 +80,22 @@ export const Carousel = ({ images }) => {
 
     // Example: You can redirect to the new URL or update the browser's location
     const newUrl = `${item.navigate_to_page}?${queryParams}`;
-    navigate(newUrl)
+    navigate(`/${newUrl}`);
     console.log(filters);
-    console.log(item)
+    console.log(item);
   };
 
   return (
     <div className="box">
       <div className="slider">
         <AnimatePresence initial={false} custom={direction}>
-          <motion.div
-          onClick={()=>handleClick(images[activeImageIndex])}
+          <motion.img
+            onClick={() => handleClick(images[activeImageIndex])}
             key={imageCount}
-            style={{
-              backgroundImage: `url(${images[activeImageIndex].url})`,
-            }}
+            // style={{
+            //   backgroundImage: `url(${images[activeImageIndex].url})`,
+            // }}
+            src={images[activeImageIndex].url}
             custom={direction}
             variants={sliderVariants}
             initial="incoming"

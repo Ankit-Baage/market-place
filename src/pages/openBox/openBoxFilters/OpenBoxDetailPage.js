@@ -55,7 +55,6 @@ export const OpenBoxDetailPage = () => {
   const guestId = Cookies.get("guestId");
   const medium = authToken ? "user" : "guest";
   const user_id = authToken ? userId : guestId;
- 
 
   const navigate = useNavigate();
   const { data, isError, isPending, isSuccess, refetch } = useGetOpenBoxDetail({
@@ -77,6 +76,7 @@ export const OpenBoxDetailPage = () => {
 
     navigate(`/openBox/${requestId}`);
   };
+
   const handleQuantityUpdate = useCallback(
     (operator, item = data?.data?.data) => {
       let currentQuantity = localQuantities[item.id] || item.quantity;
@@ -153,7 +153,10 @@ export const OpenBoxDetailPage = () => {
         model: encodeURIComponent(data?.data?.data?.model),
         color: data?.data?.data?.color,
       };
-      const variant = { ram: data?.data?.data?.ram, rom: data?.data?.data?.rom };
+      const variant = {
+        ram: data?.data?.data?.ram,
+        rom: data?.data?.data?.rom,
+      };
 
       dispatch({
         type: "SET_DATA",
@@ -181,7 +184,7 @@ export const OpenBoxDetailPage = () => {
   } = state;
 
   const { sellerId, brand, model, ram, rom } = colorQuery || {};
-  const shouldFetch = sellerId && brand && model && ram && rom; 
+  const shouldFetch = sellerId && brand && model && ram && rom;
 
   const { data: newPhoneColors, isSuccess: isNewPhoneSuccess } =
     useGetOpenBoxColors(colorQuery);

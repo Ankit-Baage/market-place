@@ -9,9 +9,14 @@ export const Address = ({
   onEdit,
   onOpenDeleteModal,
 }) => {
-  console.log(address);
+  console.log("address", address);
   return (
-    <div className={classes.box__card}>
+    <div
+      className={classes.box__card}
+      style={{
+        border: address.is_default ? "1px solid #FF6F3F" : "",
+      }}
+    >
       <label
         htmlFor={`address-${address.id}`}
         className={classes.box__content__filter__option}
