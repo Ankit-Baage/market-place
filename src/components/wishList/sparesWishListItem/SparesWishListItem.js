@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { formatNumber } from "../../../utils/helpers/formatNumber";
-import dummyImage from "../../../assets/spare_preview_not_available.svg";
+import dummyImage from "../../../assets/dummyPreview.png";
 
 import classes from "./sparesWishListItem.module.css";
 import { WishListActionButtonGroup } from "../wishListActionButtonGroup/WishListActionButtonGroup";

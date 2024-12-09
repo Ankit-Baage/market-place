@@ -1,6 +1,6 @@
 import React from "react";
 import { formatNumber } from "../../../utils/helpers/formatNumber";
-import dummyImage from "../../../assets/spare_preview_not_available.svg";
+import dummyImage from "../../../assets/dummyPreview.png";
 
 import { Link } from "react-router-dom";
 import classes from "./newPhoneWishListItem.module.css";

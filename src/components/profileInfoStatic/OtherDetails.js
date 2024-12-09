@@ -6,7 +6,6 @@ import classes from "./otherDetails.module.css";
 
 export const OtherDetails = () => {
   const { detailCategory: detailParams } = useParams();
-  console.log(detailParams);
   const otherDetail = useMemo(
     () => otherDetails.find((el) => el.page === detailParams),
     [detailParams]

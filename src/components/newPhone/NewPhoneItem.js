@@ -1,9 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import fav from "../../assets/heart.svg";
 import classes from "./newPhoneItem.module.css";
 import { formatNumber } from "../../utils/helpers/formatNumber";
-import dummyImage from "../../assets/spare_preview_not_available.svg";
+import dummyImage from "../../assets/dummyPreview.png";
 import { CategoryActionButtonGroup } from "../categoryActionButtonGroup/CategoryActionButtonGroup";
 import useCartListSparesMutation from "../../tanstack-query/cartList/useCartListSparesMutation";
 import { toast } from "react-toastify";

@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import classes from "./vrpListPage.module.css";
 
 import { VrpItem } from "../../components/vrpItem/VrpItem";
-import { Advertisement } from "../../components/vrpItem/advertisement/Advertisement";
+
 import { FilterPage } from "./filter/FilterPage";
 import useGetVrpSortedList from "../../tanstack-query/vrp/useGetVrpSortedList";
 import axiosInstance from "../../utils/axios-middleware/axiosMiddleware";
@@ -15,6 +15,7 @@ import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWish
 import { BannerSkeleton } from "../../components/skeletons/bannerSkeleton/BannerSkeleton";
 import { ProductSkeleton } from "../../components/skeletons/productSkeleton/ProductSkeleton";
 import { BestSellingCardMessage } from "../../components/skeletons/bestSellingCardMessage/BestSellingCardMessage";
+import { Advertisement } from "../../components/advertisement/Advertisement";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(

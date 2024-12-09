@@ -1,5 +1,5 @@
 import React from "react";
-import help_center from "../../assets/help_center.svg";
+import help_center from "../../assets/help_center.png";
 import help__account from "../../assets/help_account.svg";
 import help__products from "../../assets/help_products.svg";
 import help__return from "../../assets/help_return.svg";

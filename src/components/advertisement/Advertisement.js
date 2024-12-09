@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./advertisement.module.css";
 import {  useNavigate } from "react-router-dom";
-import { getParamsFromAdd } from "../../../utils/helpers/getParamsFromAdd";
+import { getParamsFromAdd } from "../../utils/helpers/getParamsFromAdd";
 
 const convertFiltersToQueryParams = (filters) => {
   const queryParams = [];

@@ -1,5 +1,5 @@
 import React from "react";
-import bestSellingImage from "../../../assets/bestSelling__comingSoon.svg";
+import bestSellingImage from "../../../assets/bestSelling__comingSoon.png";
 import classes from "./bestSellingCardMessage.module.css";
 
 export const BestSellingCardMessage = ({message}) => {

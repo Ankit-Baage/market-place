@@ -1,5 +1,5 @@
 import React from "react";
-import orderSuccess from "../../assets/orderSuccess.svg";
+import orderSuccess from "../../assets/orderSuccess.png";
 import classes from "./orderSuccess.module.css";
 import { Link, useNavigate } from "react-router-dom";
 

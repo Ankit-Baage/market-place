@@ -6,9 +6,9 @@ import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "../../utils/axios-middleware/axiosMiddleware";
 import { SearchBar } from "../../components/ui/searchBarWithBackBtn/SearchBar";
 import { Carousel } from "../../components/carousel/Carousel";
-import { Advertisement } from "../../components/vrpItem/advertisement/Advertisement";
-import { useNavigate } from "react-router-dom";
+
 import { BannerSkeleton } from "../../components/skeletons/bannerSkeleton/BannerSkeleton";
+import { Advertisement } from "../../components/advertisement/Advertisement";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(

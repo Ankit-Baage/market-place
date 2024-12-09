@@ -23,8 +23,6 @@ export const BestSellingProductPage = () => {
   const { data: openBoxData, isSuccess: openBoxIsSuccess } =
     useGetBestOpenBoxProductList();
 
-  const navigate = useNavigate();
-
   const getComponent = (isSuccess, data, Component) => {
     if (!isSuccess) return BestSellingSkeleton;
     if (data?.length === 0) return BestSellingCardMessage;

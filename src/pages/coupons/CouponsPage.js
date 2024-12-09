@@ -1,7 +1,7 @@
 import React from "react";
 import { SearchBar } from "../../components/ui/searchBarWithBackBtn/SearchBar";
 import { Coupon } from "../../components/coupon/Coupon";
-import coupon_page from "../../assets/couponPage_img.svg";
+import coupon_page from "../../assets/couponPage.png";
 import classes from "./couponsPage.module.css";
 import useGetCouponsList from "../../tanstack-query/couponsList/useGetCouponsList";
 import { CartLoader } from "../../components/cart/cartLoader/CartLoader";

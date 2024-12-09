@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 
 import classes from "./spareListPage.module.css";
-import { Advertisement } from "../../components/vrpItem/advertisement/Advertisement";
 import useGetSpareList from "../../tanstack-query/spares/useGetSpareList";
 import { SpareItem } from "../../components/spares/SpareItem";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -20,6 +19,7 @@ import {
   selectFilterOptions,
   setFilterOption,
 } from "../../store/catergory/categorySlice";
+import { Advertisement } from "../../components/advertisement/Advertisement";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(

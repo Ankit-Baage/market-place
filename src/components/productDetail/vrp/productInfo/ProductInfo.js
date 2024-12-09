@@ -2,12 +2,13 @@ import React from "react";
 import { formatNumber } from "../../../../utils/helpers/formatNumber";
 
 import classes from "./productInfo.module.css";
-import { Advertisement } from "../../../vrpItem/advertisement/Advertisement";
+
 import vrpAdd from "../../../../assets/vrpAdd.png";
 import axiosInstance from "../../../../utils/axios-middleware/axiosMiddleware";
 import { useQuery } from "@tanstack/react-query";
 import { Carousel } from "../../../carousel/Carousel";
 import { BannerSkeleton } from "../../../skeletons/bannerSkeleton/BannerSkeleton";
+import { Advertisement } from "../../../advertisement/Advertisement";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(

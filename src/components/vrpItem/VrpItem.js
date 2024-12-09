@@ -2,7 +2,7 @@ import React from "react";
 import vrp from "../../assets/vrpCartItem.png";
 import classes from "./vrpItem.module.css";
 import { formatNumber } from "../../utils/helpers/formatNumber";
-import dummyImage from "../../assets/spare_preview_not_available.svg";
+import dummyImage from "../../assets/dummyPreview.png";
 import { CategoryActionButtonGroup } from "../categoryActionButtonGroup/CategoryActionButtonGroup";
 import useCartListSparesMutation from "../../tanstack-query/cartList/useCartListSparesMutation";
 import { toast } from "react-toastify";

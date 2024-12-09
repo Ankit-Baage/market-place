@@ -5,8 +5,7 @@ import classes from "./newPhoneDetail.module.css";
 import { NewPhonePrice } from "../newPhonePrice/NewPhonePrice";
 import { SpareHighlights } from "../newPhoneHighlights/NewPhoneHighlights";
 import { SpareOffers } from "../newPhoneOffers/NewPhoneOffers";
-import { validateImages } from "../../../utils/helpers/imageValidator";
-import dummy from "../../../assets/spare_preview_not_available.svg";
+import dummy from "../../../assets/dummyPreview.png";
 import { NewPhoneColors } from "../newPhoneColor/NewPhoneColors";
 import { NewPhoneVariant } from "../newPhoneVariant/NewPhoneVariant";
 

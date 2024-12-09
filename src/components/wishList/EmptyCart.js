@@ -1,5 +1,5 @@
 import React from "react";
-import emptyWishList from "../../assets/empty__wishList.svg";
+import emptyWishList from "../../assets/empty_wishlist.png";
 import classes from "./emptyCart.module.css";
 import { Link } from "react-router-dom";
 

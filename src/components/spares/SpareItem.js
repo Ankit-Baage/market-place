@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./spareItem.module.css";
 import { formatNumber } from "../../utils/helpers/formatNumber";
-import dummyImage from "../../assets/spare_preview_not_available.svg";
+import dummyImage from "../../assets/dummyPreview.png";
 import { CategoryActionButtonGroup } from "../categoryActionButtonGroup/CategoryActionButtonGroup";
 import useCartListSparesMutation from "../../tanstack-query/cartList/useCartListSparesMutation";
 import { toast } from "react-toastify";
@@ -60,6 +60,18 @@ export const SpareItem = ({ item, onClick, onWishList }) => {
               <span className={classes.box__discount__img}>
                 {item.discount_percentage}% OFF
               </span>
+            </div>
+            <div className={classes.box__info__qty}>
+              <label
+                htmlFor="qty"
+                className={classes.box__info__qty__label}
+              >Qty:</label>
+              <input
+                type="number"
+                className={classes.box__info__qty__input}
+                defaultValue="1"
+                id="qty"
+              />
             </div>
 
             <CategoryActionButtonGroup

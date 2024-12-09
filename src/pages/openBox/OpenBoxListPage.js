@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import { Advertisement } from "../../components/vrpItem/advertisement/Advertisement";
-
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { OpenBoxFilterPage } from "./openBoxFilters/OpenBoxFiltersPage";
 
@@ -19,6 +17,7 @@ import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWish
 import { BannerSkeleton } from "../../components/skeletons/bannerSkeleton/BannerSkeleton";
 import { ProductSkeleton } from "../../components/skeletons/productSkeleton/ProductSkeleton";
 import { BestSellingCardMessage } from "../../components/skeletons/bestSellingCardMessage/BestSellingCardMessage";
+import { Advertisement } from "../../components/advertisement/Advertisement";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(

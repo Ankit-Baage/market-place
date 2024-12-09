@@ -6,7 +6,7 @@ import { SparePrice } from "../sparePrice/SparePrice";
 import { SpareHighlights } from "../spareHighlights/SpareHighlights";
 import { SpareOffers } from "../spareOffers/SpareOffers";
 import { validateImages } from "../../../utils/helpers/imageValidator";
-import dummy from "../../../assets/spare_preview_not_available.svg";
+import dummy from "../../../assets/dummyPreview.png";
 
 const dummyArray = [dummy];
 

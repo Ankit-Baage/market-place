@@ -2,19 +2,14 @@ import React, { useCallback, useEffect, useState } from "react";
 import { ProductCarousel } from "../../ui/productCarousel/ProductCarousel";
 import classes from "./openBoxDetail.module.css";
 
-import { validateImages } from "../../../utils/helpers/imageValidator";
-import dummy from "../../../assets/spare_preview_not_available.svg";
+import dummy from "../../../assets/dummyPreview.png";
 
 import { OpenBoxVariant } from "../openBoxVariant/OpenBoxVariant";
 import { OpenBoxColors } from "../openBoxColor/OpenBoxColors";
 import { OpenBoxPrice } from "../openBoxPrice/OpenBoxPrice";
 import { OpenBoxHighlights } from "../openBoxHighlights/OpenBoxHighlights";
 import { OpenBoxOffers } from "../openBoxOffers/OpenBoxOffers";
-import axiosInstance from "../../../utils/axios-middleware/axiosMiddleware";
-import { useQuery } from "@tanstack/react-query";
-import { Carousel } from "../../carousel/Carousel";
-import { Advertisement } from "../../vrpItem/advertisement/Advertisement";
-import { BannerSkeleton } from "../../skeletons/bannerSkeleton/BannerSkeleton";
+
 
 const dummyArray = [dummy];
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { formatNumber } from "../../../utils/helpers/formatNumber";
 
-import dummyImage from "../../../assets/spare_preview_not_available.svg";
+import dummyImage from "../../../assets/dummyPreview.png";
 import classes from "./bestSellingOpenBox.module.css";
 import { useNavigate } from "react-router-dom";
 

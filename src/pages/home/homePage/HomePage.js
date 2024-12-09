@@ -12,11 +12,12 @@ import newPhone from "../../../assets/new_phone.svg";
 import { Carousel } from "../../../components/carousel/Carousel";
 import axiosInstance from "../../../utils/axios-middleware/axiosMiddleware";
 import { useQuery } from "@tanstack/react-query";
-import { Advertisement } from "../../../components/vrpItem/advertisement/Advertisement";
+
 import { BestSellingProductPage } from "../bestSellingProducts/BestSellingProductPage";
 import { BannerSkeleton } from "../../../components/skeletons/bannerSkeleton/BannerSkeleton";
 import classes from "./homePage.module.css";
 import { useSelector } from "react-redux";
+import { Advertisement } from "../../../components/advertisement/Advertisement";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
