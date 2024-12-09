@@ -23,7 +23,7 @@ import { OpenBoxListPage } from "../pages/openBox/OpenBoxListPage";
 import { OpenBoxDetailPage } from "../pages/openBox/openBoxFilters/OpenBoxDetailPage";
 import { CartPage } from "../pages/cart/CartPage";
 import { ProfileInfoPage } from "../pages/profileInfo/ProfileInfoPage";
-import { ProfileNavigation } from "../components/profileInfo/ProfileNavigation";
+import { ProfileNavigation } from "../components/profileNavigation/ProfileNavigation";
 import { AddressPage, checkAuthLoader } from "../pages/address/AddressPage";
 import { AddressOutlet } from "../pages/address/AddressOutlet";
 import { AddressDetailPage } from "../pages/address/AddressDetailPage";
@@ -37,18 +37,9 @@ import { OrdersPage } from "../pages/order/OrdersPage";
 
 import { OrderSuccess } from "../components/orderSuccess/OrderSuccess";
 import { Help } from "../components/help/Help";
-import { Account } from "../components/help/account/Account";
-import { Product } from "../components/help/product/Product";
-import { Return } from "../components/help/return/Return";
-import { Offer } from "../components/help/offer/Offer";
-import { Payment } from "../components/help/payment/Payment";
-import { OrderHelp } from "../components/help/order_help/Order";
-import { AboutUs } from "../components/profileInfoStatic/aboutUs/AboutUs";
-import { Faqs } from "../components/profileInfoStatic/faqs/Faqs";
-import { TermsOfUse } from "../components/profileInfoStatic/termsOfUse/TermsOfUse";
-import { PrivacyPolicy } from "../components/profileInfoStatic/privacyPolicy/PrivacyPolicy";
-import { Grievance } from "../components/profileInfoStatic/grievance/Grievance";
 import { ProfileStaticOutlet } from "../pages/profileStatic/ProfileStaticOutlet";
+import { HelpCategory } from "../components/help/helpCategory/HelpCategory";
+import { OtherDetails } from "../components/profileInfoStatic/OtherDetails";
 
 export const mainRoutes = [
   {
@@ -149,42 +140,14 @@ export const mainRoutes = [
         element: <HelpPage />,
         children: [
           { index: true, element: <Help /> },
-          {
-            path: "account",
-            element: <Account />,
-          },
-          {
-            path: "product",
-            element: <Product />,
-          },
-          {
-            path: "return",
-            element: <Return />,
-          },
-          {
-            path: "offer",
-            element: <Offer />,
-          },
-          {
-            path: "payment",
-            element: <Payment />,
-          },
-          {
-            path: "order",
-            element: <OrderHelp />,
-          },
+          { path: ":helpCategory", element: <HelpCategory /> },
         ],
       },
+
       {
         path: "otherDetails",
         element: <ProfileStaticOutlet />,
-        children: [
-          { path: "aboutUs", element: <AboutUs /> },
-          { path: "faqs", element: <Faqs /> },
-          { path: "termsOfUse", element: <TermsOfUse /> },
-          { path: "privacyPolicy", element: <PrivacyPolicy /> },
-          { path: "grievance", element: <Grievance /> },
-        ],
+        children: [{ path: ":detailCategory", element: <OtherDetails /> }],
       },
     ],
   },

@@ -26,7 +26,7 @@ const topics = [
     backGroundColor: "#FFF0EB",
     border: "1px solid #FCE6DE",
     borderRadius: "8px",
-    path: "product",
+    path: "products",
   },
   {
     id: 3,
@@ -35,7 +35,7 @@ const topics = [
     backGroundColor: "#F0F2FF",
     border: "1px solid #E1E5FD",
     borderRadius: "8px",
-    path: "return",
+    path: "returns",
   },
   {
     id: 4,
@@ -44,7 +44,7 @@ const topics = [
     backGroundColor: "#EBF7FF",
     border: "1px solid #DDF0FC",
     borderRadius: "8px",
-    path: "offer",
+    path: "offers",
   },
   {
     id: 5,
@@ -53,7 +53,7 @@ const topics = [
     backGroundColor: "#FAF0FF",
     border: "1px solid #F4E4FD",
     borderRadius: "8px",
-    path: "payment",
+    path: "payments",
   },
   {
     id: 6,
@@ -62,7 +62,7 @@ const topics = [
     backGroundColor: "#E3FFFD",
     border: "1px solid #CEF4F2",
     borderRadius: "8px",
-    path: "order",
+    path: "orders",
   },
 ];
 
