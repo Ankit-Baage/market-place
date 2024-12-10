@@ -292,3 +292,9 @@ export const userProfileUrl = (user_id) =>
 
 export const categoryListUrl = (category,user_id, medium) =>
   `${baseUrl}${version}${mode}${category}/?user_id=${user_id}&mode=${medium}`;
+
+
+
+///////////////////////advertisement////////////////
+const advertisementEndPoint = 'admin/advertisement'
+export const advertisementUrl =`${baseUrl}${version}${mode}${advertisementEndPoint}`

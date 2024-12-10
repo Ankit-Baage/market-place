@@ -7,26 +7,16 @@ import classes from "./newPhoneListPage.module.css";
 import { NewPhoneFilterPage } from "./newPhoneFilters/NewPhoneFiltersPage";
 import useGetNewPhoneList from "../../tanstack-query/newPhones/useGetNewPhoneList";
 import { NewPhoneItem } from "../../components/newPhone/NewPhoneItem";
-import axiosInstance from "../../utils/axios-middleware/axiosMiddleware";
-import { useQuery } from "@tanstack/react-query";
-import { Carousel } from "../../components/carousel/Carousel";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWishListMutation";
 import { BannerSkeleton } from "../../components/skeletons/bannerSkeleton/BannerSkeleton";
 import { ProductSkeleton } from "../../components/skeletons/productSkeleton/ProductSkeleton";
 import { BestSellingCardMessage } from "../../components/skeletons/bestSellingCardMessage/BestSellingCardMessage";
-import { Advertisement } from "../../components/advertisement/Advertisement";
 
-const fetchAdvertisements = async () => {
-  const response = await axiosInstance.get(
-    "https://dev.backend.mobigarage.com/v1/mp/admin/advertisement",
-    {
-      params: { category: "new_phones", page: "listing" },
-    }
-  );
-  return response.data;
-};
+import useGetAdvertisement from "../../tanstack-query/advertisement/useGetAdvertisement";
+import { Banner } from "../../components/banner/Banner";
+
 
 export const NewPhoneListPage = () => {
   const [filters, setFilters] = useState({
@@ -42,6 +32,7 @@ export const NewPhoneListPage = () => {
   const guestId = Cookies.get("guestId");
   const medium = authToken ? "user" : "guest";
   const user_id = authToken ? userId : guestId;
+  const advertisementFilters = { category: "new_phones", page: "listing" };
 
   const [searchParams, setSearchParams] = useSearchParams();
   const {
@@ -50,10 +41,8 @@ export const NewPhoneListPage = () => {
     isLoading,
   } = useGetNewPhoneList(filters, user_id, medium);
 
-  const { data: add, isSuccess: addIsSuccess } = useQuery({
-    queryKey: ["advertisements", "new_phones", "listing"],
-    queryFn: fetchAdvertisements,
-  });
+  const { data: add, isSuccess: addIsSuccess } =
+    useGetAdvertisement(advertisementFilters);
 
   const {
     mutateAsync,
@@ -139,20 +128,10 @@ export const NewPhoneListPage = () => {
         />
       )}
 
-      {addIsSuccess ? (
-        <div className={classes.box__space}>
-          {add?.data?.length > 1 ? (
-            <Carousel images={add?.data} />
-          ) : (
-            <Advertisement image={add?.data} />
-          )}
-        </div>
-      ) : (
-        <BannerSkeleton />
-      )}
+      {addIsSuccess ? <Banner data={add?.data} /> : <BannerSkeleton />}
       <div className={classes.box__item}>
         {isLoading ? (
-          <ProductSkeleton /> 
+          <ProductSkeleton />
         ) : isSuccess ? (
           newPhonesListData?.length > 0 ? (
             <div className={classes.box__item}>

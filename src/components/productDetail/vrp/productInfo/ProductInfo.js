@@ -8,7 +8,7 @@ import axiosInstance from "../../../../utils/axios-middleware/axiosMiddleware";
 import { useQuery } from "@tanstack/react-query";
 import { Carousel } from "../../../carousel/Carousel";
 import { BannerSkeleton } from "../../../skeletons/bannerSkeleton/BannerSkeleton";
-import { Advertisement } from "../../../advertisement/Advertisement";
+// import { Advertisement } from "../../../advertisement/Advertisement";
 
 const fetchAdvertisements = async () => {
   const response = await axiosInstance.get(
@@ -46,7 +46,7 @@ export const ProductInfo = ({ productData, onWishList }) => {
             onClick={onWishList}
           />
         </div>
-        {addIsSuccess ? (
+        {/* {addIsSuccess ? (
         <div className={classes.box__space}>
           {add?.data?.length > 1 ? (
             <Carousel images={add?.data} />
@@ -56,7 +56,7 @@ export const ProductInfo = ({ productData, onWishList }) => {
         </div>
       ) : (
         <BannerSkeleton />
-      )}
+      )} */}
       </div>
       <div className={classes.box__specs}>
         <div className={classes.box__specs__info}>

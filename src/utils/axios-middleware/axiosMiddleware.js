@@ -16,23 +16,23 @@ const axiosInstance = axios.create();
 
 axiosInstance.interceptors.request.use(attachTokenMiddleware);
 
-axiosInstance.interceptors.response.use(
-  (response) => response, // Return response if no error
-  (error) => {
-    if (error.response) {
-      const { status } = error.response;
-      if (status === 401) {
-        window.location = "/authentication";
-      }
-    } else if (!navigator.onLine || error.message) {
-      console.log("No internet connection. Please check your network.");
-      error.customMessage =
-        "No internet connection. Please check your network.";
-      toast.warning(error.customMessage);
-    }
+// axiosInstance.interceptors.response.use(
+//   (response) => response, // Return response if no error
+//   (error) => {
+//     if (error.response) {
+//       const { status } = error.response;
+//       if (status === 401) {
+//         window.location = "/authentication";
+//       }
+//     } else if (!navigator.onLine || error.message) {
+//       console.log("No internet connection. Please check your network.");
+//       error.customMessage =
+//         "No internet connection. Please check your network.";
+//       toast.warning(error.customMessage);
+//     }
 
-    throw error;
-  }
-);
+//     throw error;
+//   }
+// );
 
 export default axiosInstance;

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link,  useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Cookies from "js-cookie";
 import { Header } from "../../../components/header/Header";
@@ -9,25 +9,16 @@ import vrp from "../../../assets/vrp.svg";
 import openBox from "../../../assets/openBox.svg";
 import spares from "../../../assets/spare.svg";
 import newPhone from "../../../assets/new_phone.svg";
-import { Carousel } from "../../../components/carousel/Carousel";
-import axiosInstance from "../../../utils/axios-middleware/axiosMiddleware";
-import { useQuery } from "@tanstack/react-query";
+
 
 import { BestSellingProductPage } from "../bestSellingProducts/BestSellingProductPage";
 import { BannerSkeleton } from "../../../components/skeletons/bannerSkeleton/BannerSkeleton";
 import classes from "./homePage.module.css";
 import { useSelector } from "react-redux";
-import { Advertisement } from "../../../components/advertisement/Advertisement";
 
-const fetchAdvertisements = async () => {
-  const response = await axiosInstance.get(
-    "https://dev.backend.mobigarage.com/v1/mp/admin/advertisement",
-    {
-      params: { category: "home", page: "landing" },
-    }
-  );
-  return response.data;
-};
+import useGetAdvertisement from "../../../tanstack-query/advertisement/useGetAdvertisement";
+import { Banner } from "../../../components/banner/Banner";
+
 
 const buttonRoutes = [
   { id: "vrp", image: vrp, label: "VRP" },
@@ -41,40 +32,24 @@ export const HomePage = () => {
   const navigate = useNavigate();
   const [width, setWidth] = useState(0);
 
-
-  const { params } = useSelector(
-    (state) => state.advertisementParams.params
-  );
-
-
-
-
+  // const { params } = useSelector(
+  //   (state) => state.advertisementParams.params
+  // );
 
   const placeholder = "Search for mobile, accessories & more";
+  const advertisementFilters = { category: "home", page: "landing" };
 
   const carousel = useRef();
-  const {
-    data: add,
 
-    isSuccess
-  } = useQuery({
-    queryKey: ["advertisements", "home", "landing"],
-    refetchOnWindowFocus: false,
-    retry: 2,
-    retryDelay: 1000,
-    queryFn: fetchAdvertisements,
-  });
+  const { data: add, isSuccess: addIsSuccess } =
+    useGetAdvertisement(advertisementFilters);
 
   useEffect(() => {
     setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
   }, []);
 
-  const handleLogOut = () => {
-    Cookies.remove("authToken");
-    console.log(Cookies.get("authToken"));
-    navigate("/");
-  };
-  console.log("params", params)
+ 
+  // console.log("params", params)
   return (
     <div className={classes.container}>
       <div className={classes.container__box}>
@@ -106,22 +81,9 @@ export const HomePage = () => {
           </motion.div>
         </div>
       </div>
+      {addIsSuccess ? <Banner data={add?.data} /> : <BannerSkeleton />}
 
-      <div className={classes.container__box__content}>
-        {isSuccess ? (
-          <div className={classes.container__carousel}>
-            {add?.data.length > 1 ? (
-              <Carousel images={add?.data} />
-            ) : (
-              <Advertisement image={add?.data} />
-            )}
-          </div>
-        ) : (
-          <BannerSkeleton />
-        )}
-
-        <BestSellingProductPage />
-      </div>
+      <BestSellingProductPage />
     </div>
   );
 };

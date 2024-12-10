@@ -15,17 +15,9 @@ import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWish
 import { BannerSkeleton } from "../../components/skeletons/bannerSkeleton/BannerSkeleton";
 import { ProductSkeleton } from "../../components/skeletons/productSkeleton/ProductSkeleton";
 import { BestSellingCardMessage } from "../../components/skeletons/bestSellingCardMessage/BestSellingCardMessage";
-import { Advertisement } from "../../components/advertisement/Advertisement";
 
-const fetchAdvertisements = async () => {
-  const response = await axiosInstance.get(
-    "https://dev.backend.mobigarage.com/v1/mp/admin/advertisement",
-    {
-      params: { category: "vrp", page: "listing" },
-    }
-  );
-  return response.data;
-};
+import { Banner } from "../../components/banner/Banner";
+import useGetAdvertisement from "../../tanstack-query/advertisement/useGetAdvertisement";
 
 export const VrpListPage = () => {
   const [vrpListData, setVrpListData] = useState([]);
@@ -40,23 +32,20 @@ export const VrpListPage = () => {
     p4_percent_start: null,
     p4_percent_end: null,
   });
-  // const { data, isLoading, isError, isSuccess } = useGetVrpList();
+  const advertisementFilters = { category: "vrp", page: "listing" };
   const authToken = Cookies.get("authToken");
   const userId = Cookies.get("user_id");
   const guestId = Cookies.get("guestId");
   const medium = authToken ? "user" : "guest";
   const user_id = authToken ? userId : guestId;
-  const { data: add, isSuccess: addIsSuccess } = useQuery({
-    queryKey: ["advertisements", "vrp", "listing"],
-    queryFn: fetchAdvertisements,
-  });
+  const { data: add, isSuccess: addIsSuccess } =
+    useGetAdvertisement(advertisementFilters);
 
   const { data, isLoading, isSuccess, refetch } = useGetVrpSortedList(
     filters,
     user_id,
     medium
   );
-  console.log("mode ", medium);
 
   const {
     mutateAsync,
@@ -135,17 +124,7 @@ export const VrpListPage = () => {
         />
       )}
 
-      {addIsSuccess ? (
-        <div className={classes.box__space}>
-          {add?.data?.length > 1 ? (
-            <Carousel images={add?.data} />
-          ) : (
-            <Advertisement image={add?.data} />
-          )}
-        </div>
-      ) : (
-        <BannerSkeleton />
-      )}
+      {addIsSuccess ? <Banner data={add?.data} /> : <BannerSkeleton />}
       <div className={classes.box__item}>
         {isLoading ? (
           <ProductSkeleton /> // Render skeleton while loading

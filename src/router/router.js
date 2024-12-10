@@ -28,7 +28,7 @@ import { AddressPage, checkAuthLoader } from "../pages/address/AddressPage";
 import { AddressOutlet } from "../pages/address/AddressOutlet";
 import { AddressDetailPage } from "../pages/address/AddressDetailPage";
 import { HelpPage } from "../pages/help/HelpPage";
-import { CategoryPage } from "../pages/category/CategoryPage";
+// import { CategoryPage } from "../pages/category/CategoryPage";
 import { LaterPage } from "../pages/later/LaterPage";
 import { WishListPage } from "../pages/wishList/WishListPage";
 import { CouponsPage } from "../pages/coupons/CouponsPage";
@@ -131,10 +131,10 @@ export const mainRoutes = [
       },
       { path: "review", element: <ReviewPage /> },
       { path: "success", element: <OrderSuccess /> },
-      {
-        path: "category",
-        element: <CategoryPage />,
-      },
+      // {
+      //   path: "category",
+      //   element: <CategoryPage />,
+      // },
       {
         path: "help",
         element: <HelpPage />,

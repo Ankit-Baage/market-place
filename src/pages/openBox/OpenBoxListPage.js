@@ -7,9 +7,6 @@ import classes from "./openBoxListPage.module.css";
 
 import useGetOpenBoxList from "../../tanstack-query/openBox/useGetOpenBoxList";
 
-import axiosInstance from "../../utils/axios-middleware/axiosMiddleware";
-import { useQuery } from "@tanstack/react-query";
-import { Carousel } from "../../components/carousel/Carousel";
 import { OpenBoxItem } from "../../components/openBox/OpenBoxItem";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
@@ -17,17 +14,10 @@ import useAddToWishListMutation from "../../tanstack-query/wishList/useAddToWish
 import { BannerSkeleton } from "../../components/skeletons/bannerSkeleton/BannerSkeleton";
 import { ProductSkeleton } from "../../components/skeletons/productSkeleton/ProductSkeleton";
 import { BestSellingCardMessage } from "../../components/skeletons/bestSellingCardMessage/BestSellingCardMessage";
-import { Advertisement } from "../../components/advertisement/Advertisement";
 
-const fetchAdvertisements = async () => {
-  const response = await axiosInstance.get(
-    "https://dev.backend.mobigarage.com/v1/mp/admin/advertisement",
-    {
-      params: { category: "open_box", page: "listing" },
-    }
-  );
-  return response.data;
-};
+import { Banner } from "../../components/banner/Banner";
+import useGetAdvertisement from "../../tanstack-query/advertisement/useGetAdvertisement";
+
 
 export const OpenBoxListPage = () => {
   const [filters, setFilters] = useState({
@@ -40,21 +30,21 @@ export const OpenBoxListPage = () => {
   const navigate = useNavigate();
 
   const [searchParams, setSearchParams] = useSearchParams();
+  const advertisementFilters = { category: "open_box", page: "listing" };
   const authToken = Cookies.get("authToken");
   const userId = Cookies.get("user_id");
   const guestId = Cookies.get("guestId");
   const medium = authToken ? "user" : "guest";
   const user_id = authToken ? userId : guestId;
+  const { data: add, isSuccess: addIsSuccess } =
+  useGetAdvertisement(advertisementFilters);
   const {
     data: openBoxListData,
     isSuccess,
     isLoading,
   } = useGetOpenBoxList(filters, user_id, medium);
 
-  const { data: add, isSuccess: addIsSuccess } = useQuery({
-    queryKey: ["advertisements", "open_box", "listing"],
-    queryFn: fetchAdvertisements,
-  });
+
 
   const {
     mutateAsync,
@@ -140,17 +130,7 @@ export const OpenBoxListPage = () => {
         />
       )}
 
-      {addIsSuccess ? (
-        <div className={classes.box__space}>
-          {add?.data?.length > 1 ? (
-            <Carousel images={add?.data} />
-          ) : (
-            <Advertisement image={add?.data} />
-          )}
-        </div>
-      ) : (
-        <BannerSkeleton />
-      )}
+      {addIsSuccess ? <Banner data={add?.data} /> : <BannerSkeleton />}
       <div className={classes.box__item}>
         {isLoading ? (
           <ProductSkeleton /> // Render skeleton while loading

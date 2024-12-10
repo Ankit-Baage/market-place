@@ -8,7 +8,7 @@ import { useSearchParams } from "react-router-dom";
 
 import { SparesPriceFilterPage } from "./SparesPriceFilterPage";
 import { useSelector } from "react-redux";
-import { selectFilterOptions } from "../../../../store/catergory/categorySlice";
+import { selectFilterOptions } from "../../../../store/category/categorySlice";
 
 const filterButtons = [
   { id: "spare", label: "Spares" },
