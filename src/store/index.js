@@ -12,7 +12,7 @@ import couponReducer from "./coupon/couponSlice";
 import addressReducer from "./address/addressSlice";
 import errorReducer from "./error/errorSlice";
 import advertisementParamsReducer from "./advertisementParams/advertisementParamsSlice";
-import categoryReducer from "./catergory/categorySlice";
+import categoryReducer from "./category/categorySlice";
 
 export const store = configureStore({
   reducer: {

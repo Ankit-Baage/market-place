@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import Cookies from "js-cookie";
 import { Header } from "../../../components/header/Header";
 import { SearchInput } from "../../../components/searchInput/SearchInput";
 import prexo from "../../../assets/prexo.svg";
@@ -14,7 +13,6 @@ import newPhone from "../../../assets/new_phone.svg";
 import { BestSellingProductPage } from "../bestSellingProducts/BestSellingProductPage";
 import { BannerSkeleton } from "../../../components/skeletons/bannerSkeleton/BannerSkeleton";
 import classes from "./homePage.module.css";
-import { useSelector } from "react-redux";
 
 import useGetAdvertisement from "../../../tanstack-query/advertisement/useGetAdvertisement";
 import { Banner } from "../../../components/banner/Banner";
@@ -31,10 +29,6 @@ const buttonRoutes = [
 export const HomePage = () => {
   const navigate = useNavigate();
   const [width, setWidth] = useState(0);
-
-  // const { params } = useSelector(
-  //   (state) => state.advertisementParams.params
-  // );
 
   const placeholder = "Search for mobile, accessories & more";
   const advertisementFilters = { category: "home", page: "landing" };
