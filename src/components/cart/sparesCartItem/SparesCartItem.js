@@ -35,7 +35,7 @@ export const SparesCartItem = ({
         <div className={classes.box__info__cred}>
         <h2 className={classes.box__info__cred__badge}>Spares</h2>
           <Link
-            to={`/home/spares/${item.id}`}
+            to={`/spares/${item.id}`}
             className={classes.box__info__cred__title}
           >
             <h1 className={classes.box__info__cred__title__head}>

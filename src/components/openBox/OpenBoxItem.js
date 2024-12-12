@@ -18,6 +18,7 @@ export const OpenBoxItem = ({ item, onClick, onWishList }) => {
       category_id: item.category_id,
       master_product_id: item.master_product_id,
       item_id: item.id,
+      qty: 1
     };
 
     try {

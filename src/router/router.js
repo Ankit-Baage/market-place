@@ -39,6 +39,7 @@ import { Help } from "../components/help/Help";
 import { ProfileStaticOutlet } from "../pages/profileStatic/ProfileStaticOutlet";
 import { HelpCategory } from "../components/help/helpCategory/HelpCategory";
 import { OtherDetails } from "../components/profileInfoStatic/OtherDetails";
+import { CategoryPage } from "../pages/category/CategoryPage";
 
 export const mainRoutes = [
   {
@@ -130,6 +131,10 @@ export const mainRoutes = [
       },
       { path: "review", element: <ReviewPage /> },
       { path: "success", element: <OrderSuccess /> },
+      {
+        path: "category",
+        element: <CategoryPage />,
+      },
   
       {
         path: "help",

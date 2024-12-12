@@ -14,7 +14,8 @@ export const cartListPostRequest = async (data) => {
     }),
     ...(data.category_id !== 5 && { item_id: data.item_id }),
     ...(data.category_id === 5 && { request_id: data.request_id }),
-    ...(!authToken && guestId && { user_id: guestId })
+    ...(!authToken && guestId && { user_id: guestId }),
+    qty: data.qty,
   };
 
   try {

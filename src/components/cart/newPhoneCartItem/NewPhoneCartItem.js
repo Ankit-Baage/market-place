@@ -35,7 +35,7 @@ export const NewPhoneCartItem = ({
         <div className={classes.box__info__cred}>
         <h2 className={classes.box__info__cred__badge}>New Phone</h2>
           <Link
-            to={`/home/newPhone/${item.id}`}
+            to={`/newPhone/${item.id}`}
             className={classes.box__info__cred__title}
           >
             <h1 className={classes.box__info__cred__title__head}>
