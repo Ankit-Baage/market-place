@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./newPhoneItem.module.css";
 import { formatNumber } from "../../utils/helpers/formatNumber";
 import dummyImage from "../../assets/dummyPreview.png";
@@ -7,6 +7,7 @@ import useCartListSparesMutation from "../../tanstack-query/cartList/useCartList
 import { toast } from "react-toastify";
 
 export const NewPhoneItem = ({ item, onClick, onWishList }) => {
+  const [qty, setQty] = useState(item.cart_count);
   const { mutateAsync, isLoading, isSuccess, isPending } =
   useCartListSparesMutation();
 
@@ -67,6 +68,19 @@ export const NewPhoneItem = ({ item, onClick, onWishList }) => {
               <span className={classes.box__discount__img}>
                 {item.discount_percentage}% OFF
               </span>
+            </div>
+            <div className={classes.box__info__qty}>
+              <label htmlFor="qty" className={classes.box__info__qty__label}>
+                Qty:
+              </label>
+              <input
+                type="number"
+                className={classes.box__info__qty__input}
+                id="qty"
+                value={qty}
+                onChange={(e) => setQty(e.target.value)} // Update the qty state
+                onClick={(e) => e.stopPropagation()}
+              />
             </div>
 
             <CategoryActionButtonGroup onAdd={handleAddToCart} isAddedToCart={item.cart_status}/>

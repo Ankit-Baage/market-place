@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./spareItem.module.css";
 import { formatNumber } from "../../utils/helpers/formatNumber";
 import dummyImage from "../../assets/dummyPreview.png";
@@ -7,6 +7,7 @@ import useCartListSparesMutation from "../../tanstack-query/cartList/useCartList
 import { toast } from "react-toastify";
 
 export const SpareItem = ({ item, onClick, onWishList }) => {
+  const [qty, setQty] = useState(item.cart_count);
   const { mutateAsync, isLoading, isSuccess, isPending } =
     useCartListSparesMutation();
 
@@ -16,7 +17,7 @@ export const SpareItem = ({ item, onClick, onWishList }) => {
       category_id: item.category_id,
       master_product_id: item.master_product_id,
       item_id: item.id,
-      qty:2
+      qty,
     };
 
     try {
@@ -63,15 +64,16 @@ export const SpareItem = ({ item, onClick, onWishList }) => {
               </span>
             </div>
             <div className={classes.box__info__qty}>
-              <label
-                htmlFor="qty"
-                className={classes.box__info__qty__label}
-              >Qty:</label>
+              <label htmlFor="qty" className={classes.box__info__qty__label}>
+                Qty:
+              </label>
               <input
                 type="number"
                 className={classes.box__info__qty__input}
-                defaultValue="1"
                 id="qty"
+                value={qty}
+                onChange={(e) => setQty(e.target.value)} // Update the qty state
+                onClick={(e) => e.stopPropagation()}
               />
             </div>
 

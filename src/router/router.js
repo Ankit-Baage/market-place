@@ -41,6 +41,7 @@ import { HelpCategory } from "../components/help/helpCategory/HelpCategory";
 import { OtherDetails } from "../components/profileInfoStatic/OtherDetails";
 import { CategoryPage } from "../pages/category/CategoryPage";
 
+
 export const mainRoutes = [
   {
     path: "/",
@@ -83,6 +84,7 @@ export const mainRoutes = [
           { path: ":requestId", element: <OpenBoxDetailPage /> },
         ],
       },
+
 
       {
         path: "profileInfo",
@@ -135,7 +137,7 @@ export const mainRoutes = [
         path: "category",
         element: <CategoryPage />,
       },
-  
+
       {
         path: "help",
         element: <HelpPage />,
@@ -150,6 +152,7 @@ export const mainRoutes = [
         element: <ProfileStaticOutlet />,
         children: [{ path: ":detailCategory", element: <OtherDetails /> }],
       },
+      
     ],
   },
 

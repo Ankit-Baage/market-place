@@ -41,6 +41,7 @@
 
 .box__info__container {
   display: flex;
+  justify-content: center;
   align-items: center;
   column-gap: 8px;
 }
@@ -105,10 +106,6 @@
 }
 
 
-
-
-
-
 .box__discount__img {
   display: flex;
   justify-content: center;
@@ -129,42 +126,44 @@
 .box__info__btns {
   display: flex;
   column-gap: 12px;
+  /* justify-content: space-between; */
   align-items: center;
 
 }
 
+.box__info__qty {
+  display: flex;
+  column-gap: 8px;
+  align-items: center;
+}
 
-.box__info__btns__cart {
+.box__info__qty__label {
   font-family: "Poppins", sans;
   font-weight: 400;
   font-size: 12px;
   line-height: 12px;
-  border-radius: 8px;
-  border: 1px solid #FF6F3F;
-  color: #FF6F3F;
-  padding: 8px 11px 8px 10px;
-  background-color: #FFFFFF;
+  color: #595959;
 
 }
 
-.box__info__btns__buy {
+.box__info__qty__input {
+  width: 78px;
+  border: 1px solid #EFEFEF;
+  border-radius: 4px;
   font-family: "Poppins", sans;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 12px;
-  border-radius: 8px;
-  border: 1px solid #FF6F3F;
-  color: #FFFFFF;
-  padding: 8px 20px 8px 19px;
-  background-color: #FF6F3F;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 14px;
+  color: #595959;
+  padding: 7px 8px;
 
 }
+
 
 .box__item__divider {
   background-color: #EFEFEF;
   height: 1.5px;
 }
-
 .box__info__fav {
   width: 16px;
   height: 16px;

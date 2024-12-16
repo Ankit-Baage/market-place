@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import fav from "../../assets/heart.svg";
 import classes from "./openBoxItem.module.css";
@@ -9,16 +9,17 @@ import useCartListSparesMutation from "../../tanstack-query/cartList/useCartList
 import { toast } from "react-toastify";
 
 export const OpenBoxItem = ({ item, onClick, onWishList }) => {
+  const [qty, setQty] = useState(item.cart_count);
   const { mutateAsync, isLoading, isSuccess, isPending } =
-  useCartListSparesMutation();
+    useCartListSparesMutation();
 
   const handleAddToCart = async (event) => {
-    event.stopPropagation()
+    event.stopPropagation();
     const data = {
       category_id: item.category_id,
       master_product_id: item.master_product_id,
       item_id: item.id,
-      qty: 1
+      qty,
     };
 
     try {
@@ -71,8 +72,24 @@ export const OpenBoxItem = ({ item, onClick, onWishList }) => {
                 {item.discount_percentage}% OFF
               </span>
             </div>
+            <div className={classes.box__info__qty}>
+              <label htmlFor="qty" className={classes.box__info__qty__label}>
+                Qty:
+              </label>
+              <input
+                type="number"
+                className={classes.box__info__qty__input}
+                id="qty"
+                value={qty}
+                onChange={(e) => setQty(e.target.value)} // Update the qty state
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
 
-            <CategoryActionButtonGroup onAdd={handleAddToCart} isAddedToCart={item.cart_status}/>
+            <CategoryActionButtonGroup
+              onAdd={handleAddToCart}
+              isAddedToCart={item.cart_status}
+            />
           </div>
         </div>
         <span

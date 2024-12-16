@@ -298,3 +298,6 @@ export const categoryListUrl = (category,user_id, medium) =>
 ///////////////////////advertisement////////////////
 const advertisementEndPoint = 'admin/advertisement'
 export const advertisementUrl =`${baseUrl}${version}${mode}${advertisementEndPoint}`
+
+
+export const productsListUrl=(category)=>`${baseUrl}${version}${mode}${category}/`;
