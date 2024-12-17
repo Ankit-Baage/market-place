@@ -30,18 +30,18 @@ export const BestSellingProductPage = () => {
   };
 
   const bestSellingSections = [
-    {
-      title: "VRP (Hot Deals)",
-      path: "vrp",
-      data: vrpData?.data?.data,
-      component: getComponent(
-        vrpIsSuccess,
-        vrpData?.data?.data,
-        BestSellingVrp
-      ),
-      keyField: "request_id",
-      propName: "vrp",
-    },
+    // {
+    //   title: "VRP (Hot Deals)",
+    //   path: "vrp",
+    //   data: vrpData?.data?.data,
+    //   component: getComponent(
+    //     vrpIsSuccess,
+    //     vrpData?.data?.data,
+    //     BestSellingVrp
+    //   ),
+    //   keyField: "request_id",
+    //   propName: "vrp",
+    // },
     {
       title: "Spares (Hot Deals)",
       path: "spares",
@@ -54,30 +54,30 @@ export const BestSellingProductPage = () => {
       keyField: "id",
       propName: "spares",
     },
-    {
-      title: "New Phones (Hot Deals)",
-      path: "newPhone",
-      data: newPhonesData?.data?.data,
-      component: getComponent(
-        newPhoneIsSuccess,
-        newPhonesData?.data?.data,
-        BestSellingNewPhones
-      ),
-      keyField: "id",
-      propName: "newPhones",
-    },
-    {
-      title: "Open Box (Hot Deals)",
-      path: "openBox",
-      data: openBoxData?.data?.data,
-      component: getComponent(
-        openBoxIsSuccess,
-        openBoxData?.data?.data,
-        BestSellingOpenBox
-      ),
-      keyField: "id",
-      propName: "openBox",
-    },
+    // {
+    //   title: "New Phones (Hot Deals)",
+    //   path: "newPhone",
+    //   data: newPhonesData?.data?.data,
+    //   component: getComponent(
+    //     newPhoneIsSuccess,
+    //     newPhonesData?.data?.data,
+    //     BestSellingNewPhones
+    //   ),
+    //   keyField: "id",
+    //   propName: "newPhones",
+    // },
+    // {
+    //   title: "Open Box (Hot Deals)",
+    //   path: "openBox",
+    //   data: openBoxData?.data?.data,
+    //   component: getComponent(
+    //     openBoxIsSuccess,
+    //     openBoxData?.data?.data,
+    //     BestSellingOpenBox
+    //   ),
+    //   keyField: "id",
+    //   propName: "openBox",
+    // },
   ];
 
   return (

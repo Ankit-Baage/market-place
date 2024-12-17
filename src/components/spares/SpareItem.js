@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from "react";
-import classes from "./spareItem.module.css";
-import { formatNumber } from "../../utils/helpers/formatNumber";
-import dummyImage from "../../assets/dummyPreview.png";
-import { CategoryActionButtonGroup } from "../categoryActionButtonGroup/CategoryActionButtonGroup";
-import useCartListSparesMutation from "../../tanstack-query/cartList/useCartListSparesMutation";
 import { toast } from "react-toastify";
+import useCartListSparesMutation from "../../tanstack-query/cartList/useCartListSparesMutation";
+import { formatNumber } from "../../utils/helpers/formatNumber";
+import { CategoryActionButtonGroup } from "../categoryActionButtonGroup/CategoryActionButtonGroup";
+import dummyImage from "../../assets/dummyPreview.png";
+import classes from "./spareItem.module.css";
 
 export const SpareItem = ({ item, onClick, onWishList }) => {
   const [qty, setQty] = useState(item.cart_count);

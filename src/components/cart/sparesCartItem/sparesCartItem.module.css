@@ -165,3 +165,16 @@
 }
 
 
+.box__info__btns__cart {
+  font-family: "Poppins", sans;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  border-radius: 8px;
+  border: 1px solid #FF6F3F;
+  color: #FF6F3F;
+  padding:11px;
+  background-color: #FFFFFF;
+  margin-left:12px
+
+}

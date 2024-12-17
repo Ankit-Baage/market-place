@@ -206,21 +206,21 @@ const guest = "guest/"
 const qty = "qty";
 
 export const cartListUrl = `${baseUrl}${version}${mode}${cart}`;
-export const cartListUpdateUrl = `${baseUrl}${version}${mode}${cart}${guest}${qty}`;
-export const cartListGuestUpdateUrl = `${baseUrl}${version}${mode}${cart}${qty}`;
+export const cartListUpdateUrl = `${baseUrl}${version}${mode}${cart}${qty}`;
+export const cartListGuestUpdateUrl = `${baseUrl}${version}${mode}${cart}${guest}${qty}`;
 
 export const cartGetListGuestUrl = (guestId, coupon_code) => {
-  let url = `${baseUrl}${version}${mode}${cart}/guest?user_id=${guestId}`;
+  let url = `${baseUrl}${version}${mode}${cart}guest?user_id=${guestId}`;
   url += coupon_code ? `&coupon_code=${coupon_code}` : "";
-
+console.log(url)
   return url;
 };
 
-export const cartLisGuestUrl = `${baseUrl}${version}${mode}${cart}/guest`;
+export const cartLisGuestUrl = `${baseUrl}${version}${mode}${cart}guest`;
 
 export const cartGetListUrl = (coupon_code) => {
   let url = baseUrl + version + mode + cart;
-  url += coupon_code ? `/?coupon_code=${coupon_code}` : "";
+  url += coupon_code ? `?coupon_code=${coupon_code}` : "";
 
   return url;
 };
@@ -229,7 +229,7 @@ export const cartGetListUrl = (coupon_code) => {
 
 export const reviewListUrl = (coupon_code, address_id) => {
   // Base URL
-  let url = `${baseUrl}${version}${mode}${cart}/review?address_id=${address_id}`;
+  let url = `${baseUrl}${version}${mode}${cart}review?address_id=${address_id}`;
 
   // Append coupon_code if provided
   if (coupon_code) {

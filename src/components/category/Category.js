@@ -10,7 +10,7 @@ export const Category = () => {
   return (
     <div className={classes.box}>
       <h1 className={classes.box__title}>Product Category</h1>
-      <Link className={classes.box__vrp} to="/vrp">
+      {/* <Link className={classes.box__vrp} to="/vrp">
         <div className={classes.box__vrp__content}>
           <h2 className={classes.box__vrp__content__title}>VRP</h2>
           <p className={classes.box__vrp__content__para}>
@@ -19,16 +19,16 @@ export const Category = () => {
           </p>
         </div>
         <img className={classes.box__vrp__img} src={category_vrp} alt="/vrp" />
-      </Link>
+      </Link> */}
       <div className={classes.box__others}>
-        <Link className={classes.box__others__prexo} to="/openBox">
+        {/* <Link className={classes.box__others__prexo} to="/openBox">
           <h2 className={classes.box__others__prexo__title}>Open Box</h2>
           <img
             className={classes.box__others__prexo__img}
             src={category_openBox}
             alt="Open Box"
           />
-        </Link>
+        </Link> */}
         <Link className={classes.box__others__spares} to="/spares">
           <h2 className={classes.box__others__spares__title}>Spares</h2>
           <img
@@ -38,7 +38,7 @@ export const Category = () => {
           />
         </Link>
       </div>
-      <Link className={classes.box__newPhones} to="/newPhone">
+      {/* <Link className={classes.box__newPhones} to="/newPhone">
         <div className={classes.box__newPhones__content}>
           <h2 className={classes.box__newPhones__content__title}>New Phones</h2>
           <p className={classes.box__newPhones__content__para}>
@@ -51,7 +51,7 @@ export const Category = () => {
           src={category_newPhones}
           alt="newPhones"
         />
-      </Link>
+      </Link> */}
     </div>
   );
 };
