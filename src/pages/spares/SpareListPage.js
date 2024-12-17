@@ -74,9 +74,7 @@ export const SpareListPage = () => {
     navigate(`${requestId}`);
   };
 
-  const handleAddToWishList = async (event, item) => {
-    event.stopPropagation();
-
+  const handleAddToWishList = async (item) => {
     const data = {
       category_id: item.category_id,
       item_id: item.id,
@@ -85,10 +83,12 @@ export const SpareListPage = () => {
 
     try {
       const response = await mutateAsync(data);
-      toast.success(response.message.displayMessage);
+      console.log("API Response:", response); // Check full API response
+    console.log("Display Message:", response?.message?.displayMessage); // Chec
+      toast.success(response?.data?.message?.displayMessage);
       console.log(item);
     } catch (error) {
-      // toast.error(error.response.message.displayMessage);
+      toast.error(error?.response?.data?.message.displayMessage);
     }
   };
 
@@ -109,7 +109,7 @@ export const SpareListPage = () => {
                   key={spareItem.id}
                   item={spareItem}
                   onClick={navigateToSpareDetail}
-                  onWishList={(event) => handleAddToWishList(event, spareItem)}
+                  onWishList={() => handleAddToWishList(spareItem)}
                 />
               ))}
             </div>

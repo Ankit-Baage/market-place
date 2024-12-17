@@ -8,6 +8,7 @@
 
 .container__float {
   display: flex;
+  column-gap: 6px;
   justify-content: space-between;
 }
 
@@ -172,6 +173,7 @@
   background-size: cover;
   background-image: url(../../assets/heart.svg);
   cursor: pointer;
+  padding: 6px
 }
 .box__info__fav__active {
   width: 16px;
@@ -181,4 +183,5 @@
   background-size: cover;
   background-image: url(../../assets/heart__filled.svg);
   cursor: pointer;
+  padding: 6px
 }
