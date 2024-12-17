@@ -1,8 +1,38 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import classes from "./sparePrice.module.css";
 
 export const SparePrice = ({ prices }) => {
-  console.log("prices :", prices);
+  const [qty, setQty] = useState(prices.quantity);
+
+  // const handleQtyChange = (e) => {
+  //   const newQty = e.target.value;
+  //   setQty(newQty); // Update local state
+  //   prices.onQuantityUpdate(newQty); // Pass the new value to the parent
+  // };
+
+  const handleQtyChange = useCallback(
+    (e) => {
+      const value = e.target.value;
+
+      // Allow empty input temporarily and validate numeric input
+      if (value === "" || /^[0-9]+$/.test(value)) {
+        setQty(value); // Set the quantity to the current input value
+        prices.onQuantityUpdate(value);
+      }
+    },
+    [prices]
+  );
+
+  const handleQtyBlur = useCallback(() => {
+    // Validate and reset to minimum value (1) if empty or invalid
+    setQty((prev) => {
+      // If the value is empty or not a valid number (<= 0), reset to 1
+      const parsedValue = parseInt(prev, 10);
+      return isNaN(parsedValue) || parsedValue <= 0 ? 1 : parsedValue;
+    });
+  }, []);
+
+  console.log("quantity :", qty);
   return (
     <div className={classes.box}>
       <div className={classes.box__info}>
@@ -20,22 +50,19 @@ export const SparePrice = ({ prices }) => {
               {prices.discountPercentage}% OFF
             </span>
           </div>
-          <div className={classes.box__quantity}>
-            <button
-              className={classes.box__quantity__decrement}
-              onClick={() => prices.onQuantityUpdate("decrease")}
-              disabled={prices.isUpdating}
-            >
-              -
-            </button>
-            <h2 className={classes.box__quantity__text}>{prices.spareQuantity}</h2>
-            <button
-              className={classes.box__quantity__increment}
-              onClick={() => prices.onQuantityUpdate("increase")}
-              disabled={prices.isUpdating}
-            >
-              +
-            </button>
+          <div className={classes.box__info__qty}>
+            <label htmlFor="qty" className={classes.box__info__qty__label}>
+              Qty:
+            </label>
+            <input
+              type="number"
+              className={classes.box__info__qty__input}
+              id="qty"
+              value={qty}
+              onChange={handleQtyChange}
+              onClick={(e) => e.stopPropagation()} // Prevent triggering click on parent
+              onBlur={handleQtyBlur}
+            />
           </div>
         </div>
       </div>

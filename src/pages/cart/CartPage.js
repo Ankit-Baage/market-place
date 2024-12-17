@@ -26,15 +26,21 @@ import {
 export const CartPage = () => {
   const dispatch = useDispatch();
   const coupon = useSelector(selectCouponState);
-  const guestId = Cookies.get("guestId")
+  const guestId = Cookies.get("guestId");
   const { data, isSuccess, isLoading } = useGetCartList(coupon.id, guestId);
   const navigate = useNavigate();
+  const [qty, setQty] = useState(data?.data?.data?.quantity);
 
-  const [localQuantities, setLocalQuantities] = useState({});
-  const [isUpdating, setIsUpdating] = useState(false);
+  const handleQuantityUpdate = (newQty) => {
+    setQty(newQty);
+    console.log("cart_page updated Quantity:", newQty);
+  };
+
+  // const [localQuantities, setLocalQuantities] = useState({});
+  // const [isUpdating, setIsUpdating] = useState(false);
 
   const { mutateAsync: deleteItem } = useCartListDeleteItemMutation();
-  const { mutate: updateQuantity } = useCartListQuantityMutation();
+  // const { mutate: updateQuantity } = useCartListQuantityMutation();
   const {
     mutateAsync,
     isLoading: isMoving,
@@ -53,7 +59,7 @@ export const CartPage = () => {
         ...(category_id === 5 ? { request_id } : { master_product_id }),
       };
 
-      setIsUpdating(true);
+      // setIsUpdating(true);
 
       try {
         const response = await deleteItem(data);
@@ -62,55 +68,10 @@ export const CartPage = () => {
       } catch (error) {
         toast.error(error.response.data.message.displayMessage);
       } finally {
-        setIsUpdating(false);
+        // setIsUpdating(false);
       }
     },
     [deleteItem] // Dependencies for useCallback
-  );
-
-  const handleQuantityUpdate = useCallback(
-    (operator, item) => {
-      let currentQuantity = localQuantities[item.id] || item.quantity;
-
-      // Check for decrement case and prevent going below 1
-      if (operator === "decrease" && currentQuantity === 1) {
-        toast.warn("Quantity cannot be less than 1");
-        return;
-      }
-
-      const data = {
-        operator,
-        category_id: item.category_id,
-        master_product_id: item.master_product_id,
-      };
-
-      // Set the loader for the API call
-      setIsUpdating(true);
-
-      // Make the API call to update the quantity
-      updateQuantity(data, {
-        onSuccess: (response) => {
-          // Based on the operator, adjust the local quantity only on success
-          const newQuantity =
-            operator === "increase" ? currentQuantity + 1 : currentQuantity - 1;
-
-          setLocalQuantities((prev) => ({
-            ...prev,
-            [item.id]: newQuantity, // Update local state with the new quantity
-          }));
-
-          toast.success(response.message.displayMessage);
-        },
-        onError: (error) => {
-          toast.error(error.response.data.message.displayMessage);
-        },
-        onSettled: () => {
-          // Clear the updating state once the API call finishes
-          setIsUpdating(false);
-        },
-      });
-    },
-    [localQuantities, updateQuantity]
   );
 
   const handleSaveForLater = useCallback(
@@ -161,7 +122,6 @@ export const CartPage = () => {
               <VrpCartItem
                 key={item.request_id}
                 item={item}
-                isUpdating={isUpdating}
                 onRemove={() => {
                   handleRemove(item);
                 }}
@@ -173,47 +133,33 @@ export const CartPage = () => {
               <SparesCartItem
                 key={item.id}
                 item={item}
-                onUpdateQuantity={(operator) =>
-                  handleQuantityUpdate(operator, item)
-                }
+                onQuantityUpdate={(newQty) => handleQuantityUpdate(newQty)}
                 onRemove={() => {
                   handleRemove(item);
                 }}
                 onLater={() => handleSaveForLater(item)}
-                spareQuantity={localQuantities[item.id] || item.quantity}
-                isUpdating={isUpdating}
               />
             );
           case 7:
             return (
               <NewPhoneCartItem
-                key={item.id}
                 item={item}
-                onUpdateQuantity={(operator) =>
-                  handleQuantityUpdate(operator, item)
-                }
+                onQuantityUpdate={(newQty) => handleQuantityUpdate(newQty)}
                 onRemove={() => {
                   handleRemove(item);
                 }}
                 onLater={() => handleSaveForLater(item)}
-                newPhoneQuantity={localQuantities[item.id] || item.quantity}
-                isUpdating={isUpdating}
               />
             );
           case 8:
             return (
               <OpenBoxCartItem
-                key={item.id}
                 item={item}
-                onUpdateQuantity={(operator) =>
-                  handleQuantityUpdate(operator, item)
-                }
+                onQuantityUpdate={(newQty) => handleQuantityUpdate(newQty)}
                 onRemove={() => {
                   handleRemove(item);
                 }}
                 onLater={() => handleSaveForLater(item)}
-                openBoxQuantity={localQuantities[item.id] || item.quantity}
-                isUpdating={isUpdating}
               />
             );
           default:
@@ -222,16 +168,7 @@ export const CartPage = () => {
       });
     }
     return <EmptyCart />;
-  }, [
-    isLoading,
-    isSuccess,
-    data?.data?.data,
-    isUpdating,
-    localQuantities,
-    handleSaveForLater,
-    handleRemove,
-    handleQuantityUpdate,
-  ]);
+  }, [data?.data?.data?.cart_items, handleRemove, handleSaveForLater, isLoading, isSuccess]);
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
@@ -247,7 +184,7 @@ export const CartPage = () => {
   }, [dispatch, searchParams]);
 
   useEffect(() => {
-    if (isSuccess && data) {
+    if (isSuccess) {
       const couponCode = data?.data?.data?.applied_coupon_code;
 
       setSearchParams((params) => {
@@ -266,14 +203,7 @@ export const CartPage = () => {
         return params;
       });
     }
-  }, [
-    coupon,
-    data,
-    data?.data?.data?.applied_coupon_code,
-    dispatch,
-    isSuccess,
-    setSearchParams,
-  ]);
+  }, [coupon.id, data, dispatch, isSuccess, setSearchParams]);
   console.log("couponId :", coupon.id);
 
   return isSuccess ? (

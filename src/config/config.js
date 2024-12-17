@@ -201,9 +201,13 @@ export const openBoxVariantUrl = (sellerId, brand, model, color) =>
   )}`;
 
 ////////CART/////////////////
-const cart = "cart";
+const cart = "cart/";
+const guest = "guest/"
+const qty = "qty";
 
 export const cartListUrl = `${baseUrl}${version}${mode}${cart}`;
+export const cartListUpdateUrl = `${baseUrl}${version}${mode}${cart}${guest}${qty}`;
+export const cartListGuestUpdateUrl = `${baseUrl}${version}${mode}${cart}${qty}`;
 
 export const cartGetListGuestUrl = (guestId, coupon_code) => {
   let url = `${baseUrl}${version}${mode}${cart}/guest?user_id=${guestId}`;
@@ -287,17 +291,14 @@ export const placeOrderUrl = (coupon_code, address_id) => {
 export const userProfileUrl = (user_id) =>
   `${baseUrl}${version}${mode}accounts/user_profile?user_id=${user_id}`;
 
-
 //////////optimization//////////////
 
-export const categoryListUrl = (category,user_id, medium) =>
+export const categoryListUrl = (category, user_id, medium) =>
   `${baseUrl}${version}${mode}${category}/?user_id=${user_id}&mode=${medium}`;
 
-
-
 ///////////////////////advertisement////////////////
-const advertisementEndPoint = 'admin/advertisement'
-export const advertisementUrl =`${baseUrl}${version}${mode}${advertisementEndPoint}`
+const advertisementEndPoint = "admin/advertisement";
+export const advertisementUrl = `${baseUrl}${version}${mode}${advertisementEndPoint}`;
 
-
-export const productsListUrl=(category)=>`${baseUrl}${version}${mode}${category}/`;
+export const productsListUrl = (category) =>
+  `${baseUrl}${version}${mode}${category}/`;

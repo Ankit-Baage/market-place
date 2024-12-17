@@ -50,14 +50,20 @@ export const SpareDetailPage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const navigate = useNavigate();
-  const [localQuantities, setLocalQuantities] = useState({});
+  // const [localQuantities, setLocalQuantities] = useState({});
   const [isUpdating, setIsUpdating] = useState(false);
   const { data, isError, isPending, isSuccess, refetch } = useGetSpareDetail({
     requestId,
     user_id,
     medium,
   });
-  const { mutate: updateQuantity } = useCartListQuantityMutation();
+  const [qty, setQty] = useState(data?.data?.data?.cart_count);
+  // const { mutate: updateQuantity } = useCartListQuantityMutation();
+  const { postCart, patchCart } = useCartListSparesMutation();
+  const handleQtyChange = (newQty) => {
+    setQty(newQty);
+    console.log("Grandparent updated Quantity:", newQty);
+  };
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);
@@ -65,50 +71,50 @@ export const SpareDetailPage = () => {
     navigate(`/spares/${color.record_id}`);
   };
 
-  const handleQuantityUpdate = useCallback(
-    (operator, item = data?.data?.data) => {
-      let currentQuantity = localQuantities[item.id] || item.quantity;
+  // const handleQuantityUpdate = useCallback(
+  //   (operator, item = data?.data?.data) => {
+  //     let currentQuantity = localQuantities[item.id] || item.quantity;
 
-      // Check for decrement case and prevent going below 1
-      if (operator === "decrease" && currentQuantity === 1) {
-        toast.warn("Quantity cannot be less than 1");
-        return;
-      }
+  //     // Check for decrement case and prevent going below 1
+  //     if (operator === "decrease" && currentQuantity === 1) {
+  //       toast.warn("Quantity cannot be less than 1");
+  //       return;
+  //     }
 
-      const data = {
-        operator,
-        category_id: item.category_id,
-        master_product_id: item.master_product_id,
-      };
+  //     const data = {
+  //       operator,
+  //       category_id: item.category_id,
+  //       master_product_id: item.master_product_id,
+  //     };
 
-      // Set the loader for the API call
-      setIsUpdating(true);
+  //     // Set the loader for the API call
+  //     setIsUpdating(true);
 
-      // Make the API call to update the quantity
-      updateQuantity(data, {
-        onSuccess: (response) => {
-          // Based on the operator, adjust the local quantity only on success
-          const newQuantity =
-            operator === "increase" ? currentQuantity + 1 : currentQuantity - 1;
+  //     // Make the API call to update the quantity
+  //     updateQuantity(data, {
+  //       onSuccess: (response) => {
+  //         // Based on the operator, adjust the local quantity only on success
+  //         const newQuantity =
+  //           operator === "increase" ? currentQuantity + 1 : currentQuantity - 1;
 
-          setLocalQuantities((prev) => ({
-            ...prev,
-            [item.id]: newQuantity, // Update local state with the new quantity
-          }));
+  //         setLocalQuantities((prev) => ({
+  //           ...prev,
+  //           [item.id]: newQuantity, // Update local state with the new quantity
+  //         }));
 
-          toast.success(response.message.displayMessage);
-        },
-        onError: (error) => {
-          toast.error(error.response.data.message.displayMessage);
-        },
-        onSettled: () => {
-          // Clear the updating state once the API call finishes
-          setIsUpdating(false);
-        },
-      });
-    },
-    [data?.data?.data, localQuantities, updateQuantity]
-  );
+  //         toast.success(response.message.displayMessage);
+  //       },
+  //       onError: (error) => {
+  //         toast.error(error.response.data.message.displayMessage);
+  //       },
+  //       onSettled: () => {
+  //         // Clear the updating state once the API call finishes
+  //         setIsUpdating(false);
+  //       },
+  //     });
+  //   },
+  //   [data?.data?.data, localQuantities, updateQuantity]
+  // );
 
   useEffect(() => {
     if (isSuccess && data) {
@@ -130,8 +136,8 @@ export const SpareDetailPage = () => {
         originalPrice: formatNumber(data.data.data.original_price),
         discountedPrice: formatNumber(data.data.data.discounted_price),
         discountPercentage: data.data.data.discount_percentage,
-        quantity: data.data.data.quantity,
-        onQuantityUpdate: handleQuantityUpdate,
+        quantity: data.data.data.cart_count,
+        onQuantityUpdate: handleQtyChange,
       };
       const color = data.data.data.color;
       const partName = data.data.data.part_name;
@@ -149,7 +155,7 @@ export const SpareDetailPage = () => {
         },
       });
     }
-  }, [isSuccess, data, handleQuantityUpdate]);
+  }, [isSuccess, data]);
 
   const {
     spareCarouselData,
@@ -192,22 +198,53 @@ export const SpareDetailPage = () => {
     }
   };
 
-  const handleAddToCart = async (event) => {
-    event.stopPropagation();
-    const payload = {
-      category_id: data?.data?.data.category_id,
-      master_product_id: data?.data?.data.master_product_id,
-      item_id: data?.data?.data.id,
-    };
+  const handleAddToCart = useCallback(
+    async (event) => {
+      event.stopPropagation();
 
-    try {
-      const response = await mutateAsync(payload);
-      // console.log(data)
-      toast.success(response.message.displayMessage);
-    } catch (error) {
-      toast.error(error.response.data.message.displayMessage);
-    }
-  };
+      // If the quantity is unchanged, exit early
+      if (qty === data?.data?.data.cart_count) {
+        toast.info("Quantity remains unchanged. No action taken.");
+        return;
+      }
+
+      // Check if the quantity is zero or negative
+      if (qty <= 0) {
+        toast.error("Quantity cannot be zero or negative.");
+        return;
+      }
+
+      const payload = {
+        category_id: data?.data?.data.category_id,
+        master_product_id: data?.data?.data.master_product_id,
+        item_id: data?.data?.data.id,
+        qty: qty * 1, // Ensure it's a number
+      };
+
+      try {
+        if (data?.data?.data.cart_count === 0 && qty > 0) {
+          // If the previous quantity was 0 (even if it came from the backend) and the user updates it to something greater than 0, post (add to cart)
+          const response = await postCart(payload); // Post (add to cart)
+          toast.success(response.message.displayMessage);
+        } else if (data?.data?.data.cart_count > 0 && qty > 0) {
+          // If the quantity is being updated but is non-zero, patch (update quantity)
+          const response = await patchCart(payload); // Patch (update quantity)
+          toast.success(response.message.displayMessage);
+        } else {
+          // Handle edge case where qty is 0 or invalid action
+          toast.error("Invalid action.");
+        }
+      } catch (error) {
+        // Rollback to the last valid quantity if error occurs
+        console.log(error)
+        setQty(data?.data?.data.cart_count);
+        toast.error(
+          error.response?.data?.message?.displayMessage || "Error occurred."
+        );
+      }
+    },
+    [qty, data, mutateAsync] // Dependencies
+  );
 
   return !isSpareColorSuccess ? (
     <Spinner />
@@ -215,12 +252,7 @@ export const SpareDetailPage = () => {
     <SpareDetail
       spareData={data}
       images={spareCarouselData}
-      prices={{
-        ...prices,
-        spareQuantity:
-          localQuantities[data?.data?.data.id] || data?.data?.data.quantity,
-        isUpdating,
-      }}
+      prices={prices}
       colors={spareColors?.data.data}
       color={color}
       partName={data?.data.data.part_name}
@@ -230,9 +262,6 @@ export const SpareDetailPage = () => {
       cart_status={data?.data?.data.cart_status}
       wishlist_status={data?.data?.data.wishlist_status}
       onWishList={handleAddToWishList}
-      // onUpdateQuantity={(operator) =>
-      //   handleQuantityUpdate(operator, data?.data?.data)
-      // }
     />
   );
 };

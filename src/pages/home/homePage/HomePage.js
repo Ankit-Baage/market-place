@@ -19,11 +19,11 @@ import { Banner } from "../../../components/banner/Banner";
 
 
 const buttonRoutes = [
-  { id: "vrp", image: vrp, label: "VRP" },
-  { id: "openBox", image: openBox, label: "Open Box" },
+  // { id: "vrp", image: vrp, label: "VRP" },
   { id: "spares", image: spares, label: "Spares" },
-  { id: "newPhone", image: newPhone, label: "New Phone" },
-  { id: "prexo", image: prexo, label: "Prexo" },
+  // { id: "openBox", image: openBox, label: "Open Box" },
+  // { id: "newPhone", image: newPhone, label: "New Phone" },
+  // { id: "prexo", image: prexo, label: "Prexo" },
 ];
 
 export const HomePage = () => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 import { formatNumber } from "../../../utils/helpers/formatNumber";
@@ -9,12 +9,17 @@ import classes from "./openBoxCartItem.module.css";
 
 export const OpenBoxCartItem = ({
   item,
-  onUpdateQuantity,
+  onQuantityUpdate,
   isUpdating,
   onRemove,
-  openBoxQuantity,
   onLater
 }) => {
+  const [qty, setQty] = useState(item.quantity);
+  const handleQtyChange = (e) => {
+    const newQty = e.target.value;
+    setQty(newQty); // Update local state
+    onQuantityUpdate(newQty); // Pass the new value to the parent
+  };
   const handleImageError = (e) => {
     e.target.src = dummyImage;
   };
@@ -57,22 +62,18 @@ export const OpenBoxCartItem = ({
             </span>
           </div>
 
-          <div className={classes.box__btns}>
-            <button
-              className={classes.box__btns__decrement}
-              onClick={() => onUpdateQuantity("decrease")}
-              disabled={isUpdating}
-            >
-              -
-            </button>
-            <h3 className={classes.box__btns__value}>{openBoxQuantity}</h3>
-            <button
-              className={classes.box__btns__increment}
-              onClick={() => onUpdateQuantity("increase")}
-              disabled={isUpdating}
-            >
-              +
-            </button>
+          <div className={classes.box__info__qty}>
+            <label htmlFor="qty" className={classes.box__info__qty__label}>
+              Qty:
+            </label>
+            <input
+              type="number"
+              className={classes.box__info__qty__input}
+              id="qty"
+              value={qty}
+              onChange={handleQtyChange}
+              onClick={(e) => e.stopPropagation()}
+            />
           </div>
         </div>
       </div>

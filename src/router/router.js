@@ -52,14 +52,14 @@ export const mainRoutes = [
         path: "/",
         element: <HomePage />,
       },
-      {
-        path: "vrp",
-        element: <VrpPage />,
-        children: [
-          { index: true, element: <VrpListPage /> },
-          { path: ":requestId", element: <VrpDetailPage /> },
-        ],
-      },
+      // {
+      //   path: "vrp",
+      //   element: <VrpPage />,
+      //   children: [
+      //     { index: true, element: <VrpListPage /> },
+      //     { path: ":requestId", element: <VrpDetailPage /> },
+      //   ],
+      // },
       {
         path: "spares",
         element: <SparesPage />,
@@ -68,22 +68,22 @@ export const mainRoutes = [
           { path: ":requestId", element: <SpareDetailPage /> },
         ],
       },
-      {
-        path: "newPhone",
-        element: <NewPhonePage />,
-        children: [
-          { index: true, element: <NewPhoneListPage /> },
-          { path: ":requestId", element: <NewPhoneDetailPage /> },
-        ],
-      },
-      {
-        path: "openBox",
-        element: <OpenBoxPage />,
-        children: [
-          { index: true, element: <OpenBoxListPage /> },
-          { path: ":requestId", element: <OpenBoxDetailPage /> },
-        ],
-      },
+      // {
+      //   path: "newPhone",
+      //   element: <NewPhonePage />,
+      //   children: [
+      //     { index: true, element: <NewPhoneListPage /> },
+      //     { path: ":requestId", element: <NewPhoneDetailPage /> },
+      //   ],
+      // },
+      // {
+      //   path: "openBox",
+      //   element: <OpenBoxPage />,
+      //   children: [
+      //     { index: true, element: <OpenBoxListPage /> },
+      //     { path: ":requestId", element: <OpenBoxDetailPage /> },
+      //   ],
+      // },
 
 
       {

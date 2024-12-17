@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./openBoxPrice.module.css";
 
 export const OpenBoxPrice = ({ prices }) => {
+  const [qty, setQty] = useState(prices.quantity);
+
+  const handleQtyChange = (e) => {
+    const newQty = e.target.value;
+    setQty(newQty); // Update local state
+    prices.onQuantityUpdate(newQty); // Pass the new value to the parent
+  };
   console.log(prices);
   return (
     <div className={classes.box}>
@@ -20,22 +27,18 @@ export const OpenBoxPrice = ({ prices }) => {
               {prices.discountPercentage}% OFF
             </span>
           </div>
-          <div className={classes.box__quantity}>
-            <button
-              className={classes.box__quantity__decrement}
-              onClick={() => prices.onQuantityUpdate("decrease")}
-              disabled={prices.isUpdating}
-            >
-              -
-            </button>
-            <h2 className={classes.box__quantity__text}>{prices.openBoxQuantity}</h2>
-            <button
-              className={classes.box__quantity__increment}
-              onClick={() => prices.onQuantityUpdate("increase")}
-              disabled={prices.isUpdating}
-            >
-              +
-            </button>
+          <div className={classes.box__info__qty}>
+            <label htmlFor="qty" className={classes.box__info__qty__label}>
+              Qty:
+            </label>
+            <input
+              type="number"
+              className={classes.box__info__qty__input}
+              id="qty"
+              value={qty}
+              onChange={handleQtyChange}
+              onClick={(e) => e.stopPropagation()}
+            />
           </div>
         </div>
       </div>

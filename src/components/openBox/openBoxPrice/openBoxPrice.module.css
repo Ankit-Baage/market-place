@@ -91,41 +91,31 @@
 
 
 
-.box__quantity {}
+.box__info__qty {
+  display: flex;
+  column-gap: 8px;
+  align-items: center;
+}
 
-.box__quantity__decrement {
+.box__info__qty__label {
+  font-family: "Poppins", sans;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  color: #595959;
+
+}
+
+.box__info__qty__input {
+  width: 78px;
   border: 1px solid #EFEFEF;
   border-radius: 4px;
   font-family: "Poppins", sans;
   font-weight: 500;
   font-size: 14px;
   line-height: 14px;
-  color: #C6C6C6;
-  padding: 6px 8px;
-
-}
-
-.box__quantity__text {
-  font-family: "Poppins", sans;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 14px;
-  color: #2F3567;
-
-}
-
-.box__quantity__increment {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #FF6F3F;
-  border-radius: 4px;
-  font-family: "Poppins", sans;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 14px;
-  color: #FFFFFF;
-  padding: 6px 8px;
+  color: #595959;
+  padding: 7px 8px;
 
 }
 

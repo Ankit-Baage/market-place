@@ -47,7 +47,7 @@ export const OpenBoxDetailPage = () => {
 
   const requestId = params.requestId;
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [localQuantities, setLocalQuantities] = useState({});
+
   const [isUpdating, setIsUpdating] = useState(false);
 
   const authToken = Cookies.get("authToken");
@@ -62,11 +62,15 @@ export const OpenBoxDetailPage = () => {
     user_id,
     medium,
   });
-  const { mutate: updateQuantity } = useCartListQuantityMutation();
+  // const { mutate: updateQuantity } = useCartListQuantityMutation();
+  const [qty, setQty] = useState(data?.data?.data?.cart_count);
+
+  const handleQtyChange = (newQty) => {
+    setQty(newQty);
+    console.log("Grandparent updated Quantity:", newQty);
+  };
 
   const handleColorSelect = (color) => {
-    // setSelectedColor(color);
-    // console.log("Selected color:", color.record_id);
     navigate(`/openBox/${color.record_id}`);
   };
 
@@ -77,50 +81,50 @@ export const OpenBoxDetailPage = () => {
     navigate(`/openBox/${requestId}`);
   };
 
-  const handleQuantityUpdate = useCallback(
-    (operator, item = data?.data?.data) => {
-      let currentQuantity = localQuantities[item.id] || item.quantity;
+  // const handleQuantityUpdate = useCallback(
+  //   (operator, item = data?.data?.data) => {
+  //     let currentQuantity = localQuantities[item.id] || item.quantity;
 
-      // Check for decrement case and prevent going below 1
-      if (operator === "decrease" && currentQuantity === 1) {
-        toast.warn("Quantity cannot be less than 1");
-        return;
-      }
+  //     // Check for decrement case and prevent going below 1
+  //     if (operator === "decrease" && currentQuantity === 1) {
+  //       toast.warn("Quantity cannot be less than 1");
+  //       return;
+  //     }
 
-      const data = {
-        operator,
-        category_id: item.category_id,
-        master_product_id: item.master_product_id,
-      };
+  //     const data = {
+  //       operator,
+  //       category_id: item.category_id,
+  //       master_product_id: item.master_product_id,
+  //     };
 
-      // Set the loader for the API call
-      setIsUpdating(true);
+  //     // Set the loader for the API call
+  //     setIsUpdating(true);
 
-      // Make the API call to update the quantity
-      updateQuantity(data, {
-        onSuccess: (response) => {
-          // Based on the operator, adjust the local quantity only on success
-          const newQuantity =
-            operator === "increase" ? currentQuantity + 1 : currentQuantity - 1;
+  //     // Make the API call to update the quantity
+  //     updateQuantity(data, {
+  //       onSuccess: (response) => {
+  //         // Based on the operator, adjust the local quantity only on success
+  //         const newQuantity =
+  //           operator === "increase" ? currentQuantity + 1 : currentQuantity - 1;
 
-          setLocalQuantities((prev) => ({
-            ...prev,
-            [item.id]: newQuantity, // Update local state with the new quantity
-          }));
+  //         setLocalQuantities((prev) => ({
+  //           ...prev,
+  //           [item.id]: newQuantity, // Update local state with the new quantity
+  //         }));
 
-          toast.success(response.message.displayMessage);
-        },
-        onError: (error) => {
-          toast.error(error.response.data.message.displayMessage);
-        },
-        onSettled: () => {
-          // Clear the updating state once the API call finishes
-          setIsUpdating(false);
-        },
-      });
-    },
-    [data?.data?.data, localQuantities, updateQuantity]
-  );
+  //         toast.success(response.message.displayMessage);
+  //       },
+  //       onError: (error) => {
+  //         toast.error(error.response.data.message.displayMessage);
+  //       },
+  //       onSettled: () => {
+  //         // Clear the updating state once the API call finishes
+  //         setIsUpdating(false);
+  //       },
+  //     });
+  //   },
+  //   [data?.data?.data, localQuantities, updateQuantity]
+  // );
 
   useEffect(() => {
     if (isSuccess && data) {
@@ -144,7 +148,7 @@ export const OpenBoxDetailPage = () => {
         discountedPrice: formatNumber(data?.data?.data?.discounted_price),
         discountPercentage: data?.data?.data?.discount_percentage,
         quantity: data?.data?.data?.quantity,
-        onQuantityUpdate: handleQuantityUpdate,
+        onQuantityUpdate: handleQtyChange,
       };
       const color = data?.data?.data?.color;
       const variantQuery = {
@@ -171,7 +175,7 @@ export const OpenBoxDetailPage = () => {
         },
       });
     }
-  }, [isSuccess, data, handleQuantityUpdate]);
+  }, [isSuccess, data]);
 
   const {
     newPhoneCarouselData,
@@ -220,6 +224,7 @@ export const OpenBoxDetailPage = () => {
       category_id: data?.data?.data.category_id,
       master_product_id: data?.data?.data.master_product_id,
       item_id: data?.data?.data.id,
+      qty: qty * 1,
     };
 
     try {
@@ -236,12 +241,7 @@ export const OpenBoxDetailPage = () => {
   ) : (
     <OpenBoxDetail
       images={newPhoneCarouselData}
-      prices={{
-        ...prices,
-        openBoxQuantity:
-          localQuantities[data?.data?.data.id] || data?.data?.data.quantity,
-        isUpdating,
-      }}
+      prices={prices}
       colors={newPhoneColors?.data.data}
       color={color}
       partName={data?.data.data.part_name}

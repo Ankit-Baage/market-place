@@ -136,46 +136,32 @@
   color: #FFFFFF;
 }
 
-.box__btns {
-  width:88px;
+.box__info__qty {
   display: flex;
-  column-gap: 10px;
+  column-gap: 8px;
   align-items: center;
-  justify-content: space-between;
 }
 
-.box__btns__decrement{
-  width: 24px;
-  height: 24px;
-  background-image: url("../../../assets/decrement.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+.box__info__qty__label {
   font-family: "Poppins", sans;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 14px;
-  color: #C6C6C6;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  color: #595959;
+
 }
-.box__btns__value {
+
+.box__info__qty__input {
+  width: 78px;
+  border: 1px solid #EFEFEF;
+  border-radius: 4px;
   font-family: "Poppins", sans;
   font-weight: 500;
   font-size: 14px;
   line-height: 14px;
-  color: #2F3567;
+  color: #595959;
+  padding: 7px 8px;
 
 }
 
-.box__btns__increment{
-  width: 24px;
-  height: 24px;
-  background-image: url("../../../assets/increment.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  font-family: "Poppins", sans;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 14px;
-  color: #FFFFFF;
-}
+

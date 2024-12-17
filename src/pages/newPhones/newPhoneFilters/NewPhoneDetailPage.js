@@ -64,7 +64,12 @@ export const NewPhoneDetailPage = () => {
       medium,
     }
   );
-  const { mutate: updateQuantity } = useCartListQuantityMutation();
+  const [qty, setQty] = useState(data?.data?.data?.cart_count);
+
+  const handleQtyChange = (newQty) => {
+    setQty(newQty);
+    console.log("Grandparent updated Quantity:", newQty);
+  };
 
   const handleColorSelect = (color) => {
     // setSelectedColor(color);
@@ -78,50 +83,7 @@ export const NewPhoneDetailPage = () => {
 
     navigate(`/newPhone/${requestId}`);
   };
-  const handleQuantityUpdate = useCallback(
-    (operator, item = data?.data?.data) => {
-      let currentQuantity = localQuantities[item.id] || item.quantity;
 
-      // Check for decrement case and prevent going below 1
-      if (operator === "decrease" && currentQuantity === 1) {
-        toast.warn("Quantity cannot be less than 1");
-        return;
-      }
-
-      const data = {
-        operator,
-        category_id: item.category_id,
-        master_product_id: item.master_product_id,
-      };
-
-      // Set the loader for the API call
-      setIsUpdating(true);
-
-      // Make the API call to update the quantity
-      updateQuantity(data, {
-        onSuccess: (response) => {
-          // Based on the operator, adjust the local quantity only on success
-          const newQuantity =
-            operator === "increase" ? currentQuantity + 1 : currentQuantity - 1;
-
-          setLocalQuantities((prev) => ({
-            ...prev,
-            [item.id]: newQuantity, // Update local state with the new quantity
-          }));
-
-          toast.success(response.message.displayMessage);
-        },
-        onError: (error) => {
-          toast.error(error.response.data.message.displayMessage);
-        },
-        onSettled: () => {
-          // Clear the updating state once the API call finishes
-          setIsUpdating(false);
-        },
-      });
-    },
-    [data?.data?.data, localQuantities, updateQuantity]
-  );
 
   useEffect(() => {
     if (isSuccess && data) {
@@ -144,8 +106,8 @@ export const NewPhoneDetailPage = () => {
         originalPrice: formatNumber(data.data.data.original_price),
         discountedPrice: formatNumber(data.data.data.discounted_price),
         discountPercentage: data.data.data.discount_percentage,
-        quantity: data.data.data.quantity,
-        onQuantityUpdate: handleQuantityUpdate,
+        quantity: data?.data?.data?.quantity,
+        onQuantityUpdate: handleQtyChange,
       };
       const color = data.data.data.color;
       const variantQuery = {
@@ -169,7 +131,7 @@ export const NewPhoneDetailPage = () => {
         },
       });
     }
-  }, [isSuccess, data, handleQuantityUpdate]);
+  }, [isSuccess, data]);
 
   const {
     newPhoneCarouselData,

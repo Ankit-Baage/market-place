@@ -22,9 +22,10 @@ export const SpareDetail = ({
   onAddToCart,
   cart_status,
   wishlist_status,
-  onWishList
+  onWishList,
 }) => {
   const [validationResults, setValidationResults] = useState({});
+  
 
   // Function to check if an image URL is valid
   const checkImageUrl = (url) => {
@@ -51,7 +52,7 @@ export const SpareDetail = ({
   }, [images, validateImages]);
 
   console.log(validationResults);
-  console.log("sparesDetail ",spareData?.data?.data)
+  console.log("sparesDetail ", spareData?.data?.data);
 
   const imageArray = Object.keys(validationResults).filter(
     (key) => validationResults[key] === true
@@ -108,7 +109,7 @@ export const SpareDetail = ({
           className={`${classes.box__btns__btn} ${classes.box__btns__add}`}
           onClick={onAddToCart}
         >
-          {cart_status ? "Added" : "Add To cart"}
+          {cart_status ? "Update Quantity" : "Add To cart"}
         </button>
         <button
           className={`${classes.box__btns__btn} ${classes.box__btns__buy}`}

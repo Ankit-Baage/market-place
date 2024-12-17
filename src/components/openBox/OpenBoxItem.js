@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 import fav from "../../assets/heart.svg";
 import classes from "./openBoxItem.module.css";
@@ -10,25 +10,76 @@ import { toast } from "react-toastify";
 
 export const OpenBoxItem = ({ item, onClick, onWishList }) => {
   const [qty, setQty] = useState(item.cart_count);
-  const { mutateAsync, isLoading, isSuccess, isPending } =
-    useCartListSparesMutation();
+  const { postCart, patchCart } = useCartListSparesMutation();
 
-  const handleAddToCart = async (event) => {
-    event.stopPropagation();
-    const data = {
-      category_id: item.category_id,
-      master_product_id: item.master_product_id,
-      item_id: item.id,
-      qty,
-    };
+  // Handler to add an item to the cart
+  const handleQtyChange = useCallback((e) => {
+    const value = e.target.value;
 
-    try {
-      const response = await mutateAsync(data);
-      toast.success(response.message.displayMessage);
-    } catch (error) {
-      toast.error(error.response.data.message.displayMessage);
+    // Allow empty input temporarily or numeric input, but prevent setting zero manually
+    if (value === "" || /^[1-9][0-9]*$/.test(value)) {
+      setQty(value); // Only allow positive numbers or empty input
     }
-  };
+  }, []);
+
+  const handleQtyBlur = useCallback(() => {
+    setQty((prev) => {
+      const parsedValue = parseInt(prev, 10);
+
+      // If value is empty or invalid, set to 1 (to prevent 0)
+      if (isNaN(parsedValue) || parsedValue <= 0) {
+        return 1;
+      }
+
+      // If it's a valid positive value (not zero), return it
+      return parsedValue;
+    });
+  }, []);
+  const handleAddToCart = useCallback(
+    async (event) => {
+      event.stopPropagation();
+
+      // If the quantity is unchanged, exit early
+      if (qty === item.cart_count) {
+        toast.info("Quantity remains unchanged. No action taken.");
+        return;
+      }
+
+      // Check if the quantity is zero or negative
+      if (qty <= 0) {
+        toast.error("Quantity cannot be zero or negative.");
+        return;
+      }
+
+      const data = {
+        category_id: item.category_id,
+        master_product_id: item.master_product_id,
+        item_id: item.id,
+        qty,
+      };
+
+      try {
+        if (item.cart_count === 0 && qty > 0) {
+          // If the previous quantity was 0 (even if it came from the backend) and the user updates it to something greater than 0, post (add to cart)
+          const response = await postCart(data);
+          toast.success(response.message.displayMessage);
+        } else if (item.cart_count > 0 && qty > 0) {
+          // If the quantity is being updated but is non-zero, patch (update quantity)
+          const response = await patchCart(data);
+          toast.success(response.message.displayMessage);
+        } else {
+          // Handle edge case where qty is 0
+          toast.error("Invalid action.");
+        }
+      } catch (error) {
+        setQty(item.cart_count);
+        toast.error(
+          error.response?.data?.message?.displayMessage || "Error occurred."
+        );
+      }
+    },
+    [qty, item, postCart, patchCart]
+  );
   const handleNewPhoneDetail = (id) => {
     onClick(id);
   };
@@ -81,8 +132,9 @@ export const OpenBoxItem = ({ item, onClick, onWishList }) => {
                 className={classes.box__info__qty__input}
                 id="qty"
                 value={qty}
-                onChange={(e) => setQty(e.target.value)} // Update the qty state
-                onClick={(e) => e.stopPropagation()}
+                onChange={handleQtyChange}
+                onClick={(e) => e.stopPropagation()} // Prevent triggering click on parent
+                onBlur={handleQtyBlur}
               />
             </div>
 
