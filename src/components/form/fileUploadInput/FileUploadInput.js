@@ -1,7 +1,7 @@
-import React from 'react';
-import classes from "./fileUploadInput.module.css"
+import React from "react";
+import classes from "./fileUploadInput.module.css";
 
-export const FileUploadInput = ({ id, label, register, onChange }) => (
+export const FileUploadInput = ({ id, label, register, onChange, error }) => (
   <div className={classes.form__group}>
     <h3 className={classes.form__field__upload__title}>{label}</h3>
     <div className={classes.form__group__upload}>
@@ -10,7 +10,7 @@ export const FileUploadInput = ({ id, label, register, onChange }) => (
           type="file"
           id={id}
           className={classes.form__field__upload}
-          {...register(id)}
+          {...register}
           onChange={onChange}
         />
       </label>
@@ -25,10 +25,11 @@ export const FileUploadInput = ({ id, label, register, onChange }) => (
           accept="image/*"
           capture="camera"
           className={classes.form__field__upload__takePic}
-          {...register(id)}
+          {...register}
+          onChange={onChange}
         />
       </label>
     </div>
+    {error && <p className={classes.errorText}>{error}</p>}
   </div>
 );
-

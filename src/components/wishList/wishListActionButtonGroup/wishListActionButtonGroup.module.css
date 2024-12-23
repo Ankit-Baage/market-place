@@ -1,11 +1,14 @@
 .box {
   display: flex;
-  align-items: center;
-  column-gap: 8px;
-  justify-content: space-between;
-  padding-top: 4px;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
 }
 
+.box__sep {
+  width: 100%;
+ border:  1.5px solid #EFEFEF;
+}
 
 
 .box__btns {
@@ -14,28 +17,41 @@
   align-items: center;
 }
 
-.box__btns__cart {
-  font-size: 12px;
-  line-height: 12px;
-  font-weight: 400;
+
+.box__btns__sep {
+  border: 1px solid #C6C6C6;
+  height: 22px;
+
+}
+.btns__sep {
+  padding:12px;
+}
+
+.box__btns__remove {
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 500;
   font-family: "Poppins", sans;
-  color: #FF6F3F;
-  border-radius: 4px;
-  border: 1px solid #FF6F3F;
-  padding: 8px 10px;
+  color: #FD6363;
+
+}
+
+
+.box__btns__later {
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  color: #989898;
 
 }
 
 
 .box__btns__buy {
-  font-size: 12px;
-  line-height: 12px;
-  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 500;
   font-family: "Poppins", sans;
-  color: #FFFFFF;
-  background-color: #FF6F3F;
-  padding: 8px 20px;
-  border-radius: 4px;
+  color: #FF6F3F;
 
 }
-

@@ -118,5 +118,11 @@
   font-weight: 600;
   font-family: "Poppins", sans;
   color: #2F3567;
+}
 
+.box__coupons__list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  justify-content: center;
 }

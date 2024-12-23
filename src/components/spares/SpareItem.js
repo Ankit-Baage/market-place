@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import useCartListSparesMutation from "../../tanstack-query/cartList/useCartListSparesMutation";
 import { formatNumber } from "../../utils/helpers/formatNumber";
@@ -9,6 +10,7 @@ import classes from "./spareItem.module.css";
 export const SpareItem = ({ item, onClick, onWishList }) => {
   const [qty, setQty] = useState(item.cart_count);
   const { postCart, patchCart } = useCartListSparesMutation();
+  const authToken = Cookies.get("authToken");
 
   // Handler to add an item to the cart
   const handleQtyChange = useCallback((e) => {
@@ -152,17 +154,19 @@ export const SpareItem = ({ item, onClick, onWishList }) => {
         </div>
 
         {/* Wishlist toggle */}
-        <span
-          className={
-            item.wishlist_status === 1
-              ? classes.box__info__fav__active
-              : classes.box__info__fav
-          }
-          onClick={(e) => {
-            e.stopPropagation();
-            onWishList(item.id);
-          }}
-        />
+        {authToken ? (
+          <span
+            className={
+              item.wishlist_status === 1
+                ? classes.box__info__fav__active
+                : classes.box__info__fav
+            }
+            onClick={(e) => {
+              e.stopPropagation();
+              onWishList(item.id);
+            }}
+          />
+        ) : null}
       </div>
 
       <hr className={classes.box__item__divider} />

@@ -98,7 +98,7 @@ export const WishListPage = () => {
                 onRemove={() => {
                   handleRemove(item);
                 }}
-                onMove={() => {
+                onMoveToCart={() => {
                   handleMoveToCart(item);
                 }}
               />
@@ -111,7 +111,7 @@ export const WishListPage = () => {
                 onRemove={() => {
                   handleRemove(item);
                 }}
-                onMove={() => {
+                onMoveToCart={() => {
                   handleMoveToCart(item);
                 }}
                 isUpdating={isUpdating}
@@ -122,7 +122,7 @@ export const WishListPage = () => {
               <NewPhoneWishListItem
                 key={item.id}
                 item={item}
-                onMove={() => {
+                onMoveToCart={() => {
                   handleMoveToCart(item);
                 }}
                 onRemove={() => {
@@ -136,7 +136,7 @@ export const WishListPage = () => {
               <OpenBoxWishListItem
                 key={item.id}
                 item={item}
-                onMove={() => {
+                onMoveToCart={() => {
                   handleMoveToCart(item);
                 }}
                 onRemove={() => {

@@ -62,7 +62,6 @@ export const SpareDetailPage = () => {
   const { postCart, patchCart } = useCartListSparesMutation();
   const handleQtyChange = (newQty) => {
     setQty(newQty);
-    console.log("Grandparent updated Quantity:", newQty);
   };
 
   const handleColorSelect = (color) => {
@@ -202,23 +201,24 @@ export const SpareDetailPage = () => {
     async (event) => {
       event.stopPropagation();
 
-      // If the quantity is unchanged, exit early
       if (qty === data?.data?.data.cart_count) {
         toast.info("Quantity remains unchanged. No action taken.");
         return;
       }
 
-      // Check if the quantity is zero or negative
       if (qty <= 0) {
         toast.error("Quantity cannot be zero or negative.");
         return;
       }
 
+      // If the quantity is unchanged, exit early
+      
+
       const payload = {
         category_id: data?.data?.data.category_id,
         master_product_id: data?.data?.data.master_product_id,
         item_id: data?.data?.data.id,
-        qty: qty * 1, // Ensure it's a number
+        qty: qty * 1,
       };
 
       try {
@@ -236,14 +236,22 @@ export const SpareDetailPage = () => {
         }
       } catch (error) {
         // Rollback to the last valid quantity if error occurs
-        console.log(error)
+        console.log(error);
         setQty(data?.data?.data.cart_count);
         toast.error(
           error.response?.data?.message?.displayMessage || "Error occurred."
         );
       }
     },
-    [qty, data, mutateAsync] // Dependencies
+    [
+      qty,
+      data?.data?.data.cart_count,
+      data?.data?.data.category_id,
+      data?.data?.data.master_product_id,
+      data?.data?.data.id,
+      postCart,
+      patchCart,
+    ] // Dependencies
   );
 
   return !isSpareColorSuccess ? (

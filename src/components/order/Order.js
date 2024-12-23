@@ -151,10 +151,10 @@ export const Order = ({ order }) => {
             {shipment.items.map((item) => (
               <div key={item.id} className={classes.box__content__detail__item}>
                 <h2 className={classes.box__content__detail__item__info}>
-                  {shipment.category}
+                  {item.category_id === 5 ? item.lot_id : item.item}
                 </h2>
                 <h2 className={classes.box__content__detail__item__info}>
-                  {shipment.quantity}
+                  {item.qty}
                 </h2>
                 <h2 className={classes.box__content__detail__item__info}>
                   Rs {formatNumber(item.price)}

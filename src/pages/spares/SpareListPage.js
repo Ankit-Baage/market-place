@@ -83,8 +83,6 @@ export const SpareListPage = () => {
 
     try {
       const response = await mutateAsync(data);
-      console.log("API Response:", response); // Check full API response
-    console.log("Display Message:", response?.message?.displayMessage); // Chec
       toast.success(response?.data?.message?.displayMessage);
       console.log(item);
     } catch (error) {

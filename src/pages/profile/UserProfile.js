@@ -10,6 +10,7 @@ import { openLoader } from "../../store/loaderSlice";
 import classes from "./userProfile.module.css";
 import { UserProfileSkeleton } from "../../components/skeletons/userProfileSkeleton/UserProfileSkeleton";
 import { ButtonSkeleton } from "../../components/skeletons/buttonSkeleton/ButtonSkeleton";
+import { toast } from "react-toastify";
 
 export const UserProfile = () => {
   const { data, isLoading, isError, isSuccess, refetch } = useGetProfileData();
@@ -46,19 +47,13 @@ export const UserProfile = () => {
       console.log(profile);
 
       const response = await mutateAsync(profile);
+      console.log(response.data.message.displayMessage)
+      toast.success(response.data.message.displayMessage);
 
       // Perform any actions after successful mutation if needed
       console.log("Form data submitted successfully");
       refetch();
-    } catch (error) {
-      if (axiosInstance.isAxiosError(error)) {
-        dispatch(openLoader({ error: error.message }));
-        console.error("Axios error in onResend:", error.message);
-      } else {
-        console.error("Non-Axios error in onSubmit:", error.message);
-        dispatch(openLoader({ error: error.message }));
-      }
-    }
+    } catch (error) {}
   };
 
   const handleNavigate = () => {

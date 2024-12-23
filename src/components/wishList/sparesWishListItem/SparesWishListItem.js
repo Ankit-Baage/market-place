@@ -4,9 +4,10 @@ import { formatNumber } from "../../../utils/helpers/formatNumber";
 import dummyImage from "../../../assets/dummyPreview.png";
 
 import classes from "./sparesWishListItem.module.css";
+import { CartActionButtonGroup } from "../../cart/CartActionButtonGroup/CartActionButtonGroup";
 import { WishListActionButtonGroup } from "../wishListActionButtonGroup/WishListActionButtonGroup";
 
-export const SparesWishListItem = ({ item, isUpdating, onRemove, onMove }) => {
+export const SparesWishListItem = ({ item, isUpdating, onRemove, onMoveToCart }) => {
   const handleImageError = (e) => {
     e.target.src = dummyImage;
   };
@@ -50,14 +51,18 @@ export const SparesWishListItem = ({ item, isUpdating, onRemove, onMove }) => {
               {item.discount_percentage}% OFF
             </span>
           </div>
-          <WishListActionButtonGroup
+          {/* <WishListActionButtonGroup
             onRemove={onRemove}
             isUpdating={isUpdating}
             onMove={onMove}
-          />
+          /> */}
         </div>
       </div>
-      <hr className={classes.box__sep} />
+      <WishListActionButtonGroup
+        onRemove={onRemove}
+        isUpdating={isUpdating}
+        onMoveToCart={onMoveToCart}
+      />
     </div>
   );
 };

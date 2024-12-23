@@ -35,8 +35,7 @@ export const CouponsPage = () => {
                 Discount coupons
               </h1>
               <p className={classes.box__coupons__content__head__info__para}>
-                Lorium was an ancient village of ancient Etruria, Italy, on the
-                Via Aurelia,
+                Shop smarter, save bigger – grab your exclusive coupons now!
               </p>
             </div>
 

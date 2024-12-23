@@ -66,12 +66,12 @@ const topics = [
   },
 ];
 
-const faqs = [
-  { id: 1, query: "How do i login to account?" },
-  { id: 2, query: "Why am i not getting an OTP?" },
-  { id: 3, query: "I am not getting forgot password link?" },
-  { id: 4, query: "Why am i not getting an OTP?" },
-];
+// const faqs = [
+//   { id: 1, query: "How do i login to account?" },
+//   { id: 2, query: "Why am i not getting an OTP?" },
+//   { id: 3, query: "I am not getting forgot password link?" },
+//   { id: 4, query: "Why am i not getting an OTP?" },
+// ];
 
 export const Help = () => {
   return (
@@ -118,7 +118,7 @@ export const Help = () => {
         </div>
       </div>
 
-      <div className={classes.box__faqs}>
+      {/* <div className={classes.box__faqs}>
         {faqs.map((faq) => (
           <div key={faq.id} className={classes.box__faqs__faq}>
             <div className={classes.box__faqs__faq__content}>
@@ -131,7 +131,7 @@ export const Help = () => {
             <hr className={classes.box__item__divider} />
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
