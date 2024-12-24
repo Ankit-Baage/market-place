@@ -126,3 +126,13 @@
   cursor: pointer;
 
 }
+
+.errorText {
+  color: #FF6F3F;
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 500;
+  font-family: "Poppins", sans;
+  padding-top: 6px;
+
+}

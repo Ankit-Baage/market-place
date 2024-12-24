@@ -6,7 +6,10 @@ const useCartListSparesMutation = () => {
   const queryClient = useQueryClient();
 
   // Post Mutation
-  const { mutateAsync: postCart, isLoading: isPostLoading } = useMutation({
+  const {
+    mutateAsync: postCart,
+    isLoading: isPostLoading,
+  } = useMutation({
     mutationFn: cartListPostRequest,
     onSuccess: () => {
       queryClient.invalidateQueries(["cartList"]);
@@ -14,7 +17,10 @@ const useCartListSparesMutation = () => {
   });
 
   // Patch Mutation
-  const { mutateAsync: patchCart, isLoading: isPatchLoading } = useMutation({
+  const {
+    mutateAsync: patchCart,
+    isLoading: isPatchLoading,
+  } = useMutation({
     mutationFn: cartListPatchRequest,
     onSuccess: () => {
       queryClient.invalidateQueries(["cartList"]);

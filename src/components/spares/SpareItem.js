@@ -22,19 +22,19 @@ export const SpareItem = ({ item, onClick, onWishList }) => {
     }
   }, []);
 
-  const handleQtyBlur = useCallback(() => {
-    setQty((prev) => {
-      const parsedValue = parseInt(prev, 10);
+  // const handleQtyBlur = useCallback(() => {
+  //   setQty((prev) => {
+  //     const parsedValue = parseInt(prev, 10);
 
-      // If value is empty or invalid, set to 1 (to prevent 0)
-      if (isNaN(parsedValue) || parsedValue <= 0) {
-        return 1;
-      }
+  //     // If value is empty or invalid, set to 1 (to prevent 0)
+  //     if (isNaN(parsedValue) || parsedValue <= 0) {
+  //       return 1;
+  //     }
 
-      // If it's a valid positive value (not zero), return it
-      return parsedValue;
-    });
-  }, []);
+  //     // If it's a valid positive value (not zero), return it
+  //     return parsedValue;
+  //   });
+  // }, []);
   const handleAddToCart = useCallback(
     async (event) => {
       event.stopPropagation();
@@ -55,7 +55,7 @@ export const SpareItem = ({ item, onClick, onWishList }) => {
         category_id: item.category_id,
         master_product_id: item.master_product_id,
         item_id: item.id,
-        qty,
+        qty: qty * 1,
       };
 
       try {
@@ -141,7 +141,7 @@ export const SpareItem = ({ item, onClick, onWishList }) => {
                 value={qty}
                 onChange={handleQtyChange}
                 onClick={(e) => e.stopPropagation()} // Prevent triggering click on parent
-                onBlur={handleQtyBlur}
+                // onBlur={handleQtyBlur}
               />
             </div>
 

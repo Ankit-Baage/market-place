@@ -23,14 +23,14 @@ export const SparePrice = ({ prices }) => {
     [prices]
   );
 
-  const handleQtyBlur = useCallback(() => {
-    // Validate and reset to minimum value (1) if empty or invalid
-    setQty((prev) => {
-      // If the value is empty or not a valid number (<= 0), reset to 1
-      const parsedValue = parseInt(prev, 10);
-      return isNaN(parsedValue) || parsedValue <= 0 ? 1 : parsedValue;
-    });
-  }, []);
+  // const handleQtyBlur = useCallback(() => {
+  //   // Validate and reset to minimum value (1) if empty or invalid
+  //   setQty((prev) => {
+  //     // If the value is empty or not a valid number (<= 0), reset to 1
+  //     const parsedValue = parseInt(prev, 10);
+  //     return isNaN(parsedValue) || parsedValue <= 0 ? prices.quantity : parsedValue;
+  //   });
+  // }, [prices.quantity]);
 
   useEffect(() => {
     if (prices.quantity) {
@@ -67,7 +67,7 @@ export const SparePrice = ({ prices }) => {
               value={qty}
               onChange={handleQtyChange}
               onClick={(e) => e.stopPropagation()} // Prevent triggering click on parent
-              onBlur={handleQtyBlur}
+              // onBlur={handleQtyBlur}
             />
           </div>
         </div>

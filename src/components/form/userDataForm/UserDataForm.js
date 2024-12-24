@@ -64,12 +64,27 @@ export const UserDataForm = ({ userData, onSubmit }) => {
 
   const handleFileChange = async (event, field) => {
     const selectedFile = event.target.files[0];
+    const uploadingToastId = toast.success("Uploading...");
 
     try {
       const response = await uploadImageRequest(selectedFile);
       const imageUrl = response?.data?.fileUrl;
       setValue(field, imageUrl, { shouldValidate: true });
+      toast.update(uploadingToastId, {
+        render: "Upload successful!",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000, // Automatically close after 3 seconds
+      });
     } catch (error) {
+      toast.update(uploadingToastId, {
+        render: `Upload failed for ${field}: ${
+          error.message || "Unknown error"
+        }`,
+        type: "error",
+        isLoading: false,
+        autoClose: 5000, // Automatically close after 5 seconds
+      });
       console.error(`Upload failed for ${field}:`, error);
     }
   };
@@ -174,7 +189,6 @@ export const UserDataForm = ({ userData, onSubmit }) => {
           register={register("email", validationRules.email)}
           error={errors.email?.message}
         />
-
         <h4 className={classes.form__business}>Business Details</h4>
         <CustomInput
           type="text"
@@ -183,7 +197,6 @@ export const UserDataForm = ({ userData, onSubmit }) => {
           register={register("gst_number", validationRules.gst_number)}
           error={errors.gst_number?.message}
         />
-
         <div className={classes.form__divider}>
           <div className={classes.form__divider__container}>
             <hr className={classes.form__divider__line} />
@@ -193,7 +206,6 @@ export const UserDataForm = ({ userData, onSubmit }) => {
             <hr className={classes.form__divider__line} />
           </div>
         </div>
-
         <CustomInput
           type="text"
           id="pan_number"
@@ -207,7 +219,6 @@ export const UserDataForm = ({ userData, onSubmit }) => {
           register={register("pan_image_url")}
           onChange={(e) => handleFileChange(e, "pan_image_url")}
         />
-
         <CustomInput
           type="text"
           id="aadhar_number"
@@ -222,7 +233,6 @@ export const UserDataForm = ({ userData, onSubmit }) => {
           onChange={(e) => handleFileChange(e, "aadhar_image_url")}
         />
         {console.log(isCustomValid())};
-
         <button
           type="submit"
           text="Save"

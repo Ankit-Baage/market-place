@@ -76,11 +76,11 @@ export const UserProfile = () => {
           {isSuccess ? (
             <h2
               className={`${classes.profile__head__status} ${
-                data?.data?.data.profile_status === "Pending"
+                data?.data?.data.profile_status === "Pending for verification"
                   ? classes.profile__head__status__pending
                   : data?.data?.data.profile_status === "Incomplete"
                   ? classes.profile__head__status__incomplete
-                  : data?.data?.data.profile_status === "Completed"
+                  : data?.data?.data.profile_status === "Verified"
                   ? classes.profile__head__status__completed
                   : data?.data?.data.profile_status === "Rejected"
                   ? classes.profile__head__status__rejected

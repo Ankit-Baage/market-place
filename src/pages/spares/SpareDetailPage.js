@@ -51,7 +51,7 @@ export const SpareDetailPage = () => {
 
   const navigate = useNavigate();
 
-  const { data, isError, isPending, isSuccess, refetch } = useGetSpareDetail({
+  const { data, isSuccess } = useGetSpareDetail({
     requestId,
     user_id,
     medium,
@@ -110,14 +110,8 @@ export const SpareDetailPage = () => {
     }
   }, [isSuccess, data]);
 
-  const {
-    spareCarouselData,
-    colorQuery,
-    prices,
-    spareDescription,
-    color,
-    partName,
-  } = state;
+  const { spareCarouselData, colorQuery, prices, spareDescription, color } =
+    state;
 
   const { data: spareColors, isSuccess: isSpareColorSuccess } =
     useGetSpareColors({
@@ -129,7 +123,7 @@ export const SpareDetailPage = () => {
   // console.log(colors?.data.data);
   console.log(spareColors?.data.data);
 
-  const { mutateAsync, isLoading } = useCartListSparesMutation();
+  // const { mutateAsync, isLoading } = useCartListSparesMutation();
   const {
     mutateAsync: addToWishList,
     isLoading: isAdding,
@@ -154,57 +148,59 @@ export const SpareDetailPage = () => {
   const handleAddToCart = useCallback(
     async (event) => {
       event.stopPropagation();
-      console.log("data : ", data?.data?.data.cart_count, qty);
 
+      // Validate quantity
+      if (isNaN(qty) || qty <= 0) {
+        toast.error("Quantity must be a positive number.");
+        return;
+      }
+
+      // Check for unchanged quantity
       if (qty === data?.data?.data.cart_count) {
         toast.info("Quantity remains unchanged. No action taken.");
-
         return;
       }
-
-      if (qty <= 0) {
-        toast.error("Quantity cannot be zero or negative.");
-        return;
-      }
-
-      // If the quantity is unchanged, exit early
 
       const payload = {
         category_id: data?.data?.data.category_id,
         master_product_id: data?.data?.data.master_product_id,
         item_id: data?.data?.data.id,
-        qty: qty * 1,
+        qty: qty * 1, // Ensure qty is a number
       };
 
       try {
         if (data?.data?.data.cart_count === 0 && qty > 0) {
-          const response = await postCart(payload); // Post (add to cart)
-          refetch()
+          // Add to cart
+          const response = await postCart(payload);
+
           toast.success(response.message.displayMessage);
         } else if (data?.data?.data.cart_count > 0 && qty > 0) {
+          // Update cart
           const response = await patchCart(payload);
-          refetch();
+
           toast.success(response.message.displayMessage);
         } else {
+          // Fallback
           toast.error("Invalid action.");
         }
       } catch (error) {
-        console.log(error);
-        setQty(data?.data?.data.cart_count);
+        console.error("Add to Cart Error:", error);
+        setQty(data?.data?.data.cart_count); // Reset to previous quantity
         toast.error(
-          error.response?.data?.message?.displayMessage || "Error occurred."
+          error.response?.data?.message?.displayMessage ||
+            "An unexpected error occurred."
         );
       }
     },
     [
-      qty,
       data?.data?.data.cart_count,
       data?.data?.data.category_id,
       data?.data?.data.master_product_id,
       data?.data?.data.id,
+      qty,
       postCart,
       patchCart,
-    ] // Dependencies
+    ]
   );
 
   return !isSpareColorSuccess ? (
