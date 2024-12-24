@@ -7,6 +7,7 @@ import { SpareHighlights } from "../spareHighlights/SpareHighlights";
 import { SpareOffers } from "../spareOffers/SpareOffers";
 import { validateImages } from "../../../utils/helpers/imageValidator";
 import dummy from "../../../assets/dummyPreview.png";
+import Cookies from "js-cookie";
 
 const dummyArray = [dummy];
 
@@ -25,7 +26,6 @@ export const SpareDetail = ({
   onWishList,
 }) => {
   const [validationResults, setValidationResults] = useState({});
-  
 
   // Function to check if an image URL is valid
   const checkImageUrl = (url) => {
@@ -58,18 +58,22 @@ export const SpareDetail = ({
     (key) => validationResults[key] === true
   );
   console.log(imageArray);
+  const authToken = Cookies.get("authToken");
 
   return (
     <div className={classes.box}>
       <div className={classes.box__spareIntro}>
-        <span
-          className={
-            wishlist_status === 1
-              ? classes.box__info__fav__active
-              : classes.box__info__fav
-          }
-          onClick={onWishList}
-        />
+        {authToken ? (
+          <span
+            className={
+              wishlist_status === 1
+                ? classes.box__info__fav__active
+                : classes.box__info__fav
+            }
+            onClick={onWishList}
+          />
+        ) : null}
+
         <ProductCarousel
           imageData={imageArray.length < 1 ? dummyArray : imageArray}
         />

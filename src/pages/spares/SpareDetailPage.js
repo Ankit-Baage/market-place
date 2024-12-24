@@ -50,16 +50,15 @@ export const SpareDetailPage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const navigate = useNavigate();
-  // const [localQuantities, setLocalQuantities] = useState({});
-  const [isUpdating, setIsUpdating] = useState(false);
+
   const { data, isError, isPending, isSuccess, refetch } = useGetSpareDetail({
     requestId,
     user_id,
     medium,
   });
   const [qty, setQty] = useState(data?.data?.data?.cart_count);
-  // const { mutate: updateQuantity } = useCartListQuantityMutation();
   const { postCart, patchCart } = useCartListSparesMutation();
+
   const handleQtyChange = (newQty) => {
     setQty(newQty);
   };
@@ -69,51 +68,6 @@ export const SpareDetailPage = () => {
     console.log("Selected color:", color.record_id);
     navigate(`/spares/${color.record_id}`);
   };
-
-  // const handleQuantityUpdate = useCallback(
-  //   (operator, item = data?.data?.data) => {
-  //     let currentQuantity = localQuantities[item.id] || item.quantity;
-
-  //     // Check for decrement case and prevent going below 1
-  //     if (operator === "decrease" && currentQuantity === 1) {
-  //       toast.warn("Quantity cannot be less than 1");
-  //       return;
-  //     }
-
-  //     const data = {
-  //       operator,
-  //       category_id: item.category_id,
-  //       master_product_id: item.master_product_id,
-  //     };
-
-  //     // Set the loader for the API call
-  //     setIsUpdating(true);
-
-  //     // Make the API call to update the quantity
-  //     updateQuantity(data, {
-  //       onSuccess: (response) => {
-  //         // Based on the operator, adjust the local quantity only on success
-  //         const newQuantity =
-  //           operator === "increase" ? currentQuantity + 1 : currentQuantity - 1;
-
-  //         setLocalQuantities((prev) => ({
-  //           ...prev,
-  //           [item.id]: newQuantity, // Update local state with the new quantity
-  //         }));
-
-  //         toast.success(response.message.displayMessage);
-  //       },
-  //       onError: (error) => {
-  //         toast.error(error.response.data.message.displayMessage);
-  //       },
-  //       onSettled: () => {
-  //         // Clear the updating state once the API call finishes
-  //         setIsUpdating(false);
-  //       },
-  //     });
-  //   },
-  //   [data?.data?.data, localQuantities, updateQuantity]
-  // );
 
   useEffect(() => {
     if (isSuccess && data) {
@@ -140,7 +94,7 @@ export const SpareDetailPage = () => {
       };
       const color = data.data.data.color;
       const partName = data.data.data.part_name;
-      console.log(partName);
+      setQty(data.data.data.cart_count || 0);
 
       dispatch({
         type: "SET_DATA",
@@ -200,9 +154,11 @@ export const SpareDetailPage = () => {
   const handleAddToCart = useCallback(
     async (event) => {
       event.stopPropagation();
+      console.log("data : ", data?.data?.data.cart_count, qty);
 
       if (qty === data?.data?.data.cart_count) {
         toast.info("Quantity remains unchanged. No action taken.");
+
         return;
       }
 
@@ -212,7 +168,6 @@ export const SpareDetailPage = () => {
       }
 
       // If the quantity is unchanged, exit early
-      
 
       const payload = {
         category_id: data?.data?.data.category_id,
@@ -223,19 +178,17 @@ export const SpareDetailPage = () => {
 
       try {
         if (data?.data?.data.cart_count === 0 && qty > 0) {
-          // If the previous quantity was 0 (even if it came from the backend) and the user updates it to something greater than 0, post (add to cart)
           const response = await postCart(payload); // Post (add to cart)
+          refetch()
           toast.success(response.message.displayMessage);
         } else if (data?.data?.data.cart_count > 0 && qty > 0) {
-          // If the quantity is being updated but is non-zero, patch (update quantity)
-          const response = await patchCart(payload); // Patch (update quantity)
+          const response = await patchCart(payload);
+          refetch();
           toast.success(response.message.displayMessage);
         } else {
-          // Handle edge case where qty is 0 or invalid action
           toast.error("Invalid action.");
         }
       } catch (error) {
-        // Rollback to the last valid quantity if error occurs
         console.log(error);
         setQty(data?.data?.data.cart_count);
         toast.error(

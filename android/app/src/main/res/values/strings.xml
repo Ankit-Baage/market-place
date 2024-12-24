@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">Market-Place</string>
-    <string name="title_activity_main">Market-Place</string>
-    <string name="package_name">mobigarage.com</string>
-    <string name="custom_url_scheme">mobigarage.com</string>
-</resources>

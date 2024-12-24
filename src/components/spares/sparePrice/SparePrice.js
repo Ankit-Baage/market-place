@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import classes from "./sparePrice.module.css";
 
 export const SparePrice = ({ prices }) => {
@@ -31,6 +31,12 @@ export const SparePrice = ({ prices }) => {
       return isNaN(parsedValue) || parsedValue <= 0 ? 1 : parsedValue;
     });
   }, []);
+
+  useEffect(() => {
+    if (prices.quantity) {
+      setQty(prices.quantity || 0); // Default to 0 if cart_count is undefined
+    }
+  }, [prices.quantity]);
 
   console.log("quantity :", qty);
   return (
