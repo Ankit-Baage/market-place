@@ -12,7 +12,7 @@ const useCartListSparesMutation = () => {
   } = useMutation({
     mutationFn: cartListPostRequest,
     onSuccess: () => {
-      queryClient.invalidateQueries(["cartList"]);
+      queryClient.invalidateQueries(["cartList", "spareList", "spareProductDetail"]);
     },
   });
 
@@ -23,7 +23,7 @@ const useCartListSparesMutation = () => {
   } = useMutation({
     mutationFn: cartListPatchRequest,
     onSuccess: () => {
-      queryClient.invalidateQueries(["cartList"]);
+      queryClient.invalidateQueries(["cartList", "spareList", "spareProductDetail"]);
     },
   });
 
