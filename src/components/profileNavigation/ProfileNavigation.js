@@ -106,8 +106,7 @@ export const ProfileNavigation = () => {
   const guestId = Cookies.get("guestId");
   const user_id = authToken ? userId : guestId;
 
-  const { data, isError, isSuccess, } =
-    useGetUserProfile(user_id);
+  const { data, isError, isSuccess } = useGetUserProfile(user_id);
 
   const handleNavigate = () => {
     navigate(-1);
@@ -118,6 +117,7 @@ export const ProfileNavigation = () => {
       // Remove session-related cookies
       Cookies.remove("authToken");
       Cookies.remove("user_id");
+      // Cookies.remove("user_id");
       // Redirect to home after logging out
       navigate("/");
     } else {
@@ -169,6 +169,9 @@ export const ProfileNavigation = () => {
         <span className={classes.box__btn__img} />
         {authToken ? "Log Out" : "Log In"}
       </button>
+      <h1 className={classes.box__brand}>
+        FUEVATION TECHNOLOGY SOLUTIONS PVT LTD
+      </h1>
     </div>
   );
 };

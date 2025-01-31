@@ -4,7 +4,7 @@ import classes from "./spareDetail.module.css";
 import { SpareColors } from "../spareColor/SpareColors";
 import { SparePrice } from "../sparePrice/SparePrice";
 import { SpareHighlights } from "../spareHighlights/SpareHighlights";
-import { SpareOffers } from "../spareOffers/SpareOffers";
+import {SpareOffers} from "../spareOffers/SpareOffers"
 import { validateImages } from "../../../utils/helpers/imageValidator";
 import dummy from "../../../assets/dummyPreview.png";
 import Cookies from "js-cookie";

@@ -1,9 +1,25 @@
 import Cookies from "js-cookie";
 import { v4 as uuidv4 } from "uuid";
 
+export const getTokenDuration = () => {
+  const expirationTime = Cookies.get("expiryTimestamp");
+  const expirationDate = new Date(expirationTime);
+  const now = new Date();
+  const duration = expirationDate.getTime() - now.getTime();
+  return duration;
+};
+
 export const getAuthToken = () => {
-  console.log(Cookies.get("authToken"));
   const authToken = Cookies.get("authToken");
+  if (!authToken) {
+    return null;
+  }
+
+  const tokenDuration = getTokenDuration();
+  if (tokenDuration < 0) {
+    return "EXPIRED";
+  }
+
   return authToken;
 };
 
@@ -21,4 +37,3 @@ export const generateId = () => {
   // Return existing guestId if present
   return guestId;
 };
-

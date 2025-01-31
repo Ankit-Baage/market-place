@@ -24,7 +24,7 @@ export const NewPhoneLaterItem = ({
   return (
     <div className={classes.box}>
       <div className={classes.box__info}>
-        <Link to={`/home/newPhone/${item.id}`}>
+        <Link to={`/newPhone/${item.id}`}>
           <img
             src={item.image}
             alt="item"
@@ -36,7 +36,7 @@ export const NewPhoneLaterItem = ({
         <div className={classes.box__info__cred}>
         <h2 className={classes.box__info__cred__badge}>New Phone</h2>
           <Link
-            to={`/home/newPhone/${item.id}`}
+            to={`/newPhone/${item.id}`}
             className={classes.box__info__cred__title}
           >
             <h1 className={classes.box__info__cred__title__head}>

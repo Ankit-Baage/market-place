@@ -18,9 +18,11 @@ export const otpVerificationRequest = async (data) => {
 
     const authToken = response.data.data.auth_token;
     const user_id = response.data.data.profile_data.id;
+    const expiryTimestamp = response.data.data.expiry_timestamp;
     console.log("user_id :",user_id);
     Cookies.set("authToken", authToken);
     Cookies.set("user_id", user_id);
+    Cookies.set("expiryTimestamp", expiryTimestamp);
 
     console.log("Cookie set:", {
       authToken: Cookies.get("authToken"),

@@ -135,7 +135,7 @@ export const AddressPage = () => {
 export const checkAuthLoader = () => {
   const authToken = Cookies.get("authToken");
   if (!authToken) {
-    return redirect("/authentication"); // Use a return statement for the redirect
+    return redirect("/authentication"); 
   }
-  return null; // Ensure the loader resolves properly for authenticated users
+  return null;
 };

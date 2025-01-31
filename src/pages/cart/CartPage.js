@@ -76,25 +76,35 @@ export const CartPage = () => {
 
   const handleSaveForLater = useCallback(
     async (item) => {
-      const payload = {
-        category_id: item.category_id,
-        ...(item.category_id !== 5 && {
-          master_product_id: item.master_product_id,
-        }),
-        ...(item.category_id !== 5 && { item_id: item.id }),
-        ...(item.category_id === 5 && { request_id: item.request_id }),
-      };
-
+      const authToken = Cookies.get("authToken");
+      if (!authToken) {
+        navigate("/authentication");
+        toast.warning("Please login");
+        return;
+      }
+  
       try {
+        const isCategoryFive = item.category_id === 5;
+        const payload = {
+          category_id: item.category_id,
+          ...(isCategoryFive
+            ? { request_id: item.request_id }
+            : {
+                master_product_id: item.master_product_id,
+                item_id: item.id,
+              }),
+        };
+  
         const response = await mutateAsync(payload);
         toast.success(response.message.displayMessage);
         console.log(item);
       } catch (error) {
-        toast.error(error.response.data.message.displayMessage);
+        toast.error(error?.response?.data?.message?.displayMessage || "Something went wrong");
       }
     },
-    [mutateAsync]
+    [mutateAsync, navigate]
   );
+  
   const handleNavigateToCoupons = () => {
     navigate("/coupons");
   };
@@ -168,7 +178,13 @@ export const CartPage = () => {
       });
     }
     return <EmptyCart />;
-  }, [data?.data?.data?.cart_items, handleRemove, handleSaveForLater, isLoading, isSuccess]);
+  }, [
+    data?.data?.data?.cart_items,
+    handleRemove,
+    handleSaveForLater,
+    isLoading,
+    isSuccess,
+  ]);
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {

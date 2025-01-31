@@ -15,7 +15,7 @@ import { VrpReviewItem } from "../../components/review/vrpReviewItem/VrpReviewIt
 import { SparesReviewItem } from "../../components/review/sparesReviewItem/SparesReviewItem";
 import { OpenBoxReviewItem } from "../../components/review/openBoxReviewItem/OpenBoxReviewItem";
 import { NewPhoneReviewItem } from "../../components/review/newPhoneReviewItem/NewPhoneReviewItem";
-import { AddressReview } from "../../components/review/addressReview/AddressReview";
+// import { AddressReview } from "../../components/review/addressReview/AddressReview";
 import useGetReviewList from "../../tanstack-query/reviewList/useGetReviewList";
 import usePlaceOrderMutation from "../../tanstack-query/placeOrder/usePlaceOrderMutation";
 
@@ -121,7 +121,7 @@ export const ReviewPage = () => {
       {data?.data?.data?.address && (
         <div className={classes.box__address}>
           <h2 className={classes.box__address__title}>Selected address</h2>
-          <AddressReview address={data?.data?.data?.address} />
+          {/* <AddressReview address={data?.data?.data?.address} /> */}
         </div>
       )}
       <div className={classes.box__cart}>{content}</div>
