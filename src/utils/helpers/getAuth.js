@@ -3,12 +3,14 @@ import { v4 as uuidv4 } from "uuid";
 
 export const getTokenDuration = () => {
   const expirationTime = Cookies.get("expiryTimestamp");
-  const expirationDate = new Date(expirationTime);
-  const now = new Date();
-  const duration = expirationDate.getTime() - now.getTime();
-  return duration;
-};
 
+  if (!expirationTime) return 0; // Handle missing expiry
+
+  const expirationTimestamp = parseFloat(expirationTime) * 1000; // Convert seconds → milliseconds
+  const now = Date.now(); // Get current time in milliseconds
+
+  return expirationTimestamp - now; // Return remaining time
+};
 export const getAuthToken = () => {
   const authToken = Cookies.get("authToken");
   if (!authToken) {
