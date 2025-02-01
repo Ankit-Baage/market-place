@@ -7,7 +7,12 @@ import classes from "./sparesWishListItem.module.css";
 import { CartActionButtonGroup } from "../../cart/CartActionButtonGroup/CartActionButtonGroup";
 import { WishListActionButtonGroup } from "../wishListActionButtonGroup/WishListActionButtonGroup";
 
-export const SparesWishListItem = ({ item, isUpdating, onRemove, onMoveToCart }) => {
+export const SparesWishListItem = ({
+  item,
+  isUpdating,
+  onRemove,
+  onMoveToCart,
+}) => {
   const handleImageError = (e) => {
     e.target.src = dummyImage;
   };
@@ -44,12 +49,17 @@ export const SparesWishListItem = ({ item, isUpdating, onRemove, onMoveToCart })
             <h1 className={classes.box__info__cred__price__value}>
               Rs.{formatNumber(item.discounted_price)}
             </h1>
-            <h2 className={classes.box__info__cred__price__subValue}>
-              Rs.{formatNumber(item.original_price)}
-            </h2>
-            <span className={classes.box__info__cred__price__discount}>
-              {item.discount_percentage}% OFF
-            </span>
+            {item.discount_percentage !== 0 && (
+              <h2 className={classes.box__info__cred__price__subValue}>
+                Rs.{formatNumber(item.original_price)}
+              </h2>
+            )}
+
+            {item.discount_percentage !== 0 && (
+              <span className={classes.box__info__cred__price__discount}>
+                {item.discount_percentage}% OFF
+              </span>
+            )}
           </div>
           {/* <WishListActionButtonGroup
             onRemove={onRemove}

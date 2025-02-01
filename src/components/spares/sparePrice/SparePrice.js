@@ -48,13 +48,17 @@ export const SparePrice = ({ prices }) => {
             <h3 className={classes.box__price__discount}>
               Rs.{prices.discountedPrice}
             </h3>
+            {prices.discountPercentage !== 0 && (
+              <h3 className={classes.box__price__original}>
+                {prices.originalPrice}
+              </h3>
+            )}
 
-            <h3 className={classes.box__price__original}>
-              {prices.originalPrice}
-            </h3>
-            <span className={classes.box__price__discount__img}>
-              {prices.discountPercentage}% OFF
-            </span>
+            {prices.discountPercentage !== 0 && (
+              <span className={classes.box__price__discount__img}>
+                {prices.discountPercentage}% OFF
+              </span>
+            )}
           </div>
           <div className={classes.box__info__qty}>
             <label htmlFor="qty" className={classes.box__info__qty__label}>

@@ -21,16 +21,16 @@ export const AddressForm = ({
       city: addressData.city || "",
       state: addressData.state || "",
       postal_code: addressData.postal_code || "",
+      landmark: addressData.landmark || "",
       country: addressData.country || "",
       is_default: addressData?.is_default === 1 || false,
     },
   });
-  
 
   const { isValid, isDirty, isTouched } = formState;
 
   const params = useParams();
-  console.log(addressData)
+  console.log(addressData);
   if (!addressData) {
     return <div>Loading...</div>; // Or any placeholder you prefer
   }
@@ -63,13 +63,13 @@ export const AddressForm = ({
             type="text"
             id="name"
             placeholder="Full Name (First and Last name)"
-            register={register('name')}
+            register={register("name")}
           />
           <CustomInput
             type="tel"
             id="mobile_no"
             placeholder="Phone Number*"
-            register={register('mobile_no')}
+            register={register("mobile_no")}
           />
 
           {/* <div className={classes.form__location}>
@@ -85,21 +85,21 @@ export const AddressForm = ({
             type="text"
             id="address_line1"
             placeholder="Flat, House no, Building, Company,"
-            register={register('address_line1')}
+            register={register("address_line1")}
             message="Please provide the correct GST No"
           />
           <CustomInput
             type="text"
             id="address_line2"
             placeholder="Area, Street, Sector, Village"
-            register={register('address_line2')}
+            register={register("address_line2")}
             message="Please provide the correct GST No"
           />
           <CustomInput
             type="text"
             id="landmark"
             placeholder="Landmark"
-            register={register('landmark')}
+            register={register("landmark")}
             message="Please provide the correct landmark"
           />
           <div className={classes.form__city}>
@@ -108,7 +108,7 @@ export const AddressForm = ({
                 type="text"
                 id="postal_code"
                 placeholder="Pincode"
-                register={register('postal_code')}
+                register={register("postal_code")}
                 pattern={/^\d{6}$/}
                 message="Please provide the correct Pincode"
               />
@@ -119,7 +119,7 @@ export const AddressForm = ({
                 type="text"
                 id="city"
                 placeholder="Town/City"
-                register={register('city')}
+                register={register("city")}
                 message="Please provide the correct state"
               />
             </div>
@@ -129,7 +129,7 @@ export const AddressForm = ({
             type="text"
             id="state"
             placeholder="state"
-            register={register('state')}
+            register={register("state")}
             message="Please provide the correct Pincode"
           />
 

@@ -40,12 +40,17 @@ export const SparesReviewItem = ({ item }) => {
             <h1 className={classes.box__info__cred__price__value}>
               Rs.{formatNumber(item.discounted_price)}
             </h1>
-            <h2 className={classes.box__info__cred__price__subValue}>
-              Rs.{formatNumber(item.original_price)}
-            </h2>
-            <span className={classes.box__info__cred__price__discount}>
-              {item.discount_percentage}% OFF
-            </span>
+            {item?.discount_percentage !== 0 && (
+              <h2 className={classes.box__info__cred__price__subValue}>
+                Rs.{formatNumber(item.original_price)}
+              </h2>
+            )}
+
+            {item.discount_percentage !== 0 && (
+              <span className={classes.box__info__cred__price__discount}>
+                {item.discount_percentage}% OFF
+              </span>
+            )}
           </div>
 
           <div className={classes.box__qty}>

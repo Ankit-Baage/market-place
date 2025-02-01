@@ -16,7 +16,7 @@ export const SparesCartItem = ({
   onLater,
 }) => {
   const [qty, setQty] = useState(item.quantity);
-  console.log("spares",item);
+  console.log("spares", item);
   const { patchCart } = useCartListSparesMutation();
 
   const handleQtyChange = useCallback((e) => {
@@ -66,7 +66,7 @@ export const SparesCartItem = ({
       };
 
       try {
-       if (item.quantity > 0 && qty > 0) {
+        if (item.quantity > 0 && qty > 0) {
           // If the quantity is being updated but is non-zero, patch (update quantity)
           const response = await patchCart(data);
           toast.success(response.message.displayMessage);
@@ -119,12 +119,17 @@ export const SparesCartItem = ({
             <h1 className={classes.box__info__cred__price__value}>
               Rs.{formatNumber(item.discounted_price)}
             </h1>
-            <h2 className={classes.box__info__cred__price__subValue}>
-              Rs.{formatNumber(item.original_price)}
-            </h2>
-            <span className={classes.box__info__cred__price__discount}>
-              {item.discount_percentage}% OFF
-            </span>
+            {item?.discount_percentage !== 0 && (
+              <h2 className={classes.box__info__cred__price__subValue}>
+                Rs.{formatNumber(item.original_price)}
+              </h2>
+            )}
+
+            {item?.discount_percentage !== 0 && (
+              <span className={classes.box__info__cred__price__discount}>
+                {item.discount_percentage}% OFF
+              </span>
+            )}
           </div>
 
           <div className={classes.box__info__qty}>
@@ -140,7 +145,10 @@ export const SparesCartItem = ({
               onClick={(e) => e.stopPropagation()}
               onBlur={handleQtyBlur}
             />
-            <button className={classes.box__info__btns__cart} onClick={handleUpdateToCart}>
+            <button
+              className={classes.box__info__btns__cart}
+              onClick={handleUpdateToCart}
+            >
               Update
             </button>
           </div>

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { formatNumber } from "../../../utils/helpers/formatNumber";
 import dummyImage from "../../../assets/dummyPreview.png";
 
-
 import classes from "./sparesLaterItem.module.css";
 import { LaterActionButtonGroup } from "../laterActionButtonGroup/LaterActionButtonGroup";
 
@@ -13,9 +12,8 @@ export const SparesLaterItem = ({
   spareQuantity,
   isUpdating,
   onRemove,
-  onMove
+  onMove,
 }) => {
- 
   const handleImageError = (e) => {
     e.target.src = dummyImage;
   };
@@ -33,7 +31,7 @@ export const SparesLaterItem = ({
         </Link>
 
         <div className={classes.box__info__cred}>
-        <h2 className={classes.box__info__cred__badge}>Spares</h2>
+          <h2 className={classes.box__info__cred__badge}>Spares</h2>
           <Link
             to={`/spares/${item.id}`}
             className={classes.box__info__cred__title}
@@ -50,18 +48,26 @@ export const SparesLaterItem = ({
             <h1 className={classes.box__info__cred__price__value}>
               Rs.{formatNumber(item.discounted_price)}
             </h1>
-            <h2 className={classes.box__info__cred__price__subValue}>
-              Rs.{formatNumber(item.original_price)}
-            </h2>
-            <span className={classes.box__info__cred__price__discount}>
-              {item.discount_percentage}% OFF
-            </span>
-          </div>
+            {item.discount_percentage !== 0 && (
+              <h2 className={classes.box__info__cred__price__subValue}>
+                Rs.{formatNumber(item.original_price)}
+              </h2>
+            )}
 
+            {item.discount_percentage !== 0 && (
+              <span className={classes.box__info__cred__price__discount}>
+                {item.discount_percentage}% OFF
+              </span>
+            )}
+          </div>
         </div>
       </div>
 
-      <LaterActionButtonGroup onRemove={onRemove} isUpdating={isUpdating} onMove={onMove}/>
+      <LaterActionButtonGroup
+        onRemove={onRemove}
+        isUpdating={isUpdating}
+        onMove={onMove}
+      />
     </div>
   );
 };

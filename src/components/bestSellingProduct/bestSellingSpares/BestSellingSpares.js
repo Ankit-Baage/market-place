@@ -19,9 +19,12 @@ export const BestSellingSpares = ({ spares }) => {
       className={classes.box}
       onClick={() => navigateToSparesDetail(spares?.id)}
     >
-      <span className={classes.box__discount}>
-        {spares?.discount_percentage}% OFF
-      </span>
+      {spares.discount_percentage !== 0 && (
+        <span className={classes.box__discount}>
+          {spares?.discount_percentage}% OFF
+        </span>
+      )}
+
       <img
         className={classes.box__img}
         alt="vrp"
@@ -38,12 +41,14 @@ export const BestSellingSpares = ({ spares }) => {
               ? formatNumber(spares.discounted_price)
               : "N/A"}
           </h1>
-          <h2 className={classes.box__content__info__price__original}>
-            Rs{" "}
-            {spares?.original_price
-              ? formatNumber(spares.original_price)
-              : "N/A"}
-          </h2>
+          {spares.discount_percentage !== 0 && (
+            <h2 className={classes.box__content__info__price__original}>
+              Rs{" "}
+              {spares?.original_price
+                ? formatNumber(spares.original_price)
+                : "N/A"}
+            </h2>
+          )}
         </div>
       </div>
     </div>

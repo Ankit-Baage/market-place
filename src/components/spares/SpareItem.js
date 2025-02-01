@@ -118,12 +118,17 @@ export const SpareItem = ({ item, onClick, onWishList }) => {
               <h3 className={classes.box__discount__container__discountedPrice}>
                 Rs.{formatNumber(item.discounted_price)}
               </h3>
-              <h3 className={classes.box__discount__container__price}>
-                Rs.{formatNumber(item.original_price)}
-              </h3>
-              <span className={classes.box__discount__img}>
-                {item.discount_percentage}% OFF
-              </span>
+              {item.discount_percentage !== 0 && (
+                <h3 className={classes.box__discount__container__price}>
+                  Rs.{formatNumber(item.original_price)}
+                </h3>
+              )}
+
+              {item.discount_percentage !== 0 && (
+                <span className={classes.box__discount__img}>
+                  {item.discount_percentage}% OFF
+                </span>
+              )}
             </div>
 
             {/* Quantity */}

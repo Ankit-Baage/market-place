@@ -11,6 +11,7 @@ const newAddressData = {
   mobile_no: "",
   address_line1: "",
   address_line2: "",
+  landmark: "",
   city: "",
   state: "",
   postal_code: "",
@@ -51,8 +52,10 @@ export const AddressDetailPage = () => {
       let response;
 
       if (addressId) {
-        data.id = addressId;
-        response = await mutateAsync(data);
+        // data.id = addressId;
+        response = await mutateAsync({...payload, id:addressId});
+
+        console.log("update",{...payload, id:addressId})
       } else {
         response = await addMutation({ ...data, country: "India" });
       }
@@ -61,7 +64,7 @@ export const AddressDetailPage = () => {
       toast.dismiss(loadingToastId);
       toast.success(response.message.displayMessage);
     } catch (error) {
-      toast.error(error.response.data.message.displayMessage);
+      // toast.error(error.response.data.message.displayMessage);
     }
   };
   console.log(addressId);
@@ -77,7 +80,7 @@ export const AddressDetailPage = () => {
       onNavigate={handleNavigateBack}
       addressData={addressData}
       onSubmit={handleSubmit}
-      addressId ={addressId}
+      addressId={addressId}
     />
   );
 };
