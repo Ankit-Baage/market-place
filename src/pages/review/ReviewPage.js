@@ -18,6 +18,7 @@ import { NewPhoneReviewItem } from "../../components/review/newPhoneReviewItem/N
 // import { AddressReview } from "../../components/review/addressReview/AddressReview";
 import useGetReviewList from "../../tanstack-query/reviewList/useGetReviewList";
 import usePlaceOrderMutation from "../../tanstack-query/placeOrder/usePlaceOrderMutation";
+import { AddressReview } from "../../components/review/addressReview/AddressReview";
 
 export const ReviewPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -121,7 +122,7 @@ export const ReviewPage = () => {
       {data?.data?.data?.address && (
         <div className={classes.box__address}>
           <h2 className={classes.box__address__title}>Selected address</h2>
-          {/* <AddressReview address={data?.data?.data?.address} /> */}
+          <AddressReview address={data?.data?.data?.address} />
         </div>
       )}
       <div className={classes.box__cart}>{content}</div>

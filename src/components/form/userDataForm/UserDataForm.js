@@ -232,7 +232,6 @@ export const UserDataForm = ({ userData, onSubmit }) => {
           register={register("aadhar_image_url")}
           onChange={(e) => handleFileChange(e, "aadhar_image_url")}
         />
-        {console.log(isCustomValid())};
         <button
           type="submit"
           text="Save"
