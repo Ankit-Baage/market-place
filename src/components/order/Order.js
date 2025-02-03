@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import classes from "./order.module.css";
 import { formatDate, formatNumber } from "../../utils/helpers/formatNumber";
 import useGetOrderDetail from "../../tanstack-query/orderDetail/useGetOrderDetail";
+import returnImage from "../../assets/return.png";
 
 export const Order = ({ order }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -56,6 +57,20 @@ export const Order = ({ order }) => {
               {order.num_of_items}
             </h1>
           </div>
+
+          {/* <div className={classes.box__return}>
+            <hr className={classes.box__sep} />
+            <div className={classes.box__return__info}>
+              <img
+                src={returnImage}
+                alt="return"
+                className={classes.box__return__info__img}
+              />
+              <h3 className={classes.box__return__info__title}>
+                3 days left to return
+              </h3>
+            </div>
+          </div> */}
         </div>
         <div className={classes.box__upper__order__date}>
           <h1 className={classes.box__upper__order__date__text}>

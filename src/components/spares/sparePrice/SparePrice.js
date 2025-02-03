@@ -4,11 +4,6 @@ import classes from "./sparePrice.module.css";
 export const SparePrice = ({ prices }) => {
   const [qty, setQty] = useState(prices.quantity);
 
-  // const handleQtyChange = (e) => {
-  //   const newQty = e.target.value;
-  //   setQty(newQty); // Update local state
-  //   prices.onQuantityUpdate(newQty); // Pass the new value to the parent
-  // };
 
   const handleQtyChange = useCallback(
     (e) => {

@@ -26,7 +26,7 @@ const validationRules = {
   },
   pan_number: {
     pattern: {
-      value: /^[A-Z]{5}[0-9]{4}[A-Z]$/,
+      value: /^[A-Z]{5}[0-9]{4}[A-Z]$/i,
       message: "Enter a valid PAN card number",
     },
   },

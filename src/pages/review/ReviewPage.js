@@ -15,10 +15,10 @@ import { VrpReviewItem } from "../../components/review/vrpReviewItem/VrpReviewIt
 import { SparesReviewItem } from "../../components/review/sparesReviewItem/SparesReviewItem";
 import { OpenBoxReviewItem } from "../../components/review/openBoxReviewItem/OpenBoxReviewItem";
 import { NewPhoneReviewItem } from "../../components/review/newPhoneReviewItem/NewPhoneReviewItem";
-// import { AddressReview } from "../../components/review/addressReview/AddressReview";
 import useGetReviewList from "../../tanstack-query/reviewList/useGetReviewList";
 import usePlaceOrderMutation from "../../tanstack-query/placeOrder/usePlaceOrderMutation";
 import { AddressReview } from "../../components/review/addressReview/AddressReview";
+import { toast } from "react-toastify";
 
 export const ReviewPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -41,7 +41,10 @@ export const ReviewPage = () => {
   // const placeholder = "Search...";
   const handlePlaceOrder = () => {
     mutate(
-      { coupon_code: coupon.id, address_id: address.id },
+      {
+        coupon_code: coupon.id,
+        address_id: address.id,
+      },
       {
         onSuccess: (data) => {
           console.log("Order placed successfully:", data);
@@ -49,6 +52,8 @@ export const ReviewPage = () => {
         },
         onError: (error) => {
           console.error("Failed to place order:", error);
+          toast.error(error?.response?.data?.message?.displayMessage || "Something went wrong");
+  
           navigate("/cart");
         },
       }

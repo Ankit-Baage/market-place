@@ -109,6 +109,39 @@
   background-color: #FBE8B3;
 }
 
+
+.box__return {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  
+}
+
+.box__return__info {
+  display: flex;
+  column-gap: 8px;
+}
+
+.box__return__info__img {
+  display: block;
+  width:16px;
+  height: 16px;
+}
+
+.box__return__info__title {
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 400;
+  font-family: "Poppins", sans;
+  color: #989898;
+
+}
+
+.box__sep {
+  background-color: #EFEFEF;
+  height: 1.5px;
+}
+
 .box__content__expand {
   width: 16px;
   height: 16px;
@@ -174,6 +207,7 @@
 
 
 .box__sep {
+  width: 100%;
   background-color: #EFEFEF;
   height: 1.5px;
 }

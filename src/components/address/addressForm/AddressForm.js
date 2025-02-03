@@ -66,7 +66,7 @@ export const AddressForm = ({
             register={register("name")}
           />
           <CustomInput
-            type="tel"
+            type="number"
             id="mobile_no"
             placeholder="Phone Number*"
             register={register("mobile_no")}
