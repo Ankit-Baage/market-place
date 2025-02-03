@@ -150,8 +150,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   cursor: pointer;
-  z-index: 9;
-
+  z-index: 8;
 }
 .box__content__detail {
   display: grid;
