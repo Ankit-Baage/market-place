@@ -36,14 +36,14 @@ export const BestSellingSpares = ({ spares }) => {
 
         <div className={classes.box__content__info__price}>
           <h1 className={classes.box__content__info__price__discount}>
-            Rs{" "}
+            Rs.
             {spares?.discounted_price
               ? formatNumber(spares.discounted_price)
               : "N/A"}
           </h1>
           {spares.discount_percentage !== 0 && (
             <h2 className={classes.box__content__info__price__original}>
-              Rs{" "}
+              Rs.
               {spares?.original_price
                 ? formatNumber(spares.original_price)
                 : "N/A"}

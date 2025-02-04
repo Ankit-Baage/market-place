@@ -82,7 +82,7 @@ export const CartPage = () => {
         toast.warning("Please login");
         return;
       }
-  
+
       try {
         const isCategoryFive = item.category_id === 5;
         const payload = {
@@ -94,23 +94,30 @@ export const CartPage = () => {
                 item_id: item.id,
               }),
         };
-  
+
         const response = await mutateAsync(payload);
         toast.success(response.message.displayMessage);
         console.log(item);
       } catch (error) {
-        toast.error(error?.response?.data?.message?.displayMessage || "Something went wrong");
+        toast.error(
+          error?.response?.data?.message?.displayMessage ||
+            "Something went wrong"
+        );
       }
     },
     [mutateAsync, navigate]
   );
-  
+
   const handleNavigateToCoupons = () => {
     navigate("/coupons");
   };
 
   const handleNavigateToAddresses = () => {
-    navigate("/address");
+    if (!data?.data?.data?.qty_changed_flag) {
+      navigate("/address");
+    } else {
+      toast.warning("Accept the new quantity in the cart");
+    }
   };
   const handleRemoveCoupon = () => {
     dispatch(couponRemoved());
@@ -202,6 +209,14 @@ export const CartPage = () => {
   useEffect(() => {
     if (isSuccess) {
       const couponCode = data?.data?.data?.applied_coupon_code;
+      const couponId = coupon.id;
+      const couponAmount = data?.data?.data?.applied_coupon_amount;
+
+      if (couponId && !couponAmount) {
+        toast.warning(
+          "This coupon is not applicable on some of the current cart items. Review coupon before applying."
+        );
+      }
 
       setSearchParams((params) => {
         if (couponCode) {

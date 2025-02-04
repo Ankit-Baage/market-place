@@ -40,24 +40,32 @@ export const ReviewPage = () => {
 
   // const placeholder = "Search...";
   const handlePlaceOrder = () => {
-    mutate(
-      {
-        coupon_code: coupon.id,
-        address_id: address.id,
-      },
-      {
-        onSuccess: (data) => {
-          console.log("Order placed successfully:", data);
-          navigate("/success");
+    if (!data?.data?.data?.qty_changed_flag) {
+      mutate(
+        {
+          coupon_code: coupon.id,
+          address_id: address.id,
         },
-        onError: (error) => {
-          console.error("Failed to place order:", error);
-          toast.error(error?.response?.data?.message?.displayMessage || "Something went wrong");
-  
-          navigate("/cart");
-        },
-      }
-    );
+        {
+          onSuccess: (data) => {
+            console.log("Order placed successfully:", data);
+            navigate("/success");
+          },
+          onError: (error) => {
+            console.error("Failed to place order:", error);
+            toast.error(
+              error?.response?.data?.message?.displayMessage ||
+                "Something went wrong"
+            );
+
+            navigate("/cart");
+          },
+        }
+      );
+    } else {
+      toast.warning("Accept the new quantity in the cart")
+      navigate("/cart");
+    }
   };
 
   const content = useMemo(() => {

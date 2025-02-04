@@ -47,10 +47,10 @@ export const SparesCartItem = ({
       event.stopPropagation();
 
       // If the quantity is unchanged, exit early
-      if (qty === item.quantity) {
-        toast.info("Quantity remains unchanged. No action taken.");
-        return;
-      }
+      // if (qty === item.quantity) {
+      //   toast.info("Quantity remains unchanged. No action taken.");
+      //   return;
+      // }
 
       // Check if the quantity is zero or negative
       if (qty <= 0) {
@@ -149,7 +149,7 @@ export const SparesCartItem = ({
               className={classes.box__info__btns__cart}
               onClick={handleUpdateToCart}
             >
-              Update
+              {item?.qty_changed_flag ? "Accept new Quantity" : "update"}
             </button>
           </div>
         </div>
