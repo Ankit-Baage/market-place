@@ -47,10 +47,10 @@ export const SparesCartItem = ({
       event.stopPropagation();
 
       // If the quantity is unchanged, exit early
-      // if (qty === item.quantity) {
-      //   toast.info("Quantity remains unchanged. No action taken.");
-      //   return;
-      // }
+      if (qty === item.quantity) {
+        // toast.info("Quantity remains unchanged. No action taken.");
+        return;
+      }
 
       // Check if the quantity is zero or negative
       if (qty <= 0) {

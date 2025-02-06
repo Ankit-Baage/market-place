@@ -8,18 +8,24 @@ export const Coupon = ({ coupon, onCouponApply }) => {
         <div className={classes.box__content__info}>
           <h1 className={classes.box__content__info__title}>{coupon.code}</h1>
           <h2 className={classes.box__content__info__subTitle}>
-            min order value
+            Minimum Cart Value
             <span className={classes.box__content__info__subTitle__highLighted}>
-              {coupon.min_order_value}
+              Rs.{coupon.min_order_value}
             </span>
           </h2>
         </div>
-        <button className={classes.box__content__btn} onClick={onCouponApply}>Apply</button>
+        <button className={classes.box__content__btn} onClick={onCouponApply}>
+          Apply
+        </button>
       </div>
       <hr className={classes.box__sep} />
-      <p className={classes.box__content__info__para}>
+      {/* <p className={classes.box__content__info__para}>
         {coupon.descrption}
-      </p>
+      </p> */}
+      <p
+        className={classes.box__content__info__para}
+        dangerouslySetInnerHTML={{ __html: coupon.descrption }}
+      />
     </div>
   );
 };

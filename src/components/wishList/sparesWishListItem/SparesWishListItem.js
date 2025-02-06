@@ -20,7 +20,7 @@ export const SparesWishListItem = ({
   return (
     <div className={classes.box}>
       <div className={classes.box__info}>
-        <Link to={`/home/spares/${item.id}`}>
+        <Link to={`/spares/${item.id}`}>
           <img
             src={item.image}
             alt="item"
@@ -37,7 +37,7 @@ export const SparesWishListItem = ({
             <span className={classes.box__info__cred__img}></span>
           </div>
           <Link
-            to={`/home/spares/${item.id}`}
+            to={`/spares/${item.id}`}
             className={classes.box__info__cred__title}
           >
             <h1 className={classes.box__info__cred__title__head}>

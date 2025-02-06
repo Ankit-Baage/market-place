@@ -194,6 +194,8 @@ export const CartPage = () => {
   ]);
   const [searchParams, setSearchParams] = useSearchParams();
 
+  
+
   useEffect(() => {
     const couponIdFromUrl = searchParams.get("coupon");
 
