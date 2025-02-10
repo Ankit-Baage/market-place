@@ -106,17 +106,21 @@ export const SparesFilterPage = () => {
     if (!inFilterMode) {
       event.stopPropagation();
     }
-
-    // Check if the filterType is "price" and clear all related sub-filters
-    let newFilters = { ...filters };
-    if (filterType === "price") {
-      newFilters = { ...newFilters, start: null, end: null, sort: null };
-    } else {
-      newFilters = { ...newFilters, [filterType]: null };
-    }
-    setFilters(newFilters);
-
-    // Update URL search params to clear the corresponding filters
+  
+    setFilters((prevFilters) => {
+      const updatedFilters = { ...prevFilters };
+  
+      if (filterType === "price") {
+        updatedFilters.start = null;
+        updatedFilters.end = null;
+        updatedFilters.sort = null;
+      } else {
+        updatedFilters[filterType] = [];
+      }
+  
+      return updatedFilters;
+    });
+  
     setSearchParams((params) => {
       if (filterType === "price") {
         params.delete("start");
@@ -127,9 +131,10 @@ export const SparesFilterPage = () => {
       }
       return params;
     });
-
+  
     handleClose();
   };
+  
 
   return (
     <div className={classes.box}>

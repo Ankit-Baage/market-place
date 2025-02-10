@@ -26,8 +26,8 @@ export const SpareFilterModal = ({
   };
 
   const clearHandler = () => {
-    onClear();
-    setFilters({ ...filterData, options: [] });
+    setFilters({ ...filterData, options: [] }); // Reset local modal state
+    onClear(null, filterData.type); // Call parent function with the correct type
   };
   const isApplyDisabled = filters.options.length === 0;
 
